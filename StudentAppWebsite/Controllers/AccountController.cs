@@ -555,6 +555,30 @@ namespace StudentAppWebsite.Controllers
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
+        public JsonResult GetCitiesByCountry(int CountryID)
+        {
+            string json = string.Empty;
+            City model = new City();
+            commonBase.CountryId = CountryID;
+            ActionResult = commonAction.FindCitiesByCountry(commonBase);
+            if (ActionResult.IsSuccess)
+            {
+                model.Price = Convert.ToDecimal(ActionResult.dtResult.Rows[0].Table.Rows[0].ItemArray[0].ToString());
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetCitiesByState(int StateID)
+        {
+            string json = string.Empty;
+            City model = new City();
+            commonBase.StateId = StateID;
+            ActionResult = commonAction.FindCitiesByState(commonBase);
+            if (ActionResult.IsSuccess)
+            {
+                model.Price = Convert.ToDecimal(ActionResult.dtResult.Rows[0].Table.Rows[0].ItemArray[0].ToString());
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
         public List<Country> CountryLoad()
         {
@@ -851,6 +875,8 @@ namespace StudentAppWebsite.Controllers
                         Session["UserId"] = ActionResult.dtResult.Rows[0]["Id"];
                         Session["ProfileImage"] = ActionResult.dtResult.Rows[0]["ProfileImage"];
                         Session["CountryId"] = ActionResult.dtResult.Rows[0]["CountryId"];
+                        Session["StateId"] = ActionResult.dtResult.Rows[0]["StateId"];
+                        Session["CityId"] = ActionResult.dtResult.Rows[0]["CityId"];
                         Session["FirstName"] = ActionResult.dtResult.Rows[0]["FirstName"];
                         Session["LastName"] = ActionResult.dtResult.Rows[0]["LastName"];
                         var f = Convert.ToString(Session["FirstName"]);

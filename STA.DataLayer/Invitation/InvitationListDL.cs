@@ -94,5 +94,31 @@ namespace STA.DataLayer.Invitation
         }
         #endregion
 
+        public DataTable CallList_InsertUpdate(InvitationListBase invitationListBase)
+        {
+            string PageUrl = "/Home/Index?PageId=" + invitationListBase.PageId.ToString() + "&BookId=" + invitationListBase.BookId.ToString() + "";
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+                                             new MyParameter("@UserId",invitationListBase.UserId),
+                                             new MyParameter("@InvitedUserId",invitationListBase.InvitedUserId),
+                                              new MyParameter("@CreatDate",invitationListBase.CreatedDate.ToString()),
+                                              new MyParameter("@PageUrl",PageUrl),
+
+                                         };
+                Common.Set_Procedures("CallRequests_I_U");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception Ex)
+            {
+                ErrorReporting.WebApplicationError(Ex);
+            }
+            return dtContainer;
+        }
+
     }
 }

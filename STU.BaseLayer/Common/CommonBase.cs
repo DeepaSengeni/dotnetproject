@@ -44,6 +44,8 @@ namespace STU.BaseLayer.Common
         private decimal _Rate = 0;
         //private int _pageNo = 0;
         private int _offset = 0;
+        private string _tittle = string.Empty;
+        private string _description = string.Empty;
         //private string _paymentId = string.Empty;
         //private string _totalammount = string.Empty;
         //private string _Currency = string.Empty;
@@ -115,15 +117,9 @@ namespace STU.BaseLayer.Common
         //public string Payer_id { get { return _Payer_id; } set { _Payer_id = value; } }
         //public string intent { get { return _intent; } set { _intent = value; } }
         //public string state { get { return _state; } set { _state = value; } }
-
-
-        public string BankAccountHolderName { get; set; }
-        public string UPIId { get; set; }
-        public string MobileNumberUPI { get; set; }
-        public string BankAccountNumber { get; set; }
-        public string BankIFSCCode { get; set; }
-
         #endregion
+        public string Tittle { get { return _tittle; } set { _tittle = value; } }
+        public string Description { get { return _description; } set { _description = value; } }
     }
 
     public class CommonMastersBase

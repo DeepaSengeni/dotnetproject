@@ -63,6 +63,7 @@ namespace STU.BaseLayer.User
         private string _countryname = string.Empty;
         private string _statename = string.Empty;
         private string _cityname = string.Empty;
+        private string _customerid = string.Empty;
 
         public int Counts { get { return _counts; } set { _counts = value; } }
         public int InvitedUserId { get { return _invitedUserId; } set { _invitedUserId = value; } }
@@ -125,7 +126,8 @@ namespace STU.BaseLayer.User
         public string Address { get { return _Address; } set { _Address = value; } }
         public string countryname { get { return _countryname; }set { _countryname = value; } }
         public string statename { get { return _statename; } set { _statename = value; } }
-          public string cityname { get { return _cityname; } set { _cityname = value; } }
+        public string cityname { get { return _cityname; } set { _cityname = value; } }
+        public string Customerid { get { return _customerid; } set { _customerid = value; } }
 
     }
 

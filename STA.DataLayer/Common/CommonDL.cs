@@ -18,6 +18,100 @@ namespace STA.DataLayer.CommonMethods
         DataTable dtContainer;
         #endregion
 
+        #region FindCititesByCountry
+        public DataTable FindCititesByCountry(CommonBase commonBase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+                    new MyParameter("@CountryID",commonBase.CountryId)
+                                         };
+                Common.Set_Procedures("USP_Find_Cities_By_CountryId");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
+        #region FindCititesByState
+        public DataTable FindCititesByState(CommonBase commonBase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+                    new MyParameter("@StateID",commonBase.StateId)
+                                         };
+                Common.Set_Procedures("USP_Find_Cities_By_StateId");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
+
+
+        #region FindCititesIDByCountry
+        public DataTable FindCititesIDByCountry(CommonBase commonBase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+                    new MyParameter("@CountryID",commonBase.CountryId)
+                                         };
+                Common.Set_Procedures("USP_Find_Cities_ID_By_CountryId");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
+        #region FindCititesIDByState
+        public DataTable FindCititesIDByState(CommonBase commonBase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+                    new MyParameter("@StateID",commonBase.StateId)
+                                         };
+                Common.Set_Procedures("USP_Find_Cities_ID_By_StateId");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
         #region Countries_LoadAll
         public DataTable Countries_LoadAll()
         {
@@ -26,7 +120,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                          
                                          };
                 Common.Set_Procedures("USP_S_Master_Countries_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -122,7 +216,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_EntranceExam_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -146,7 +240,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_ExamStream_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -170,7 +264,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Subjects_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -194,7 +288,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Streams_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -218,7 +312,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Chapters_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -242,7 +336,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("Notesbook_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -283,7 +377,7 @@ namespace STA.DataLayer.CommonMethods
             return dtContainer;
         }
         #endregion
-
+        
 
         #region Colleges_LoadAll
         public DataTable Colleges_LoadAll()
@@ -293,7 +387,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Colleges_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -317,7 +411,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Categories_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -341,7 +435,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Topics_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -462,7 +556,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-                                         new MyParameter("@Id",common.Id)
+                                         new MyParameter("@Id",common.Id) 
                                          };
                 Common.Set_Procedures("InstituteLoadByInstituteId");
                 Common.Set_ParameterLength(myParams.Length);
@@ -486,7 +580,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                         
                                          };
                 Common.Set_Procedures("USP_S_Master_Institute_LoadAll");
                 Common.Set_ParameterLength(myParams.Length);
@@ -512,7 +606,7 @@ namespace STA.DataLayer.CommonMethods
             {
                 MyParameter[] myParams = {
                                          new MyParameter("@CityId",common.CityId)
-
+                                        
                                          };
                 Common.Set_Procedures("Institute_LoadByCityId");
                 Common.Set_ParameterLength(myParams.Length);
@@ -582,7 +676,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                            
                                          new MyParameter("@id",common.Id),
                                          new MyParameter("@CategoryName",common.CategoryName),
                                           new MyParameter("@Price",common.Price),
@@ -610,12 +704,12 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                            
                                          new MyParameter("@id",common.Id),
-
+                                         
                                          new MyParameter("@Status",common.Status),
                                           new MyParameter("@Action",common.Action)
-
+                                        
                                          };
                 Common.Set_Procedures("Update_StatusByID");
                 Common.Set_ParameterLength(myParams.Length);
@@ -637,7 +731,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                            
                                          new MyParameter("@id",common.Id),
                                          new MyParameter("@StreamCategory",common.StreamCategory),
                                           new MyParameter("@StreamName",common.StreamName),
@@ -672,7 +766,7 @@ namespace STA.DataLayer.CommonMethods
                                              new MyParameter("@SubjectName",commonBase.SubjectName),
                                              new MyParameter("@Details",commonBase.Details),
                                              new MyParameter("@Status",commonBase.Status)
-
+                                         
                                          };
                 Common.Set_Procedures("Subject_InsertUpdate");
                 Common.Set_ParameterLength(myParams.Length);
@@ -695,11 +789,11 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                            
                                          new MyParameter("@id",common.Id),
                                          new MyParameter("@InstituteIcon",common.InstituteIcon),
                                           new MyParameter("@InstituteName",common.InstituteName),
-
+                                          
                                          new MyParameter("@StreamId",common.StreamId),
                                          new MyParameter("@CountryId",common.CountryId),
                                          new MyParameter("@StateId",common.StateId),
@@ -793,7 +887,7 @@ namespace STA.DataLayer.CommonMethods
                                               new MyParameter("@monetaryAdvantages",commonBase.MonetoryAdvantages),
                                               new MyParameter("@Innovation_Investment",commonBase.Innovation_Investment),
                                               new MyParameter("@Visible_Hidden",commonBase.Visible_Hidden)
-
+                                            
                                        };
                 Common.Set_Procedures("NotebookDetails_Insert");
                 Common.Set_ParameterLength(myParams.Length);
@@ -830,7 +924,7 @@ namespace STA.DataLayer.CommonMethods
                                               new MyParameter("@BookId",commonBase.Id),
                                               new MyParameter("@Innovation_Investment",commonBase.Innovation_Investment),
                                                new MyParameter("@Visible_Hidden",commonBase.Visible_Hidden)
-
+                                              
 
                                        };
                 Common.Set_Procedures("NotebookDetails_Update");
@@ -856,7 +950,7 @@ namespace STA.DataLayer.CommonMethods
                 MyParameter[] myParams = {
                                               new MyParameter("@UserId",commonBase.UserId),
                                               new MyParameter("@BookId",commonBase.Id)
-
+                                            
                                        };
                 Common.Set_Procedures("NotebookDetails_Delete");
                 Common.Set_ParameterLength(myParams.Length);
@@ -879,7 +973,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                             
                                                new MyParameter("@UserId",commonBase.Id)
 
                                        };
@@ -904,7 +998,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                             
                                                new MyParameter("@UserId",commonBase.UserId),
                                                new MyParameter("@BookId",commonBase.Id)
 
@@ -930,7 +1024,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                             
                                                new MyParameter("@UserId",commonBase.UserId),
                                                  new MyParameter("@CardHolderName",commonBase.CardHolderName),
                                               new MyParameter("@CardNumber",commonBase.CardNumber),
@@ -988,7 +1082,7 @@ namespace STA.DataLayer.CommonMethods
                 MyParameter[] myParams = {
                                              new MyParameter("@Status",commonBase.Status),
                                                new MyParameter("@UserId",commonBase.Id)
-
+                                               
                                        };
                 Common.Set_Procedures("UpdateUserStatusById");
                 Common.Set_ParameterLength(myParams.Length);
@@ -1049,9 +1143,9 @@ namespace STA.DataLayer.CommonMethods
                 dsContainer = Common.Execute_Procedures_Select();
                 if (dsContainer != null)
                 {
-                    dtContainer = dsContainer.Tables[0];
+                dtContainer = dsContainer.Tables[0];    
                 }
-
+                
             }
             catch (Exception ex)
             {
@@ -1159,7 +1253,7 @@ namespace STA.DataLayer.CommonMethods
             return dtContainer;
         }
         #endregion
-
+        
 
         #region BookContentLoadByBookId
         public DataTable BookContentLoadByBookId(CommonBase CommonBase)
@@ -1556,7 +1650,7 @@ namespace STA.DataLayer.CommonMethods
             try
             {
                 MyParameter[] myParams = {
-
+                                              
                                           };
                 Common.Set_Procedures("Master_Categories_LoadAllPrice");
                 Common.Set_ParameterLength(myParams.Length);
@@ -1806,7 +1900,7 @@ namespace STA.DataLayer.CommonMethods
             {
                 MyParameter[] myParams = {
                                              new MyParameter("@Id",commonBase.UserId),
-
+                                          
                                        };
                 Common.Set_Procedures("DeleteUserDetails");
                 Common.Set_ParameterLength(myParams.Length);
@@ -1830,7 +1924,7 @@ namespace STA.DataLayer.CommonMethods
             {
                 MyParameter[] myParams = {
                                        };
-                Common.Set_Procedures("RemoveUnpiadAdd");
+                Common.Set_Procedures("deleteUnpaidAdd");
                 Common.Set_ParameterLength(myParams.Length);
                 Common.Set_Parameters(myParams);
                 dtContainer = Common.Execute_Procedures_LoadData();
@@ -1844,7 +1938,7 @@ namespace STA.DataLayer.CommonMethods
         #endregion
 
         #region CityNameByID
-        public DataTable CityNameByID(int id)
+        public DataTable CityNameByID( int id)
         {
             dtContainer = new DataTable();
             try
@@ -1865,17 +1959,17 @@ namespace STA.DataLayer.CommonMethods
         }
         #endregion
 
-        #region GetUPIDetails
-        public DataTable GetUPIDetails(CommonBase commonBase)
+        #region Hiring
+        public DataTable Get_Admin_Hiring(CommonBase commonBase)
         {
             dsContainer = new DataSet();
             dtContainer = new DataTable();
             try
             {
                 MyParameter[] myParams = {
-                                            new MyParameter("@userId",commonBase.Id),
+                                          
                                          };
-                Common.Set_Procedures("GetUPIDetails");
+                Common.Set_Procedures("USP_Get_Admin_Hiring");
                 Common.Set_ParameterLength(myParams.Length);
                 Common.Set_Parameters(myParams);
                 dsContainer = Common.Execute_Procedures_Select();
@@ -1887,19 +1981,59 @@ namespace STA.DataLayer.CommonMethods
             }
             return dtContainer;
         }
-
-        #endregion
-        #region GetBankDetails
-        public DataTable GetBankDetails(CommonBase commonBase)
+        public DataTable Hiring_LoadById(CommonBase common)
         {
             dsContainer = new DataSet();
             dtContainer = new DataTable();
             try
             {
                 MyParameter[] myParams = {
-                                            new MyParameter("@userId",commonBase.Id),
+                                         new MyParameter("@id",common.Id)
                                          };
-                Common.Set_Procedures("GetBankDetails");
+                Common.Set_Procedures("USP_S_Master_Hiring_LoadById");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dtContainer = Common.Execute_Procedures_LoadData();
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        public DataTable Hiring_InsertUpdate(CommonBase commonBase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+                                             new MyParameter("@Id",commonBase.Id),
+                                             new MyParameter("@Tittle",commonBase.Tittle),
+                                             new MyParameter("@Description",commonBase.Description)
+
+                                         };
+                Common.Set_Procedures("Hirirng_InsertUpdate");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dtContainer = Common.Execute_Procedures_LoadData();
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return dtContainer;
+        }
+        public DataTable Hiring_LoadActive()
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+
+                                         };
+                Common.Set_Procedures("USP_S_User_Hiring_LoadActive");
                 Common.Set_ParameterLength(myParams.Length);
                 Common.Set_Parameters(myParams);
                 dsContainer = Common.Execute_Procedures_Select();
@@ -1911,7 +2045,6 @@ namespace STA.DataLayer.CommonMethods
             }
             return dtContainer;
         }
-
         #endregion
     }
 }

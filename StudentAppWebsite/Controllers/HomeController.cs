@@ -16,6 +16,7 @@ using System.Configuration;
 using STU.BaseLayer.Book;
 using STU.ActionLayer.Book;
 using System.Web.Hosting;
+
 using STU.ActionLayer.Invitation;
 using STU.BaseLayer.Invitations;
 using STU.Utility;
@@ -35,8 +36,6 @@ using STU.BaseLayer.User;
 using System.Globalization;
 using System.Web.Caching;
 using System.Web.Helpers;
-using STU.Utility;
-
 
 namespace StudentAppWebsite.Controllers
 {
@@ -199,6 +198,7 @@ namespace StudentAppWebsite.Controllers
                 model.PageImage =   HttpUtility.HtmlDecode(lstNotebook[0].PageImage);
             }
             ViewBag.BookUserId = (lstNotebook != null && lstNotebook.Count > 0 ? lstNotebook[0].UserId : 0);
+            ViewBag.BookUserEmailId = (lstNotebook != null && lstNotebook.Count > 0 ? lstNotebook[0].Email : ""); 
             model = (lstNotebook != null && lstNotebook.Count > 0 ? lstNotebook[0] : model);
             model.UserId = (Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : 0);
             List<Int64> lstpageIds = new List<Int64>();
@@ -299,6 +299,35 @@ namespace StudentAppWebsite.Controllers
 
             return View();
         }
+
+        public ActionResult TermsandConditions()
+        {
+            ViewBag.Message = "Terms and Condition page.";
+
+            return View();
+        }
+
+        public ActionResult AboutUs()
+        {
+            ViewBag.Message = "About Us page.";
+
+            return View();
+        }
+
+        public ActionResult PrivacyPolicies()
+        {
+            ViewBag.Message = "Privacy Policy page.";
+
+            return View();
+        }
+
+        public ActionResult RefundCancellation()
+        {
+            ViewBag.Message = "Refund Cancellation page.";
+
+            return View();
+        }
+
         public ActionResult FAQ()
         {
             ViewBag.Message = "Your faq page.";
@@ -646,12 +675,14 @@ namespace StudentAppWebsite.Controllers
             model.QuestionsList = lstQuestion.OrderBy(m => m.Id).ToList();
             model.AnswersList = AnswersList.OrderBy(m => m.Id).ToList();
             model.UserId = Convert.ToInt32(userId);
+            model.PageId = pageId;
             return PartialView(model);
         }
 
-        public PartialViewResult _ReplyAnswerPartial(int? Answerid = 0)
+        public PartialViewResult _ReplyAnswerPartial(int? answerid = 0, int? pageid = 0)
         {
-            answersBase.Id = Convert.ToInt32(Answerid);
+            answersBase.Id = Convert.ToInt32(answerid);
+            answersBase.PageID = Convert.ToInt32(pageid);
             List<AnswerModel> ReplyAnswersList = new List<AnswerModel>();
             QuestionModel model = new QuestionModel();
             actionResult = questionsAction.ReplyAnswers_LoadBy_PageId(answersBase);
@@ -957,11 +988,39 @@ namespace StudentAppWebsite.Controllers
             return Json(status);
         }
 
+        public JsonResult RemoveAnswer_ById(int Id, String isRemoveForYouOnly, int isRemoveForAll)
+        {
+            bool status = false;
+            questionBase.Id = Id;
+            questionBase.isRemoveForYouOnly = isRemoveForYouOnly;
+            questionBase.isRemoveForAll = isRemoveForAll;
+            actionResult = questionsAction.RemoveAnswer_ById(questionBase);
+            if (actionResult.IsSuccess)
+            {
+                status = true;
+            }
+            return Json(status);
+        }
+
         public JsonResult DeleteQuestions_ById(int Id)
         {
             bool status = false;
             questionBase.Id = Id;
             actionResult = questionsAction.Questions_Delete_By_Id(questionBase);
+            if (actionResult.IsSuccess)
+            {
+                status = true;
+            }
+            return Json(status);
+        }
+
+        public JsonResult RemoveQuestions_ById(int Id,String isRemoveForYouOnly,int isRemoveForAll)
+        {
+            bool status = false;
+            questionBase.Id = Id;
+            questionBase.isRemoveForYouOnly = isRemoveForYouOnly;
+            questionBase.isRemoveForAll = isRemoveForAll;
+            actionResult = questionsAction.Questions_Remove_By_Id(questionBase);
             if (actionResult.IsSuccess)
             {
                 status = true;
@@ -1562,6 +1621,46 @@ namespace StudentAppWebsite.Controllers
         }
         #endregion
 
+        #region CallList_InsertUpdate
+        [HttpGet]
+        public JsonResult CallList_InsertUpdate(int InvitedId, int PageId = 0,int BookId = 0)
+        {
+            string json = string.Empty;
+            string result = string.Empty;
+            invitationListBase = new InvitationListBase();
+            invitationListBase.UserId = Convert.ToInt32(Session["UserId"]);
+            invitationListBase.InvitedUserId = InvitedId;
+            invitationListBase.PageId = PageId;
+            invitationListBase.BookId = BookId;
+            DateTime localDateTime = DateTime.Now;
+            string formattedDateTime = localDateTime.ToString("MMM dd yyyy hh:mm tt", CultureInfo.InvariantCulture);
+            invitationListBase.CreatedDate = formattedDateTime;
+            actionResult = invitationListAction.CallList_InsertUpdate(invitationListBase);
+            if (actionResult.IsSuccess)
+            {
+                result = Convert.ToString(actionResult.dtResult.Rows[0][0]);
+                /* try
+                {
+                    var token = Convert.ToString(actionResult.dtResult.Rows[0][1]);
+                    String Message = Session["StudentName"].ToString() + " has sent you a friend request";
+                    SendPushNotification(token, Message, "2");
+                }
+                catch (Exception ex)
+                {
+
+                } */
+                json = "{\"Status\":\"1\",\"result\":\"" + result + "\"}";
+                //json = "{\"Status\":" + result + "}";
+            }
+            else
+            {
+                json = "{\"Status\":\"-1\"}";
+            }
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+
         #region insertView
         public JsonResult insertView(int Id, string action)
         {
@@ -1592,6 +1691,40 @@ namespace StudentAppWebsite.Controllers
 
         }
         #endregion
+
+        public JsonResult GetFileByUrl(string url)
+        {
+            //Create object of FileInfo for specified path            
+            FileInfo fi = new FileInfo(HttpContext.Server.MapPath("~" + url));
+
+            //Open file for Read\Write
+            FileStream fs = fi.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+            //create byte array of same size as FileStream length
+            byte[] fileBytes = new byte[fs.Length];
+
+            //define counter to check how much bytes to read. Decrease the counter as you read each byte
+            int numBytesToRead = (int)fileBytes.Length;
+
+            //Counter to indicate number of bytes already read
+            int numBytesRead = 0;
+
+            //iterate till all the bytes read from FileStream
+            while (numBytesToRead > 0)
+            {
+                int n = fs.Read(fileBytes, numBytesRead, numBytesToRead);
+
+                if (n == 0)
+                    break;
+
+                numBytesRead += n;
+                numBytesToRead -= n;
+            }
+
+            var jsonResult = Json(Convert.ToBase64String(fileBytes), JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
 
         #region insertpageclick
         public bool insertpageclick(int Id, string device)
@@ -1642,6 +1775,7 @@ namespace StudentAppWebsite.Controllers
                     string data = string.Empty;
                     string notifications = string.Empty;
                     string friendRequests = string.Empty;
+                    string callRequests = string.Empty;
 
                     if (actionResult.dsResult.Tables.Count > 0)
                         data = Newtonsoft.Json.JsonConvert.SerializeObject((actionResult.dsResult.Tables[0].Rows.Count > 0 ? actionResult.dsResult.Tables[0].Rows.Cast<System.Data.DataRow>().Take(5).CopyToDataTable() : actionResult.dsResult.Tables[0]));
@@ -1652,7 +1786,10 @@ namespace StudentAppWebsite.Controllers
                     if (actionResult.dsResult.Tables.Count > 2)
                         friendRequests = Newtonsoft.Json.JsonConvert.SerializeObject((actionResult.dsResult.Tables[2].Rows.Count > 0 ? actionResult.dsResult.Tables[2].Rows.Cast<System.Data.DataRow>().Take(5).CopyToDataTable() : actionResult.dsResult.Tables[2]));
 
-                    json = "{\"Status\":\"1\",\"data\":" + data + ",\"notifications\":" + notifications + ",\"friendRequests\":" + friendRequests + "}";
+                    if (actionResult.dsResult.Tables.Count > 3)
+                        callRequests = Newtonsoft.Json.JsonConvert.SerializeObject((actionResult.dsResult.Tables[3].Rows.Count > 0 ? actionResult.dsResult.Tables[3].Rows.Cast<System.Data.DataRow>().Take(5).CopyToDataTable() : actionResult.dsResult.Tables[3]));
+
+                    json = "{\"Status\":\"1\",\"data\":" + data + ",\"notifications\":" + notifications + ",\"friendRequests\":" + friendRequests + ",\"callRequests\":" + callRequests + "}";
                 }
                 else
                     json = "{\"Status\":\"-1\"}";
@@ -1772,7 +1909,7 @@ namespace StudentAppWebsite.Controllers
                         catModel.Features = cat["Features"].ToString();
                         catModel.Price = Convert.ToDecimal(cat["Price"]);
                         catModel.MobileNumber = cat["MobileNumber"].ToString();
-                        catModel.Type = Convert.ToInt32(cat["Type"]);
+                        catModel.Type = Convert.ToInt32(cat["FileExtType"]);
                         catModel.UrlAddress = cat["UrlAddress"].ToString();
                         CategoryList.Add(catModel);
                     }
@@ -1871,34 +2008,33 @@ namespace StudentAppWebsite.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public JsonResult SavePaymentRequest(AdvertisementModels model)
-        //{
-        //    AdvertisementBase advertisementbase = new AdvertisementBase();
-        //    AdvertisementAction advertisementaction = new AdvertisementAction();
+        [HttpPost]
+        public JsonResult SavePaymentRequest(AdvertisementModels model)
+        {
+            AdvertisementBase advertisementbase = new AdvertisementBase();
+            AdvertisementAction advertisementaction = new AdvertisementAction();
 
-        //    advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-        //    //advertisementbase.AccountNumber = Encode(model.AccountNumber);
-        //    //advertisementbase.IFSCCode = Encode(model.IFSCCode);
-        //    advertisementbase.Currency = model.Currency;
-        //    advertisementbase.ExchangeRate = model.ExchangeRate;
-        //    advertisementbase.AmountRequested = Convert.ToDecimal(model.WalletAmount);
-        //    //advertisementbase.AccountHolderName = model.AccountHolderName;
-        //    advertisementbase.EmailId = model.EmailId;
-        //    actionResult = advertisementaction.PaymentRequest_IU(advertisementbase);
-        //    Session["Payment_ID"] = actionResult.dtResult.Rows[0].ItemArray[0];
+            advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
+            //advertisementbase.AccountNumber = Encode(model.AccountNumber);
+            //advertisementbase.IFSCCode = Encode(model.IFSCCode);
+            advertisementbase.Currency = model.Currency;
+            advertisementbase.ExchangeRate = model.ExchangeRate;
+            advertisementbase.AmountRequested = Convert.ToDecimal(model.WalletAmount);
+            //advertisementbase.AccountHolderName = model.AccountHolderName;
+            advertisementbase.EmailId = model.EmailId;
+            actionResult = advertisementaction.PaymentRequest_IU(advertisementbase);
+            Session["Payment_ID"] = actionResult.dtResult.Rows[0].ItemArray[0];
 
-        //    if (actionResult.IsSuccess)
-        //    {
-        //        TempData["SuccessMessage"] = "Your request has been saved successfully.";
-        //    }
-        //    else
-        //    {
-        //        TempData["ErrorMessage"] = "Error in saving your request. Please try again later.";
-        //    }
-        //    return Json("Success");
-        //}
-
+            if (actionResult.IsSuccess)
+            {
+                TempData["SuccessMessage"] = "Your request has been saved successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error in saving your request. Please try again later.";
+            }
+            return Json("Success");
+        }
 
 
         [HttpGet]
@@ -2001,277 +2137,17 @@ namespace StudentAppWebsite.Controllers
             return Json(CurrencyList, JsonRequestBehavior.AllowGet);
         }
 
-        ////[HttpGet]
-        //[Route("User/AccountSettings")]
-        //public ActionResult ShowUPIDetails()
-        //{
-        //    AdvertisementModels model = new AdvertisementModels();
-        //    //List<UPIDetails> UPIDetailsList = new List<UPIDetails>();
-        //    commonBase.Id = Convert.ToInt32(Session["UserId"]);
-        //    var data = commonAction.GetUPIDetails_ByuserId(commonBase);
-        //    if (data.IsSuccess)
-        //    {
-        //        model.BankAccountHolderName = data.dtResult.Rows[0].ItemArray[1].ToString();
-        //        model.UPIId = data.dtResult.Rows[0].ItemArray[2].ToString();
-        //        model.MobileNumberUPI = data.dtResult.Rows[0].ItemArray[3].ToString();
-        //        //UPIDetailsList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<UPIDetails>(data.dtResult);
-        //    }
-        //    return View("~/Views/User/AccountSettings.cshtml", model);
-        //}
-
-        #region UPI Insert/Update
-        public ActionResult UPIdetails_Insert_Update(AdvertisementModels model)
+        #region Hiring
+        public ActionResult Hiring()
         {
-            AdvertisementBase advertisementbase = new AdvertisementBase();
-            AdvertisementAction advertisementaction = new AdvertisementAction();
-            advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-            advertisementbase.BankAccountHolderName = model.BankAccountHolderName;
-            advertisementbase.UPIId = model.UPIId;
-            advertisementbase.MobileNumberUPI = model.MobileNumberUPI;
-            actionResult = advertisementaction.UPIdetails_Insert_Update(advertisementbase);
+            List<Hiring> lstHiring = new List<Hiring>();
+            actionResult = commonAction.Hiring_LoadActive();
             if (actionResult.IsSuccess)
-            {
-                TempData["SuccessMessage"] = "Saved UPI Details successfully.";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Error in saving your UPI Details. Please try again later.";
-            }
-            return RedirectToAction("AccountSettings", "User");
+                lstHiring = AccountingSoftware.Helpers.CommonMethods.ConvertTo<Hiring>(actionResult.dtResult);
+
+            return View(lstHiring);
         }
         #endregion
 
-        #region SavePaymentRequest
-        [HttpPost]
-        public JsonResult SavePaymentRequest(AdvertisementModels model)
-        {
-            AdvertisementBase advertisementbase = new AdvertisementBase();
-            AdvertisementAction advertisementaction = new AdvertisementAction();
-
-            advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-            advertisementbase.BankAccountHolderName = model.BankAccountHolderName;
-            advertisementbase.UPIId = model.UPIId;
-            advertisementbase.MobileNumberUPI = model.MobileNumberUPI;
-            advertisementbase.Currency = model.Currency;
-            advertisementbase.AmountRequested = Convert.ToDecimal(model.WalletAmount);
-            advertisementbase.EmailId = model.EmailId;
-            actionResult = advertisementaction.PaymentRequest_UPI(advertisementbase);
-            Session["Payment_ID"] = actionResult.dtResult.Rows[0].ItemArray[0];
-
-            if (actionResult.IsSuccess)
-            {
-                string Attachment = SaveUPIDetailsinCSV(model);
-                if (Attachment != "")
-                {
-                    AccountingSoftware.Helper.Email.SendUPIDetails(Attachment);
-                }
-                TempData["SuccessMessage"] = "Your request has been saved successfully. Your amount will be send at the end of this month";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Error in saving your request. Please try again later.";
-            }
-            return Json("Success");
-        }
-        #endregion
-
-        #region Save in CSV
-        public string SaveUPIDetailsinCSV(AdvertisementModels model)
-        {
-            try
-            {
-                List<string> list = new List<string>();
-                
-                list.Add(Session["FirstName"].ToString());
-                list.Add(model.BankAccountHolderName);
-                list.Add(model.UPIId);
-                list.Add(model.MobileNumberUPI);
-                list.Add(Convert.ToString(model.WalletAmount));
-                string[] UPIDetails = list.ToArray();
-                string UPItoCSV = Common.ConvertToCSV(UPIDetails);
-
-                
-                //File creation
-                string MonthYear = DateTime.Today.Year.ToString();
-                string Month = DateTime.Today.Month.ToString();
-                StringBuilder str1 = new StringBuilder(Month);
-                str1.Append(MonthYear);
-                var path = System.Web.Hosting.HostingEnvironment.MapPath("~/Excels");
-                string pathString = System.IO.Path.Combine(path, str1.ToString());
-                if (Directory.Exists(pathString))
-                {
-                    string fileName = "UPIDetails.csv";
-                    // Use Combine again to add the file name to the path.
-                    pathString = System.IO.Path.Combine(pathString, fileName);
-                    //using (StreamWriter sw = new StreamWriter(System.IO.File.OpenWrite(pathString)))
-                    //{
-                    //    string text = "\r\n";
-                    //    sw.Write(text + UPItoCSV);
-                    //}
-                    if (System.IO.File.Exists(pathString))
-                    {
-                        using (StreamWriter sw = System.IO.File.AppendText(pathString))
-                        {
-                            string text = "\r\n";
-                            sw.Write(text + UPItoCSV);
-                        }
-                    }
-                }
-                else
-                {
-                    System.IO.Directory.CreateDirectory(pathString);
-                    string fileName = "UPIDetails.csv";
-                    // Use Combine again to add the file name to the path.
-                    pathString = System.IO.Path.Combine(pathString, fileName);
-                    using (StreamWriter sw = new StreamWriter(System.IO.File.OpenWrite(pathString)))
-                    {
-                        string text = "\r\n";
-                        sw.Write(text + UPItoCSV);
-                    }
-                }
-                return pathString;
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-        #endregion
-
-        #region Bank Insert/Update
-        public ActionResult Bankdetails_Insert_Update(AdvertisementModels model)
-        {
-            AdvertisementBase advertisementbase = new AdvertisementBase();
-            AdvertisementAction advertisementaction = new AdvertisementAction();
-            advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-            advertisementbase.BankAccountHolderName = model.BankAccountHolderName;
-            advertisementbase.BankAccountNumber = model.BankAccountNumber;
-            advertisementbase.BankIFSCCode = model.BankIFSCCode;
-            advertisementbase.MobileNumberUPI = model.MobileNumberUPI;
-            actionResult = advertisementaction.Bankdetails_Insert_Update(advertisementbase);
-            if (actionResult.IsSuccess)
-            {
-                TempData["SuccessMessage"] = "Saved Bank Details successfully.";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Error in saving your UPI Details. Please try again later.";
-            }
-            return RedirectToAction("AccountSettings", "User");
-        }
-        #endregion
-
-        #region SavePaymentRequest
-        [HttpPost]
-        public JsonResult SavePaymentRequestBank(AdvertisementModels model)
-        {
-            try
-            {
-                AdvertisementBase advertisementbase = new AdvertisementBase();
-                AdvertisementAction advertisementaction = new AdvertisementAction();
-
-                advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-                advertisementbase.BankAccountHolderName = model.BankAccountHolderName;
-                advertisementbase.BankAccountNumber = model.BankAccountNumber;
-                advertisementbase.BankIFSCCode = model.BankIFSCCode;
-                advertisementbase.MobileNumberUPI = model.MobileNumberUPI;
-                advertisementbase.Currency = model.Currency;
-                advertisementbase.AmountRequested = Convert.ToDecimal(model.WalletAmount);
-                advertisementbase.EmailId = model.EmailId;
-                actionResult = advertisementaction.PaymentRequest_Bank(advertisementbase);
-                Session["Payment_ID"] = actionResult.dtResult.Rows[0].ItemArray[0];
-
-                if (actionResult.IsSuccess)
-                {
-                    //string Attachment = SaveBankDetailsinCSV(model);
-                    //if (Attachment != "")
-                    //{
-                    //AccountingSoftware.Helper.Email.SendUPIDetails(Attachment);
-                    //}
-                    TempData["SuccessMessage"] = "Your request has been saved successfully. Your amount will be send at the end of this month";
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Error in saving your request. Please try again later.";
-                }
-            }
-            catch(Exception e)
-            {
-                throw (e);
-            }
-            return Json("Success");
-        }
-        #endregion
-
-        #region Save in CSV
-        public string SaveBankDetailsinCSV(AdvertisementModels model)
-        {
-            try
-            {
-                List<string> list = new List<string>();
-
-                list.Add(Session["FirstName"].ToString());
-                list.Add(model.BankAccountHolderName);
-                list.Add(model.BankAccountNumber);
-                list.Add(model.BankIFSCCode);
-                list.Add(model.MobileNumberUPI);
-                list.Add(Convert.ToString(model.WalletAmount));
-                string[] BankDetails = list.ToArray();
-                string BanktoCSV = Common.ConvertToCSV(BankDetails);
-
-
-                //File creation
-                string MonthYear = DateTime.Today.Year.ToString();
-                string Month = DateTime.Today.Month.ToString();
-                StringBuilder str1 = new StringBuilder(Month);
-                str1.Append(MonthYear);
-                var path = System.Web.Hosting.HostingEnvironment.MapPath("~/Excels");
-                string pathString = System.IO.Path.Combine(path, str1.ToString());
-                if (Directory.Exists(pathString))
-                {
-                    string fileName = "BankDetails.csv";
-                    // Use Combine again to add the file name to the path.
-                    pathString = System.IO.Path.Combine(pathString, fileName);
-                    //using (StreamWriter sw = new StreamWriter(System.IO.File.OpenWrite(pathString)))
-                    //{
-                    //    string text = "\r\n";
-                    //    sw.Write(text + UPItoCSV);
-                    //}
-                    if (System.IO.File.Exists(pathString))
-                    {
-                        using (StreamWriter sw = System.IO.File.AppendText(pathString))
-                        {
-                            string text = "\r\n";
-                            sw.Write(text + BanktoCSV);
-                        }
-                    }
-                    else 
-                    {
-                        using (StreamWriter sw = System.IO.File.AppendText(pathString))
-                        {
-                            sw.Write(BanktoCSV);
-                        }
-                    }
-                }
-                else
-                {
-                    System.IO.Directory.CreateDirectory(pathString);
-                    string fileName = "BankDetails.csv";
-                    // Use Combine again to add the file name to the path.
-                    pathString = System.IO.Path.Combine(pathString, fileName);
-                    using (StreamWriter sw = new StreamWriter(System.IO.File.OpenWrite(pathString)))
-                    {
-                        string text = "\r\n";
-                        sw.Write(text + BanktoCSV);
-                    }
-                }
-                return pathString;
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-        }
-        #endregion
     }
 }

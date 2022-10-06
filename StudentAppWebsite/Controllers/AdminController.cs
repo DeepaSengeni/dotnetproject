@@ -19,8 +19,7 @@ using STU.BaseLayer.Advertisement;
 using STU.ActionLayer.Advertisement;
 using STU.BaseLayer.Pages;
 using STU.ActionLayer.Pages;
-using STU.ActionLayer.Admin;
-using ClosedXML.Excel;
+
 
 namespace StudentAppWebsite.Controllers
 {
@@ -470,7 +469,7 @@ namespace StudentAppWebsite.Controllers
                 //}
 
 
-                // commonBase.InstituteIcon = model.InstituteLogo;
+               // commonBase.InstituteIcon = model.InstituteLogo;
                 commonBase.InstituteIcon = string.Empty;
                 commonBase.Address = model.Address;
                 commonBase.Zipcode = model.Zipcode;
@@ -575,7 +574,7 @@ namespace StudentAppWebsite.Controllers
             return Countrylist;
         }
 
-
+       
 
         [AllowAnonymous]
         public JsonResult StateLoad(int CountryID)
@@ -915,7 +914,7 @@ namespace StudentAppWebsite.Controllers
 
         #region Method CityPricing_InsertUpdate
         public JsonResult CityPricing_InsertUpdate(string cityId, string price)
-        {
+        {   
             string jsonString = string.Empty;
             if (cityId != "" && price != "")
             {
@@ -936,7 +935,7 @@ namespace StudentAppWebsite.Controllers
                 jsonString = "{\"Status\":\"-2\"}";
             }
             return Json(jsonString, JsonRequestBehavior.AllowGet);
-        }
+        } 
         #endregion
 
 
@@ -1002,7 +1001,7 @@ namespace StudentAppWebsite.Controllers
                 model.AmountPaid = (ActionResult.dtResult.Rows[0][0] != DBNull.Value ? Convert.ToDecimal(ActionResult.dtResult.Rows[0][0]) : 0);
             }
 
-
+            
 
             return View(model);
         }
@@ -1015,7 +1014,7 @@ namespace StudentAppWebsite.Controllers
             AdvertisementAction advertisementaction = new AdvertisementAction();
 
             advertisementbase.AmountToBePaid = model.AmountPaid;
-
+           
             ActionResult = advertisementaction.PriceTable_IU(advertisementbase);
             if (ActionResult.IsSuccess)
             {
@@ -1045,7 +1044,7 @@ namespace StudentAppWebsite.Controllers
             return View(model);
         }
 
-        public ActionResult AdPreview(int AdId = 0)
+        public ActionResult AdPreview(int AdId=0)
         {
             ViewBag.Id = AdId;
             return View();
@@ -1087,8 +1086,7 @@ namespace StudentAppWebsite.Controllers
         public ActionResult CityPricing()
         {
             StudentRegistration model = new StudentRegistration();
-            try
-            {
+            try {
                 var country = CountryLoad();
                 model.Countrylist = country;
                 model.Country = 101;
@@ -1098,7 +1096,7 @@ namespace StudentAppWebsite.Controllers
                 if (ActionResult.IsSuccess)
                 {
                     model.statelist = AccountingSoftware.Helpers.CommonMethods.ConvertTo<State>(ActionResult.dtResult);
-                    if (model.statelist != null && model.statelist.Count > 0)
+                    if(model.statelist!=null && model.statelist.Count>0)
                     {
                         model.state = "38";
                         commonBase.StateId = 38;
@@ -1111,18 +1109,92 @@ namespace StudentAppWebsite.Controllers
                 }
 
             }
+            catch(Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+#region Hiring
+        public ActionResult ManageHiring()
+        {
+            AdminModels model = new AdminModels();
+            List<Hiring> hiringList = new List<Hiring>();
+            try
+            {
+                ActionResult = commonAction.Get_Admin_Hiring(commonBase);
+                if (ActionResult.IsSuccess)
+                        {
+                    model.hiringList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<Hiring>(ActionResult.dtResult);
+
+                        }
+            }
             catch (Exception ex)
             {
 
             }
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult AddHiring(int? Id = 0)
+        {
+            List<SelectListItem> lstStream = new List<SelectListItem>();
+            Hiring model = new Hiring();
+
+            if (Id > 0)
+            {
+                commonBase.Id = Convert.ToInt32(Id);
+                ActionResult = commonAction.Hiring_LoadById(commonBase);
+                if (ActionResult.IsSuccess)
+                {
+                    model.Tittle = Convert.ToString(ActionResult.dtResult.Rows[0]["tittle"]);
+                    model.Description = Convert.ToString(ActionResult.dtResult.Rows[0]["description"]);
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddHiring(Hiring model)
+        {
+            string type = "save";
+            commonBase.Id = model.ID;
+            if (model.ID > 0)
+                type = "update";
+            commonBase.Tittle= model.Tittle;
+            commonBase.Description = model.Description;
+            ActionResult = commonAction.Hiring_InsertUpdate(commonBase);
+            if (ActionResult.IsSuccess)
+            {
+                if (Convert.ToString(ActionResult.dtResult.Rows[0][0]) != "-10")
+                    TempData["SuccessMessage"] = "Hiring " + type + "d successfully.";
+                else
+                {
+                    TempData["ErrorMessage"] = "Hiring Name already exists, Please enter another.";
+                    return RedirectToAction("AddSubject", model.ID);
+                }
+
+            }
+            else
+                TempData["ErrorMessage"] = "Some error occured during " + type.Substring(0, type.Length - 1) + "ing Hiring.";
+            return RedirectToAction("ManageHiring");
+        }
+        public ActionResult UpdateHiringStatusById(int Id, bool Status)
+        {
+            commonBase.Id = Id;
+            commonBase.Status = Status;
+            commonBase.Action = "Hirings";
+            ActionResult = commonAction.Update_StatusByID(commonBase);
+            return RedirectToAction("ManageHiring");
+        }
+        #endregion
         [HttpGet]
         public ActionResult CountryCurrenyExRate()
         {
             StudentRegistration model = new StudentRegistration();
             var Currency = CurrencyLoadAll();
-            model.currencyRates = Currency;
+            model.currencyRates  = Currency;
             return View(model);
         }
 
@@ -1153,7 +1225,7 @@ namespace StudentAppWebsite.Controllers
             if (Id != "" && price != "")
             {
                 commonBase.ID = Convert.ToInt32(Id);
-                commonBase.Rate = Convert.ToDecimal(price);
+                commonBase.Rate =Convert.ToDecimal(price);
                 ActionResult = commonAction.CurrencyRate_Update(commonBase);
                 if (ActionResult.IsSuccess)
                 {
@@ -1183,133 +1255,20 @@ namespace StudentAppWebsite.Controllers
             if (ActionResult.IsSuccess)
             {
                 PaypalResponseList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<PaypalResponse>(ActionResult.dtResult);
-                model.PaypalResponseList = PaypalResponseList;
+                model.PaypalResponseList=PaypalResponseList;
             }
-
+            
             return View(new List<AdvertisementModels> { model });
         }
 
-        public ActionResult PaymentList()
-        {
-            return View();
-            //ViewBag.Id = AdId;
-            //return View();
-        }
-
-        [HttpPost]
-        public ActionResult GeneratePaymentlist(PaymentModel model)
-        {
-            string Month = model.Month;
-            string Year = model.Year;
-            DataTable datatablePaymentlist = new DataTable();
-            //string sqlstr = "SELECT * FROM BankPaymentRequest BPR inner join [dbo].[UsersInfo] UI on  UI.ID=BPR.UserId WHERE MONTH(BPR.CreatedDate) = '" + Month + "' AND YEAR(BPR.CreatedDate) ='" + Year + "'";
-            DataTable dt = new DataTable("BankPaymentrequest");
-            dt.Columns.Add("RazorpayX Account Number");
-            dt.Columns.Add("Payout Amount(in Rupees)");
-            dt.Columns.Add("Payout Currency");
-            dt.Columns.Add("Payout Mode");
-            dt.Columns.Add("Payout Purpose");
-            dt.Columns.Add("Fund Account Id");
-            dt.Columns.Add("Fund Account Type");
-            dt.Columns.Add("Fund Account Name");
-            dt.Columns.Add("Fund Account Ifsc");
-            dt.Columns.Add("Fund Account Number");
-            dt.Columns.Add("Fund Account Vpa");
-            dt.Columns.Add("Contact Name");
-            dt.Columns.Add("Payout Narration");
-            dt.Columns.Add("Payout Reference Id");
-            dt.Columns.Add("Contact Type");
-            dt.Columns.Add("Contact Email");
-            dt.Columns.Add("Contact Mobile");
-            dt.Columns.Add("Contact Reference Id");
-            dt.Columns.Add("notes[place]");
-            dt.Columns.Add("notes[code]");
-
-            try
-            {
-                PaymentListAction paymentlistaction = new PaymentListAction();
-                ActionResult = paymentlistaction.GetPaymentListforMonth(Month, Year);
-                if (ActionResult.IsSuccess)
-                {
-                    datatablePaymentlist = ActionResult.dtResult;
-                    if (datatablePaymentlist.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in datatablePaymentlist.Rows)
-                        {
-                            DataRow dtrow;
-                            dtrow = dt.NewRow();
-                            dtrow["Payout Amount(in Rupees)"] = string.IsNullOrEmpty(row["AmountRequested"].ToString()) ? "" : row["AmountRequested"];
-                            //dtrow["Payout Currency"] = string.IsNullOrEmpty(row["AmountCurrency"].ToString()) ? "" : row["AmountCurrency"];
-                            dtrow["Payout Currency"] = "INR";
-                            dtrow["Fund Account Name"] = string.IsNullOrEmpty(row["BankAccountHolderName"].ToString()) ? "" : row["BankAccountHolderName"];
-                            dtrow["Fund Account Type"] = "Bank_Account";
-                            dtrow["Fund Account Ifsc"] = string.IsNullOrEmpty(row["IFSCCode"].ToString()) ? "" : row["IFSCCode"];
-                            dtrow["Fund Account Number"] = string.IsNullOrEmpty(row["BankAccountNumber"].ToString()) ? "" : row["BankAccountNumber"];
-                            dtrow["Contact Email"] = string.IsNullOrEmpty(row["EmailId"].ToString()) ? "" : row["EmailId"];
-                            dtrow["Contact Mobile"] = string.IsNullOrEmpty(row["MobileNumberUPI"].ToString()) ? "" : row["MobileNumberUPI"];
-                            dtrow["RazorpayX Account Number"] = "7878780080749731";
-                            dtrow["Payout Mode"] = "NEFT";
-                            dtrow["Payout Purpose"] = "Salary";
-                            dt.Rows.Add(dtrow);
-                            //}
-                        }
-                        using (XLWorkbook wb = new XLWorkbook())
-                        {
-
-                            wb.Worksheets.Add(dt);
-                            Response.Clear();
-                            Response.Buffer = true;
-                            Response.Charset = "";
-                            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                            Response.AddHeader("content-disposition", "attachment;filename=BankPaymentList.xlsx");
-                            using (System.IO.MemoryStream MyMemoryStream = new System.IO.MemoryStream())
-                            {
-                                wb.SaveAs(MyMemoryStream);
-                                MyMemoryStream.WriteTo(Response.OutputStream);
-                                Response.Flush();
-                                Response.End();
-                                //TempData["SuccessMessage"] = "Excel Sheet has been downloaded";
-                                return File(MyMemoryStream.ToArray(), "application / vnd.openxmlformats - officedocument.spreadsheetml.sheet");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        TempData["ErrorMessage"] = "There is no data in the selected month and year";
-                        return RedirectToAction("PaymentList");
-                    }
-
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "There is no data in the selected month and year";
-                    return RedirectToAction("PaymentList");
-                }
-            }
-            //DataTable datatable1 = ExecuteQuery_DataSet(sqlstr, "tbl");
+        
 
 
-            //try
-            //{
-            //PaymentListAction paymentlistaction = new PaymentListAction();
-            //ActionResult = paymentlistaction.GetPaymentListforMonth();
-            //    if (ActionResult.IsSuccess)
-            //    {
-            //        TempData["SuccessMessage"] = "Saved Bank Details successfully.";
-            //    }
-            //    else
-            //    {
-            //        TempData["ErrorMessage"] = "Error in saving your UPI Details. Please try again later.";
-            //    }
 
-
-            //}
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "There is no data in the selected month and year";
-                //return RedirectToAction("PaymentList");
-            }
-            return RedirectToAction("PaymentList");
-        }
     }
+
+
+
+
+
 }

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "AddQuestion";
     int pageid = ViewBag.pageid;
-
+    var BookUserEmailId = ViewBag.BookUserEmailId;
 
 }
 <style>
@@ -100,7 +100,7 @@
     </script>*@
 
 
-
+<input type="hidden" name="BookUserEmailId" id="BookUserEmailId" value="@BookUserEmailId"/>
 
 <div class="main-inner">
     <div class="">
@@ -398,6 +398,9 @@
                         $('#featuresLbl1').text(msg.CategoryList[0].Features);
                         $('#featuresLbl2').text(msg.CategoryList[0].Features);
 
+                        $('#urlLbl1').attr("href",msg.CategoryList[0].UrlAddress);
+                        $('#urlLbl2').attr("href", msg.CategoryList[0].UrlAddress);
+
                         $('#urlLbl1').text(msg.CategoryList[0].UrlAddress);
                         $('#urlLbl2').text(msg.CategoryList[0].UrlAddress);
 
@@ -470,6 +473,11 @@
                             window.location = "/User/UserProfile?tab=profile&Id=" + msg.CategoryList[0].UserId + "";
                         });
                         $('#adDiv1').show();
+
+                        if ($("#SlideshowImages1 img").length == 1) {
+                            $("#SlideshowImages1 img").css("display", "block");
+                            $("#SlideshowImages1 img").css("opacity", 1);
+                        }
                         //$('#adDiv2').show();
                     }
                     else {

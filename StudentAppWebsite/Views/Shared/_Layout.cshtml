@@ -258,10 +258,10 @@
                                     </li>
 
                                     @*<li  style="margin-left: 7px;">
-                                            <p class="curcode"  id="CurrencyCode"></p>
-                                            <input type="hidden" id="rate" value="" />
+                <p class="curcode"  id="CurrencyCode"></p>
+                <input type="hidden" id="rate" value="" />
 
-                                        </li>*@
+            </li>*@
 
                                     <li class="row mobile-back mobile-back-pc">
                                         <div class="layout-find-frnd-btnmobile">
@@ -304,6 +304,17 @@
                                         </ul>
                                     </li>
                                     // Notifications listing ends here
+
+                                    //CallRequest listing starts here
+
+                                    <li class="dropdown hover-line" style="display:none;" id="callrecieveurl" callurl="" onclick="redirecttocallpage();">
+                                        <a href="javascript:;" data-toggle="dropdown">
+                                            <img style="width:18px;height:18px;" src="https://cdn-icons-png.flaticon.com/128/7044/7044967.png" />
+                                            <span class="badge badge-purple callCount" id="CallCount" style="display: none">0</span>
+                                        </a>
+                                    </li>
+
+                                    // Call Request Ends Here
 
 
                                     //FriendRequest listing starts here
@@ -418,9 +429,9 @@
                                             </li>
                                             @*Help 8787056761*@
                                             <li class="last">
-                                                <a href="#">
-                                                    <span style="white-space:nowrap"><i class="fa fa-question" aria-hidden="true">  notetor.com@gmail.com</i></span>
-                                                    
+                                                <a href="mailto:notetorhelp@gmail.com" target="_blank">
+                                                    <i class="fa fa-question" aria-hidden="true"> </i>
+                                                    May I help you?  &#128578
                                                 </a>
                                             </li>
                                             <li class="last">
@@ -429,10 +440,17 @@
                                                     Setting
                                                 </a>
                                             </li>
+
                                             <li class="last">
                                                 <a href="/User/AccountSettings">
                                                     <i class="fa fa-cog" aria-hidden="true"></i>
                                                     Creator's Account
+                                                </a>
+                                            </li>
+                                            <li class="last">
+                                                <a href="/home/Hiring">
+                                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                                    Hiring
                                                 </a>
                                             </li>
                                             <li class="last">
@@ -595,6 +613,12 @@
         }
     }
 
+    function redirecttocallpage() {
+        if ($('#callrecieveurl').attr("callurl") != "") {
+            window.location.href = $('#callrecieveurl').attr("callurl");
+        }
+    }
+
     function showNotifications() {
 
 
@@ -610,7 +634,25 @@
             global: false,
             success: function (data) {
                 var jsonData = JSON.parse(data);
+                console.log(jsonData);
+
                 if (jsonData.Status == 1) {
+
+                    // CallRequests Showing Starts Here
+                    if (jsonData.callRequests.length == 0 || jsonData.callRequests[0].UnreadNotifications == 0) //
+                    {
+                        $('#CallCount').hide();
+                        $('#CallCount').removeClass('badge badge-purple friendCount');
+                        $('#callrecieveurl').hide();
+                        $('#CallCount').html('');
+                    }
+                    else {
+                        $('#CallCount').show();
+                        $('#CallCount').addClass('badge badge-purple friendCount');
+                        $('#CallCount').html('1');
+                        $('#callrecieveurl').show();
+                        $('#callrecieveurl').attr("callurl", jsonData.callRequests[0].PageUrl + "&call=true");
+                    }
 
                     // FriendsRequests Showing Starts Here
                     if (jsonData.friendRequests.length == 0 || jsonData.friendRequests[0].UnreadNotifications == 0) //
@@ -641,7 +683,7 @@
                         else
                             element += '<li class="active notification-success friendLi clearfix" data-Id="' + jsonData.friendRequests[i].FriendRequestId + '"><div class="col-md-3"><img src="'
                                 + jsonData.friendRequests[i].InviterImage + '" class="img-circle img-inline userpic-32"> </div><div class="col-md-9" ">'
-                                + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + ' has send you a friend request <br/>'
+                                + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + ' has sent you a friend request <br/>'
                                 + (jsonData.friendRequests[i].CreatedDate == null ? ' ' : jsonData.friendRequests[i].CreatedDate) + '</div><span  style="display:block;float:right;margin-right: 10px;"><input type="button"class="notification-btn btn btn-primary" value="Accept" data-NotificationId="'
                                 + jsonData.friendRequests[i].FriendRequestId + '" onclick="UpdateNotificationStatus(this,1,1,\'layout\')"/><input class="notification-btn btn btn-warning" type="button" value="Reject" data-NotificationId="'
                                 + jsonData.friendRequests[i].FriendRequestId + '" onclick="UpdateNotificationStatus(this,2,1,\'layout\')"/></span>';

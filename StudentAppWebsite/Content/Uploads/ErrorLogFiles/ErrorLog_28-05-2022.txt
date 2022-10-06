@@ -1,0 +1,11 @@
+
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 28-05-2022 23:53:31
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.CommonMethods.CommonDL.FriendRequest_LoadByUserId(CommonBase CommonBase) in D:\Hemant Kumar\Notetor\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 1153
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 28-05-2022 23:53:43
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in H:\Work\Other\Notetor\StudentAppWebsite\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.FriendRequest_LoadByUserId(CommonBase CommonBase) in D:\Hemant Kumar\Notetor\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 1157
+   at STU.ActionLayer.Common.CommonAction.FriendRequest_LoadByUserId(CommonBase commonBase) in D:\Hemant Kumar\Notetor\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 923

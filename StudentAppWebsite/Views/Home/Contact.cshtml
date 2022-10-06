@@ -1,50 +1,101 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: inherit;
+    }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+    .panel-default > .panel-heading {
+        color: #333;
+        background-color: #eee;
+    }
 
-<section class="contact">
-    <header>
-        <h3>Phone</h3>
-    </header>
-    <p>
-        <span class="label">Main:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
-    </p>
-</section>
+    .panel-heading {
+        padding: 10px 15px;
+    }
 
-<section class="contact">
-    <header>
-        <h3>Email</h3>
-    </header>
-    <p>
-        <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
-    </p>
-</section>
+    .panel-default {
+        border-color: #ddd;
+    }
 
-<section class="contact">
-    <header>
-        <h3>Address</h3>
-    </header>
-    <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
-    </p>
-</section>
+    .panel {
+        margin: 0px;
+        background-color: #fff;
+        border: none;
+        border-radius: 0px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 0px 10px;
+    }
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #ddd;
+    }
+
+    .panel-body {
+        border-top: 0px;
+        padding: 15px;
+    }
+
+    .panel .panel-body {
+        padding: 0;
+        color: #626262;
+        padding: 0px 5px;
+    }
+
+    .panel .panel-heading > .panel-title > a {
+        color: #000;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .panel-group .panel .panel-heading + .panel-collapse .panel-body {
+        border-top: none;
+        margin-top: 0px;
+    }
+
+    .panel .panel-heading {
+        padding-bottom: 0px;
+        border-bottom: none;
+        margin-bottom: 7px !important;
+        color: #000 !important;
+    }
+
+    .panel-group .panel {
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #616565;
+    }
+
+    .answ {
+        line-height: 32px;
+        color: #616565;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 faq-page">
+            <h2 style="text-align: center;">Contact Details</h2>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <p>Operational address- 14/13 Civil Line, Kanpur, Uttar Pradesh, India. Pin- 208001</p>
+                            <p>(Phone number- 8787056761) </p>
+                            <p>(Email- notetor.com@gmail.com)</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

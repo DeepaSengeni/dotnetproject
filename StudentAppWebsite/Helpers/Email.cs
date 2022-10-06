@@ -54,14 +54,14 @@ namespace AccountingSoftware.Helper
 
                 MailAddress toa = new MailAddress(emailId);
                 MailMessage message = new MailMessage(frm, toa);
-                message.From = new MailAddress("ajmatnoor786@gmail.com", "Notetor App");
+                message.From = new MailAddress("info@notetor.com", "Notetor App");
                 message.IsBodyHtml = true;
 
                 message.Subject = "Your OTP for registration";
                 string content = string.Format("Dear customer, your OTP for registration is {0} .From http://notetor.com/", messageBody);
                 message.Body = content;
-                // SmtpClient client = new SmtpClient();
-                // client.Send(message);
+                 //SmtpClient client = new SmtpClient();
+                 //client.Send(message);
                 SetUserCredentialAndProcessMail(message);
                 return "true";
 
@@ -121,30 +121,6 @@ namespace AccountingSoftware.Helper
                 return false;
             }
         }
-        #region Send Email with UPI Details 
-        public static string SendUPIDetails(string Attachment)
-        {
-            try
-            {
-
-                MailAddress toa = new MailAddress("notetor.com@gmail.com");
-                MailMessage message = new MailMessage(frm, toa);
-                message.From = new MailAddress("notetorotp@gmail.com", "Notetor App");
-                message.IsBodyHtml = true;
-                message.Attachments.Add(new Attachment(Attachment));
-                message.Subject = "UPI Payment Request";
-                string content = string.Format("Dear customer, Please Find the attachment for this month's UPI Payment request list.");
-                message.Body = content;
-                SetUserCredentialAndProcessMail(message);
-                return "true";
-
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-        #endregion
 
         #region Method : SendEmail by Mohd
         public static bool SendEmail(string toMail, string subject, string message, bool isBodyHtml)
@@ -158,47 +134,30 @@ namespace AccountingSoftware.Helper
             return true;
         }
         #endregion
-
+       
         #region Method SetUserCredentialAndProcessMail
         private static void SetUserCredentialAndProcessMail(MailMessage msg)
         {
             NetworkCredential cred = new NetworkCredential(userName, password);
-            SmtpClient mailClient = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp
-            mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             //SmtpClient mailClient = testMode == "1" ? new SmtpClient(smtpServer, 587) : new SmtpClient("relay-hosting.secureserver.net", 25);
-            // SmtpClient mailClient = testMode == "1" ? new SmtpClient(smtpServer, 587) : new SmtpClient(smtpServer, 26);
+            SmtpClient mailClient = testMode == "1" ? new SmtpClient(smtpServer, 587) : new SmtpClient("relay-hosting.secureserver.net", 25);
             //mailClient.EnableSsl = testMode == "1" ? true : false;
-            mailClient.EnableSsl = true;
             mailClient.UseDefaultCredentials = false;
-            // mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            // mailClient.TargetName = "STARTTLS/smtp.gmail.com";
             mailClient.Credentials = cred;
+            //Godaddy code 
+
+            //SmtpClient mailClient = new SmtpClient();
+
             try
             {
-                //if (testMode == "1")
-                //{
-                //mailClient.Send(msg);
-
-                //string to = msg.To[0].Address;
-                //MailMessage mailMessage = new MailMessage(mailFrom, to, msg.Subject, msg.Body);
-                //mailMessage.Subject = msg.Subject;
-                //mailMessage.Body = msg.Body;
-                //mailMessage.IsBodyHtml = msg.IsBodyHtml;
-                //if (msg.Attachments != null && msg.Attachments.Count > 0)
-                //{
-                //    AttachmentCollection attachment = msg.Attachments;
-                //    foreach (Attachment item in attachment)
-                //    {
-                //        msg.Attachments.Add(item);
-                //    }
-                //}
-                mailClient.Send(msg);
-                //mailClient.Send(mailMessage);
-                //}
-                //else
-                //{
-                //mailClient.Send(msg);
-                //}
+                if (testMode == "1")
+                {
+                    mailClient.Send(msg);
+                }
+                else
+                {
+                    mailClient.Send(msg);
+                }
             }
             catch (Exception ex)
             {
@@ -207,7 +166,7 @@ namespace AccountingSoftware.Helper
         }
         #endregion
 
-
+        
 
         public static string ReadFile(string filename, string name,string fullname ,string token)
         {
