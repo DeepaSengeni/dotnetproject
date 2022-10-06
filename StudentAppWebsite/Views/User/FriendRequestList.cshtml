@@ -1,0 +1,216 @@
+﻿@model  List<StudentAppWebsite.Models.InvitationModel>
+@{
+    ViewBag.Title = "FriendRequestList";
+}
+
+<style>
+    .user-notification {
+        background: rgb(222, 235, 255) none repeat scroll 0% 0%;
+        padding: 9px 10px;
+        margin-bottom: 8px !important;
+        border: 1px solid rgb(206, 222, 254);
+        text-transform: capitalize;
+        color: rgb(71, 71, 71) !important;
+    }
+
+    user-notification > i {
+        background: rgb(251, 157, 106);
+        color: #fff;
+        padding: 5px 10px;
+        margin: 0px 12px;
+    }
+
+    .btn {
+        margin-top: 0px;
+    }
+
+    .Accept, .Reject {
+        margin-bottom: 0px;
+    }
+
+    .alert {
+        margin-top: 0px;
+    }
+    /*.user-notification:nth-last-child(-n+2) {
+            background: rgb(251, 233, 238) none repeat scroll 0% 0%;
+            border: 1px solid rgb(251, 213, 208);
+        }*/
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#example-4").dataTable({
+            aLengthMenu: [
+                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+            ]
+        });
+        $('#example-4_wrapper').find('.row').eq(0).hide();
+    });
+</script>
+<div class="social-div">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+        </div>
+
+
+        @using (Html.BeginForm("NotificationList", "User", FormMethod.Get))
+        {
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                Pending Friend Requests
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="notoficationContainer">
+                                <table id="example-4" class="table table-small-font table-bordered table-striped">
+                                    <thead style="display: none">
+                                        <tr>
+                                            <th>Notifications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.Count > 0)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+                                                if (item.Status == 0)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <input type="hidden" id="recordfound" name="recordfound" value="1" />
+                                                                <div class="user-notification">
+
+                                                                    <div class="active notification-success friendLi clearfix" data-id="@item.FriendRequestId">
+                                                                        <div class="col-md-1 col-sm-1 col-xs-3">
+                                                                           <img src="@item.InviterImage" class="img-circle img-inline userpic-32">
+                                                                        </div>
+                                                                        <div class="col-md-11 col-sm-11 col-xs-9">
+                                                                            @(item.Inviter == null ? "" : item.Inviter) has send you a friend request
+                                                                            <br />
+                                                                            @(item.CreatedDate == null ? "" : item.CreatedDate)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="text-align: right">
+                                                                        <a id="" class="btn btn-primary Accept" data-notificationid="@item.FriendRequestId" onclick="UpdateNotificationStatus(this,1,1,'Page')">Accept</a>
+                                                                        <a id="" class="btn btn-warning Reject" data-notificationid="@item.FriendRequestId" onclick="UpdateNotificationStatus(this,2,1,'Page')">Deny</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            }
+                                        }
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        @*  var xml = '';
+        if ('@Model' != null && '@Model.Count' > 0) {
+            var count = ' @Model.Count';
+            pContent = ('@Html.Raw(Json.Encode((Model)))');
+            var JsonData = JSON.parse(pContent);
+            xml += "<root>";
+            for (i = 0; i < count; i++) {
+                xml += "<InvitationList>";
+                xml += "<Id>" + JsonData[parseInt(i)].InvitationListId + "</Id>";
+                xml += "</InvitationList>";
+            }
+            xml += "</root>";
+        }*@
+        //if ($('#recordfound').length == 0 && $('#NorecordFound').length == 0) {
+        //    $('#notoficationContainer').append('<div  class="alert alert-danger">No Records Found</div> ');
+        //}
+
+        //UpdateIsRead(xml);
+        updateIsRead('friendLi');
+    });
+
+    function UpdateIsRead(xml) {
+
+        $.ajax({
+            type: 'POST',
+            url: '/User/InvitationListId_IsRead_Update',
+            data: '{ "XML" : "' + xml + '"}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) { },
+            error: function () { },
+            complete: function () { }
+        })
+    }
+
+    //$('.Accept').click(function () {
+    //    //window.setTimeout(window.location.reload(),1500);
+    //    $('#NotificationMsg').html('and you are now friend');
+    //    $(this).hide();
+    //    $('.Reject').hide();
+    //});
+    //$('.Reject').click(function () {
+    //    //window.setTimeout(window.location.reload(), 1500);
+    //    $('#NotificationMsg').html("'s friend request rejected.");
+    //    $(this).hide();
+    //    $('.Accept').hide();
+    //});
+
+
+    //function UpdateFriendRequestStatus(obj, status, Type) { //, image, name
+
+    //    var Id = $(obj).attr('data-NotificationId');
+    //    //alert();
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: '/User/InvitationList_UpdateStatus',
+    //        data: '{ "Id" : "' + Id + '","status":"' + status + '","type":"' + Type + '"}',
+    //        contentType: 'application/json; charset=utf-8',
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            var jsonData = JSON.parse(data);
+    //            if (jsonData.Status == 1) {
+    //                showNotifications();
+    //                //if (status == 1)
+    //                //    showNotifications();
+    //                //    // $('li[data-Id="' + Id + '"]').html('<a href="#" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + image + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div> <div class="col-md-10" style="text-align: justify;">' + name + ' and you are now friends.</div>');
+    //                //else
+    //                //    showNotifications();
+    //                //    //$('li[data-Id="' + Id + '"]').html('<a href="#" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + image + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div><div class="col-md-10" style="text-align: justify;">You have rejected the request of ' + name + '.</div>');
+    //            }
+    //        },
+    //        error: function () { },
+    //        complete: function () {
+    //            window.location.reload()
+    //        }
+    //    })
+    //}
+
+
+
+</script>
+

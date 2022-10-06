@@ -1,0 +1,72 @@
+﻿@model   StudentAppWebsite.Models.PaymentModel
+@{
+    ViewBag.Title = "PaymentList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="col-md-12">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+    </div>
+
+@*@using (Html.BeginForm("PaymentList", "Admin", FormMethod.Get))*@
+@using (Html.BeginForm("GeneratePaymentlist", "Admin", FormMethod.Post))
+{
+    
+        <div class="row">
+            @*<div class="col-lg-3">
+                <div class="pull-right">*@
+            <div class="form2">
+                <div class="col-sm-offset-0 form-group">
+                    <label class="sr-only">Month List</label>
+                    @Html.LabelFor(m => m.MonthLable)
+                    @*@Html.DropDownListFor(model => model.PaymentModel, new SelectList(Model.MonthList), "--Select Month--", new { @class = "all-select address", placeholder = "Month" })*@
+                    @Html.DropDownListFor(m => m.Month, new List<SelectListItem>
+                    {new SelectListItem { Text = "Please select", Value = "0" },
+                    new SelectListItem { Text = "January", Value = "1" },
+                     new SelectListItem { Text = "February", Value = "2" },
+                    new SelectListItem { Text = "March", Value = "3" },
+                     new SelectListItem { Text = "April", Value = "4" },
+                     new SelectListItem { Text = "May", Value = "5" },
+                     new SelectListItem { Text = "June", Value = "6" },
+                     new SelectListItem { Text = "July", Value = "7" },
+                     new SelectListItem { Text = "August", Value = "8" },
+                     new SelectListItem { Text = "September", Value = "9" },
+                     new SelectListItem { Text = "October", Value = "10" },
+                     new SelectListItem { Text = "November", Value = "11" },
+                     new SelectListItem { Text = "December", Value = "12" }})
+                </div>
+            </div>
+            <div class="form2">
+                <div class="form-group">
+                    <label class="sr-only">Year List</label>
+                    @Html.LabelFor(m => m.YearLabel)
+                    @*@Html.DropDownListFor(model => model.PaymentModel, new SelectList(Model.MonthList), "--Select Month--", new { @class = "all-select address", placeholder = "Month" })*@
+                    @Html.DropDownListFor(m => m.Year, new List<SelectListItem>
+                   {new SelectListItem { Text = "Please select", Value = "0" },
+                   new SelectListItem { Text = "2022", Value = "2022" },
+                    new SelectListItem { Text = "2023", Value = "2023" },
+                   new SelectListItem { Text = "2024", Value = "2024" },
+                    new SelectListItem { Text = "2025", Value = "2025" }})
+                </div>
+            </div>
+        </div>
+        //}
+        @*@using (Html.BeginForm("GeneratePaymentlist", "Admin", FormMethod.Post))
+            {*@
+
+        <div class="form-group">
+            <div class="col-sm-offset-0 col-sm-1">
+                <input type="submit" value="Generate Payment List" id="btnsubmit" class="btn btn-primary" />
+            </div>
+        </div>
+    }

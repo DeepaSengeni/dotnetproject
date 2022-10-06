@@ -1,0 +1,27 @@
+﻿@model StudentAppWebsite.Models.NotebookForm
+@{
+    ViewBag.Title = "_TextPage";
+    Layout = null;
+}
+
+ 
+<style>
+    .imageContainer img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+    }
+</style>
+<link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/content/css/style.css" rel="stylesheet" type="text/css">
+<link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+<link href="~/Content/css/responsive-website.css" rel="stylesheet" />
+<link href="~/assets/css/xenon-core.css" rel="stylesheet" />
+<link href="~/Content/css/hover.css" rel="stylesheet" />
+<link href="~/Content/css/hover.css" rel="stylesheet" />
+
+<div id="main" class="col-md-12">
+    @Html.Raw(HttpUtility.HtmlDecode(Model.PageImage));
+</div>

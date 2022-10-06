@@ -1,0 +1,287 @@
+
+<ion-header>
+  
+</ion-header>
+<ion-content class="add-notebook">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+    <div>
+      <div padding>
+        <div class="pageButonn"><a href="#"><ion-icon name="home" class="glyphicon glyphicon-home"></ion-icon> {{subjectname}}</a></div>
+        <span>
+          <ion-item class="page-type-item">
+            <ion-label>Add Page as</ion-label>
+            <ion-select [(ngModel)]="pageType" (ionChange)="setPageType()">
+              <ion-option value="Image">Image </ion-option>
+              <ion-option value="Text">Text </ion-option>
+              <ion-option value="Audio">Audio </ion-option>
+              <ion-option value="Video">Video </ion-option>
+            </ion-select>
+          </ion-item>
+        </span>
+      </div>
+      <div class="add-notebook-main">
+        <input type="hidden" name="hdnImageData" id="screendata" value="dd">
+        <!--<input type="file" name="image" accept="image/*" (change)="uploadImage($event)">
+  <div id="captureImg"><img id="capImg" alt="test" /></div>
+  <button id="test1" onclick="takeScreenShot('captureImg','screendata')">save</button>
+  <button id="test2" (click)="saveImg()" >save Image</button>-->
+
+        <button type="button" class="add-nb-btn" id="PageNumbershow">Page No. {{pageno}}</button>
+        <button type="button" class="add-nb-btn" id="ChapterName" style="display: none !important">Chapter Name</button>
+        <button type="button" class="add-nb-btn" id="scientificKey" style="display: none !important">Scientific Keyboard</button>
+        <!--<input type="file" class="add-nb-btn" *ngIf="pageType=='image'" name="image" accept="image/*" (change)="changeListener($event)">-->
+        <button type="button" class="add-nb-btn" id="AddImage" *ngIf="pageType=='Image'" (click)="openImgPopup()">Add Image</button>
+        <button type="button" class="add-nb-btn" id="AddAudio" *ngIf="pageType=='Audio'" (click)="openaudioPopup()">Add Audio</button>
+        <button type="button" class="add-nb-btn" id="AddVideo" *ngIf="pageType=='Video'" (click)="openVideoPopup()">Add Video</button>
+        <button type="button" class="add-nb-btn" id="screen" *ngIf="pageType=='Text'" onclick="takeScreenShot1('capture','screendata')">Save</button>
+        <button type="button" class="add-nb-btn" style="display: none !important">Marker</button>
+        <button type="button" class="add-nb-btn" *ngIf="pageType!='Text'" (click)="change()">Save</button>
+        <!--<button type="button" class="add-nb-btn">Add New</button>-->
+        <button type="button" class="add-nb-btn" id="Tools" style="display: none  !important">View Image</button>
+        <button type="button" class="add-nb-btn" (click)="help()">Help</button>
+        <button type="button" class="add-nb-btn">Exit</button>
+        <button type="button" class="add-nb-btn" id="saveImageBtn" (click)="change()" style="opacity:0;"></button>
+        <!--<button onclick="takeScreenShot('capture','cap')">test</button>-->
+        <!--<a href="#pageModal" data-toggle="modal" class="btn btn-primary sm-btn" id="PageNumbershow">Page No. @Model.PageNumber</a>
+  <a class="btn btn-primary sm-btn chp" href="#ChapterModal" data-toggle="modal" id="ChapterName">Chapter Name</a>
+  <button id="scientificKey" type="button" class="btn btn-primary sm-btn key">Scientific Keyboard</button>
+  <a class="btn btn-primary sm-btn" href="#myModal1" data-toggle="modal" id="AddImage">Add Page</a>
+  <a class="btn btn-primary sm-btn" href="#myModalAudio" data-toggle="modal" id="AddAudio">Add Audio</a>
+  <a class="btn btn-primary sm-btn" href="#myModalVideo" data-toggle="modal" id="AddVideo">Add Video</a>
+  <button type="button" class="btn btn-primary sm-btn marker" id="marker">Marker</button>
+  <button type="button" class="btn btn-primary sm-btn submit">Save</button>
+  <button type="button" class="btn btn-primary sm-btn new">Add New</button>
+  <a type="button" class="btn btn-primary sm-btn tool" href="#ToolsModal" data-toggle="modal" id="Tools" style="display: none !important">View Image</a>
+  <button type="button" class="btn btn-primary sm-btn" onclick="helpwindow()">Help</button>
+  <button type="button" class="btn btn-primary sm-btn exit">Exit</button>-->
+      </div>
+      <div padding>
+        <div *ngIf="pageType=='Text'">
+          <div>
+            <!--<div contenteditable="true" id="editor" style="min-height:100%;width:100%;float:left;display:inline-block;z-index:999;position:relative;height:770px;">
+      <span class="selected-text" style="background-color: rgb(255, 153, 0);"></span><div></div></div>-->
+            <!-- Keyboard -->
+            <div id="formattingToolDiv" style="">
+              <div class="" style="text-align: center;">
+                <select id="fontfamilySelect" style="width: 207px; height: 26px; margin-top: 5px;"></select>
+
+                <select id="fontsizeSelect" style="width: 60px; height: 26px; margin-top: 5px;"></select>
+                <div class="font-collection" style="display: inline-block; background: #E9E7E7; padding: 4px 0px 3px; border: 1px solid #ddd;margin-top: 8px;">
+
+                  <span style="cursor: pointer" id="boldAnchor">
+                    <a href="javascript:;" style="text-decoration: none; font-weight: 800;color: #000;">
+                      <span style="font-weight:800;">B</span>
+                      <!--<i class="fa fa-bold" style="color: #666;"></i>-->
+                    </a>
+                  </span>
+                  <span style="cursor: pointer" id="italicsAnchor">
+                    <a href="javascript:;" id="" style="text-decoration: none; font-weight: 800;color: #000;">
+                      <span style="font-style:italic">I</span>
+                      <!--<i class="fa fa-italic" style="color: #666;"></i>-->
+                    </a>
+                  </span>
+                  <span style="cursor: pointer" id="underlineAnchor">
+                    <a href="javascript:;" id="" style="text-decoration: none; font-weight: 800;color: #000;">
+                      <!--<i class="fa fa-underline" style="color: #666;"></i>-->
+                      <span style="text-decoration:underline">U</span>
+                    </a>
+                  </span>
+                  <span style="cursor: pointer" id="centerAnchor">
+                    <a href="javascript:;" id="" style="text-decoration:none;">
+                      <!--<i class="fa fa-align-center" style="color: #838383;"></i>-->
+                      <span style="text-decoration:underline">
+                        <img src="assets/icon/center-align.png" style="width: 16px;padding:0px;" />
+                      </span>
+                    </a>
+                  </span>
+                  <span style="cursor: pointer" id="leftAnchor">
+                    <a href="javascript:;" id="" style="text-decoration:none;">
+                      <img src="assets/icon/left-alignment.png" style="width: 16px;padding:0px;" />
+                    </a>
+                  </span>
+                  <span style="cursor: pointer" id="rightAnchor">
+                    <a href="javascript:;" id="" style="text-decoration:none;"> <img src="assets/icon/right-alignment-.png" style="width: 16px;padding:0px;" /></a>
+                  </span>
+                  <span style="cursor: pointer" id="justifyAnchor">
+                    <a href="javascript:;" id="" style="text-decoration:none;">
+                      <img src="assets/icon/text-lines.png" style="width: 16px;padding:0px;" />
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 addbk" style="background-color: rgb(129, 164, 209); height: 888px;    margin-top: 14px; overflow: hidden;">
+                <div class="notebookEditor" id="editorDiv1" style="background-color: rgb(255, 255, 255);">
+			<div><h2 class="chptrttl" id="ChapterTitle"></h2></div>
+			<div class="childEditor" id="capture" style="height: 100%;">
+			<div contenteditable="true" id="editor" style="min-height:100%;width:100%;float:left;display:inline-block;z-index:999;position:relative;height:770px;">
+			</div>
+			</div>
+            </div>
+              </div>
+
+            <div class="popx">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="btn-area1">
+                    <a href="javascript:;" class="top-button" onclick="return defaultScientific_KeyBoard();">Scientific Keyboard</a>
+                    <a href="javascript:;" class="top-button" onclick="gotoSpecialSymbols();">Special symbols</a>
+                    <a href="javascript:;" class="top-button" onclick="return gotoQWETY();">Qwerty Keyboard</a>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="btn-area2 clearfix">
+                  <div class="col-md-12" id="keyboadArea">
+                    <span data-attr="1" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img1.png" />
+                      </a>
+                    </span>
+                    <span data-attr="2" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/im2.png" />
+                      </a>
+                    </span>
+                    <span data-attr="3" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/im3.png" />
+                      </a>
+                    </span>
+                    <span data-attr="4" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img4.png" />
+                      </a>
+                    </span>
+                    <span data-attr="5" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img5.png" />
+                      </a>
+                    </span>
+                    <span data-attr="6" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img6.png" />
+                      </a>
+                    </span>
+                    <span data-attr="7" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/im7.png" />
+                      </a>
+                    </span>
+                    <span data-attr="8" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img8.png" />
+                      </a>
+                    </span>
+                    <span data-attr="9" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img9.png" />
+                      </a>
+                    </span>
+                    <span data-attr="10" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img10.png" />
+                      </a>
+                    </span>
+                    <span data-attr="11" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img11.png" />
+                      </a>
+                    </span>
+                    <span data-attr="12" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img12.png" />
+                      </a>
+                    </span>
+                    <span data-attr="80" data-text="∪" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img13.png" />
+                      </a>
+                    </span>
+                    <span data-attr="80" data-text="∩" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img14.png" />
+                      </a>
+                    </span>
+                    <span data-attr="15" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img15.png" />
+                      </a>
+                    </span>
+
+                  </div>
+                  <table class="ruled prec-form-char" style="display: none;">
+                    <tr>
+                      <td>
+                        <textarea id="powerTextbox">\\html'&lt;div contenteditable="true" class="textbox text"&gt;x&lt;/div&gt;'</textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <textarea id="mathSrc1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox"&gt;&lt;/div&gt;'</textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div id="mathTgt1"></div>
+                      </td>
+                    </tr>
+                  </table>
+                  <div style="float: right; position: absolute; bottom: -12px; right: 8px;display:none" id="commonKeys">
+                    <span class="KeyboardKey" data-attr="80" data-text="&nbsp;">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/space.png" />
+                      </a>
+                    </span>
+                    <span class="KeyboardKey">
+                      <a href="javascript:;" class="button" onclick="backspaceFunction()">
+                        <img src="assets/custom/KeyboardIcons/images/special character/bksp.png" />
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: none">
+              <textarea id="dy" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;dy&lt;/div&gt;'</textarea>
+              <textarea id="dx" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;dx&lt;/div&gt;'</textarea>
+              <textarea id="dy1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;△y&lt;/div&gt;'</textarea>
+              <textarea id="dx1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;△x&lt;/div&gt;'</textarea>
+              <textarea id="dy2" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;∂y&lt;/div&gt;'</textarea>
+              <textarea id="dx2" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;∂x&lt;/div&gt;'</textarea>
+              <textarea id="dy3" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;δy&lt;/div&gt;'</textarea>
+              <textarea id="dx3" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;δx&lt;/div&gt;'</textarea>
+            </div>
+            <div id="question" style="border:1px solid #000;min-height:50px;background-color:#fff;display:none;"></div>
+            <!-- Keyboard -->
+          </div>
+        </div>
+
+
+        <div class='audioContainer' style='display: table; width: 100%; height: 100%;' *ngIf="pageType=='Audio'&&audiosrc!=''">
+          <div style='display: table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>
+            <audio controls src="{{url}}{{audiosrc}}">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+
+          <div class='videoContainer' *ngIf="pageType=='Video'&&videosrc!=''">
+     <div style='text-align: center;' >
+       <video id="myVideo" controls autoplay style="width:100%" src="{{url}}{{videosrc}}">
+         Your browser does not support HTML5 video.
+       </video>
+     </div>
+   </div>
+
+        <div class='imageContainer' style='display: table; width: 100%; height: 100%;' *ngIf="(pageType!='text' && pageType!='Audio' && pageType!='video')&&imagesrc!=''">
+          <div style='display:table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>
+            <img id="mainpageimg" style='display:inline-block;' src="{{imagesrc}}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

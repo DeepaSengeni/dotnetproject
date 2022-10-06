@@ -1,0 +1,207 @@
+
+<ion-content class="home notertor-site">
+  <div class="main-page-wrapper">
+    <div class="mainHeader">
+      <div class="mainHeaderIcon"><span class="fa fa-bars fa-2x pull-left" aria-hidden="true"></span> </div>
+      <div class="header-wrap">
+        <div class="container">
+          <div class="logo-wrap textCenter"> <img src="assets/images/logo.png" alt="Notetor Logo"> </div>
+          <div class="search-wrap signUp">
+            <form [formGroup]="authForm" (ngSubmit)="signInSubmit(authForm.value)">
+              <div class="control-wrap">
+                <ion-item [ngClass]="{'error-border':!authForm.controls.username.valid && authForm.controls.username.touched}">
+                  <ion-label floating>Username</ion-label>
+                  <ion-input formControlName="username" type="text"></ion-input>
+                </ion-item>
+
+                <ion-item *ngIf="authForm.controls.username.hasError('required') && authForm.controls.username.touched">
+                  <p class="error-text">Sorry, field username is required!</p>
+                </ion-item>
+                <!--<ion-item *ngIf="authForm.controls.username.hasError('pattern') && authForm.controls.username.touched">
+                  <p>Sorry, Valid Email is required!</p>
+                </ion-item>-->
+                <!--<ion-item *ngIf="authForm.controls.username.hasError('pattern') && authForm.controls.username.touched">
+                  <p>Sorry, only small and capital letters are allowed!</p>
+                </ion-item>
+                <ion-item *ngIf="authForm.controls.username.hasError('minlength') && authForm.controls.username.touched">
+                  <p>Sorry, minimum username length is 8!</p>
+                </ion-item>
+                <ion-item *ngIf="authForm.controls.username.hasError('maxlength') && authForm.controls.username.touched">
+                  <p>Sorry, maximum username length is 30!</p>
+                </ion-item>-->
+
+              </div>
+              <div class="control-wrap">
+                <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+                  <ion-label floating>Password</ion-label>
+                  <ion-input formControlName="password" type="password"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+                  <p class="error-text">Sorry, field password is required!</p>
+                </ion-item>
+
+                <!--<ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+                  <p>Sorry, minimum password length is 8!</p>
+                </ion-item>-->
+
+              </div>
+              <div class="control-wrap">
+                <button ion-button full [disabled]="!authForm.valid" type="submit" class="btn btn-block btn-success">Log in</button>
+              </div>
+
+              <div class="control-wrap">
+                <span class="pull-right" (click)="openForgotPop();">Forgotten password</span>
+              </div>
+
+              <div class="control-wrap">
+                <button ion-button class="btn btn-block btn-faq" type="button" (click)="FAQ();">FAQ</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End of mainHeader-->
+    <div class="BigMainWrapper">
+      <div class="mainWrapper">
+        <div class="SignUpForm-heading">Create an account</div>
+        <div class="signUpForm">
+          <form [formGroup]="regForm" (ngSubmit)="registerSubmit(regForm.value)">
+            <ion-list>
+
+              <ion-item [ngClass]="{'error-border':!regForm.controls.firstName.valid && regForm.controls.firstName.touched}">
+                <ion-label floating>First Name</ion-label>
+                <ion-input formControlName="firstName" type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.firstName.hasError('required') && regForm.controls.firstName.touched">
+                <p class="error-text">Sorry, field firstName is required!</p>
+              </ion-item>
+
+              <ion-item [ngClass]="{'error-border':!regForm.controls.lastName.valid && regForm.controls.lastName.touched}">
+                <ion-label floating>Last Name</ion-label>
+                <ion-input formControlName="lastName" type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.lastName.hasError('required') && regForm.controls.lastName.touched">
+                <p class="error-text">Sorry, field lastName is required!</p>
+              </ion-item>
+
+              <ion-item [ngClass]="{'error-border':!regForm.controls.email.valid && regForm.controls.email.touched}">
+                <ion-label floating>Email</ion-label>
+                <ion-input formControlName="email" type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.email.hasError('required') && regForm.controls.email.touched">
+                <p class="error-text">Sorry, field Email is required!</p>
+              </ion-item>
+              <ion-item class="error" *ngIf="regForm.controls.email.hasError('isEmailUnique') && regForm.controls.email.touched">
+                <p class="error-text">Email already exists please choose another</p>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>Mobile number</ion-label>
+                <ion-input type="text" formControlName="mobile" name="mobile"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.mobile.hasError('required') && regForm.controls.mobile.touched">
+                <p class="error-text">Sorry, Mobile number is required!</p>
+              </ion-item>
+              <ion-item class="error" *ngIf="regForm.controls.mobile.hasError('ismobileUnique') && regForm.controls.mobile.touched">
+                <p class="error-text">Mobile No already exists please choose another</p>
+              </ion-item>
+              <ion-buttons end>
+                <button ion-button ng-show="!send" type="button" clear (click)="sendOTP();" end>{{txtSendOTP}}</button>
+                <!--<button ion-button ng-show="{{send}}" type="button" clear (click)="sendOTP();" end>Resend OTP</button>-->
+              </ion-buttons>
+              <ion-item>
+                <ion-label floating>OTP</ion-label>
+                <ion-input type="number" formControlName="OTP" name="OTP"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.OTP.hasError('required') && regForm.controls.OTP.touched">
+                <p class="error-text">Verify OTP is required!</p>
+              </ion-item>
+              <ion-buttons end>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" *ngIf="verify" class="text-success"></ion-icon>
+                <ion-label *ngIf="verify" class="text-success">Verified</ion-label>
+                <button ion-button *ngIf="!verify" type="button" clear (click)="verifyOTP();" end>Verify OTP</button>
+              </ion-buttons>
+
+              <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="regPassword"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.regPassword.hasError('required') && regForm.controls.regPassword.touched">
+                <p class="error-text">Sorry, Password is required!</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Confirm Password</ion-label>
+                <ion-input formControlName="ConfirmPassword" type="password"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="regForm.controls.ConfirmPassword.hasError('required') && regForm.controls.ConfirmPassword.touched">
+                <p class="error-text">Sorry, ConfirmPassword is required!</p>
+              </ion-item>
+              <ion-item class="error" *ngIf="regForm.controls.ConfirmPassword.hasError('equalTo') && regForm.controls.ConfirmPassword.touched">
+                <p class="error-text">Password Mismatch</p>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>Birthday</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" formControlName="DOB" name="DOB"></ion-datetime>
+              </ion-item>
+              <ion-list radio-group formControlName="gender">
+                <ion-list-header>
+                  Gender
+                </ion-list-header>
+
+                <ion-item>
+                  <ion-label>Female</ion-label>
+                  <ion-radio value="Female" checked="true"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Male</ion-label>
+                  <ion-radio value="Male"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <ion-item>
+                <label>Profile Picture</label>
+                <input type="file" name="image" accept="image/*" (change)="changeListener($event)">
+                <input type="hidden" formControlName="hdnImage" [ngModel]="hdnImageData">
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Country</ion-label>
+                <ion-select formControlName="country" name="country" (ionChange)="countrySelect()">
+                  <ion-option selected>Select Country</ion-option>
+                  <ion-option (ionSelect)="countrySelected($event)" *ngFor="let item of CountryList" value="{{ item['ID'] }}">{{ item['CountryName'] }}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>State</ion-label>
+                <ion-select formControlName="state" name="state">
+                  <ion-option selected>Select State</ion-option>
+                  <ion-option (ionSelect)="stateSelected($event)" *ngFor="let item of StateList" value="{{ item['ID'] }}">{{ item['StateName'] }}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>City</ion-label>
+                <ion-select formControlName="city" name="city">
+                  <ion-option selected>Select City</ion-option>
+                  <ion-option *ngFor="let item of CityList" value="{{ item['ID'] }}">{{ item['CityName'] }}</ion-option>
+                </ion-select>
+              </ion-item>
+
+            </ion-list>
+
+            <div class="form-group">
+              <button type="Submit" [disabled]="!regForm.valid" class="btn btn-success">Create account</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--End of mainWrapper-->
+    </div>
+    <!--End of BigMainWrapper-->
+
+
+  </div>
+ 
+</ion-content>

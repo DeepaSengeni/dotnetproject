@@ -1,0 +1,20 @@
+/**
+ *
+ * Apply your custom CSS here
+ *
+*/
+
+body {	
+}
+
+a {
+}
+.btn-primary {
+    color: #ffffff;
+    background-color: #0f86ec !important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #0B71D8 !important;
+    border-color: #0B5EB1 !important;
+}

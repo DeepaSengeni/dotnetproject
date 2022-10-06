@@ -1,0 +1,133 @@
+page-SendMessage {
+  .mainWrapper.add-page .pageButon {
+    margin-top: 0;
+  }
+
+  .mainWrapper.add-page .pageButon a {
+    display: inline-block;
+  }
+
+  .mainWrapper .PageList {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+  }
+
+  .mainWrapper .PageList p {
+    font-size: 18px;
+    color: #00408f;
+  }
+
+  .mainWrapper .PageList p span {
+    float: right;
+    font-size: 30px;
+    margin-right: 15px;
+    color: #949494;
+  }
+
+  .mainWrapper .pageButon {
+    margin-top: 30px;
+  }
+
+  .mainWrapper .pageButon a {
+    background: #f5ae59;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 4px;
+  }
+
+  .mainWrapper .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+  }
+
+  .mainWrapper .flex-container .flex-box {
+    margin: 10px;
+  }
+
+  .mainWrapper .flex-container .flexBox {
+    border: 10px solid #beeaa7;
+    height: 200px;
+    width: 310px;
+    border-radius: 7px;
+  }
+
+  .searchFilters .sendmessage {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+
+  .mainWrapper .flex-container .FlexCheck {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .mainWrapper .numberClick {
+    padding: 20px;
+    background: #eaeaea;
+    display: inline-block;
+    border-radius: 3px;
+    margin-bottom: 30px;
+  }
+
+  .mainWrapper .numberClick h1 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .mainWrapper .numberClick span {
+    color: #00408f;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 18px;
+  }
+
+  .mainWrapper {
+    padding: 30px 20px;
+  }
+
+  .mainWrapper .wallet h2 {
+    font-size: 30px;
+    color: #2d94e3;
+  }
+
+  .mobileno {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    padding: 11px;
+    font: 400 13.3333px Arial;
+  }
+
+  .btn-wallet {
+    background: linear-gradient(#4aaaee, #0072d1);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+  }
+
+  .msg {
+    border: 1px solid rgb(204, 204, 204);
+    min-height: 170px;
+    padding: 10px;
+    max-height: 170px;
+    overflow-y: auto;
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,105 @@
+﻿@model List<StudentAppWebsite.Models.Subjects>
+@{
+    ViewBag.Title = "SubjectsList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h2 class="col-sm-offset-4 col-sm-5">Subjects</h2>*@
+@*<br />*@
+
+
+<div class="col-md-12">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+</div>
+
+
+@using (Html.BeginForm("SubjectsList", "Admin", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="pull-right">
+                <a href="/Admin/AddSubject" class="btn btn-warning"> <i class="fa fa-plus" aria-hidden="true"></i> Add More</a>
+            </div>
+        </div>
+    </div>
+                
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Subjects</h3>
+
+                    <div class="panel-options">
+                        <a href="#" data-toggle="panel">
+                            <span class="collapse-icon">&ndash;</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">&times;
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $("#example-4").dataTable({
+                                aLengthMenu: [
+                                    [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                                ]
+                            });
+                        });
+                    </script>
+                    <div class="table-responsive">
+                        <table id="example-4" class="table table-small-font table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Stream Name</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null && Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>@item.StreamName</td>
+                                        <td>@item.SubjectName</td>
+                                        <td>@(item.Status ? "Active" : "Inactive")</td>
+                                        <td><a href="/Admin/AddSubject/@item.Id">Edit</a> | <a href="/Admin/UpdateSubjectStatusById?Id=@item.Id&Status=@Convert.ToString(!item.Status)">@(item.Status == false ? "Activate" : "De-Activate")</a></td>
+
+
+                                    </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="alert alert-danger">No Records Found</div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}

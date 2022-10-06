@@ -1,0 +1,49 @@
+<ion-header>
+</ion-header>
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+  
+    <div class="profile">
+      <div class="card" *ngFor="let Userdata of datalistdata">
+        <div class="profileImg">
+          <div style="height: 240px;overflow: hidden;object-fit: cover;">
+            <ion-icon name="camera" style="cursor:pointer;position: absolute; font-size: 28px; right: 10px; bottom: 5px;" *ngIf="userid == id" (click)="updatecoverimg()"></ion-icon><img src="{{url}}{{coverimage}}" alt="cover" style="width:100%">
+            </div>
+            <div class="userImg">
+          <ion-icon name="camera" style="cursor:pointer;position: absolute; bottom: 5px; right: 5px;" *ngIf="userid == id" (click)="changeimg()"></ion-icon><img class="img-thumbnail" style="height: 80px;width: 80px;border: 1px solid;background: #fff;" src="{{url}}{{profileimage}}" alt="John">
+            </div>
+          </div>
+          <div class="profile-title">
+            <h2>{{Userdata.FirstName}} {{Userdata.LastName}}</h2>
+            <p class="title" *ngIf="userid == id" (click)="profileEdit(Userdata.Id)"><i class="fa fa-pencil"></i> Edit profile</p>
+            <button type="button" *ngIf="userid != id" style="padding: 7px;border-radius: 4px; position: absolute;right: 10px;bottom: 15px;cursor:pointer" (click)="Dynamic(usershow,Userdata.Id,friendrequestId)">{{usershow}}</button>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="bookProperties profilE ">
+      <h2><a href="javascript:void(0);" style="text-decoration:none">Profile</a></h2>
+    </div>
+    <div class="clearfix"></div>
+    <div class="notebooks NotebookP">
+      <div class="notbookMain">
+        <div class="creatorName profilecreator" *ngFor="let Userdata of datalistdata">
+          <h2><span class="mainSubject">Name:</span> <span class="NameSubject">{{Userdata.FirstName}}{{Userdata.LastName}}</span></h2>
+          <h2><span class="mainSubject">City:</span> <span class="NameSubject">{{Userdata.CityName}}</span></h2>
+          <h2><span class="mainSubject">State:</span> <span class="NameSubject">{{Userdata.StateName}}</span></h2>
+          <h2><span class="mainSubject">Country:</span> <span class="NameSubject">{{Userdata.Countryname}}</span></h2>
+          <h2><span class="mainSubject">Email:</span> <span class="NameSubject">{{Userdata.EmailId}}</span></h2>
+          <h2><span class="mainSubject">Date of Birth:</span> <span class="NameSubject">{{Userdata.DateOfBirth}}</span></h2>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</ion-content>

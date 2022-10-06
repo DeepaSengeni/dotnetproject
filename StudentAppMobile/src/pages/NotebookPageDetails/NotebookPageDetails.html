@@ -1,0 +1,40 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+
+
+  <div class="mainWrapper">
+
+
+    <div class="PageList">
+      <span class="list-page-info">List of Pages</span>
+      <span class="pull-right" *ngIf="pages==true">
+        <span (click)="openForgotPop()">
+          <img class="page-icon-img" src="assets/images/icon1.png" alt="" />
+        </span>
+        <span (click)="goToAddNotebook(id)">
+          <img class="page-icon-img" src="assets/images/icon2.png" alt="" />
+        </span>
+      </span>
+    </div>
+    <!--End of PageList-->
+
+    <div class="pageButon" *ngFor="let Subject of dataLists"><a href="#"><ion-icon name="home" class="glyphicon glyphicon-home"></ion-icon> {{Subject.SubjectName}}</a></div>
+    <div class="flex-container" *ngFor="let item of BookPageDetails">
+   
+      <div *ngIf="item.PageType=='Audio'" class="flexBox" (click)="pagedetails(item.Id)"><img src="assets/images/Audio.png" /></div>
+      <div *ngIf="item.PageType=='Video'" class="flexBox" (click)="pagedetails(item.Id)"><img src="{{url}}{{item.ScreenShot}}" /></div>
+      <div *ngIf="item.PageType=='Image'" class="flexBox" (click)="pagedetails(item.Id)"><img src="{{item.PageImage}}" /></div>
+      <div *ngIf="item.PageType=='Text'" class="flexBox" (click)="pagedetails(item.Id)"><img src="{{url}}{{item.ScreenShot}}" /></div>
+
+      <div class="FlexCheck">
+        <input type="checkbox" id="scales" name="{{item.Id}}" value="{{item.Id}}" [(ngModel)]="item.Checked" [ngModelOptions]="{standalone: true}" [name]="item.Id" [attr.disabled]="item.Id==1 ? true : null" />
+        <label for="scales">Page-{{item.PageNumber}}[{{item.ModifiedDate}}]</label>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,284 @@
+﻿@model StudentAppWebsite.Models.ManageProfile
+@{
+    Layout = null;
+    int count = Model.FriendRequests.Count;
+    int[] CurrentUserfriendIds = new int[count];
+    int[] CurrentUserFriendRequestIds = new int[count];
+    string[] friendStatus = new string[count];
+    var index1 = Array.IndexOf(CurrentUserfriendIds, ViewBag.Id);
+    var status1 = "";
+    var friendRequestId1 = 0;
+    if (index1 > -1)
+    {
+        status1 = friendStatus[index1];
+        friendRequestId1 = CurrentUserFriendRequestIds[index1];
+    }
+    
+}
+@if (Model.FriendRequests.Count > 0)
+{
+
+
+    int i = 0;
+    foreach (var item in Model.FriendRequests)
+    {
+
+        CurrentUserfriendIds[i] = ((item.id) > 0) ? Convert.ToInt32(item.id) : 0;
+        CurrentUserFriendRequestIds[i] = ((item.FriendRequestId) > 0) ? Convert.ToInt32(item.FriendRequestId) : 0;
+        friendStatus[i] = (!String.IsNullOrEmpty(item.Status) ? (item.Status).ToString() : "");
+        i++;
+    }
+
+
+}
+<style>
+   .low-res .dropdown-menu {
+    width: auto;
+    padding: 0px 6px;
+}
+
+        .low-res .dropdown-menu > li > a {
+            padding: 5px 0px;
+            text-align: center;
+        }
+
+    .resp {
+        border: 1px solid #eee;
+        margin: 12px 0;
+        box-shadow: 0px 0px 1px 1px #eee;
+    }
+
+    .name-div {
+        margin-top: 15px;
+    }
+
+    .resp .img-res-style:first-child {
+        padding-left: 0px !important;
+    }
+
+    .frndlist-div {
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+    }
+    .div-center {
+    margin:0 auto;}
+
+    @@media only screen and (max-width:1200px) {
+        .low-res .unfrnd-btn {
+            padding: 0px 10px !important;
+        }
+    }
+
+    @@media only screen and (min-width:481px) and (max-width:767px) {
+        .frndlist-div .dropdown-menu {
+            width: 120px !important;
+            padding: 0 !important;
+        }
+    }
+
+    @@media only screen and (min-width:600px) and (max-width:767px) {
+        .resfrnlist {
+            width: 60% !important;
+            float: none !important;
+            display: inline-block;
+        }
+
+        .text-center-only {
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (min-width:300px) and (max-width:768px) {
+        .login-style .col-md-5, .col-md-2 {
+            width: auto;
+        }
+
+        .low-res .unfrnd-btn {
+            padding: 0px 10px !important;
+        }
+    }
+</style>
+<div class="row low-res div-center">
+    <div class="my-width">
+    @if (Model.lstFriends.Count > 0)
+    {
+        foreach (var item in Model.lstFriends)
+        {
+            //if (item.id != Convert.ToInt32(Session["UserId"]))
+            //{
+                var index2 = Array.IndexOf(CurrentUserfriendIds, item.id);
+                int CurrentUserFriendRequestIds2 = 0;
+                if (index2 > -1)
+                {
+                    CurrentUserFriendRequestIds2 = CurrentUserFriendRequestIds[index2];
+                } 
+                               
+        <div class="col-md-offset-3 col-sm-offset-3  col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+            <div class="frndlist-div clearfix">
+                <div class="row ">
+                <div class="col-md-5 col-sm-5 col-xs-5 img-res-style u-frnd" onclick="window.open('/User/UserProfile?Id=@item.id&FriendRequestId=@CurrentUserFriendRequestIds2','_self')">
+                        <img src="@(!string.IsNullOrEmpty(item.ProfileImage) ? item.ProfileImage : "/Content/no-image-available.png")" class="img-responsive frnd-list-profile"/>
+                    </div>
+                    <div class="">
+                    <div class="name-div">
+                            <span>
+                                @{
+               
+
+                
+                                    <a class="s-name" href="/User/UserProfile?Id=@item.id&FriendRequestId=@CurrentUserFriendRequestIds2">@item.FirstName &nbsp; @item.LastName </a>
+                
+                                }
+
+                            </span>
+                            <br />
+                            <span>
+                                @item.CityName
+                            </span>
+                            <br />
+                            <span>
+                                @item.StateName
+                            </span>
+                            <br />
+                            <span>
+                                @item.CountryName
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="frnd-btn" style="display:@(item.id==Convert.ToInt32(Session["UserId"])?"none":"block")">
+                        @{
+                if ((ViewBag.PageId) != "0")
+                {
+                    string[] blank = { };
+                    var PageIds = String.IsNullOrEmpty(item.PageId) ? blank : item.PageId.Split(',');
+                    var index = Array.IndexOf(PageIds, ViewBag.PageId);
+                    if (index > -1)
+                    {
+                            <div class="dropdown fdrop-btn" style="margin-top: 15px !important;">
+                                <button class="btn btn-default dropdown-toggle unfrnd-btn" type="button" data-toggle="dropdown" style="margin-bottom: 1px; margin-left: 14px;">
+                                    @*<i class="fa fa-check" aria-hidden="true"></i> Friends *@
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu frnd">
+                                    <li><a href="javascript:;" data-id="@item.id" data-NotificationId="@item.FriendRequestId" >Invitation sent</a></li>
+
+                                </ul>
+                            </div>@*
+                                                    <input type="button"  class="disabledbtn btn btn-primary" value="Sent" data-NotificationId="@item.FriendRequestId" />
+                                                    <input type="button" class="btn btn-warning" value="Remove" data-id="@item.id" data-FriendName="@item.StudentName" data-FriendRequestId="@item.FriendRequestId" onclick="RemoveFriend(this)"/>*@
+                    }
+                    else
+                    {
+                            <div class="dropdown fdrop-btn" style="margin-top: 15px !important;">
+                                <button class="dropdown-toggle btn btn-default dropdown-toggle unfrnd-btn" type="button" data-toggle="dropdown" style="margin-bottom: 1px;">
+                                    @* <i class="fa fa-check" aria-hidden="true"></i>
+                                                                Friends*@ <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu frnd">
+                                    <li><a href="javascript:;" data-id="@item.id" data-NotificationId="@item.FriendRequestId" onclick="UpdateInvitationStatus(this, 1)">Send invitation</a></li>
+                                </ul>
+                            </div>    
+@*<input type="button" class="btn btn-primary" value="Send invitation" data-id="@item.id" data-NotificationId="@item.FriendRequestId" onclick="UpdateInvitationStatus(this, 1)" />
+                                                    <input type="button" class="btn btn-warning" value="Remove" data-id="@item.id" data-FriendName="@item.StudentName" data-FriendRequestId="@item.FriendRequestId" onclick="RemoveFriend(this)"/>*@
+                    }
+                }
+                else
+                {
+@*<input type="button" class="btn btn-warning" value="Remove" data-id="@item.id" data-FriendName="@item.StudentName" data-FriendRequestId="@item.FriendRequestId" onclick="RemoveFriend(this)"/>*@
+                            <div class="dropdown fdrop-btn">
+                                <button class="btn btn-default unfrnd-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                    @* <i class="fa fa-check" aria-hidden="true"></i> Friends*@
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu frnd" style="margin-top: 2px !important; min-width: auto !important;">
+                                    @{
+                                                                    
+                    var index = Array.IndexOf(CurrentUserfriendIds, item.id);
+
+                    if (index > -1)
+                    {
+                        var status = friendStatus[index];
+                        var CurrentUserFriendRequestIds1 = CurrentUserFriendRequestIds[index];
+                        if (status == "1")
+                        {
+                                        <li id="unfriend_@item.StudentName"><a href="javascript:;" data-id="@item.id" data-FriendName="@item.StudentName" data-FriendRequestId="@CurrentUserFriendRequestIds1" onclick="RemoveFriend(this)">Unfriend</a></li>
+                        }
+                        else
+                        {
+                            if (status == "2")
+                            {
+                                        <li id="SendFriend_@item.StudentName"><a href="javascript:;" data-id="@item.id" data-FriendName="@item.StudentName"  onclick="Addtofriendlst(this)">Send friend request</a></li>
+                            }
+                            else
+                            {
+                                        <li><a href="javascript:;" data-id="@item.id" data-FriendName="@item.StudentName" data-FriendRequestId="@CurrentUserFriendRequestIds1" >Friend request sent</a></li>
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                                        <li id="SendFriend1_@item.StudentName"><a href="javascript:;" data-id="@item.id" data-FriendName="@item.StudentName"  onclick="Addtofriendlst(this)">Send friend request</a></li>
+                    }
+                                                                                                                                                                                                                                                                                     
+                                                               
+                                    }
+                                </ul>
+                            </div>
+                }
+                        }
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        
+               
+               
+        
+            //}
+        }
+    }
+    else
+    {
+        <div class="col-md-12 col-xs-12">
+
+            <h2 class="text-center no-result">We couldn't find anything for @ViewBag.Data</h2>
+
+        </div>
+       
+    }
+</div>
+    </div>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        if ('@index1' > -1) {
+            if ('@status1' == "1") {
+                var html = '<a href="javascript:;" class="right-crop-btn btn btn-danger" data-id="@ViewBag.Id" data-FriendName="@Model.profile.StudentName" data-FriendRequestId="@friendRequestId1" onclick="RemoveFriend(this)">Unfriend</a>';
+            }
+            else {
+                if ('@status1' == "2") {
+                    var html = '<a href="javascript:;" class="right-crop-btn btn btn-primary" data-id="@ViewBag.Id" data-FriendName="@Model.profile.StudentName"  onclick="Addtofriendlst(this)">Send friend request</a>';
+                }
+                else {
+                    var html = '<a href="javascript:;" class="right-crop-btn btn btn-success" data-id="@ViewBag.Id" data-FriendName="@Model.profile.StudentName" data-FriendRequestId="@friendRequestId1" >Friend request sent</a>';
+                }
+
+            }
+        }
+        else {
+            var html = '<a href="javascript:;" class="right-crop-btn btn btn-primary" data-id="@ViewBag.Id" data-FriendName="@Model.profile.StudentName"  onclick="Addtofriendlst(this)">Send friend request</a>';
+        }
+        $('#frientStatus').html(html);
+    });
+</script>

@@ -1,0 +1,63 @@
+﻿@model   StudentAppWebsite.Models.AdvertisementModels
+
+@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("UpdatePrice", "Admin", FormMethod.Post))
+{
+    
+    <div class="col-md-12">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Set Price for Ad</h3>
+
+                    <div class="panel-options">
+                        <a href="#" data-toggle="panel">
+                            <span class="collapse-icon">&ndash;</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">&times;
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group clearfix">
+
+                        <div class="col-sm-12">
+                            <label>Amount</label>
+                            @Html.TextBoxFor(model => model.AmountPaid, new { @class = "form-control", placeholder = "Amount" })
+
+                            <div class="text-danger">@Html.ValidationMessageFor(model => model.AmountPaid)</div>
+
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-sm-12" style="text-align: right">
+                            <input type="submit" id="btnSubmit" value="Submit" class="btn btn-primary" />
+                            <input type="reset" id="CancelButton" class="btn btn-primary" value="Cancel" />
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

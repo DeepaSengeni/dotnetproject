@@ -1,0 +1,49 @@
+
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 15:28:29
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 929
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 15:31:20
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 929
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 15:31:26
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 933
+   at STU.ActionLayer.Advertisement.AdvertisementAction.Bankdetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.ActionLayer\Advertisement\AdvertisementAction.cs:line 704
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 15:53:12
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 929
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 15:53:26
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 933
+   at STU.ActionLayer.Advertisement.AdvertisementAction.Bankdetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.ActionLayer\Advertisement\AdvertisementAction.cs:line 704
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 16:09:03
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 929
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 16:09:12
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.Advertisement.AdvertisementDL.BankDetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Advertisement\AdvertisementDL.cs:line 933
+   at STU.ActionLayer.Advertisement.AdvertisementAction.Bankdetails_Insert_Update(AdvertisementBase advertisementbase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.ActionLayer\Advertisement\AdvertisementAction.cs:line 704
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 16:09:39
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.CommonMethods.CommonDL.GetBankDetails(CommonBase commonBase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 1906
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 16:15:31
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STA.DataLayer.CommonMethods.CommonDL.GetBankDetails(CommonBase commonBase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 1906
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 12-08-2022 16:18:48
+  Error Message: Object reference not set to an instance of an object.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.GetBankDetails(CommonBase commonBase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 1910
+   at STU.ActionLayer.Common.CommonAction.GetBankDetails_ByuserId(CommonBase commonBase) in D:\Freelancing\StudentAppWebsite\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 1564

@@ -1,0 +1,418 @@
+﻿@model StudentAppWebsite.Models.QuestionModel
+@using System.Linq;
+@{
+    int count = Model.FriendRequests.Count;
+    int[] CurrentUserfriendIds = new int[count];
+    int[] CurrentUserFriendRequestIds = new int[count];
+    string[] friendStatus = new string[count];
+    if (Model.FriendRequests.Count > 0)
+    {
+
+
+        int i = 0;
+        foreach (var item in Model.FriendRequests)
+        {
+
+            CurrentUserfriendIds[i] = ((item.id) > 0) ? Convert.ToInt32(item.id) : 0;
+            CurrentUserFriendRequestIds[i] = ((item.FriendRequestId) > 0) ? Convert.ToInt32(item.FriendRequestId) : 0;
+            friendStatus[i] = (!String.IsNullOrEmpty(item.Status) ? (item.Status).ToString() : "");
+            i++;
+        }
+    }
+    TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+
+
+}
+
+
+<style>
+
+</style>
+@*<script>
+        window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+    </script>*@
+@*<script>
+
+            var isIE = false;
+
+            if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+                isIE = true;
+            }
+
+            if (isIE) {
+                $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+
+
+                });
+            }
+            else if ($.browser.mozilla == true) {
+
+            }
+            else {
+
+                $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                    //location.reload(false);
+
+                });
+            }
+
+
+    </script>*@
+@foreach (var item in Model.QuestionsList)
+{
+
+    <div class="row edrcls sp-cm" style="margin-top: 0px;">
+        <div class="col-md-12 all-que-wrap clearfix">
+            <div class="prf-new">
+                <a href="/User/UserProfile?Id=@item.UserId">
+                    <div class="profile-photo">
+                        @*    <div class="arrowbox1"><span>@item.StudentName</span></div>*@
+                        <div class="arrowbox1"><span>@item.FirstName&nbsp @item.LastName </span></div>
+                        <img src="@(!string.IsNullOrEmpty(item.ProfileImage) ? item.ProfileImage : "x")" class="prf_small img-responsive">
+                    </div>
+                    <div style="width: 14px; margin-left: -20px; display: inline-block">
+                        <img src="@((item.IsOnline == 1) ? "/Images/online.png" : "/Images/offline.png")">
+                    </div>
+                    <div class="profile-name">
+                        <span>@item.FirstName&nbsp @item.LastName </span>
+                    </div>
+
+                </a>
+            </div>
+
+
+
+
+            <div class="question-main">
+                <h3 class="ques @(item.Id)">@Html.Raw(item.QuestionTitle)</h3>
+
+            </div>
+            <div class="prf-base col-md-12 col-sm-12 col-xs-12">
+                <span><i class="fa fa-calendar"></i>@(item.ModifiedDate != null ? TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(item.ModifiedDate, System.Globalization.CultureInfo.CurrentUICulture), tzi) : TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(item.CreatedDate, System.Globalization.CultureInfo.CurrentUICulture), tzi))</span>
+
+                <div class="dropdown editbtn edit-div" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                    <button class="dropdown-toggle edit-btn" type="button" data-toggle="dropdown" onclick="bindQuestion('@item.Id')">
+                        <i class="fa fa-pencil"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;" data-id="@item.Id" class="EditQuestion">Edit</a></li>
+                        <li><a href="#" data-id="@item.Id" class="delete" onclick="DeleteQuestion()">Delete</a></li>
+                    </ul>
+                </div>
+
+
+                @* <div>
+                        <div class="pull-right" style="margin-right: 10px;"><</div>
+
+                        <div style="display: none; float: right;">
+                            <ul>
+                                <li>Button1</li>
+                                <li>Button2</li>
+                                <li>Button3</li>
+                            </ul>
+                        </div>
+                    </div>*@
+                @*   <a data-target="#invitePopup" data-toggle="modal" style="cursor: pointer" onclick="bindQuestion('@item.Id')">
+                    <i class="fa fa-pencil"></i></a>*@
+                @* <div class="like_textarea txtarea" contenteditable></div>
+                    <input type="hidden">*@
+                <textarea style="display: none;"></textarea>
+
+
+            </div>
+            <div class="inner-main col-md-12">
+                <div class="btn-all">
+
+                    <a href="javascript:;" class="reply" data-id="@item.Id">
+                        <i class="fa fa-reply" aria-hidden="true"></i>
+                        Answer
+                    </a>
+                    @{
+                        var index1 = Array.IndexOf(CurrentUserfriendIds, item.UserId);
+                        if (index1 > -1)
+                        {
+                            var status = friendStatus[index1];
+                            var friendRequestId = CurrentUserFriendRequestIds[index1];
+                            if (status == "1")
+                            {
+                                <a href="javascript:;" class="friend" data-id="@item.Id" data-questionerId="@item.UserId" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden" : "Visible")">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    friend
+                                </a>
+                            }
+                            else
+                            {
+                                if (status == "2")
+                                {
+                                    <a href="javascript:;" class="friend" data-id="@item.Id" data-questionerId="@item.UserId" onclick="Addtofriendlst(this)" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden" : "Visible")">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span>Add to friend list</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:;" class="friend" data-id="@item.Id" data-questionerId="@item.UserId" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden" : "Visible")">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        Friend request sent
+                                    </a>
+                                }
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            <a href="javascript:;" class="friend" data-id="@item.Id" data-questionerId="@item.UserId" onclick="Addtofriendlst(this)" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden" : "Visible")">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span>Add to friend list</span>
+                            </a>
+                        }
+
+                    }
+
+
+                    @* <a href="javascript:;" class="friend" data-id="@item.Id" data-questionerId="@item.UserId" onclick="Addtofriendlst(this)" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden":"Visible"  )"><i class="fa fa-user" aria-hidden="true"></i>
+                        Add friend</a>*@
+                    @*<a href="javascript:;" class="delete" data-id="@item.Id" style="@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "padding: 5px;" : "padding:5px; pointer-events:none")" ><i class="fa fa-trash-o" aria-hidden="true"></i>
+                        Delete</a>*@
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="invitePopup" tabindex="-1" role="dialog" aria-labelledby="chooseLanguageLabel" aria-hidden="true">
+
+
+
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 300px;">
+                    <div class="modal-header">
+                        <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;">
+                            <span data-name="FeedBackmessage">Edit/Delete Question</span>
+                            <button id="btnClose" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                        </h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <input type="hidden" id="EditableId" />
+                        <div class="col-md-2">
+                            <button type="button" id="EditQuestion" data-id="@item.Id" class="btn btn-primary EditQuestion">Edit</button>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" id="submitdelete" data-dismiss="modal" data-id="@item.Id" class="btn btn-primary delete">Delete</button>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        @foreach (var answer in Model.AnswersList.Where(m => m.QuestionId == item.Id).ToList())
+        {
+            <div style="padding-left: 60px; padding-top: 10px;">
+                <div class="row edrcls sp-cm" style="margin-top: 0px;">
+                    <div class="col-md-12 all-que-wrap clearfix">
+                        <div class="prf-new">
+                            <a href="/User/UserProfile?Id=@answer.UserId">
+                                <div class="profile-photo">
+                                    <div class="arrowbox1"><span>@answer.FirstName&nbsp @answer.LastName </span></div>
+                                    <img src="@answer.AnswerImage" class="prf_small img-responsive">
+                                </div>
+                                <div style="width: 14px;margin-left: -20px; display:@(answer.UserId == Convert.ToInt32(Session["UserId"]) ? "inline-block" : "inline-block")">
+                                    <img src="@((answer.IsOnline == 1) ? "/Images/online.png" : "/Images/offline.png")">
+                                </div>
+                                <div class="profile-name">
+                                    <span>@answer.FirstName&nbsp @answer.LastName</span>
+                                </div>
+
+                            </a>
+                        </div>
+
+                        <div class="question-main" style="width: 247px;">
+                            <h3 class="ques @(answer.Id)ans">@Html.Raw(answer.Answer)</h3>
+
+                            @* <div class="like_textarea txtarea" name="page_content" contenteditable></div>
+                                <input type="hidden">*@
+
+                        </div>
+
+                        <div class="prf-base col-md-12">
+                            <span><i class="fa fa-calendar"></i>@(answer.ModifiedDate != null ? TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(answer.ModifiedDate, System.Globalization.CultureInfo.CurrentUICulture), tzi) : TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(answer.CreatedDate, System.Globalization.CultureInfo.CurrentUICulture), tzi))</span>
+                        </div>
+                        <div class="dropdown editbtn edit-div2" style="visibility:@(answer.UserId == Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                            <button class="dropdown-toggle edit-btn" type="button" data-toggle="dropdown" onclick="bindAnswer('@answer.Id','@item.Id')">
+                                <i class="fa fa-pencil"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;" data-id="@answer.Id" class="EditAnswer">Edit</a></li>
+                                <li><a href="javascript:;" data-id="@answer.Id" class="delete" onclick="DeleteAnswer()">Delete</a></li>
+                            </ul>
+                        </div>
+                        <div class="inner-main col-md-12">
+                            <div class="btn-all">
+
+                                <a href="javascript:;" class="replyanswer" data-id="@answer.Id" data-name="@answer.QuestionId">
+                                    <i class="fa fa-reply" aria-hidden="true"></i>
+                                    Answer
+                                </a>
+
+
+                                @*<a href="javascript:;" class="reply" data-id="@answer.Id" style="cursor: not-allowed; pointer-events: none;" ><i class="fa fa-reply" aria-hidden="true"></i>
+                                    Answered</a>*@
+
+                                @{
+                                    var index2 = Array.IndexOf(CurrentUserfriendIds, answer.UserId);
+                                    if (index2 > -1)
+                                    {
+                                        var status = friendStatus[index2];
+                                        var friendRequestId = CurrentUserFriendRequestIds[index2];
+                                        if (status == "1")
+                                        {
+                                            <a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" style="visibility:@(answer.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden" : "Visible")">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                friend
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            if (status == "2")
+                                            {
+                                                <a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(answer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                    <span>Add to friend list</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" style="visibility:@(answer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                    <span>Friend request sent</span>
+                                                </a>
+                                            }
+
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(answer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <span>Add to friend list</span>
+                                        </a>
+                                    }
+
+                                }
+
+
+
+
+                                @*<a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")"><i class="fa fa-user" aria-hidden="true"></i>
+                                    Add friend</a>*@
+                                @*<a href="javascript:;" class="delete" data-id="@item.Id" style="@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "padding: 5px;" : "padding:5px; pointer-events:none")" ><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    Delete</a>*@
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div style="overflow-y: auto; overflow-x: hidden; background: #F3FEFE; border: 1px solid rgb(211, 242, 242);">
+
+                        @{ Html.RenderAction("_ReplyAnswerPartial", new { pageId = ViewBag.PageId, userId = Model.UserId, BookId = Model.BookId, Answerid = answer.Id, QuestionId = item.Id }); }
+
+                    </div>
+
+
+                </div>
+            </div>
+                            }
+
+    </div>
+
+                            }
+
+<script>
+    function bindAnswer(id, quesId) {
+        $('#EditableId').val(id);
+        $('#hdnQuestionID').val(quesId);
+
+    }
+    function DeleteAnswer() {
+
+        if (parseInt('@Model.UserId') == 0) {
+            alert('Please login to continue');
+            return false;
+        }
+        else {
+
+            if (confirm('Are you sure to delete?')) {
+
+
+                del = true;
+                var AnswerId = $('#EditableId').val();
+                $.ajax
+                    ({
+                        type: 'POST',
+                        url: '/Home/DeleteAnswer_ById',
+                        data: '{ "Id" : "' + AnswerId + '"}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+
+                            if (data) {
+
+                                //window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                                $('#messagespan').html('Record deleted successfuly!!');
+                                window.location.reload();
+                                @*$('#questionsDiv').load("/Home/_QuestionList?userId=@Model.UserId&pageId=@ViewBag.PageId&bookId=" + $('#BookId').val() + "");
+
+                                $(".ques").css("word-break", "break-all !important");*@
+
+                            }
+                            else {
+                                $('#messagespan').html('error in request please try again later');
+
+                            }
+                        }
+                    });
+            } else {
+                return false;
+            }
+
+            //var answer = confirm("Are you sure to delete?");
+            //if (answer) {
+        }
+
+
+    }
+    $('.EditAnswer').click(function () {
+        //alert($('.ques').html());
+        //$('#questionsDiv').addClass('short');
+        //$('.content').show();
+        var html = $('.' + $('#EditableId').val() + 'ans').html();
+        console.log(html);
+        $('#editor').html(html);
+        $('#hdnEditQuestion').val(false);
+        $('#hdnAnswerID').val($('#EditableId').val());
+        $('#btnClose').click();
+
+    });
+</script>
+
+

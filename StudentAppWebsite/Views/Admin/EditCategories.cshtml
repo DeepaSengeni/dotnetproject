@@ -1,0 +1,71 @@
+﻿@model  StudentAppWebsite.Models.Categories
+
+@{ 
+    ViewBag.Title = "EditCategories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="/Scripts/jquery-1.7.1.min.js"></script>
+<script src="/Scripts/jquery.validate.min.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("EditCategories", "Admin", FormMethod.Post))
+{
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add/Edit Categories</h3>
+
+                    <div class="panel-options">
+                        <a href="#" data-toggle="panel">
+                            <span class="collapse-icon">&ndash;</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">&times;
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <div class="form-group clearfix">
+                            <label class="col-sm-4 control-label">Category Name</label>
+                            <div class="col-sm-8">
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", placeholder = "Category Name", maxlength = "40" })
+                                <span style="color: red">
+                                    @if (TempData["ErrorMessage"] != null)
+                                    {
+                                        @TempData["ErrorMessage"]
+                                    }
+                                </span>
+                                <div class="text-danger">@Html.ValidationMessageFor(model => model.CategoryName)</div>
+
+                            </div>
+                        </div>
+
+                      
+
+                        <div class="form-group clearfix">
+                            <label class="col-sm-4 control-label">Status</label>
+                            <div class="col-sm-8">
+                                @Html.CheckBoxFor(model => model.Status)
+
+                                @*  @Html.TextBoxFor(model => model.Status, new { @class = "form-control", placeholder = "Status" })*@
+                            </div>
+                        </div>
+
+                        <div class="form-group clearfix">
+                            <div class="col-sm-offset-4 col-sm-5">
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                                @*  <a href="/Admin/Categories" class="btn btn-primary">Back</a>*@
+                                <a href="/Admin/Categories" class="btn btn-success">Back</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

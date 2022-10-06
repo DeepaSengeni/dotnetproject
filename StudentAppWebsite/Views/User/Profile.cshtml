@@ -1,0 +1,862 @@
+﻿@model StudentAppWebsite.Models.ManageProfile
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<style>
+    /*.right-crop-btn {
+        position: absolute;
+        margin-top: -54px;
+        right: 43px;
+        height: 32px;
+        width: auto;
+        z-index: 99;
+    }*/
+
+    .fdrop-btn .btn-default {
+        background: #e6e6e6;
+        border: 1px solid #e6e6e6 !important;
+        color: rgb(255, 255, 255);
+        font-size: 8px;
+        border-radius: 0;
+        padding: 6px 10px;
+    }
+
+
+
+    .fdrop-btn .caret {
+        border-top: 7px dashed;
+        border-right: 8px solid transparent;
+        border-left: 8px solid transparent;
+        color: #6B6B6B;
+    }
+
+    .login-style .col-md-5, .col-md-2 {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    @@media only screen and (max-width:319px) {
+
+
+        .btn {
+            width: auto;
+        }
+    }
+
+    .tblfontchange a {
+        color: #808080 !important;
+    }
+
+    table.tblfontchange th {
+        background: #ffffff repeat-x;
+        border-bottom: 1px solid #dfdfdf;
+        height: 30px;
+        padding: 3px;
+        text-align: left;
+    }
+
+    table.tblfontchange td {
+        height: 28px;
+        padding: 3px;
+        border-bottom: 1px solid #dfdfdf;
+        border-top: 1px solid #FFF;
+    }
+
+        table.tblfontchange td a {
+            color: #000;
+            outline: none;
+        }
+
+    table.tblfontchange a:link {
+        border-bottom: none;
+    }
+
+    table.tblfontchange a.visited:hover {
+        border-bottom: 2px dotted #0063A9;
+    }
+
+    table.tblfontchange tr {
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+        table.tblfontchange tr:hover {
+            background-color: #CCCCCC;
+        }
+
+
+
+    .removepicicon {
+        float: right;
+        position: absolute;
+        cursor: pointer;
+        font-size: 17px;
+        color: #ccc;
+        right: 6px;
+        top: 1px;
+        z-index: 9999;
+    }
+</style>
+
+<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/crop-avatar/css/cropper.css" rel="stylesheet" />
+<link href="~/Content/crop-avatar/css/main.css" rel="stylesheet" />
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="~/Scripts/jquery.wallform.js"></script>
+<script src="~/Content/crop-avatar/js/cropper.js"></script>
+@*<script src="~/Content/crop-avatar/js/main.js"></script>*@
+<style>
+    .dropdown-menu > li > a {
+        padding: 5px 9px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('.js-clickable').on('click', function () {
+
+            var URL = $(this).attr("href");
+            window.document.location = URL;
+
+        });
+        $('#profilepic').click(function () {
+            if ('@Model.profile.Id' == parseInt('@Session["UserId"]')) {
+                $('#avatar-modal').modal('show');
+                //$('#avatarInput').click();
+            }
+            //this.initPreview();
+        });
+
+        $('#avatarInput').change(function () {
+
+            var file = document.querySelector('#avatarInput').files[0];
+
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+
+                var pic = reader.result.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+                $('.avatar-src').val(pic);
+                $('.avatar-data').val(file.name);
+                $('#timelineProfilePic').find('img').attr('src', reader.result);
+                // $('#profileForm').submit();
+
+                //  $('#avatarInput').attr('src', reader.result);
+
+
+
+                //preview.src = reader.result;
+                //  alert($('#ProfileImage').val(reader.result));
+                $('#image').attr('src', reader.result);
+                $('.cropper-view-box').find('img').attr('src', reader.result);
+                $('.cropper-canvas').find('img').attr('src', reader.result);
+                $('.preview-lg').find('img').attr('src', reader.result);
+
+                $('.avatar-data').val(file.name);
+                setTimeout(function () {
+
+                    $('script').each(function () {
+
+                        if (this.src.split('?') === '/Content/crop-avatar/js/main.js') {
+
+                            $(this).remove();
+                        }
+                        if (this.src.split('?') === '/Content/crop-avatar/js/cropper.js') {
+
+                            $(this).remove();
+                        }
+                    });
+                    $.getScript('/Content/crop-avatar/js/main.js').done(function () {
+
+
+                    });
+                    $.getScript('/Content/crop-avatar/js/cropper.js').done(function () {
+
+
+                    });
+                }, 100);
+
+
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+        $('#uX1').hide();
+
+        var ImagePosition = '@Model.profile.Position';
+        $(".bgImage").css({ 'margin-top': ImagePosition });
+        $('#timelineBGload').hide();
+        /* Uploading Profile BackGround Image */
+        $('body').on('change', '#bgphotoimg', function () {
+            $('#timelineBGload').show();
+            coverPreviewFile();
+            $("#timelineShade").hide();
+
+
+        });
+
+        function coverPreviewFile() {
+
+            if ($('#timelineBGload').hasClass("headerimage")) {
+
+            }
+            else {
+                $("#timelineBGload").addClass("headerimage");
+                $("#timelineBGload").css({ 'margin-top': '' });
+                $("#timelineBGload").css({ 'top': '' });
+            }
+            var file = document.querySelector('#bgphotoimg').files[0];
+
+            $('#ImageName').val(file.name);
+
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                $('.headerimage').attr('src', '');
+
+                $('.headerimage').attr('src', reader.result);
+                $('#uX1').show();
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        /* Banner position drag */
+        $("body").on('mouseover', '.headerimage', function () {
+            //$(this).draggable({ containment: "#timelineBackground" });
+            var y1 = $('#timelineBackground').height();
+            var y2 = $('.headerimage').height();
+            $(this).draggable({
+                scroll: false,
+                axis: "y",
+                drag: function (event, ui) {
+                    if (ui.position.top >= 0) {
+                        ui.position.top = 0;
+                    }
+                    else if (ui.position.top <= y1 - y2) {
+                        ui.position.top = y1 - y2;
+                    }
+
+                },
+                stop: function (event, ui) {
+                }
+            });
+        });
+
+
+        /* Bannert Position Save*/
+        $("body").on('click', '.bgSave', function () {
+            var id = $(this).attr("id");
+
+            var p = $("#timelineBGload").attr("style");
+
+            var Y = p.split("top:");
+
+            var Z = Y[1].split(";");
+
+            var position = Z[0];
+            var filename = $('#ImageName').val();
+
+            var dataString = $('.headerimage').attr('src');
+            var pic = dataString.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+
+            $('#coverposition').val(position);
+            $('#coverdataString').val(pic);
+            $('#coverfilename').val(filename);
+            $('#saveCoverImage').click();
+          
+        });
+
+
+
+
+    });
+
+
+    function removeprofilepic() {
+        if (confirm('Are you sure to remove?')) {
+            $.ajax({
+                type: "POST",
+                url: "/User/Remove_ProfilePic",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $('.removepicicon').hide();
+                    var a = '\\Images\\6GS4E2B.png';
+                    $("#profileimg").attr('src', a);
+                
+
+                }
+            });
+
+        }
+
+
+    }
+
+
+
+</script>
+<div class="profile-page" style="padding: 0px 16px;">
+    <div class="row">
+        <div class="col-md-12">
+            @if (TempData["ErrorMessage"] != null)
+            {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+            @if (TempData["SuccessMessage"] != null)
+            {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+
+        </div>
+        <div id="MsgDiv" class="col-md-12">
+        </div>
+    </div>
+
+    <div id="container">
+
+        <div id="timelineContainer">
+
+            <!-- timeline background -->
+            <div id="timelineBackground">
+                @using (Html.BeginForm("Update_ProfilePic", "User", FormMethod.Post))
+                {
+                <input type="hidden" id="coverposition" name="position" />
+                <input type="hidden" id="coverdataString" name="dataString" />
+                <input type="hidden" id="coverfilename" name="filename" />
+                <button type="submit" id="saveCoverImage" style="display: none"></button>
+
+                }
+                <div class="bgSave wallbutton blackButton" id="uX1">Save Background</div>
+                @if (Model.profile.CoverImage != null)
+                {
+                <div class="img-bg"><img src="@Model.profile.CoverImage" alt="No image found." class="bgImage" style="margin-top: 0px !important" /> <img style="top: 0px" class="headerimage ui-corner-all ui-draggable" id="timelineBGload" src=""></div>
+                }
+                else {
+                <div class="img-bg" style="height:315px;max-height:315px;"><img src="" alt="No image found." class="bgImage" style="margin-top: 0px !important" /> <img style="top: 0px" class="headerimage ui-corner-all ui-draggable" id="timelineBGload" src=""></div>
+                }
+
+            </div>
+
+            <!-- timeline background -->
+            @if (Model.profile.Id == Convert.ToInt32(Session["UserId"]))
+            {
+            <div id="timelineShade" style="background: url(/Images/timeline_shade.png);">
+                <input type="hidden" id="ImageName" name="ImageName" />
+                <div class="uploadFile timelineUploadBG">
+                    <input type="file" original-title="Change Cover Picture" class=" custom-file-input" id="bgphotoimg" name="photoimg">
+                </div>
+
+            </div>
+            }
+            else
+            {
+            <div id="frientStatus"></div>
+            }
+            <!-- timeline profile picture -->
+            @* <div id="timelineProfilePic">
+            <div style="padding: 5px">
+            <img src="@Model.profile.ProfileImage" alt="No image found." style="width: 100%" "x":96.01428571428572,"y":0,"height":270.4,"width":270.4,"rotate":0/>
+
+            </div>
+            </div>*@
+
+            <div id="crop-avatar">
+
+                <!-- Current avatar -->
+                <!-- Current avatar -->
+                <div>
+                    @*<div class="removepicicon text-danger">
+
+                    </div>*@
+                    <div class="avatar-view" title="Change the avatar" id="timelineProfilePic">
+                        @if (Model.profile.ProfileImage != "\\Images\\6GS4E2B.png")
+                        {
+                            if (Model.profile.Id == Convert.ToInt32(Session["UserId"]))
+                            {
+                                <div class="removepicicon" title="Remove the avatar"> <i class="fa fa-times" onclick="removeprofilepic()"></i></div>
+                                }
+                         }
+                            <div style="padding: 5px; height: 100%" id="profilepic">
+                                <img src="@Model.profile.ProfileImage" alt="No image found." style="width: 100%;height:100%" id="profileimg" name="profileimg" />
+                                <i class="fa fa-camera" aria-hidden="true" style="font-size: 24px; position: absolute; bottom: 6px; right: 7px; color:#ccc;"></i>
+                            </div>
+                        </div>
+                </div>
+                <!-- Cropping modal -->
+                @using (Html.BeginForm("Update_Picture", "User", FormMethod.Post, new { @id = "profileForm" }))
+                {
+                <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <form class="avatar-form" action="Update_Picture" enctype="multipart/form-data" method="post">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" id="avatar-modal-label">Change Profile Picture</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="avatar-body">
+
+                                        <!-- Upload image and data -->
+                                        <div class="avatar-upload">
+                                            <input type="hidden" class="avatar-src" name="avatar_src">
+                                            <input type="hidden" class="avatar-data" name="avatar_data">
+                                            <label for="avatarInput">Select an Image</label>
+                                            <input type="file" class="avatar-input" id="avatarInput" name="avatar_file">
+                                        </div>
+
+                                        <!-- Crop and preview -->
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="img-container">
+
+                                                    <img id="image" src="@Model.profile.ProfileImage" alt="Picture">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="docs-preview clearfix">
+                                                    <div class="img-preview preview-lg"></div>
+                                                    @* <div class="img-preview preview-md"></div>
+                                                    <div class="img-preview preview-sm"></div>
+                                                    <div class="img-preview preview-xs"></div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-9 docs-buttons">
+                                                <!-- <h3 class="page-header">Toolbar:</h3> -->
+
+
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
+                                                            <span class="fa fa-search-plus"></span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, -0.1)">
+                                                            <span class="fa fa-search-minus"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;move&quot;, -10, 0)">
+                                                            <span class="fa fa-arrow-left"></span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;move&quot;, 10, 0)">
+                                                            <span class="fa fa-arrow-right"></span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;move&quot;, 0, -10)">
+                                                            <span class="fa fa-arrow-up"></span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;move&quot;, 0, 10)">
+                                                            <span class="fa fa-arrow-down"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -45)">
+                                                            <span class="fa fa-rotate-left"></span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, 45)">
+                                                            <span class="fa fa-rotate-right"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;scaleX&quot;, -1)">
+                                                            <span class="fa fa-arrows-h"></span>
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;scaleY&quot;-1)">
+                                                            <span class="fa fa-arrows-v"></span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+
+
+
+
+                                                <div class="btn-group btn-group-crop">
+                                                    <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
+                                                        <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">
+                                                            Done
+                                                        </span>
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div> -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                }
+                <!-- /.modal -->
+                <!-- Loading state -->
+                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+            </div>
+
+            <!-- timeline title -->
+            <div id="timelineTitle">
+                @Model.profile.FirstName &nbsp @Model.profile.LastName
+                @if (Model.profile.Id == Convert.ToInt32(Session["UserId"]))
+                {
+                <a href="/User/Update_UserProfile" class="edit-profil"><i class="fa fa-pencil"></i>&nbsp;Edit Profile</a>
+                }
+
+                else
+                {
+                if ((Model.profile.IsOnline == 1))
+                {
+                <img src="/Images/online.png" style="width: 20px">
+                }
+                else
+                {
+                <p class="user-style-div">Last Seen  @Model.profile.LastSeen</p>
+
+                }
+
+                }
+            </div>
+
+            <!-- timeline nav -->
+            <div id="timelineNav">
+
+
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="@((ViewBag.Tab == "frndlist") ? "active " : "")"><a href="#frndlist" aria-controls="frndlist" role="tab" data-toggle="tab">Friend List</a></li>
+                    <li role="presentation" class="@((ViewBag.Tab == "notebook") ? "active" : "")"><a href="#notebook" aria-controls="notebook" role="tab" data-toggle="tab">Notebook List</a></li>
+                    <li role="presentation" class="@((ViewBag.Tab == "hiddennotebook") ? "active" : "")"><a href="#hiddennotebook" aria-controls="hiddennotebook" role="tab" data-toggle="tab">Hidden Notebook List</a></li>
+                    <li role="presentation" class="@((ViewBag.Tab == "profile") ? "active" : "")"><a href="#profilelist" aria-controls="profilelist" role="tab" data-toggle="tab">Profile</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 center-block-new" id="ProfileDiv">
+
+                <div class="col-md-3 col-sm-9 col-xs-12" style="display: none;">
+                    <div class="profile-info">
+                        <div class="form-group clearfix" style="margin-top: 30px;">
+
+                            <label class="col-md-12" style="color: rgb(119, 119, 119); font-size: 15px; display: block;">
+                                @* <span>Last seen</span>&nbsp;&nbsp;<span>@(Model.profile.LastSeen)</span></label>*@
+                                <label class="col-md-12" id="profileUpdateLink" style="display: block;">
+
+                                    @* <a href="/User/Update_UserProfile" class="edit-profil"><i class="fa fa-pencil"></i>&nbsp;Edit Profile</a>*@
+
+                                </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Nav tabs -->
+            @* <ul class="nav nav-tabs" role="tablist" style="text-align: center; margin-top: 25px;">
+            <li role="presentation" class="active"><a href="#frndlist" aria-controls="frndlist" role="tab" data-toggle="tab">Friend List</a></li>
+            <li role="presentation"><a href="#notebook" aria-controls="notebook" role="tab" data-toggle="tab">Notebook List</a></li>
+            <li role="presentation"><a href="#profilelist" aria-controls="profilelist" role="tab" data-toggle="tab">Profile</a></li>
+            </ul>*@
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="padding: 9px 0px !important;">
+                <div role="tabpanel" class="@((ViewBag.Tab == "frndlist") ? "active tab-pane" : "tab-pane")" id="frndlist">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Friend List</h3>
+
+
+                                </div>
+                                <div class="panel-body">
+
+                                    @{Html.RenderAction("Friendlist", new { Id = ViewBag.Id, FriendRequestId = ViewBag.FriendRequestId, pageId = ViewBag.PageId, studentname = Model.profile.StudentName });}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="@((ViewBag.Tab == "notebook") ? "active tab-pane" : "tab-pane")" id="notebook">
+                    <div class="col-md-12 center-block-new" id="DetailDiv">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">List Of Notebooks</div>
+                            <div class="panel-body">
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function () {
+                                        $("#example-4").dataTable({
+                                            aLengthMenu: [
+                                                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                                            ]
+                                        });
+                                    });
+                                </script>
+
+                                <div class="table-responsive">
+
+                                    <table id="example-4" class="table table-small-font table-bordered table-striped tblfontchange">
+                                        <thead>
+                                            <tr>
+                                                <th>SNo.</th>
+                                                <th>Subject</th>
+
+                                                <th>Page(s)</th>
+                                                <th>Creation Date</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @if (Model.lstNotebooks != null && Model.lstNotebooks.Count > 0)
+                                            {
+                                                var count1 = 1;
+                                                foreach (var item in Model.lstNotebooks)
+                                                {
+                                                    <tr>
+                                                        <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@count1</a></td>
+
+                                                        <td style="width: 166px; word-break:break-all;">
+                                                            <a href="/Home/Notebook_Pages?BookId=@item.Id">
+                                                                @item.SubjectName
+                                                            </a>
+                                                        </td>
+
+                                                        <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@item.TotalPages</a></td>
+                                                        <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@item.CreatedDate</a></td>
+                                                        @if (Convert.ToString(item.UserId) == Convert.ToString(Session["UserId"]))
+                                                        {
+                                                            <td><a href="/User/NotebookForm?bookId=@item.Id"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                                                        }
+                                                    </tr>
+                                                    count1 += 1;
+                                                }
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="@((ViewBag.Tab == "hiddennotebook") ? "active tab-pane" : "tab-pane")" id="hiddennotebook">
+                    <div class="col-md-12 center-block-new" id="DetailDiv">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">List Of Hidden Notebooks</div>
+                            <div class="panel-body">
+                                <script type="text/javascript">
+                                    jQuery(document).ready(function () {
+                                        $("#example-7").dataTable({
+                                            aLengthMenu: [
+                                                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                                            ]
+                                        });
+                                    });
+                                </script>
+
+                                <div class="table-responsive">
+
+                                    <table id="example-7" class="table table-small-font table-bordered table-striped tblfontchange">
+                                        <thead>
+                                            <tr>
+                                                <th>SNo.</th>
+                                                <th>Subject</th>
+
+                                                <th>Page(s)</th>
+                                                <th>Creation Date</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @if (Model.lstNotebooks != null && Model.lstNotebooks.Count > 0)
+                                            {
+
+                                                var count1 = 1;
+                                                foreach (var item in Model.lstNotebooks)
+                                                {
+                                                    if (item.Visible_Hidden == 2 && Convert.ToString(item.UserId) == Convert.ToString(Session["UserId"]))
+                                                    {
+                                                    <tr>
+                                                        <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@count1</a></td>
+
+                                                        <td style="width: 166px; word-break:break-all;"><a href="/Home/Notebook_Pages?BookId=@item.Id">@item.SubjectName</a></td>
+
+                                                        <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@item.TotalPages</a></td>
+                                                        <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@item.CreatedDate</a></td>
+                                                         <td><a href="/User/NotebookForm?bookId=@item.Id"> <span class="glyphicon glyphicon-pencil"></span></a></td>
+                                                    </tr>
+                                                        count1 += 1;
+                                                    }
+                                                }
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="@((ViewBag.Tab == "profile") ? "active tab-pane" : "tab-pane")" id="profilelist">
+                    <div class="row1">
+                        <div class="inner-div-res">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Profile</h3>
+
+
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row profile-view">
+
+                                        <div class="col-md-5 col-sm-8 col-xs-12">
+
+                                            <div class="form-group clearfix">
+                                                <label class="col-md-4 col-sm-4 col-xs-6">Name</label>
+                                                <div class="col-md-4 col-sm-8 col-xs-6">@Model.profile.FirstName&nbsp;&nbsp;@Model.profile.LastName</div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-md-4 col-sm-4 col-xs-6">City</label>
+                                                <div class="col-md-4 col-sm-8 col-xs-6">@Model.profile.CityName</div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-md-4 col-sm-4 col-xs-6">State</label>
+                                                <div class="col-md-4 col-sm-8 col-xs-6">@Model.profile.StateName</div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-5 col-sm-8 col-xs-12">
+
+                                            <div class="form-group clearfix">
+                                                <label class="col-md-4 col-sm-4 col-xs-6">Country</label>
+                                                <div class="col-md-4 col-sm-8 col-xs-6">@Model.profile.CountryName</div>
+                                            </div>
+
+                                            <div class="form-group clearfix">
+                                                <label class="col-md-4 col-sm-4 col-xs-6">Gender</label>
+                                                <div class="col-md-4 col-sm-8 col-xs-6">@Model.profile.Gender</div>
+                                            </div>
+                                            <div class="form-group clearfix">
+                                                <label class="col-md-4 col-sm-4 col-xs-6">Date of birth</label>
+                                                <div class="col-md-4 col-sm-8 col-xs-6">@Model.profile.DOB</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 9999; background-color: rgba(225,225,225,0.5); text-align: center; display: none;" id="loaderDiv2">
+
+
+
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+
+
+    </div>
+</div>
+
+<script src="~/Scripts/Profile.js"></script>
+
+<script type="text/javascript">
+
+    function UpdateInvitationStatus(obj, status) {
+       // alert('hi');
+        debugger;
+        var pageId = '@ViewBag.PageId';
+        var invitedUserId = $(obj).attr('data-Id');
+        //alert(invitedUserId + ' / ' + status+' // '+ pageid);
+        if (status == 1) {
+            $.ajax({
+                type: 'POST',
+                url: '/User/InvitationList_InsertUpdate',
+                data: '{ "InvitedUserId" : "' + invitedUserId + '","pageId":"' + pageId + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    if (jsonData.Status == 1) {
+                        $(obj).html('Invitation Sent');
+                        $(obj).addClass('disabledbtn');
+                        $('#MsgDiv').addClass('alert alert-success').html('Invitation sent successfully.').fadeIn().fadeOut(10000);
+                        //$('li[data-Id="' + Id + '"]').html('<a href="#" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + image + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div> <div class="col-md-10" style="text-align: justify;">' + name + ' and you are now friends.</div>');
+
+
+                        //$('li[data-Id="' + Id + '"]').html('<a href="#" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + image + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div><div class="col-md-10" style="text-align: justify;">You have rejected the request of ' + name + '.</div>');
+
+                    }
+                    else {
+                        $('#MsgDiv').addClass('alert alert-danger').html('You have already invited to this User for this page !.').fadeIn().fadeOut(10000);
+                    }
+                },
+                error: function () { },
+                complete: function () { }
+            })
+        }
+
+    }
+</script>
+
+<style>
+    #uX1 {
+        display: block;
+        position: absolute;
+        right: 2px;
+    }
+</style>

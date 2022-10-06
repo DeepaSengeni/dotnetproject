@@ -1,0 +1,43 @@
+.main-inner {
+  display: table;
+  width: 100%;
+  position: relative;
+}
+
+.notebookEditor {
+  background-color: #81a4d1;
+  background: #fff;
+  height: 855px;
+  max-height: 855px;
+  width: 100%;
+  overflow-y: auto;
+  word-wrap: break-word;
+ 
+  padding: 0px 15px;
+}
+
+.chptrttl {
+  border-bottom: 2px solid rgb(4, 140, 215);
+  font-size: 36px;
+  text-align: center;
+  color: rgb(4, 126, 215);
+  display: none;
+}
+
+.childEditor {
+  position: relative;
+  background: white;
+  text-align: left;
+  height: 772px;
+  max-height: 772px;
+  -webkit-background-size: 100% 30px;
+  -moz-background-size: 100% 30px;
+  -ms-background-size: 100% 30px;
+  background-size: 100% 30px;
+}
+
+.childEditor {
+  font-size: 15px;
+  color: #5F5F5F; 
+  text-align: justify;
+}

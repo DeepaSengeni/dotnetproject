@@ -1,0 +1,92 @@
+
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+
+
+    <div class="BigMainWrapper">
+      <div class="mainWrapper">
+        <div class="SignUpForm-heading">Udate Profile</div>
+
+        <div class="signUpForm">
+          <form [formGroup]="profileForm" (ngSubmit)="profileSubmit(profileForm.value)">
+       
+              <ion-item [ngClass]="{'error-border':!profileForm.controls.firstName.valid && profileForm.controls.firstName.touched}">
+                <ion-label floating>First Name</ion-label>
+                <ion-input formControlName="firstName" type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="profileForm.controls.firstName.hasError('required') && profileForm.controls.firstName.touched">
+                <p class="error-text">Sorry, field firstName is required!</p>
+              </ion-item>
+
+              <ion-item [ngClass]="{'error-border':!profileForm.controls.lastName.valid && profileForm.controls.lastName.touched}">
+                <ion-label floating>Last Name</ion-label>
+                <ion-input formControlName="lastName"  type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="profileForm.controls.lastName.hasError('required') && profileForm.controls.lastName.touched">
+                <p class="error-text">Sorry, field lastName is required!</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Birthday</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" formControlName="DOB" name="DOB"></ion-datetime>
+              </ion-item>
+
+              <ion-list radio-group formControlName="gender">
+                <ion-list-header>
+                  Gender
+                </ion-list-header>
+                <ion-item>
+                  <ion-label>Female</ion-label>
+                  <ion-radio value="Female" checked="true"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Male</ion-label>
+                  <ion-radio value="Male"></ion-radio>
+                </ion-item>
+              </ion-list>
+
+              <ion-item>
+                <ion-label>Country</ion-label>
+                <ion-select formControlName="country" name="country" (ionChange)="countrySelect()">
+                  <ion-option selected>Select Country</ion-option>
+                  <ion-option (ionSelect)="countrySelected($event)" *ngFor="let item of CountryList" value="{{ item['ID'] }}">{{ item['CountryName'] }}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>State</ion-label>
+                <ion-select formControlName="state" name="state">
+                  <ion-option selected>Select State</ion-option>
+                  <ion-option (ionSelect)="stateSelected($event)" *ngFor="let item of StateList" value="{{ item['ID'] }}">{{ item['StateName'] }}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>City</ion-label>
+                <ion-select formControlName="city" name="city">
+                  <ion-option selected>Select City</ion-option>
+                  <ion-option *ngFor="let item of CityList" value="{{ item['ID'] }}">{{ item['CityName'] }}</ion-option>
+                </ion-select>
+              </ion-item>
+        
+
+            <div class="form-group">
+              <button type="Submit" [disabled]="!profileForm.valid" class="btn btn-success">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    </div>
+    <!--End of mainHeader-->
+  </div>
+</ion-content>
+
+
+

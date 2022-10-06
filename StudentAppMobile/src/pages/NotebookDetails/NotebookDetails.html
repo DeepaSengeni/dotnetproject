@@ -1,0 +1,93 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+    <!--<div class="mainHeader">
+      <ion-navbar class="nav-bar-main">
+        <button ion-button menuToggle>
+          <ion-icon class="nav-bar-icon" name="menu"></ion-icon>
+        </button>
+      </ion-navbar>
+      <div class="mainHeaderIcon"><span class="fa fa-bars fa-2x pull-left" aria-hidden="true"></span> </div>
+      <div class="header-wrap">
+        <div class="container">
+          <div class="logo-wrap textCenter"> <img src="assets/images/logo.png" alt="Notetor Logo"> </div>
+          <div class="search-wrap signUp">
+            <form>
+              <div class="control-wrap textCenter home-create-wrap">
+                <button ion-button color="light" class="home-create-btn" round type="button" (click)="login($event);">
+                  <ion-icon class="home-create-icon" name="ios-navigate-outline"></ion-icon> Create Notebook
+                </button>
+              </div>
+              <div class="control-wrap">
+                <ion-searchbar animated="true" autocomplete="on" placeholder="Find a Friend..." (ionInput)="onInput($event)"></ion-searchbar>
+              </div>
+              <ion-grid>
+                <ion-row text-center>
+                  <ion-col>
+                    <button ion-button clear>
+                      <ion-icon name="home" class="home-btn-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button ion-button clear>
+                      <ion-icon name="people" class="home-btn-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button ion-button clear>
+                      <ion-icon name="flag" class="home-btn-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!--End of mainHeader-->
+
+
+    <div class="mainWrapper">
+      <div class="bookProperties">
+        <h2><a href="javascript:void(0);">All Properties</a></h2>
+      </div>
+      <!--end of bookProperties-->
+      <div class="clearfix"></div>
+      <div class="notebooks NotebookP" *ngFor="let book of data">
+        <div class="notbookMain">
+          <div class="notebookpagedetails">
+            <img src="assets/images/notebooks.png">
+            <div class="textdiv">
+              <div class="main1">
+                <div class="main2"> <img src="{{url}}{{book.SubmitterPic}}"> </div>
+                <div class="main3">{{book.SubjectName}}</div>
+              </div>
+            </div>
+            <div class="{{(book.Innovation_Investment==1)?'Inno_inv_val_1':(book.Innovation_Investment==2)?'Inno_inv_val_2':'Inno_inv_val_0'}}">I</div>
+          </div>
+          <div class="creatorName">
+            <h2><span class="mainSubject">Subject:</span> <span class="NameSubject">{{book.SubjectName}}</span></h2>
+            <h2><span class="mainSubject">Creator:</span> <span class="NameSubject">{{book.StudentName}}</span></h2>
+            <h2><span class="mainSubject">Date:</span> <span class="NameSubject">{{book.StartDate}}</span></h2>
+            <h2><span class="mainSubject">Pages:</span> <span class="NameSubject">{{book.Total_Number_of_Pages}}</span></h2>
+            <div class="creatorbutton clearfix">
+              <a href="#" class="btn-wallet" (click)="profile(book.UserId)">Creator's Profile</a>
+              <!--<a href="#" class="btn-wallet btn-green" (click)="Downloadbook()">Downloads</a>-->
+              <a href="#" class="btn-wallet btn-green" *ngIf="pages==true" (click)="Editbook()">Edit</a>
+              <a href="#" class="btn-wallet btn-green" *ngIf="pages==true" (click)="presentConfirm()">Delete</a>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        </div>
+    </div>
+    <!--End of BigMainWrapper-->
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,97 @@
+﻿@model   StudentAppWebsite.Models.AdvertisementModels
+
+@{
+    ViewBag.Title = "Advertisement List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Advertisement List</h3>
+
+                <div class="panel-options">
+                    <a href="#" data-toggle="panel">
+                        <span class="collapse-icon">&ndash;</span>
+                        <span class="expand-icon">+</span>
+                    </a>
+                    <a href="#" data-toggle="remove">&times;
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        $("#example-4").dataTable({
+                            aLengthMenu: [
+                                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                            ]
+                        });
+                    });
+                </script>
+
+                <div class="table-responsive" @*data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true"*@>
+
+                    <table id="example-4" class="table table-small-font table-bordered table-striped">
+                        <thead>
+                            <tr>
+
+                               
+                                <th>Ad Owner Id</th>                                
+                                <th>Ad Duration</th>
+                                <th>Amount Paid</th>
+                                @*<th>Categories Selected</th>*@
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model.PaymentList.Count > 0)
+                            {
+                                for (int i = 0; i < Model.PaymentList.Count;i++ )
+                                {
+                                <tr>
+                                    <td>@Model.PaymentList[i].UserId </td>
+                                    <td>
+                                        @(Convert.ToDateTime(Model.PaymentList[i].startdate).ToString("dd/MM/yyyy")) to @(Convert.ToDateTime(Model.PaymentList[i].enddate).ToString("dd/MM/yyyy"))
+                                    </td>
+                                   <td>
+                                       @Model.PaymentList[i].AmountToBePaid
+                                   </td>
+                                   @*<td style="word-break:break-all">
+                                        @Model.PaymentList[i].Categories
+                                   </td>*@
+                                   <td>
+                                       <a href="/Admin/AdPreview?AdId=@Model.PaymentList[i].adcreationId" class="btn btn-primary">View Ad</a>
+                                       <a href="/Admin/getpaymentDetails_ByadID?AdId=@Model.PaymentList[i].adcreationId" class="btn btn-primary">Payment Detail</a>
+                                   </td>
+                                    
+                                </tr>
+                                }
+                            }
+                            
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

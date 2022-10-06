@@ -1,0 +1,382 @@
+﻿@model StudentAppWebsite.Models.ManageProfile
+
+@{
+    ViewBag.Title = "Update_UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .background-image {
+        width: 100%;
+        height: 380px;
+        margin-top: 10px;
+    }
+
+    .profile-pic {
+        height: 180px;
+        width: 190px;
+        margin: 0px;
+        border: none;
+    }
+</style>
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-md-12">
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+            else if (TempData["ErrorMessage"] != null)
+            {
+     
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+        </div>
+    </div>
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Update Profile</h3>
+        </div>
+
+        <div class="panel-body">
+            <div class=" center-block-new" id="ProfileDiv" style="margin-top: 20px;">
+                <div class="row">
+
+
+                    @using (Html.BeginForm("Update_UserProfile", "User", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" }))
+                    { 
+                
+@*<div class="row">
+                    <div class="col-md-12">
+                        <img src="@(Model.profile.CoverImage != null ? Model.profile.CoverImage : "/Images/6GS4E2B.png")" alt="No image found." class="background-image" id="CoverImg" />
+                        <input type="file" name="CoverPicture" id="CoverPicture" />
+                    </div>
+                </div>
+
+                @Html.HiddenFor(m => m.profile.ProfileImage)
+                
+                <div class="col-lg-2">
+                    <img src="@(Model.profile.ProfileImage != null ? Model.profile.ProfileImage : "/Images/6GS4E2B.png")" alt="No image found." class="profile-pic" id="ProfileImg" />
+                    <input type="file" name="ProfilePicture" id="ProfilePic" />
+                </div>*@
+                    
+                        @Html.HiddenFor(m => m.profile.EmailId)
+                        @Html.HiddenFor(m => m.profile.Id);
+                        @Html.HiddenFor(m => m.profile.ProfileImage);
+                        @Html.HiddenFor(m => m.profile.CoverImage);
+                        <div class="custom-more">
+
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-4">First Name</label>
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(m => m.profile.FirstName, new { @class = "form-control", placeholder = "First Name" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-4">Last Name</label>
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(m => m.profile.LastName, new { @class = "form-control", placeholder = "Last Name" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-4">Country</label>
+                                        <div class="col-lg-8">
+                                            @Html.DropDownListFor(m => m.profile.CountryId, new SelectList(Model.Countrylist, "ID", "CountryName"), "--Select Country--", new { @class = "form-control", placeholder = "Country" })
+                                            @*@Html.TextBoxFor(m => m.profile.CountryName, new { @class = "form-control" })*@
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <label class="col-lg-4">State</label>
+                                        <div class="col-lg-8">
+                                            @Html.DropDownListFor(m => m.profile.StateId, new SelectList(Model.statelist, "ID", "StateName"), "--Select State--", new { @class = "form-control", placeholder = "State" })
+                                            @*@Html.TextBoxFor(m => m.profile.StateName, new { @class = "form-control" })*@
+                                        </div>
+                                    </div>
+                                   
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-md-offset-2">
+                                <div class="row">
+                                     <div class="form-group clearfix">
+                                        <label class="col-lg-4">City</label>
+                                        <div class="col-lg-8">
+                                            @Html.DropDownListFor(m => m.profile.CityId, new SelectList(Model.citylist, "ID", "CityName"), "--Select City--", new { @class = "form-control", placeholder = "City" })
+                                            @*@Html.TextBoxFor(m => m.profile.CityName, new { @class = "form-control" })*@
+
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group clearfix">
+                                        <label class="col-lg-4">Name Of (Coaching/College/School)</label>
+                                        <div class="col-lg-8">
+                                            @Html.DropDownListFor(m => m.profile.CollegeId, new SelectList(Model.InstituteModellist, "ID", "InstituteName"), "--Select College--", new { @class = "form-control", placeholder = "College" })
+                                        </div>
+                                    </div>*@
+                                   @* <div class="form-group clearfix">
+                                        <label class="col-lg-4">Mobile Number</label>
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(m => m.profile.MobileNumber, new { @class = "form-control" })
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group clearfix">
+                                        <label class="col-sm-4 control-label">Gender</label>
+                                        <div class="col-sm-8">
+                                            @Html.RadioButtonFor(m => m.profile.Gender, "Male") Male
+                                        @Html.RadioButtonFor(m => m.profile.Gender, "Female") Female
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <label class="col-sm-4 control-label">Date of birth</label>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(model => model.profile.DOB,Convert.ToDateTime(Model.profile.DOB).ToString("dd/MM/yyyy"), new { @class = "form-control", placeholder = "DD/MM/YYYY" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.profile.DOB)</div>
+                                            <span id="msgdob" style="color: #A94442"></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-12">
+                                <div class="btn-all-bottom">
+                                    <div class="form-group  clearfix">
+
+
+                                        <div class="pull-right">
+                                            <input type="submit" value="Update" class="btn btn-primary" />
+                                            <input type="button" value="Cancel" class="btn btn-warnig" onclick="window.location.href = '/user/UserProfile'" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+
+
+
+
+<link href="~/assets/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/js/jquery.maskedinput.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#profile_CountryId').on("change", function () {
+            StateBind();
+        });
+
+        $('#profile_StateId').on("change", function () {
+
+            CityBind();
+        });
+        $('#profile_CityId').on("change", function () {
+
+           InstituteBind();
+        });
+
+        $('#profile_DOB').datepicker({
+            format: "dd/mm/yyyy"
+        });
+    });
+    $('#profile_DOB').mask("99/99/9999");
+    $('#CoverPicture').on("change", function () {
+        //alert('Image clicked');
+        coverPreviewFile();
+    });
+
+    $('#ProfilePic').on("change", function () {
+        //alert('Image clicked');
+        profilePreviewFile();
+    });
+
+    function profilePreviewFile() {
+        //  var preview = document.querySelector('#StreamIconImage');
+
+        var file = document.querySelector('#ProfilePic').files[0];
+
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            //  preview.src = reader.result;
+            //alert($('#ProfileImage').val(reader.result));
+            $('#ProfileImg').attr('src', reader.result);
+            $('#profile_ProfileImage').val(reader.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+    }
+
+    function coverPreviewFile() {
+        //  var preview = document.querySelector('#StreamIconImage');
+
+        var file = document.querySelector('#CoverPicture').files[0];
+
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            //  preview.src = reader.result;
+            //alert($('#ProfileImage').val(reader.result));
+            $('#CoverImg').attr('src', reader.result);
+            $('#profile_CoverImg').val(reader.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+    }
+</script>
+
+
+<script>
+    function StateBind() {
+
+        var CountryID = $('#profile_CountryId').val();
+        //alert(CountryID);
+        if (CountryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/StateLoad",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.statelist.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option>--Select State--</option>";
+                        $.each(msg.statelist, function (key, value) {
+                            console.log(value.Id);
+                            options += "<option value=" + value.ID + ">" + value.StateName + "</option>";
+                        });
+                        $('#profile_StateId').html(options);
+                        $('#profile_StateId').on("change", function () {
+
+                            CityBind($(this).val());
+                        });
+                        $('#profile_StateId option').eq(1).attr("selected", "selected");
+                        $('#profile_StateId').trigger('change');
+                    }
+                    else {
+                        var options = "<option>--Select State--</option>";
+                        $('#profile_StateId').html(options);
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CountryID': CountryID },
+            });
+        } else {
+            $('#profile_StateId').html("<option value>--Select State--</option>");
+        }
+    }
+
+
+    function CityBind() {
+        var StateID = $('#profile_StateId').val();
+        //alert(StateID);
+        if (StateID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/CityLoad",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.citylist.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option value>--Select City--</option>";
+                        $.each(msg.citylist, function (key, value) {
+                            console.log(value.Id);
+                            options += "<option value=" + value.ID + ">" + value.CityName + "</option>";
+                        });
+                        $('#profile_CityId').html(options);
+                    }
+                    else {
+                        $('#profile_CityId').html("<option value>--Select City--</option>");
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'StateID': StateID },
+            });
+
+        } else {
+            $('#profile_CityId').html("<option value>--Select City--</option>");
+        }
+    }
+
+    function InstituteBind() {
+
+        var CityID = $('#profile_CityId').val();
+
+        if (CityID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/InstituteLoadByCity",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.InstituteModelList.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option>--Select Institute--</option>";
+                        $.each(msg.InstituteModelList, function (key, value) {
+                            console.log(value.Id);
+                            options += "<option value=" + value.Id + ">" + value.InstituteName + "</option>";
+                        });
+                        $('#profile_CollegeId').html(options);
+                    }
+                    else {
+                        $('#profile_CollegeId').html("<option value>--Select Institute--</option>");
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CityId': CityID },
+            });
+        } else {
+            $('#profile_CityId').html("<option value>--Select City--</option>");
+        }
+    }
+
+</script>

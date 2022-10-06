@@ -1,0 +1,247 @@
+﻿@model StudentAppWebsite.Models.MakePaymentModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+   
+
+    
+</style>
+@using (Html.BeginForm("CCAVENUETest", "User", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    
+    <div class="container-fluid signupform">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       @* <h3 class="panel-title">Checkout</h3>*@
+                       @* <p class="infohead"></p>*@
+                         <h3 class="panel-title">Compulsory information</h3>
+
+
+                    </div>
+                    <div class="panel-body">
+                        
+                       <div class="row">
+                       <div class="col-md-6">
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Transaction Id:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="tid" id="tid" readonly="true" value="" class="form-control formtextbox" />
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label"></label>
+                                <div class="col-sm-8">
+                                    <input type="hidden" name="merchant_id" id="merchant_id" value="@Model.MerchantId" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Order Id</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="order_id" value="@Session["OrderId"]" class="form-control formtextbox" readonly/>
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Amount</label>
+                                <div class="col-sm-8">
+                                    <label class="form-control formtextbox">@Model.AmountPaid</label>
+                                    </div>
+                            </div>
+
+                            <div class="form-group clearfix" style="display:none">
+                                <label class="col-sm-4 control-label">Currency</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="currency" value="INR" class="form-control formtextbox" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">@*Redirect URL*@</label>
+                                <div class="col-sm-8">
+                                    <input type="hidden" name="redirect_url" value="@Model.RedirectUrl" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">@*Cancel URL*@</label>
+                                <div class="col-sm-8">
+                                    <input type="hidden" name="cancel_url" value="@Model.CancelUrl" />
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing information(optional):</label>
+                                <div class="col-sm-8">
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_name" value="@Session["StudentName"]" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+                            
+
+                           </div>
+                             <div class="col-md-6">
+                           
+                                 <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing Address:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_address" value="" class="form-control formtextbox" />
+                                </div>
+                            </div>
+                           
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing City:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_city" value="" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing State:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_state" value="" class="form-control formtextbox" />
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing Zip:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_zip" value="" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing Country:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_country" value="" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing Tel:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_tel" value="1234567890" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label">Billing Email:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="billing_email" value="@Session["UserName"]" class="form-control formtextbox" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label"></label>
+                                <div class="col-sm-8">
+                                    <input type="hidden" name="promo_code" />
+                                </div>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label" style="display: none">Customer Id:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="customer_identifier" value="@Session["UserId"]" class="form-control formtextbox" style="display:none"/>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-4 control-label"></label>
+                                <div class="col-sm-8">
+                                    <input type="submit" value="Checkout" class="btn btn-success"  />
+                                </div>
+                            </div>
+
+                    </div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+@*<div class="ul-block"></div>*@
+
+@* <tr>
+                        <td colspan="2">Shipping information(optional):</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Name</td>
+                        <td>
+                            <input type="text" name="delivery_name" value="" class="form-control formtextbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Address:</td>
+                        <td>
+                            <input type="text" name="delivery_address" value="" class="form-control formtextbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>shipping City:</td>
+                        <td>
+                            <input type="text" name="delivery_city" value="" class="form-control formtextbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>shipping State:</td>
+                        <td>
+                            <input type="text" name="delivery_state" value="" class="form-control formtextbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>shipping Zip:</td>
+                        <td>
+                            <input type="text" name="delivery_zip" value="" class="form-control formtextbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>shipping Country:</td>
+                        <td>
+                            <input type="text" name="delivery_country" value="India" class="form-control formtextbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Tel:</td>
+                        <td>
+                            <input type="text" name="delivery_tel" value="" class="form-control formtextbox" /></td>
+                    </tr>*@
+@*  <tr>
+                        <td>Merchant Param1</td>
+                        <td>
+                            <input type="text" name="merchant_param1" value="additional Info." class="form-control formtextbox" /></td>
+                    </tr>*@
+@*   <tr>
+            <td>Merchant Param2</td>
+            <td>
+                <input type="text" name="merchant_param2" value="additional Info." /></td>
+        </tr>
+      <tr>
+            <td>Merchant Param3</td>
+            <td>
+                <input type="text" name="merchant_param3" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param4</td>
+            <td>
+                <input type="text" name="merchant_param4" value="additional Info." /></td>
+        </tr>
+        <tr>
+            <td>Merchant Param5</td>
+            <td>
+                <input type="text" name="merchant_param5" value="additional Info." /></td>
+        </tr>*@
+            
+
+    
+    
+}
+
+
+
+<script>
+    window.onload = function () {
+        var d = new Date().getTime();
+        document.getElementById("tid").value = d;
+    };
+</script>
+

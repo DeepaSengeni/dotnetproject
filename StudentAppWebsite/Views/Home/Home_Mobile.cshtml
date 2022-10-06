@@ -1,0 +1,1320 @@
+﻿@*@{
+    ViewBag.Title = "Home_Mobile";
+}*@
+
+@model StudentAppWebsite.Models.StudentRegistration
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/css/responsive-androide.css" rel="stylesheet" />
+<script src="~/Scripts/html2canvas.js"></script>
+<script src="~/JsPDF/jspdf.js"></script>
+<script src="~/JsPDF/plugins/addimage.js"></script>
+
+
+
+<style type="text/css">
+    .break-word {
+        word-wrap: break-word;
+    }
+
+    .option-box ul li {
+        list-style: none;
+        font-size: 14px;
+    }
+
+    .option-box ul {
+        height: 125px;
+        padding-bottom: 2px;
+        max-height: 125px;
+        overflow-y: scroll;
+        margin-bottom: 3px;
+    }
+
+    .option-box {
+        margin-bottom: 0px;
+        border-bottom-left-radius: 27px;
+        border-bottom-right-radius: 27px;
+        border: 1px solid rgb(0, 66, 147);
+    }
+
+    .option {
+        border-bottom-right-radius: 27px;
+        border-bottom-left-radius: 27px;
+        border: 1px solid rgb(0, 66, 147);
+        margin-top: 15px;
+        padding-top: 0px;
+    }
+    /*.m-photo-caption {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: auto !important;
+    padding: 0px 20px;
+    left: 31px;
+    word-break: break-word;
+}*/
+
+    body {
+        background: #f5f5f5 !important;
+    }
+
+
+    #NotebookDetail .row {
+        background: #fff;
+    }
+
+    @@media only screen and (max-width:1055px) {
+        #NotebookDetail .col-md-3, #NotebookDetail .col-md-4, #NotebookDetailNew .col-md-3 {
+            min-height: 100% !important;
+        }
+    }
+</style>
+
+
+<div class="modal fade" id="zoomModal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Start Section-->
+<section class="full-width-box">
+    <div class="container">
+        <div class="section-inner">
+
+            <!--Start Section-->
+
+            <div class="m-search">
+                <form name="srch_box_form" id="srch_box_form">
+                    <div class="search-main">
+                        <input type="hidden" id="hidden" />
+                        @Html.TextBoxFor(model => model.Text, new { @class = "form-control", @placeholder = "Search notebooks by (Submitter, Subject, Coaching, College, School)" })
+                        @*<input type="text" class="form-control" placeholder="Search&hellip;">*@
+                        <button class="m-search-btn" type="button" id="btnSearch"><span class="msearch-icon"><i class="fa fa-search"></i></span></button>
+
+                    </div>
+                </form>
+            </div>
+
+            <!--End Section-->
+
+            <div class="col-md-3 col-sm-3 col-xs-5 pad-left-no">
+                @* <div class="col-md-3">*@
+                <div class="m-left-sidebar">
+                    <form name="notebook_srch_frm">
+
+
+                        <div class="option">
+                            <p class="option-text">Country</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="countryDiv">
+                                    <li>
+
+
+                                       @* @foreach (var Countries in Model.Countrylist)
+                                        {<div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.Country, Countries.ID, new { @class = "Country",@disabled="disabled" })
+                                                @Countries.CountryName
+                                            </label>
+                                        </div> 
+                                        }*@
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <p class="option-text">State</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="stateDiv">
+                                    <li>
+
+                                        @*@foreach (var States in Model.statelist)
+                                        {
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.state, States.ID, new { @class = "State",@disabled="disabled" })
+                                                    @States.StateName
+                                                </label>
+
+                                            </div>}*@
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <p class="option-text">City</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="cityDiv">
+                                    <li>
+
+                                      @*  @foreach (var Cities in Model.citylist)
+                                        { <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.City, Cities.ID, new { @class = "City" ,@disabled="disabled"})
+                                                @Cities.CityName
+                                            </label>
+                                        </div>
+                                        }*@
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <p class="option-text">Categories</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="ctgryDiv">
+                                    <li>
+
+                                        @foreach (var Categories in Model.CategoryList)
+                                        { <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.Category, Categories.Id, new { @class = "Category" ,@disabled="disabled"})
+                                                @Categories.CategoryName
+                                            </label>
+                                        </div> 
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <p class="option-text">Streams</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="strmDiv">
+                                    <li>
+
+                                       @* @foreach (var Streams in Model.StreamList)
+                                        { <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.Stream, Streams.Id, new { @class = "Streams",@disabled="disabled" })
+                                                @Streams.StreamName
+                                            </label>
+                                        </div> 
+                                        }*@
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <p class="option-text">COACHING / COLLEGE / SCHOOL</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="instDiv">
+                                    <li>
+
+                                        @*@foreach (var Institutes in Model.InstituteList)
+                                        { <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.InstituteName, Institutes.Id, new { @class = "Institute" ,@disabled="disabled"})
+                                                @Institutes.InstituteName
+                                            </label>
+                                        </div>
+                                                    
+                                        }*@
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <p class="option-text">Subjects</p>
+                            <div class="option-box zoomTarget">
+                                <ul id="subDiv">
+                                    <li>
+                                       @* @for (int i = 0; i < Model.SubjectsList.Count; i++)
+                                        {<div class="Checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.SubjectsList[i].IsChecked, new { @class = "Subject", @value = Model.SubjectsList[i].Id,@disabled="disabled" })
+                                                @Model.SubjectsList[i].SubjectName
+                                                @Html.HiddenFor(m => Model.SubjectsList[i].SubjectName)
+                                                @Html.HiddenFor(m => Model.SubjectsList[i].Id)
+                                            </label>
+                                        </div>
+                                                    
+                                        }*@
+
+
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+            @* <div class="col-md-9">*@
+            <div class="col-md-9 col-sm-9 col-xs-7 pad-left-no-right">
+
+                <div class="m-right-side">
+                    <!--Book info-->
+                    <form>
+                        <input type="hidden" id="hdnPageNoLeft" name="hdnPageNo" value="0"/>
+                        <input type="hidden" id="hdnPageNo" name="hdnPageNo" value="@ViewBag.PageNo"/>
+                        <div class="m-book-info">
+                            <div class="m-book-box" id="NotebookDetail">
+
+                                @foreach (var item in Model.NotebookFormList)
+                                {
+                                    string[] chapterdata = null;
+                                    var chapterName = item.ChapterName;
+                                    if (chapterName != null)
+                                    {
+                                        chapterdata = chapterName.Split(',');
+                                    }
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-5" style="padding-right: 5px;">
+                                            <div class="m-book-media">
+                                                <img src="/Content/images/notebooks.png">
+                                                <div class="m-photo-caption">
+                                                    <div class="table">
+                                                        <div class="table-cell" title="@item.SubjectName">
+                                                            <a href="/Home/Notebook_Pages?BookId=@item.NotebookId">@item.SubjectName</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-8 col-sm-8 col-xs-7" style="padding-left: 0px;">
+                                            <div class="m-book-detail">
+                                                <ul>
+                                                    <li  title="@item.SubjectName"><span class="m-head"><b>Subject : </b></span><span class="m-text">'@item.SubjectName'</span> </li>
+                                                    <li title="@item.FirstName @item.LastName"><span class="m-head"><b>Submitter : </b></span><span class="m-text">@((!string.IsNullOrEmpty(item.FirstName)) && (!string.IsNullOrEmpty(item.LastName)) ? item.FirstName + ' ' + item.LastName : "")</span> </li>
+                                                    <li title="@item.CollegeId"><span class="m-head"><b>Coaching/College/School : </b></span><span class="m-text">@(item.CollegeId)</span> </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="m-btn">
+                                                @Html.HiddenFor(model => model.NotebookId)
+                                                <a href="/Home/NoteBookDetails?BookId=@item.NotebookId" class="btn btn-primary all-propety">All properties</a>
+                                                <a href="javascript:;" class="btn btn-success download-btn" onclick="Downloadbook('@item.NotebookId','@item.SubjectName')">Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                 
+                            </div>
+                             
+                        </div>
+                      
+                        <div class="row main" id="NotebookDetailNew">
+                            @*<div id="ErrorMsg" class="alert alert-danger" style="text-align: center;"></div>*@
+                        </div>
+                          <div id="prevNext">
+                                <a id="prev" href="javascript:;" class="btn btn-success pull-left my-pre" onclick="NoteBook_Load('prev')" @(ViewBag.PageNo > 0 ? "" : "disabled")>previous</a>
+                                <a id="next" href="javascript:;" class="btn btn-success pull-right my-nex" onclick="NoteBook_Load('next')">Next</a>
+                            </div>
+                          
+                        
+                    </form>
+                    <!--End Book info-->
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+<!--End Section-->
+
+
+
+
+<script>
+    //home page equal box height
+
+    equalheight = function (container) {
+
+        var currentTallest = 0,
+             currentRowStart = 0,
+             rowDivs = new Array(),
+             $el,
+             topPosition = 0;
+        $(container).each(function () {
+
+            $el = $(this);
+            $($el).height('auto')
+            topPostion = $el.position().top;
+
+            if (currentRowStart != topPostion) {
+                for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+                    rowDivs[currentDiv].height(currentTallest + 50);
+                }
+                rowDivs.length = 0; // empty the array
+                currentRowStart = topPostion;
+                currentTallest = $el.height();
+                rowDivs.push($el);
+            } else {
+                rowDivs.push($el);
+                currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+            }
+            for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+                rowDivs[currentDiv].height(currentTallest + 50);
+            }
+        });
+    }
+
+    $(window).load(function () {
+        equalheight('.main .article');
+    });
+
+
+    //$(window).resize(function () {
+    //    equalheight('.main .article');
+    //});
+
+
+</script>
+<div id="export-content" style="font-size: 18px;">
+    @if (Model.IsHtml != true)
+    {
+        <img src="@Model.PageImage"/>
+    }
+    else
+    {
+        @Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))
+    }
+</div>
+<script type="text/javascript"> $(document).ready(function () {
+     $("#srch_box_form").keypress(function (e) {
+
+
+         var kCode = e.keyCode || e.charCode //for cross browser
+
+         if (kCode == 13) {
+
+             $("#btnSearch").click();
+             return false;
+         }
+     });
+ });
+</script>
+<script>
+    $(document).ready(function () {
+        CountryBind();
+        //$('.Category').eq(0).trigger('change');
+        //$(function () {
+        //    $('.option-box').slimScroll({
+        //        height: '140px'
+        //    });
+
+
+        //});
+       
+        $('#Text').on("keyup", function () {
+
+            if ($(this).val().length == 0) {
+                $('#btnSearch').click();
+                //$('#NotebookDetail').show();
+                //$('#NotebookDetailNew').hide();
+            }
+        });
+
+    });
+</script>
+
+<script src="~/Scripts/html2canvas.js"></script>
+<script src="~/JsPDF/jspdf.js"></script>
+<script src="~/JsPDF/plugins/addimage.js"></script>
+<script src="~/Scripts/FileSaver.js"></script>
+
+<script type="text/javascript">
+
+    $(document).on("change", '.Country', function () {
+
+        StateBind($(this).val());
+    });
+    $(document).on("change", '.State', function () {
+
+        CityBind($(this).val());
+    });
+    $(document).on("change", '.City', function () {
+        InstituteBind();
+    });
+    $(document).on("change", '.Category', function () {
+      
+        StreamBind($(this).val());
+        parseInt($('#hdnPageNo').val(0));
+        SearchBooksByCatInsStrSub();
+    });
+    $(document).on("change", '.Streams', function () {
+        InstituteBind();
+        parseInt($('#hdnPageNo').val(0));
+        SearchBooksByCatInsStrSub();
+
+
+    });
+    $(document).on("change", '.Institute', function () {
+
+        //  alert();
+        parseInt($('#hdnPageNo').val(0));
+        SearchBooksByCatInsStrSub();
+
+
+    });
+    $(document).on("change", '.Subject', function () {
+        parseInt($('#hdnPageNo').val(0));
+        SearchBooksByCatInsStrSub();
+    });
+    //$('.Subject').on("change", function () {
+
+
+
+    //});
+
+    //$('.Subject').click(function () {
+    //    var thisCheck = $(this);
+
+    //    if (thischeck.is(':checked')) {
+    //        SearchBooksByCatInsStrSub($(this).val());
+    //    }
+    //});
+
+    //$('#state').change(
+
+
+    //);
+</script>
+
+<script>
+
+    function CountryBind() {
+
+       
+            $.ajax({
+                type: "POST",
+                url: "/Home/CountryLoadAjax",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "";
+                        $.each(msg.Countrylist, function (key, value) {
+                           
+                            options += '<div class="radio"> <label><input id="Country" class="Country" type="radio" value="' + value.ID + '" name="Country"  disabled="disabled">' + value.CountryName + '</label></div>';
+                            //options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                        });
+                        $('#countryDiv').find('li').html(options);
+                       
+                        $('.Country').eq(0).prop('checked', true).trigger('change');
+                    }
+                    else {
+
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: {},
+            });
+        
+    }
+    function StateBind(country) {
+
+        var CountryID = country;
+        if (CountryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Home/StateLoad",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "";
+                        $.each(msg.statelist, function (key, value) {
+                            console.log(value.Id);
+                            options += '<div class="radio"> <label><input id="state" class="State" type="radio" value="' + value.ID + '" name="state"  disabled="disabled">' + value.StateName + '</label></div>';
+                            //options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                        });
+                        $('#stateDiv').find('li').html(options);
+
+                        $('#stateDivi').find('li').html(options);
+
+                        $('.State').on("change", function () {
+                            CityBind($(this).val());
+                        });
+                        $('.State').eq(0).prop('checked', true).trigger('change');
+                    }
+                    else {
+
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CountryID': CountryID },
+            });
+        } else {
+            $('#state').html("<option value>Select</option>");
+        }
+    }
+
+    function CityBind(State) {
+        var StateID = State;
+        if (StateID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Home/CityLoad",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "";
+                        $.each(msg.citylist, function (key, value) {
+                            console.log(value.Id);
+                            options += '<div class="radio"> <label><input id="city" class="City" type="radio" value="' + value.ID + '" name="city" disabled="disabled" />' + value.CityName + '</label></div>';
+                            // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                        });
+                        $('#cityDiv').find('li').html(options);
+
+                        $('#cityDivi').find('li').html(options);
+                        $('.City').on("change", function () {
+                            InstituteBind();
+                        });
+                    }
+                    else {
+
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'StateID': StateID },
+            });
+        } else {
+            $('#City').html("<option value>Select</option>");
+        }
+    }
+
+    function StreamBind(Category) {
+        var CategoryID = Category;
+        if (CategoryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Home/StreamsLoadByCategoryId",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg.HomeList.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "";
+                        $.each(msg.HomeList, function (key, value) {
+                            console.log(value.Id);
+                            options += '<div class="radio"> <label><input id="Stream" class="Streams" type="radio" value="' + value.Id + '" name="Stream" disabled="disabled" />' + value.StreamName + '</label></div>';
+                            // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                        });
+
+                        $('#strmDiv').find('li').html(options);
+                        $('.Streams').on("change", function () {
+
+                            InstituteBind();
+                        });
+                        $('.Streams').eq(0).prop('checked', true).trigger('change');
+                    }
+                    else {
+                        $('#strmDiv').find('li').html('NO STREAMS');
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CategoryID': CategoryID },
+            });
+        } else {
+            $('#Category').html("<option value>Select</option>");
+        }
+    }
+
+    function InstituteBind() {
+        var StreamId = $('.Streams:checked').val();
+        if (StreamId != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Home/InstitutesLoadByStreamID",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg.instituteNewList.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var Instituteoptions = "";
+
+                        $.each(msg.instituteNewList, function (key, value) {
+                            console.log(value.Id);
+                            Instituteoptions += '<div class="radio"> <label><input id="Institute" class="Institute" type="radio" value="' + value.Id + '" name="Institute" disabled="disabled" />' + value.InstituteName + '</label></div>';
+                            // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                        });
+
+
+
+                        $('#instDiv').find('li').html(Instituteoptions);
+                        $('.Institute').on("change", function () {
+
+                            SearchBooksByCatInsStrSub();
+                        });
+                        $('.Institute').eq(0).prop('checked', true).trigger('change');
+                    }
+                    else {
+                        $('#instDiv').find('li').html('NO COLLEGES');
+
+                    }
+
+                    if (msg.SubjectsList.length > 0) {
+                        var Subjectsoptions = "";
+                        $.each(msg.SubjectsList, function (key, value) {
+
+                            Subjectsoptions += '<div class="Checkbox"><label><input id="Subject" class="Subject" type="checkbox" value="' + value.Id + '" name="Subject" disabled="disabled" /> ' + value.SubjectName + '</label></div>';
+                            // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                        });
+
+                        $('#subDiv').find('li').html(Subjectsoptions);
+                        $('.Subject').on("change", function () {
+                            SearchBooksByCatInsStrSub();
+                            //InstituteBind($(this).val());
+                        });
+                    }
+                    else {
+
+                        $('#subDiv').find('li').html('NO SUBJECTS');
+                    }
+
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'StreamId': StreamId, 'CityId': $('.City:checked').val() },
+            });
+        }
+    }
+
+    $('#btnSearch').click(function () {
+        Text = $.trim($('#Text').val());
+        parseInt($('#hdnPageNo').val(0));
+        $('#NotebookDetailNew').show();
+        SearchBooksByName(Text);
+
+    });
+
+    function SearchBooksByCatInsStrSub() {
+       // $('#loaderDiv2').show();
+        var CategoryID = '';
+        var selectedVal = "";
+        var selected = $("#ctgryDiv input[type='radio']:checked");
+        
+        if (selected.length > 0) {
+            CategoryID = selected.val();
+
+        }
+        var StreamID = '';
+        var selectedStream = $("#strmDiv  input[type='radio']:checked");
+        if (selectedStream.length > 0) {
+            StreamID = selectedStream.val();
+
+        }
+        var InstituteID = '';
+        var selectedInstitute = $("#instDiv  input[type='radio']:checked");
+        if (selectedInstitute.length > 0) {
+            InstituteID = selectedInstitute.val();
+
+        }
+
+        var SubjectID = "";
+        $('#subDiv').find('.Checkbox').find("input[type='checkbox']:checked").each(function () {
+            SubjectID = SubjectID + (this).value + ',';
+        });
+
+        //$('.Subject:checked').map(function (_, el) {
+        //    return $(el).val();
+        //    alert($(el).val());
+        //}).get();
+        //$(".option").find('#subDiv').click(function () {
+        //    //  alert("Handler for .click() called.");
+        //});
+
+        //$('#subDiv').on("click", function () {
+
+
+
+        //    alert();
+
+
+        //});
+        var pageno = parseInt($('#hdnPageNoLeft').val());
+        var totalRows = 0;
+       
+       // var pageno = parseInt($('#hdnPageNo').val());
+        $.ajax({
+            type: "POST",
+            url: "/Home/SearchBookByCatStrInsSub_ByOFFSET",
+            dataType: "json",
+            async: false,
+            timeout: 3000,
+            success: function (data) {
+                console.log(data);
+                $('#prevNext').remove();
+               // $('#loaderDiv2').hide();
+                if (data != null && data.NotebookFormList != null && data.NotebookFormList.length > 0) {
+                    var count = data.NotebookFormList.length;
+                    if (count > 0) {
+                        var html = "";
+                        $.each(data.NotebookFormList, function (i, item) {
+                            totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                            var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                            var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            var Student = (item["StudentName"] != null ? item["StudentName"] : "");
+                            var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            var Teacher = (item["TeachersName"] != null ? item["TeachersName"] : "");
+                            var TeacherSubstring = (Teacher.length > 15 ? item["TeachersName"].substr(0, 15) : Teacher);
+                            var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            var Chapter = (item["ChapterName"] != null ? item["ChapterName"] : "");
+                            var ChapterSubstring = (Chapter.length > 15 ? item["ChapterName"].substr(0, 15) : Chapter);
+                            var Id = (item["Id"] != null ? item["Id"] : "");
+                            // alert(Id);
+                            // html += '<div class="col-md-3"><div class="detail"><a href="/Home/NoteBookDetails?BookId="><p class="index_book" title="' + item["SubjectId"] + '" >' + SubjectSubstring + '</p></a><ul><li title="' + item["ChapterName"] + '">Chapter: <span>' + ChapterSubstring + '</span></li><li title="' + item["SubjectId"] + '">Subject: <span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Student: <span>' + StudentSubstring + '</span></li><li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School: <span>' + CollegeSubstring + '</span></li></ul><br /><p><button type="button" class="btn btn-primary ">All Properties</button>&nbsp;<a href="#">Download</a><!-- <button type="button" class="btn btn-info dwnld-btn">Download</button>--></p></div></div>';
+                            //html += '<div class="col-md-3 col-sm-4"> <div class="imgdiv"><div class="imgagediv"><a href="Notebook_Pages?BookId=' + Id + '"><img src="/Content/images/notebooks.png"></div><div class="textdiv"><div class="main1"> <div class="main2"><div  title="' + item["SubjectId"] + '" >' + SubjectSubstring50 + '</div></a></div></div></div> </div><div class="list-of-students"><ul><li title="' + item["SubjectId"] + '">Subject:<span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Submitter:<span>' + StudentSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + CollegeSubstring + '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' + Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+                            //html += '<div class="col-md-3 col-sm-4 article"> <div class="imgdiv"><div class="imgagediv"><a href="Notebook_Pages?BookId=' + Id + '"><img src="/Content/images/notebooks.png"></div><div class="textdiv"><div class="main1"> <div class="main2"><div style="word-break:break-all"  title="' + item["SubjectId"] + '" >' + Subject + '</div></a></div></div></div> </div><div class="list-of-students"><ul><li style="word-break:break-all" title="' + item["SubjectId"] + '">Subject:<span>' + Subject + '</span></li><li style="word-break:break-all" title="' + item["StudentName"] + '">Submitter:<span>' + Student + '</span></li><li style="word-break:break-all" class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + College + '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' + Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+
+                            html += ' <div style="clear: both;"><div class="col-md-4 col-sm-4 col-xs-5" style="padding-right:5px;"><div class="m-book-media"><img src="/Content/images/notebooks.png"><div class="m-photo-caption"><div class="table"><div class="table-cell" title="' +
+                                item["SubjectId"] + '"><a href="/Home/Notebook_Pages?BookId=' + Id + '">' + Subject + '</a></div></div></div></div></div><div class="col-md-8 col-sm-8 col-xs-7" style="padding-left:0px;"><div class="m-book-detail"><ul><li  title="' +
+                                item["SubjectId"] + '"><span class="m-head" ><b>Subject : </b></span><span class="m-text">' + Subject + '</span> </li><li title="' + item["StudentName"] + '"><span class="m-head"><b>Submitter : </b></span><span class="m-text">' +
+                                Student + '</span> </li><li title="' + item["CollegeId"] + '"><span class="m-head"><b>Coaching/College/School : </b></span><span class="m-text">' + College + '</span></li></ul></div><div class="m-btn"><a href="/Home/NoteBookDetails?BookId=' +
+                                Id + '" class="btn btn-primary all-propety">All properties</a><a href="javascript:;" class="btn btn-success download-btn" onclick="Downloadbook(' + Id + ')">Download</a></div> </div></div>';
+
+
+
+
+                            //$('.Streams').on("change", function () {
+
+                            //    SearchBooksByCatInsStrSub();
+                            //});
+                            //// $('.Streams').eq(0).prop('checked', true).trigger('change');
+                            //$('.Institute').on("change", function () {
+
+
+                            //    SearchBooksByCatInsStrSub();
+
+
+                            //});
+                            ////$('.Institute').eq(0).prop('checked', true).trigger('change');
+                            //$('.Category').on("change", function () {
+
+                            //    //StreamBind($(this).val());                                     
+
+                            //});
+                            //$('.Subject').on("change", function () {
+
+                            //   //SearchBooksByCatInsStrSub();
+
+                            //});
+                            //$('.Category').eq(0).prop('checked', true).trigger('change');
+                        });
+                    }
+                   
+                    var newText = '<div id="prevNext"><a id="prev" href="javascript:;" class="btn btn-success pull-left my-pre" onclick="Notebook_LoadByLeftSearch(&#39;prev&#39;)" disabled>previous</a><a id="next" href="javascript:;" class="btn btn-success pull-right my-nex" onclick="Notebook_LoadByLeftSearch(&#39;next&#39;)">Next</a></div>';
+                  
+                    
+
+                    
+                    $('#NotebookDetailNew').html(html);
+                    $('#NotebookDetailNew').after(newText);
+                    if ((totalRows - (pageno * 5)) <= 5) {
+                        $('#next').attr('disabled', 'disabled');
+                    }
+                    if (pageno > 0) {
+                        $('#prev').removeAttr('disabled');
+                    }
+                    $('#NotebookDetail').hide();
+                    $('#NotebookDetailNew').remove('No Records Found');
+                    $('#NotebookDetailNew').removeClass('NotebookStyle');
+                    equalheight('.main .article');
+
+
+                }
+                else {
+                    $('#NotebookDetail').hide();
+                    $('#NotebookDetailNew').html('No Records Found');
+                    $('#NotebookDetailNew').addClass('NotebookStyle');
+                }
+                // .addClass('.alert alert-danger')
+
+
+
+            },
+            failure: function (msg) {
+                //$/('#loaderDiv2').hide();
+                console.log(msg);
+
+            },
+            data: {
+                "pageno":pageno,
+                "CategoryID": CategoryID,
+                "StreamID": StreamID,
+                "InstituteID": InstituteID,
+                "SubjectID": SubjectID
+
+
+            },
+        });
+
+
+    }
+
+    function SearchBooksByName(Text) {
+
+        var pageno = parseInt($('#hdnPageNo').val());
+        
+        var totalRows = 0;
+        $.ajax({
+            type: "POST",
+            url: "/Home/SearchBooksByNameAndroid",
+            dataType: "json",
+            async: false,
+            timeout: 3000,
+            success: function (data) {
+                console.log(data);
+                $('#prevNext').remove();
+                if (data != null && data.NotebookFormList != null && data.NotebookFormList.length > 0) {
+                    var html = "";
+                    $.each(data.NotebookFormList, function (i, item) {
+                        totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                        var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                        var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                        var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                        var Student = (item["StudentName"] != null ? item["StudentName"] : "");
+                        // var Student = (item["FirstName"] != null ? item["FirstName"] : "") + ' ' + (item["LastName"] != null ? item["LastName"] : "");
+                        var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                        var Teacher = (item["TeachersName"] != null ? item["TeachersName"] : "");
+                        var TeacherSubstring = (Teacher.length > 15 ? item["TeachersName"].substr(0, 15) : Teacher);
+                        var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                        var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                        var Chapter = (item["ChapterName"] != null ? item["ChapterName"] : "");
+                        var ChapterSubstring = (Chapter.length > 15 ? item["ChapterName"].substr(0, 15) : Chapter);
+                        var Id = (item["Id"] != null ? item["Id"] : "");
+                        //   html += '<div class="col-md-3"><div class="detail"><a href="/Home/NoteBookDetails?BookId="><p class="index_book" title="' + item["SubjectId"] + '" >' + SubjectSubstring + '</p></a><ul><li title="' + item["ChapterName"] + '">Chapter: <span>' + ChapterSubstring + '</span></li><li title="' + item["SubjectId"] + '">Subject: <span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Student: <span>' + StudentSubstring + '</span></li><li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School: <span>' + CollegeSubstring + '</span></li></ul><br /><p><button type="button" class="btn btn-primary">All Properties</button>&nbsp;<a href="#" class="btn btn-success">Download</a><!-- <button type="button" class="btn btn-info dwnld-btn">Download</button>--></p></div></div>';
+                        // html += '<div class="col-md-3 col-sm-4 article"><div class="imgdiv"><div class="imgagediv"><a href="Notebook_Pages?BookId=' + Id + '"><img src="/Content/images/notebooks.png"><div class="textdiv"><div class="main1"><div class="main2"><div style="word-break:break-all"  title="' + item["SubjectId"] + '" >' + Subject + '</div></a></div></div></div></div></div><div class="list-of-students"><ul><li style="word-break:break-all" title="' + item["SubjectId"] + '">Subject:<span>\'' + Subject + '\'</span></li><li style="word-break:break-all" title="' + item["StudentName"] + '">Submitter:<span>' + Student + '</span></li><li style="word-break:break-all" class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + College + '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' + Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+
+                        html += '<div style="clear: both;"><div class="col-md-4 col-sm-4 col-xs-5" style="padding-right:5px;"><div class="m-book-media"><img src="/Content/images/notebooks.png"><div class="m-photo-caption"><div class="table"><div class="table-cell" title="' + item["SubjectId"] + '"><a href="/Home/Notebook_Pages?BookId=' + Id + '">' + Subject + '</a></div></div></div></div></div><div class="col-md-8 col-sm-8 col-xs-7" style="padding-left:5px;"><div class="m-book-detail"><ul><li  title="' + item["SubjectId"] + '"><span class="m-head" ><b>Subject : </b></span><span class="m-text">' + Subject + '</span> </li><li title="' + item["StudentName"] + '"><span class="m-head"><b>Submitter : </b></span><span class="m-text">' + Student + '</span> </li><li title="' + item["CollegeId"] + '"><span class="m-head"><b>Coaching/College/School : </b></span><span class="m-text">' + College + '</span></li></ul></div><div class="m-btn"><a href="/Home/NoteBookDetails?BookId=' + Id + '" class="btn btn-primary all-propety">All properties</a><a href="javascript:;" class="btn btn-success download-btn" onclick="Downloadbook(' + Id + ')">Download</a> </div> </div></div>';
+
+                    });
+                    var newText = '<div id="prevNext"><a id="prev" href="javascript:;" class="btn btn-success pull-left my-pre" onclick="Notebook_LoadByTextSearch(&#39;prev&#39;)" disabled>previous</a><a id="next" href="javascript:;" class="btn btn-success pull-right my-nex" onclick="Notebook_LoadByTextSearch(&#39;next&#39;)">Next</a></div>';
+                    
+                   
+                    $('#NotebookDetailNew').html(html);
+                    $('#NotebookDetailNew').after(newText);
+                    if ((totalRows - (pageno * 5)) <= 5) {
+                        $('#next').attr('disabled', 'disabled');
+                    }
+                    if (pageno > 0) {
+                        $('#prev').removeAttr('disabled');
+                    }
+                    $('#NotebookDetail').hide();
+                    $('#NotebookDetailNew').remove('No Records Found');
+                    $('#NotebookDetailNew').removeClass('NotebookStyle');
+                    equalheight('.main .article');
+                }
+                else {
+                    $('#NotebookDetail').hide();
+                    $('#NotebookDetailNew').html('No Records Found');
+                    $('#NotebookDetailNew').addClass('NotebookStyle');
+                }
+                // .addClass('.alert alert-danger')
+
+
+
+            },
+            failure: function (msg) {
+                console.log(msg);
+
+            },
+            data: { "Text": Text, "PageNo": pageno },
+        });
+
+    }
+
+    function Downloadbook(id, SubjectName) {
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/Downloadbook",
+            dataType: "json",
+            async: false,
+            timeout: 3000,
+            success: function (data) {
+                //console.log(data);
+
+                if (data != null && data.length > 0) {
+                    var html = "";
+                    // var BookTitle = "";
+                    $.each(data, function (i, item) {
+
+                        if (item["IsHtml"] == true || item["IsHtml"] == 'true') {
+                            html += item["PageImage"];
+                            // BookTitle += item["SubjectId"];
+                        }
+                        else {
+                            html += "<img src='" + item["PageImage"] + "' />";
+                        }
+
+                    });
+                    console.log(html);
+                    var ExportData = "<Center>" + html + "</Center>";
+                    // var subject = BookTitle
+
+                    $("#export-content").html(ExportData);
+                   // $('#loaderDiv2').show();
+                    //if ($.browser.mozilla == true) {
+                    window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                    $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                        $('#export-content').removeClass('updateEditor');
+                        $('#export-content').removeClass('notebookEditor');
+                        $('#export-content').css('background-color', 'white');
+
+                        setTimeout(function () {
+
+                            html2canvas($('#export-content'), {
+
+                                onrendered: function (canvas) {
+                                    var img = canvas.toDataURL('image/jpeg');
+
+                                    var doc = new jsPDF();
+
+                                    doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                                    //$('#loaderDiv2').hide();
+                                    //$("#export-content").html('');
+                                    $("#export-content").hide();
+
+
+
+
+                                    doc.save(SubjectName + ".pdf");
+
+                                    location.reload(true);
+                                }
+                            });
+                        }, 500);
+                    });
+
+
+                    //}
+                    //else {
+                    //    $('#export-content').removeClass('updateEditor');
+                    //    $('#export-content').removeClass('notebookEditor');
+                    //    $('#export-content').css('background-color', 'white');
+
+                    //    html2canvas($('#export-content'), {
+                    //        onrendered: function (canvas) {
+                    //            var img = canvas.toDataURL('image/jpeg');
+
+                    //            var doc = new jsPDF();
+
+                    //            doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                    //            $('#loaderDiv2').hide();
+                    //            //$("#export-content").html('');
+                    //            //$("#export-content").hide();
+                    //            doc.save("ChapterContent.pdf");
+                    //            $('#export-content').addClass('updateEditor');
+
+                    //        }
+                    //    });
+                    //}
+
+                }
+
+
+
+                else {
+
+                }
+
+
+
+
+            },
+            failure: function (msg) {
+                console.log(msg);
+
+            },
+            data: { "BookId": id },
+        });
+        //$.get("/Home/SearchBooksByName", { "Text": Text }, function (data) {
+        //    var getResponse = JSON.parse(data);
+
+        //    //if (getResponse.Status == 1) {
+        //    //    $('#msgspan').html("");
+        //    //    return false;
+        //    //} else {
+        //    //    $('#msgspan').html("");
+        //    //}
+        //});
+    }
+</script>
+
+<script>
+    function NoteBook_Load(type) {
+       // $('#loaderDiv2').show();
+        var pageno = parseInt($('#hdnPageNo').val());
+        // alert(pageno);
+        if (type == "prev") {
+            if (pageno > 0) {
+                pageno -= 1;
+                $('#next').removeAttr('disabled');
+            }
+            else {
+                alert("You are on very first page.");
+
+            }
+        }
+        else {
+            if (type == "next") {
+                pageno += 1;
+                $('#prev').removeAttr('disabled');
+            }
+        }
+        if (pageno == 0) {
+            $('#prev').attr('disabled', 'disabled');
+        }
+        $('#hdnPageNo').val(pageno);
+        var totalRows = 0;
+        $.ajax({
+            type: 'Post',
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/NoteBook_Load_By_Next_Prev",
+            data: "{'pageno':'" + pageno + "'}",
+            async: false,
+            success: function (data) {
+                console.log(data);
+                var jsonData = JSON.parse(data);
+                if (jsonData.Status == "1") {
+                    var count = jsonData.NotebookFormList.length;
+                    if (count > 0) {
+                        var html = "";
+                        for (var i = 0; i < count; i++) {
+                            var item = jsonData.NotebookFormList[i];
+                            totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                            var Subject = (item["SubjectName"] != null ? item["SubjectName"] : "");
+                            var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            var FirstName = (item["FirstName"] != null ? item["FirstName"] : "");
+                            var LastName = (item["LastName"] != null ? item["LastName"] : "");
+                            var Student = FirstName + ' ' + LastName;
+                            var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            // var Teacher = (item["TeachersName"] != null ? item["TeachersName"] : "");
+                            // var TeacherSubstring = (Teacher.length > 15 ? item["TeachersName"].substr(0, 15) : Teacher);
+                            var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            //var Chapter = (item["ChapterName"] != null ? item["ChapterName"] : "");
+                            //var ChapterSubstring = (Chapter.length > 15 ? item["ChapterName"].substr(0, 15) : Chapter);
+                            var Id = (item["NotebookId"] != null ? item["NotebookId"] : 0);
+
+
+                            html += '<div style="clear: both;"><div class="col-md-4 col-sm-4 col-xs-5" ><div class="m-book-media"><img src="/Content/images/notebooks.png"><div class="m-photo-caption"><div class="table"><div class="table-cell" title="' +
+                                Subject + '"><a href="/Home/Notebook_Pages?BookId=' + Id + '">' + SubjectSubstring50 + '</a></div></div></div></div></div><div class="col-md-8 col-sm-8 col-xs-7" ><div class="m-book-detail"><ul><li  title="' +
+                                Subject + '"><span class="m-head" ><b>Subject : </b></span><span class="m-text">' + SubjectSubstring50 + '</span> </li><li title="' + Student + '"><span class="m-head"><b>Submitter : </b></span><span class="m-text">' + Student + '</span> </li><li title="' +
+                                College + '"><span class="m-head"><b>Coaching/College/School : </b></span><span class="m-text">' + College + '</span></li></ul></div><div class="m-btn"><a href="/Home/NoteBookDetails?BookId=' +
+                                Id + '" class="btn btn-primary all-propety">All properties</a><a href="javascript:;" class="btn btn-success download-btn" onclick="Downloadbook(' + Id + ')">Download</a></div> </div></div>';
+
+                        }
+
+                        if ((totalRows - (pageno * 5)) <= 5) {
+                            $('#next').attr('disabled', 'disabled');
+                        }
+                        if (pageno > 0) {
+                            $('#prev').removeAttr('disabled');
+                        }
+                        $('#NotebookDetailNew').html(html);
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').remove('No Records Found');
+                        $('#NotebookDetailNew').removeClass('NotebookStyle');
+                        equalheight('.main .article');
+                    }
+                    else {
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').html('No Records Found');
+                        $('#NotebookDetailNew').addClass('NotebookStyle');
+                    }
+                }
+            },
+            error: function () {
+            },
+            complete: function () {
+                //$('#loaderDiv2').hide();
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('.zoomTarget').click(function () {
+            $('#zoomModal').modal('show');
+            //$('#loaderDiv2').show();
+           
+           
+            var $obj = $(this);
+            $('.modal-body').html($(this).html());
+            if ($obj.find('input[type=radio]').length > 0) {
+                var oldvalue = $obj.find('input[type=radio]:checked').val();
+                $('.modal-body').find('input[value="' + oldvalue + '"]').prop('checked', true);
+              
+            }
+            else if ($obj.find('input[type=checkbox]').length > 0) {
+                $('.modal-body').find('input[type=checkbox]').prop('checked', false);
+                $obj.find('input[type=checkbox]:checked').each(function () {
+
+                    var oldvalue = $(this).val();
+                    $('.modal-body').find('input[value="' + oldvalue + '"]').prop('checked', true);
+
+                });
+               
+            }
+            $('.modal-body').find('input').removeAttr('class');
+            $('.modal-body').find('ul').addClass('ZoomUL');
+            $('.modal-body').find('input').removeAttr('disabled');
+            //$('#loaderDiv2').hide();
+           
+            $('.modal-body').find('input').change(function () {
+               // $('#loaderDiv2').show();
+                $('#zoomModal').modal('hide');
+             
+                 
+                 
+                    
+                    var elementClass = '';
+                    if ($('.modal-body').find('input[type=radio]').length > 0) {
+                        var newvalue = $('.modal-body').find('input[type=radio]:checked').val();
+                        elementClass = $('.modal-body').find('input[type=radio]:checked').attr('class');
+                        $obj.find('input[value="' + newvalue + '"]').prop('checked', true);
+                        $obj.find('input[value="' + newvalue + '"]').trigger('change');
+                    }
+                    else if ($('.modal-body').find('input[type=checkbox]').length > 0) {
+                        $obj.find('input[type=checkbox]').prop('checked', false);
+                        $('.modal-body').find('input[type=checkbox]:checked').each(function () {
+
+                            var newvalue = $(this).val();
+                            $obj.find('input[value="' + newvalue + '"]').prop('checked', true);
+                            $obj.find('input[value="' + newvalue + '"]').trigger('change');
+                        });
+
+                    }
+                    $('.modal-body').html('');
+                    //if (elementClass == 'Country' || elementClass == 'State' || elementClass == 'City') {
+                    //    $obj.find('.' + elementClass + ':checked').trigger('change');
+                    //}
+                    //else {
+                       
+                    //    //SearchBooksByCatInsStrSub();
+                    //}
+                   
+                   // $('#loaderDiv2').hide();
+               
+            });
+        });
+    });
+</script>
+
+
+<script>
+    function Notebook_LoadByTextSearch(type) {
+        var pageno = parseInt($('#hdnPageNo').val());
+        // alert(pageno);
+        if (type == "prev") {
+            if (pageno > 0) {
+                pageno -= 1;
+                $('#next').removeAttr('disabled');
+            }
+            else {
+                alert("You are on very first page.");
+
+            }
+        }
+        else {
+            if (type == "next") {
+                pageno += 1;
+                $('#prev').removeAttr('disabled');
+            }
+        }
+        if (pageno == 0) {
+            $('#prev').attr('disabled', 'disabled');
+        }
+        $('#hdnPageNo').val(pageno);
+        SearchBooksByName($('#Text').val());
+    }
+</script>
+
+<script>
+    function Notebook_LoadByLeftSearch(type) {
+        var pageno = parseInt($('#hdnPageNoLeft').val());
+        // alert(pageno);
+        if (type == "prev") {
+            if (pageno > 0) {
+                pageno -= 1;
+                $('#next').removeAttr('disabled');
+            }
+            else {
+                alert("You are on very first page.");
+
+            }
+        }
+        else {
+            if (type == "next") {
+                pageno += 1;
+                $('#prev').removeAttr('disabled');
+            }
+        }
+        if (pageno == 0) {
+            $('#prev').attr('disabled', 'disabled');
+        }
+        $('#hdnPageNoLeft').val(pageno);
+        SearchBooksByCatInsStrSub();
+    }
+</script>

@@ -1,0 +1,521 @@
+﻿@model StudentAppWebsite.Models.QuestionModel
+@{
+    ViewBag.Title = "Index_Android";
+  
+   
+     
+}
+<link href="~/Content/css/responsive-androide.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<center><span id="messagespan" style="font-size: large; color: green;"></span></center>
+
+<style>
+    .ques
+    {
+        font-weight: bold;
+        color: #504E4E;
+        font-size: 16px;
+    }
+
+    .ans
+    {
+        font-weight: 400;
+        color: #000;
+        font-size: 14px;
+    }
+
+    .content2
+    {
+        position: relative;
+        top: 13px;
+        left: 0;
+    }
+</style>
+
+
+<div class="col-md-12">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+</div>
+<div id="main">
+
+    <section class="category">
+        <div class=" container-fluid">
+            <div class="row">
+                <div class="col-md-4" style="background: #F3FEFE;">
+                    @* <button type="button" style="width: 45%; border-radius: 0px;" class="btn btn-success btn-fnt16" id="ask">Ask Question</button>
+                    &nbsp;
+    <button type="button" style="width: 45%; border-radius: 0px;" class="btn btn-success btn-fnt16" id="invite">Invite</button>*@
+                </div>
+            </div>
+            <!--<div class="row" id="sc_keyboard" style="display:block; position:fixed; bottom:0px; background:#e8e8e8;z-index:3;"></div>-->
+
+            <div class="row">
+                @*  <div class="col-md-8 text-center text-content">
+                    <h4>Page-2:-</h4>
+                    <small>
+                        <br>
+                    </small>
+                </div>*@
+                <div id="QuestionMainDiv">
+                    <div id="questionsDiv" class="col-md-4" style="overflow: auto; background: #F3FEFE; border: 1px solid rgb(211, 242, 242);">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: none">
+            <textarea id="dy" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;dy&lt;/div&gt;'</textarea>
+            <textarea id="dx" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;dx&lt;/div&gt;'</textarea>
+            <textarea id="dy1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;△y&lt;/div&gt;'</textarea>
+            <textarea id="dx1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;△x&lt;/div&gt;'</textarea>
+            <textarea id="dy2" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;∂y&lt;/div&gt;'</textarea>
+            <textarea id="dx2" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;∂x&lt;/div&gt;'</textarea>
+            <textarea id="dy3" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;δy&lt;/div&gt;'</textarea>
+            <textarea id="dx3" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;δx&lt;/div&gt;'</textarea>
+        </div>
+    </section>
+    @*  <div class="main-inner" >
+        <div class="content2" style="display:none" id="DivEditor">
+            <div class="col-md-4" >
+                @using (Html.BeginForm("SaveQuestion", "Home", new { }, FormMethod.Post, new { @id = "questionForm" }))
+                {
+                    { Html.RenderAction("_Editor_Android", new { userId = ViewBag.UserId, pageId = ViewBag.PageId }); }
+                }
+            </div>
+            <div class="col-md-8"></div>
+            
+        </div>
+    </div>*@
+
+
+
+</div>
+
+<meta charset="utf-8" />
+
+
+@*<button type="button" id="btnInvite" data-toggle="modal" data-target="#invitePopup" style="display: none;"></button>
+<div class="modal fade" id="invitePopup" tabindex="-1" role="dialog" aria-labelledby="chooseLanguageLabel" aria-hidden="true">
+   
+    @using (Html.BeginForm("SendInvitation", "Home", FormMethod.Post, new { id = "invitationForm" }))
+    {
+        <input type="hidden" id="PageType" name="PageType" value="Android" />
+         <input type="hidden" id="usersId" name="usersId" value="" />
+        <input type="hidden" id="MailTo" name="MailTo" value="" />
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;"><span data-name="FeedBackmessage">Invite your friend</span>
+                        <button id="btnClose" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                    </h4>
+                </div>
+                <div class="modal-body clearfix">
+                    <label class="col-md-2">Email</label>
+                   <div class="col-md-8"> @Html.TextBoxFor(m=>m.Email,new {@class="form-control"})</div>
+                   
+                   <div class="col-md-2"> <button type="Submit" id="submitInvite" class="btn btn-primary">Invite</button></div>
+                    <div class="col-md-offset-2 col-md-8"> @Html.ValidationMessageFor(m=>m.Email)</div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
+
+
+
+
+<script>
+
+    var datahtml = "";
+    $(document).ready(function () {
+        $('.navigation').remove();
+        Calculator.init();
+        Calculator.initKeyboard();
+        Calculator.attachEvent();
+        $('#questionsDiv').load("/Home/_QuestionList?userId=@ViewBag.UserId&pageId=@ViewBag.PageId");
+        //$('#submitQuestion').click(function () {
+
+        //    $('#DivEditor').hide();
+        //    $('.container-fluid').show();
+        //});
+
+
+        $('#cancel').click(function () {
+
+
+            $('#DivEditor').hide();
+            // $('#QuestionMainDiv').show();
+            $('#editor').html('');
+            $('#hdnQuestionID').val(0);
+            $('.container-fluid').show();
+        });
+        $('#invite').on('click', function () {
+            $('#btnInvite').click();
+        });
+        $('#submitInvite').on('click', function () {
+            $('#MailTo').val($('#Email').val());
+            $('#usersId').val('@ViewBag.UserId');
+            $('#invitationForm').submit();
+        });
+        $('.delete').click(function () {
+            if (parseInt('@ViewBag.UserId') == 0) {
+                alert('Please login to continue');
+                return false;
+            }
+            del = true;
+            $.ajax({
+                type: 'POST',
+                url: '/Home/DeleteQuestions_ById',
+                data: '{ "Id" : "' + $(this).attr('data-id') + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data) {
+                        $('#messagespan').html('Record deleted successfuly!!');
+                        $('#questionsDiv').load("/Home/_QuestionList?userId=@ViewBag.UserId&pageId=@ViewBag.PageId&bookId=" + $('#BookId').val() + "");
+                        window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                        $(".ques").css("word-break", "break-all !important");
+                        //$.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+
+
+                        //});
+
+                    }
+                    else {
+                        $('#messagespan').html('error in request please try again later');
+
+                    };
+                }
+            });
+        });
+    });
+
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        $('#questionsDiv').find('.textbox').removeClass('textbox');
+        $('.reply').click(function () {
+            $('#questionsDiv').addClass('short');
+            $('.content2').show();
+            $('#editor').html('');
+            $('#hdnQuestionID').val($(this).attr('data-id'));
+            //
+            $('.container-fluid').hide();
+            $('.content').removeClass("content").addClass("content2");
+            $(".pop").show();
+
+
+            window.location.href = "/Home/Editor_Android?UserId=@ViewBag.UserId&PageId=@ViewBag.PageId&QuestionId=" + $(this).attr('data-id') + "";
+            //
+
+        });
+
+        @*$('.delete').click(function () {
+            if (parseInt('@ViewBag.UserId') == 0) {
+                alert('Please login to continue');
+                return false;
+            }
+            del = true;
+            $.ajax({
+                type: 'POST',
+                url: '/Home/DeleteQuestions_ById',
+                data: '{ "Id" : "' + $(this).attr('data-id') + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data) {
+
+
+                        $('#messagespan').html('Record deleted successfuly!!');
+                        $('#questionsDiv').load("/Home/_QuestionList?userId=@ViewBag.UserId&pageId=@ViewBag.PageId&bookId=" + $('#BookId').val() + "");
+                        window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                        $(".ques").css("word-break", "break-all !important");
+                        //$.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+
+                        //    $(".ques").css("word-break", "break-all !important");
+                        //});
+                    }
+                    else {
+                        $('#messagespan').html('error in request please try again later');
+
+                    };
+                }
+            });
+        });*@
+        $("#questionsDiv").scrollTop($("#questionsDiv")[0].scrollHeight);
+        var $target = $('html,body');
+        $target.animate({ scrollTop: $target.height() }, 1000);
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $(".pop").show();
+        //$("#editable").click(function () {
+        //    $(".pop").show();
+        //    $('.container-fluid').hide();
+        //    $('.content').removeClass("content").addClass("content2");
+
+        //});
+        //$("body").click(function (e) {
+
+        //    if (e.target.className == "pop" || e.target.className == "control" || $(e.target).parents().hasClass("pop") || $(e.target).parents().hasClass("control") || e.target.id == "editable" || e.target.className == "KeyboardKey" || $(e.target).parents().hasClass("KeyboardKey")) {
+        //        $(".pop").show();
+        //        $('.container-fluid').hide();
+        //        $('.content').removeClass("content").addClass("content2");
+
+        //    }
+        //    else {
+        //        $(".pop").hide();
+        //    }
+
+        //});
+        $('#ask').click(function () {
+            $('.container-fluid').hide();
+            $('.content2').show();
+            $('#editor').html('');
+            $('#hdnQuestionID').val(0);
+
+            $(".pop").show();
+            //
+        });
+
+
+
+    });
+</script>
+
+
+<script src="/Scripts/bililiteRange.js"></script>
+<script src="/Scripts/jquery.sendkeys.js"></script>
+<script>
+
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        $('.EditQuestion').click(function () {
+            //alert($('.ques').html());
+            //$('#questionsDiv').addClass('short');
+            //$('.content').show();
+
+            window.location.href = "/Home/Editor_Android?UserId=@ViewBag.UserId&PageId=@ViewBag.PageId&QuestionId=" + $(this).attr('data-id') + "&Editques=" + true + "";
+            var html = $('.' + $('#EditableId').val() + '').html();
+            console.log(html);
+            $('#editor').html(html);
+           
+            //
+            //var el = $('#editor').get(0);
+            //var elemLen = el.value.length;
+            //el.selectionStart = elemLen;
+            //el.selectionEnd = elemLen;
+            //el.focus();
+            //
+
+            $('#hdnEditQuestion').val(true);
+            $('#hdnQuestionID').val($('#EditableId').val());
+            // $('#btnClose').click();
+
+        });
+
+
+       @* $('#questionsDiv').find('.textbox').removeClass('textbox');
+        $('.reply').click(function () {
+            if (parseInt('@Model.UserId') == 0) {
+                alert('Please login to continue');
+                return false;
+            }
+            $('#questionsDiv').addClass('short');
+            $('.content').show();
+            $('#editor').html('');
+            $('#hdnQuestionID').val($(this).attr('data-id'));
+
+        });*@
+
+        // var LastHeight = $('#questionsDiv').css('height');
+
+        //$(function () {
+        //    var prevHeight = $('#questionsDiv').height();
+        //    $('#questionsDiv').attrchange({
+        //        callback: function (e) {
+        //            var curHeight = $(this).height();
+        //            if (prevHeight !== curHeight) {
+
+        //                $("#questionsDiv").scrollTop($("#questionsDiv")[0].scrollHeight);
+        //                var $target = $('html,body');
+        //                $target.animate({ scrollTop: $target.height() }, 1000);
+
+        //            }
+        //        }
+        //    }).resizable();
+        //});
+
+
+        //$("#questionsDiv").resize(function () {
+        //    alert();
+        //    $("#questionsDiv").scrollTop($("#questionsDiv")[0].scrollHeight);
+        //    var $target = $('html,body');
+        //    $target.animate({ scrollTop: $target.height() }, 1000);
+        //});
+    });
+
+
+
+
+    function DeleteQuestion() {
+        var del = false;
+        if (parseInt('@ViewBag.UserId') == 0) {
+            alert('Please login to continue');
+            return false;
+        }
+        else {
+
+            if (confirm('Are you sure to delete?')) {
+
+                alert();
+                del = true;
+                var Questionid = $('#EditableId').val();
+                $.ajax
+                    ({
+                        type: 'POST',
+                        url: '/Home/DeleteQuestions_ById',
+                        data: '{ "Id" : "' + Questionid + '"}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+
+                            if (data) {
+
+
+                                $('#messagespan').html('Record deleted successfuly!!');
+                                $('#questionsDiv').load("/Home/_QuestionList?userId=@ViewBag.UserId&pageId=@ViewBag.PageId&bookId=" + $('#BookId').val() + "");
+                                window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                                $(".ques").css("word-break", "break-all !important");
+                                //$.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+
+                                //    $(".ques").css("word-break", "break-all !important");
+                                //});
+                            }
+                            else {
+                                $('#messagespan').html('error in request please try again later');
+
+                            }
+                        }
+                    });
+                } else {
+                    alert('false');
+                    return false;
+                }
+
+            //var answer = confirm("Are you sure to delete?");
+            //if (answer) {
+            }
+
+
+        }
+
+        function backspaceFunction() {
+            if ($("#editor").text().length == 0) {
+                $('#editor').empty();
+            }
+            $("#editor").sendkeys("{backspace}");
+        }
+        function Addtofriendlst(obj) {
+            if (parseInt('@ViewBag.UserId') == 0) {
+                alert('Please login to continue');
+                return false;
+            }
+            var QuestionerId = $(obj).attr("data-questionerid");
+            if (QuestionerId == '@ViewBag.UserId.ToString()')
+                alert('You can not add yourself to your friend list!');
+            else {
+                $.ajax({
+                    url: '/Home/FriendList_InsertUpdate?InvitedId=' + QuestionerId + '&PageId=' +@ViewBag.PageId +'',
+                data: {},
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    if (jsonData.Status == 1) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.Status == '1') {
+                            if (jsonData.result == '-10')
+                                alert('Already added to your friendList.');
+                            else {
+                                if (jsonData.result == '-100')
+                                    alert('This user have blocked you.You can not add this user to your friend List.');
+                                else
+                                    alert('Invitation send successfully.');
+                            }
+
+                        }
+                        else {
+                            alert('Some error occured during sending invitation!');
+                        }
+                    }
+                },
+                error: function () { },
+                complete: function () { }
+
+            })
+        }
+
+
+    }
+
+</script>
+<script src="~/Scripts/jquery.form.js"></script>
+
+<script>
+    $(function () {
+
+
+        var userID = $('#hdnUserID').val();
+        var pageID = $('#hdnPageID').val();
+        var question = $('#hdnQuestionID').val();
+
+        $('#questionForm').ajaxForm({
+            beforeSend: function () {
+                if ($('#data').html().length == 0) {
+                    return false;
+                }
+            },
+            success: function (data) {
+                if (data.success) {
+                    $('#hdnQuestionID').val();
+                    $('#hdnEditQuestion').val(false);
+                    $('#messagespan').html('Record Saved successfuly!!');
+                    $('#questionsDiv').load("/Home/_QuestionList?userId=" + userID + "&pageId=" + pageID + "");
+                    $('.container-fluid').show();
+                    $('.content2').hide();
+                }
+                else {
+                    $('#messagespan').html('error in request please try again later');
+
+                };
+            },
+            error: function () {
+
+            },
+            complete: function (xhr) {
+
+
+
+            }
+        });
+
+    });
+    function bindQuestion(id) {
+        $('#EditableId').val(id);
+
+
+    }
+
+</script>

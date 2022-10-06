@@ -1,0 +1,38 @@
+<ion-header>
+</ion-header>
+
+<ion-content >
+  <page-layout></page-layout>
+
+  <div class="mainWrapper send-message">
+    <div class="wallet">
+      <h3 class="panel-title">  <i class="fa fa-envelope" aria-hidden="true"></i> Message  </h3>
+    </div>
+
+    <div class="searchFilters" >
+      <div id="searchfilters">
+        <div class="sendmessage">
+          <div><input type="text" placeholder="Please Enter Mobile Number" id="mobileno" class="mobileno"></div>
+          <div id="addtext" class="same">
+            <a href="#" class="btn-wallet" (click)="Add()"> + Add New  </a>
+          </div>
+        </div>
+        <div class="sendmessage">
+        <div><button type="button" class="btn-wallet" *ngIf="addmore==true" (click)="removeElement()">remove</button></div>
+        </div>
+      </div>
+      <div class="m-b-15" style="    margin-top: 31px;">
+        <a href="#" class="btn-wallet" (click)="SendSMS()"> Send</a>  <a href="#" class="btn-wallet">Cancel </a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="float-width m-t-10">
+        <p>Message</p>
+        <div class="msg">{{message}}</div>
+      </div>
+    </div><!--end of searchFilters-->
+
+  </div>
+
+</ion-content>
+
+

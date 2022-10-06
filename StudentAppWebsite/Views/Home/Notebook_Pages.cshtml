@@ -1,0 +1,190 @@
+﻿@model List<StudentAppWebsite.Models.NotebookForm>
+    @{
+        ViewBag.Title = "Notebook_Pages";
+    }
+
+    <style>
+        .panel .panel-heading {
+            padding-bottom: 0px !important;
+        }
+
+            .panel .panel-heading > .panel-title {
+                padding-top: 12px;
+            }
+    </style>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">List of Pages</h3>
+
+                        <div id="AddPages">
+                            <div class="text-right action-icon">
+
+                                @if (ViewBag.BookCreator != Int32.Parse(Session["UserId"].ToString()))
+                                {
+
+                                }
+                                else
+                                {
+                                    <a modelcount="@Model.Count" href="javascript:;" id="deletepage" style="border-radius: 22px; margin-top: 0;" onclick="removePage(@ViewBag.BookId)">
+                                        <img src="~/Content/images/icon1.png" />
+                                    </a>
+
+                                    <a href="/User/AddNotebook?BookId=@ViewBag.BookId" class="" style="border-radius: 22px;">
+                                        <img src="~/Content/images/icon2.png" />
+                                    </a>
+                                }
+                            </div>
+
+                        </div>
+
+                        @* <div class="panel-options">
+                                <a href="#" data-toggle="panel">
+                                    <span class="collapse-icon">&ndash;</span>
+                                    <span class="expand-icon">+</span>
+                                </a>
+                                <a href="#" data-toggle="remove">&times;
+                                </a>
+                            </div>*@
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group btn-breadcrumb" id="breadcrumbs">
+                                <a href="/Home/Home" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
+                                <a href="" class="btn btn-warning">@ViewBag.SubjectName</a>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="bradcrumb-main clearfix">
+                            <ul id="breadcrumbs">
+                                <li><a href="/Home/Home">Home</a></li>
+                                <li><a href="">@ViewBag.SubjectName</a></li>
+
+                            </ul>
+                        </div>*@
+                    <div class="col-md-12">
+
+                        <div class="alert alert-danger" id="Danger" style="display: none"></div>
+
+                        <div class="alert alert-success" id="Success" style="display: none"></div>
+
+
+                    </div>
+                    <div class="panel-body ntbk">
+                        <div class="row">
+                            @for (int item = 0; item < Model.Count; item++)
+                            {
+                                <div class="col-md-3 col-sm-4 col-xs-12 ">
+                                    <div class="notebook own2 clearfix">
+
+                                        @if (Model[item].PageType == "Video")
+                                        {
+                                            <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">
+                                                @*<img width="150" height="195" src="~/Content/images/Video-Icon-PNG-Pic.png" />*@
+                                                <img width="150" height="195" src="@((Model[item].ScreenShot != null && Model[item].ScreenShot != "") ? @Model[item].ScreenShot : "~/Content/images/Video-Icon-PNG-Pic.png")" />
+                                            </a>
+                                        }
+                                        else if (Model[item].PageType == "Audio")
+                                        {
+                                            <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">
+                                                <img width="150" height="195" src="~/Content/images/Audio.png" />
+                                            </a>
+                                        }
+                                        else if (Model[item].PageType == "Text")
+                                        {
+                                            <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">
+                                                <img width="150" height="195" src="@((Model[item].ScreenShot != null && Model[item].ScreenShot != "") ? @Model[item].ScreenShot : "http://securecamp.co/notebooks/images/page_icon2.png")" />
+                                            </a>
+                                        }
+                                        else if (Model[item].PageType == "Image")
+                                        {
+                                            <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">
+                                                <img width="150" height="195" src="@(Model[item].PageImage)">
+                                            </a>
+                                        }
+                                        @*<a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">@* onclick="Selectpage(this)"*@
+                                        @*<img width="150" height="195" src="@((Model[item].IsHtml == true) ? ((Model[item].ScreenShot != null && Model[item].ScreenShot != "") ? Model[item].ScreenShot : "http://securecamp.co/notebooks/images/page_icon2.png") : (Model[item].PageImage))">*@
+                                        @*</a>*@
+                                        <p class="f9 text-center">
+                                            <input type="checkbox" class="chkbx" data-id="@Model[item].Id" />
+                                            <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">Page-@Model[item].PageNumber [@(Model[item].ModifiedDate != null ? Model[item].ModifiedDate : Model[item].CreatedDate)]</a>
+                                        </p>
+                                        @*@(item + 1)*@
+
+
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+   @* function Selectpage(obj) {
+        if ($(obj).parent().hasClass('Selected')) {
+            //alert("/Home/Index?PageId=" + ($(obj).attr('data-pageid')) + "&BookId=@ViewBag.BookId");
+            window.location.href = "/Home/Index?PageId=" + ($(obj).attr('data-pageid')) + "&BookId=@ViewBag.BookId"
+        }
+        else {
+            $('.Selected').removeClass('Selected');
+            ($(obj).parent().addClass('Selected'));
+            $('#deletepage').show();
+        }
+    }*@
+
+    function removePage(BookId) {
+        //var pageId = $('.Selected').find('a').attr('data-pageid');
+        var ids = "";
+        if ($('input:checked').length <= 0) {
+            alert('Please select at least one page.');
+            return false;
+        }
+
+        $('input:checked').each(function () {
+            ids += $(this).attr('data-id') + ',';
+        });
+
+        var response = confirm('Are you sure to delete page?');
+        if (response == true) {
+            $.ajax({
+                type: 'Get',
+                data: {},
+                url: '/Home/RemovePagesById?pageids=' + ids + "&BookId=" + BookId,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    if (jsonData.Status == "1") {
+                        $('input:checked').each(function () {
+                            $(this).parent().parent().remove();
+                        });
+                        $('#Success').html('Page deleted successfully.');
+                        $('#Success').show().fadeOut(5000);
+                    }
+                    else {
+                        $('#Danger').html('Error in Page deletion.');
+                        $('#Danger').show().fadeOut(5000);
+                    }
+                },
+                error: function () { },
+                complete: function () {
+                    if ($('.notebook').length <= 0)
+                        $('#deletepage').hide();
+                },
+            });
+        }
+        else {
+            return false;
+        }
+
+    }
+    </script>

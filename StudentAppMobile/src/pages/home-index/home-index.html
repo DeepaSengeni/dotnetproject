@@ -1,0 +1,396 @@
+
+
+<style>
+  .span {
+    display: inline-block !important;
+  }
+</style>
+
+
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+
+
+    <!--End of mainHeader-->
+    <div class="container-student">
+      <div class="mainWrapper add-page add-notebok">
+        <!--End of PageList-->
+        <div class="pageButon"><a href="#"><ion-icon name="home" class="glyphicon glyphicon-home"></ion-icon> {{subjectname}}</a></div>
+        <div class="m-t-20 textCenter linkContain">
+          <button type="button" class="btn btn-blue">Page no : {{pageno}}  </button>
+          <button type="button" class="btn btn-blue">{{startdate}}</button>
+          <button type="button" class="btn btn-blue">Download</button>
+          <button type="button" class="btn btn-blue" *ngIf="edit==true" (click)="Editpage()">Edit </button>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="updateEditor content_aria" id="contentArea">
+
+      </div>
+      <div class="question-div">
+        <div class="pageimg" *ngFor="let item of pagecontentdata">
+          <div class="contentareadiv" style="width: 100%;word-wrap: break-word;background-repeat: repeat-y; font-size: 18px;margin: 15px 0px;padding: 15px 15px 15px;background-color: #c1c1c18a; border-radius: 10px;">
+            <div class='audioContainer' style='display: table; width: 100%; height: 100%;' *ngIf="item.PageType == 'Audio'">
+              <div style='display: table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>
+                <audio controls>
+                  <source src="{{url}}{{item.PageImage}}" type="audio/mpeg">
+                  Your browser does not support the audio element.
+
+                </audio>
+              </div>
+            </div>
+
+            <div class='videoContainer' *ngIf="item.PageType == 'Video'">
+              <div style='text-align: center;'>
+                <video id="myVideo" controls autoplay style="width:100%" src="{{url}}{{item.PageImage}}">
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+            </div>
+
+            <img src="{{item.PageImage}}" *ngIf="item.PageType == 'Image'" />
+
+            <div id="pagetext" *ngIf="item.PageType == 'Text'"><div [innerHTML]="item.PageImage"></div></div>
+
+          </div>
+
+          <div class="m-t-20 textCenter linkContain">
+            <button type="button" class="btn btn-blue" (click)="insertLike()"><ion-icon name="thumbs-up"></ion-icon></button>
+            <button type="button" class="btn btn-blue">Ask Question</button>
+            <button type="button" class="btn btn-blue" (click)="SendInvitation()"><ion-icon name="heart"></ion-icon> Invite</button>
+            <button type="button" class="btn btn-blue" (click)="Sendmessage()">Send Message </button>
+            <ion-icon type="button" name="call" class="btn btn-blue"></ion-icon>
+            <button type="button" class="btn btn-blue">Like({{likes}}) </button>
+            <button type="button" class="btn btn-blue">view({{views}})</button>
+            <button type="button" class="btn btn-blue"><ion-icon name="share"></ion-icon></button>
+          </div>
+        </div>
+        <div class="que-custom">
+          <!--<div class="all-que">
+      <div class="all-que-wrap">
+        <div class="text-center m-r-20">
+          <img src="images/images.jpg">
+          <a href="#">Rohit Singh</a>
+        </div>
+        <div style="width:70%;">lorem ipsum dolor sit amet</div>
+      </div>
+      <div class="commt"><p><ion-icon name="calendar"></ion-icon> 17-09-2018 20:35:09</p> </div>
+      <div class="commt"><a href="#">  <ion-icon name="share-alt"></ion-icon> Answer</a> <a href="#"> <ion-icon name="person-add"></ion-icon> Add to friend list</a> </div>
+    </div>-->
+          <div class="all-que" *ngFor="let item of QuestionsList">
+            <div>
+              <div class="all-que-wrap">
+                <div class="text-center m-r-20">
+                  <img src="{{url}}{{item.ProfileImage}}">
+                  <div style="width: 14px; margin-left: -20px; display: inline-block">
+
+                    <img *ngIf="item.IsOnline == 1" src="assets/images/online.png" style="height:10px;width: 10px;position: relative;left: -27px;">
+                    <img *ngIf="item.IsOnline != 1" src="assets/images/offline.png" style="height:10px;width: 10px;position: relative;left: -27px;">
+                  </div>
+                  <div (click)="profile(item.UserId)">
+                    {{item.FirstName}} {{item.LastName}}
+                  </div>
+                </div>
+                <div class="ques {{item.ID}}" style="width:70%;" [innerHtml]="item.QuestionTitle">
+
+                </div>
+              </div>
+              <div class="commt">
+                <ion-icon name="calendar"></ion-icon>
+                <span *ngIf="item.ModifiedDate != null">{{item.ModifiedDate}}</span>
+                <span *ngIf="item.ModifiedDate == null">{{item.CreatedDate}}</span>
+              </div>
+              <div class="commt">
+                <a href="#">
+                  <span (click)="Reply(item.ID)">
+                    <ion-icon name="share-alt"></ion-icon> Answer
+                  </span>
+                </a>
+                <a href="#">
+                  <ion-icon name="person-add"></ion-icon> Add to friend list
+                </a>
+              </div>
+              <div class="all-que" *ngFor="let subItem of filterAnswersOfQuestions(item.ID)">
+                <div style="padding-left: 25px; padding-top: 10px;">
+                  <div class="all-que-wrap">
+                    <div class="text-center m-r-20">
+                      <img src="{{subItem.AnswerImage}}">
+                      <div (click)="profile(item.UserId)">
+                        {{subItem.FirstName}} {{subItem.LastName}}
+                      </div>
+                    </div>
+                    <div class="ques {{subItem.Id}}" style="width:70%;" [innerHtml]="subItem.Answer">
+                    </div>
+                  </div>
+                  <div class="commt">
+                    <ion-icon name="calendar"></ion-icon>
+                    <span *ngIf="subItem.ModifiedDate != null">{{subItem.ModifiedDate}}</span>
+                    <span *ngIf="subItem.ModifiedDate == null">{{subItem.CreatedDate}}</span>
+                  </div>
+                  <div class="commt">
+                    <div (click)="profile(item.UserId)">
+                      <span (click)="ReplyToAnswer(item.ID, subItem.Id)">
+                        <ion-icon name="share-alt"></ion-icon> Answer
+                      </span>
+                    </div>
+                    <div (click)="profile(item.UserId)">
+                      <ion-icon name="person-add"></ion-icon> Add to friend list
+                    </div>
+
+                  </div>
+                  <div class="all-que" *ngFor="let sub2Item of filterReplyToAnswersOfQuestions(item.ID)">
+                    <div style="padding-left: 25px; padding-top: 10px;">
+                      <div class="all-que-wrap">
+                        <div class="text-center m-r-20">
+                          <img src="{{sub2Item.AnswerImage}}">
+                          <div (click)="profile(sub2Item.UserId)">
+                            {{sub2Item.FirstName}} {{sub2Item.LastName}}
+                          </div>
+                        </div>
+                        <div class="ques {{sub2Item.Id}}" style="width:70%;" [innerHtml]="sub2Item.Answer">
+                        </div>
+                      </div>
+                      <div class="commt">
+                        <ion-icon name="calendar"></ion-icon>
+                        <span *ngIf="sub2Item.ModifiedDate != null">{{sub2Item.ModifiedDate}}</span>
+                        <span *ngIf="sub2Item.ModifiedDate == null">{{sub2Item.CreatedDate}}</span>
+                      </div>
+                      <div class="commt">
+                        <div (click)="profile(sub2Item.UserId)">
+                          <span (click)="ReplyToAnswer(item.ID, sub2Item.Id)">
+                            <ion-icon name="share-alt"></ion-icon> Answer
+                          </span>
+                        </div>
+                        <div (click)="profile(sub2Item.UserId)">
+                          <ion-icon name="person-add"></ion-icon> Add to friend list
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div id="demo">
+        </div>
+        <!--<form (ngSubmit)="SubmitData()">
+          <div>
+            <div class="notebookEditor" id="editorDiv" style="margin-top:16px;">
+              <div contenteditable="false">
+              </div>
+         
+            </div>
+
+            <div class="imageContainer" style="display: table; width: 100%; height: 100%;">
+              <div style="display:table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;">
+                <img id="mainpageimg" style="display:inline-block;max-width: 1024px;" src="" />
+              </div>
+            </div>
+
+            <div class="text-right">
+              <button ion-button type="submit" class="btn btn-primary" style="margin-top: 5px;padding:6px 6px;" id="submitQuestion">Post</button>
+              <button type="button" class="btn btn-primary" style="margin-top: 5px;padding:6px  5px;" id="cancel">Cancel</button>
+            </div>
+
+            <div class="popx">
+              <div class="arrow_box"></div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="btn-area1">
+                    <a href="javascript:;" class="top-button" onclick="return defaultScientific_KeyBoard();">Scientific Keyboard</a>
+                    <a href="javascript:;" class="top-button" onclick="gotoSpecialSymbols();">Special symbols</a>
+                    <a href="javascript:;" class="top-button" onclick="return gotoQWETY();">Qwerty Keyboard</a>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="btn-area2 clearfix">
+                  <div class="col-md-12" id="keyboadArea">
+                    <span data-attr="1" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img1.png" />
+                      </a>
+                    </span>
+                    <span data-attr="2" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/im2.png" />
+                      </a>
+                    </span>
+                    <span data-attr="3" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/im3.png" />
+                      </a>
+                    </span>
+                    <span data-attr="4" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img4.png" />
+                      </a>
+                    </span>
+                    <span data-attr="5" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img5.png" />
+                      </a>
+                    </span>
+                    <span data-attr="6" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img6.png" />
+                      </a>
+                    </span>
+                    <span data-attr="7" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/im7.png" />
+                      </a>
+                    </span>
+                    <span data-attr="8" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img8.png" />
+                      </a>
+                    </span>
+                    <span data-attr="9" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img9.png" />
+                      </a>
+                    </span>
+                    <span data-attr="10" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img10.png" />
+                      </a>
+                    </span>
+                    <span data-attr="11" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img11.png" />
+                      </a>
+                    </span>
+                    <span data-attr="12" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img12.png" />
+                      </a>
+                    </span>
+                    <span data-attr="80" data-text="∪" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img13.png" />
+                      </a>
+                    </span>
+                    <span data-attr="80" data-text="∩" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img14.png" />
+                      </a>
+                    </span>
+                    <span data-attr="15" class="KeyboardKey">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/img15.png" />
+                      </a>
+                    </span>
+
+                  </div>
+                  <table class="ruled prec-form-char" style="display: none;">
+                    <tr>
+                      <td>
+                        <textarea id="powerTextbox">\\html'&lt;div contenteditable="true" class="textbox text"&gt;x&lt;/div&gt;'</textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <textarea id="mathSrc1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox"&gt;&lt;/div&gt;'</textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div id="mathTgt1"></div>
+                      </td>
+                    </tr>
+                  </table>
+                  <div style="float: right; position: absolute; bottom: -12px; right: 8px;display:none" id="commonKeys">
+                    <span class="KeyboardKey" data-attr="80" data-text="&nbsp;">
+                      <a href="javascript:;" class="button">
+                        <img src="assets/custom/KeyboardIcons/images/space.png" />
+                      </a>
+                    </span>
+                    <span class="KeyboardKey">
+                      <a href="javascript:;" class="button" onclick="backspaceFunction()">
+                        <img src="assets/custom/KeyboardIcons/images/special character/bksp.png" />
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: none">
+              <textarea id="dy" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;dy&lt;/div&gt;'</textarea>
+              <textarea id="dx" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;dx&lt;/div&gt;'</textarea>
+              <textarea id="dy1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;△y&lt;/div&gt;'</textarea>
+              <textarea id="dx1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;△x&lt;/div&gt;'</textarea>
+              <textarea id="dy2" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;∂y&lt;/div&gt;'</textarea>
+              <textarea id="dx2" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;∂x&lt;/div&gt;'</textarea>
+              <textarea id="dy3" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;δy&lt;/div&gt;'</textarea>
+              <textarea id="dx3" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;δx&lt;/div&gt;'</textarea>
+            </div>
+            <div id="question" style="border:1px solid #000;min-height:50px;background-color:#fff;display:none;"></div>
+      
+
+
+          </div>
+        </form>-->
+      </div>
+
+
+      <div id="adDiv1" *ngIf="viewad==false">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 add-div ad-main-large">
+              <div id="sponDetailDiv1" class="clearfix">
+                <div class="col-md-3 clearfix">
+                  <div class="sponser">
+                    <label>Advertisement</label>
+                  </div>
+                </div>
+                <div class="col-md-9 clearfix">
+                  <div class="">
+                    <div class="ad-div">
+                      <a href="/User/adcreation">Create Ad</a>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <a href="javascript:;" onclick="hideAd();" class="close-pos">
+                    <i class="fa fa-times close-icn" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="row res" style="cursor: pointer;" (click)="clickonads()">
+                <div class="col-md-5 col-sm-7 col-xs-12">
+                  <div id="SlideshowImages1" class="fadein"><img src="{{url}}{{Adimage}}" style="width: 200px; height: 200px;"></div>
+                  <div id="videoDiv1" align="center" class="embed-responsive embed-responsive-16by9" >
+                  </div>
+                </div>
+                <div class="col-md-7 col-sm-5 col-xs-12 res2" style="font-size: 16px;word-wrap:break-word;">
+                  <label class="res-lbl" id="headlineLbl1" style="display: block;font-size:20px;font-weight:600;">{{Adheading}}</label>
+                  <label class="res-lbl" id="descriptionLbl1" style="display: block;">{{Addescription}}</label>
+
+                  <hr style="border-top: 1px dotted gray;">
+                  <label class="res-lbl" style="display: block;"><span id="urlLbl1">{{AdUrl}}</span></label>
+                  <label class="res-lbl" style="display: block; color:red;"><span id="priceSpan1">0</span> Rs.</label>
+                  <label class="res-lbl" style="display: block;height: 73px;">Call <span id="MobileNumberSpan1" style="font-size:18px;color:green">{{AdMobileno}}</span> <span style="color:green;display:none;">Fastest delivery +Lowest price+Return within 7 days.</span></label>
+                  <label class="res-lbl" style="display: block; color:red;"><a href="http://notetor.com/Account/SubmitterRegistration?returnUrl=%2f">www.Notetor.com</a> </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End of mainWrapper-->
+    </div>
+  </div>
+</ion-content>
+<!--<script>
+  document.getElementById('hdnPageID').value = 1;
+</script>-->

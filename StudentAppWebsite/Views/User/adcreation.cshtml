@@ -1,0 +1,1635 @@
+﻿@model StudentAppWebsite.Models.AdvertisementModels
+@{
+    ViewBag.Title = "adcreation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Plugin/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="~/Content/css/uploadifive.css" rel="stylesheet" />
+<script src="~/Content/js/jquery.uploadify.js"></script>
+<script type="text/javascript">
+    updateList = function () {
+        var input = document.getElementById('fileuploader');
+        var output = document.getElementById('viewfilenameall');
+        var children = "";
+        for (var i = 0; i < input.files.length; ++i) {
+            children += '<li>' + input.files.item(i).name + '</li>';
+        }
+        output.innerHTML = '<ul>' + children + '</ul>';
+       
+    }
+    
+</script>
+<script>
+    function updatefileList() {
+        alert("Hello! I am an alert box!!");
+
+        $("#ulList").empty();
+        var fp = $("#fileuploader");
+        var lg = fp[0].files.length; // get length
+        var items = fp[0].files;
+        var fragment = "";
+
+        if (lg > 0) {
+            for (var i = 0; i < lg; i++) {
+                var fileName = items[i].name; // get file name
+                var fileSize = items[i].size; // get file size 
+                var fileType = items[i].type; // get file type
+
+                // append li to UL tag to display File info
+                fragment += "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
+            }
+
+            $("#ulList").append(fragment);
+        }
+    });
+</script>
+<style>
+    label {
+        font-weight: normal;
+        padding-left: 10px;
+    }
+
+    .option-boxes {
+        background: #fff;
+        border: 1px solid #cbdede;
+        overflow: hidden;
+        margin-bottom: 10px;
+        padding: 6px;
+        overflow: auto;
+        height: 200px;
+        width: 385px;
+        margin-left: 224px;
+        font-size: 13px;
+    }
+
+    .top-check {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .paddng .top-check label {
+        padding-right: 5px;
+    }
+
+    .dropdown-menu {
+        margin-top: 2px !important;
+    }
+
+    #selectedCountryCode {
+        left: 424px;
+        position: absolute;
+        top: 9px;
+    }
+
+    .text {
+        background-color: rgb(255, 255, 255)
+    }
+
+    @@media (max-width:768px) {
+        .option-boxes {
+            padding: 6px;
+            width: 90%;
+            margin-left: 0;
+            font-size: 13px;
+            margin: 0 auto 10px;
+        }
+    }
+
+
+    .ui-widget-header {
+        background: #cedc98;
+        border: 1px solid #DDDDDD;
+        color: #333333;
+        font-weight: bold;
+    }
+</style>
+<div style="position: fixed; height: 100%; width: 100%; top: 0; left: 0; z-index: 5; display: none; background-color: rgba(225,225,225,0.5); text-align: center" id="pageloader">
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#MyForm").on("submit", function () {
+            $("#pageloader").fadeIn();
+        });//submit
+    });
+</script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@*@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}*@
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #004293;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #004293;
+  color: white;
+}
+</style>
+<div class="paddng">
+    @using (Html.BeginForm("adcreation", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "MyForm" }))
+    {
+        <div class="container-fluid signupform">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Ad Creation Form</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                            }
+                            else if (TempData["ErrorMessage"] != null)
+                            {
+
+                                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                            }
+                            <div id="progressbar"></div>
+                            <br />
+                            <div class="form-horizontal ">
+                                <input type="hidden" name="hdnCategoryIds" id="hdnCategoryIds" value="" />
+                                @Html.HiddenFor(model => model.adcreationId)
+                                @Html.HiddenFor(model => model.pageId)
+                                @Html.HiddenFor(model => model.bookId)
+
+                                <fieldset>
+                                    <legend>
+                                        Ad Creation
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" style="padding-top: 0px;">Add Attachment</label>
+                                                <div class="col-sm-10">
+                                                    <span class="top-check">
+                                                        <label>
+                                                            <input type="radio" checked class="ra" style="display:none" name="uploadtype" value="1" onclick="HtmlViewer.selectMultiple(1);" />@*Single Pic*@
+                                                        </label>
+                                                        <label>
+                                                            <input id="multiple" type="radio" class="ra" style="display:none" name="uploadtype" checked="checked" value="2" onclick="HtmlViewer.selectMultiple(2);" />@*Multiple Pic*@
+                                                        </label>
+                                                        <label>
+                                                            <input id="audio" type="radio" class="ra" style="display:none" name="uploadtype" value="4" onclick="HtmlViewer.selectMultiple(4);" />@*Audio Clip*@
+                                                        </label>
+                                                        <label class="video-clip">
+                                                            <input type="radio" class="ra " style="display:none" name="uploadtype" value="3" onclick="HtmlViewer.selectMultiple(3);" />@*Video Clip*@
+                                                        </label>
+                                                        <a id="upfile1" style="cursor:pointer"><i class="fa fa-paperclip text-blue text-left" style="font-size:20px"></i></a>
+                                                        <input type="file" accept=".jpg,.jpeg,.png,.mp3,.mp4,.wmv,.3gp" id="fileuploader" multiple="multiple" name="fileuploader" onchange="updateList(); CehckFileType(this); " style="width: 100%; display:none" /><span class="fileupld"></span> 
+                                                        <br />
+                                                        <ul id="ulList">
+                                                        </ul>
+                                                        <a href="#" id="more" style="display:none">Add More</a><br />
+                                                        <script>
+                                                            $("#upfile1").click(function () {
+                                                                $("#fileuploader").trigger('click');
+                                                            });
+                                                        </script>
+                                                        @* <span style="color: red;">@Html.ValidationMessage("fileuploader")</span>*@
+                                                        <span id="viewfilename" style=""></span>
+                                                        <span id="viewfilenameall" style=""></span>
+                                                        <input type="hidden" id="hdnFilePath" name="hdnFilePath" />
+                                                    </span>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" style="font-size: 20px; font-weight: 600;">Headline for Ad</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(model => model.headline, new { @class = "form-control", placeholder = "Headline for Ad" })
+                                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.headline)</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Features</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(model => model.Features, new { @class = "form-control", placeholder = "Features" })
+                                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.Features)</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Description</label>
+                                                    <div class="col-sm-10">
+                                                        @Html.TextAreaFor(model => model.description, new { @class = "form-control", placeholder = "Description" })
+                                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.description)</div>
+                                                        <label id="CharLength"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">Advertiser's Email Id</label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(model => model.AdvertiserEmialId, new { @class = "form-control", placeholder = "Advertiser's Email Id" })
+                                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.AdvertiserEmialId)</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">Advertiser's Mobile Number</label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(model => model.AdvertiserMobileNumber, new { @class = "form-control", placeholder = "Advertiser's Mobile Number" })
+                                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.AdvertiserMobileNumber)</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">Price of Product/Services</label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(model => model.price, new { @class = "form-control groupOfTexbox", placeholder = "Price of Product" })
+                                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.price)</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">WebSite/URL Address</label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(model => model.urladdress, new { @class = "form-control", placeholder = "URL Address" })
+                                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.urladdress)</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Target user information</legend>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Country</label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(model => model.Country, new SelectList(Model.Countrylist, "ID", "CountryName"), "--Select Country--", new { @class = "form-control", placeholder = "Country" })
+
+                                                    <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.Country)</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">State</label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(model => model.state, new SelectList(Model.statelist, "ID", "StateName"), "--Select State--", new { @class = "form-control", placeholder = "State" })
+                                                    <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.state)</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">City</label>
+                                                <div class="col-sm-8">
+                                                    <select class="js-example-basic-multiple form-control" multiple="multiple" data-tags="true">
+                                                    </select>
+                                                </div>
+                                                @*<div class="option-boxes zoomTarget">
+                            <ul id="subDiv" style="padding-left: 10px;list-style-type: none;">
+                                <li id="City" style="margin-top: -17px;">
+                                    <div class="Checkbox">
+                                        <label>
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>*@
+                                            </div>
+
+
+                                            <input type="hidden" id="selid" />
+                                            <input type="hidden" id="demo" name="citydata" />
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Start Date</label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(model => model.startdate, new { @class = "form-control", placeholder = "Start Date", id = "startdate", onchange = "calculateTotalDays();" })
+                                                    <div class="text-danger">@Html.ValidationMessageFor(model => model.startdate)</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">End Date</label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(model => model.enddate, new { @class = "form-control", placeholder = "End Date", id = "enddate", onchange = "calculateTotalDays();" })
+                                                    <div class="text-danger">@Html.ValidationMessageFor(model => model.enddate)</div>
+                                                    <span style="display: block;">
+                                                        <input type="hidden" id="availabilityHdn" />
+                                                        <label class="control-label" style="color: red; text-align: left;" id="showAvailabilityMessageLbl"></label>
+                                                        <table>
+                                                            <tbody id="avatbl">
+                                                            </tbody>
+                                                        </table>
+                                                        <span id="availabilitySpan"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-4 col-md-3">
+                                                    <input type="button" class="btn btn-primary cls res-xs" onclick="CheckAvailability();" style="display:none" value="Check Availability" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="">
+                                            <div class="col-md-6">
+                                            </div>
+                                            <div class="col-md-2">
+                                            </div>
+                                            <div class="col-md-4 col-sm-8 cls">
+                                                @*<div class="form-group">
+                            <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Before Conversion</label>
+                            <div class="col-sm-6">
+                                <label class="control-label total" id="totalAmLbl" style="display: none;">0</label>
+                                <label class="control-label total">
+                                    <span class="selectedCountryCode" aria-hidden="true"></span>
+                                    <span id="beforeconvert">0</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Conversion Rate</label>
+                            <div class="col-sm-6">
+                                <label class="control-label total" id="totalAmLbl" style="display: none;">0</label>
+                                <label class="control-label total">
+                                    <span aria-hidden="true">1</span>
+                                    <span class="selectedCountryCode" aria-hidden="true"></span>
+                                    <span> = </span>
+                                    <span class="conversion">0</span>
+                                    <span class="usercountry"></span>
+                                </label>
+                            </div>
+                        </div>*@
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Amount per Day</label>
+                                                    <div class="col-sm-6">
+                                                        <label class="control-label total" id="totalAmountLbl" style="display: none;">0</label>
+                                                        <label class="control-label total">
+                                                            <span class="selectedCountryCode" aria-hidden="true"></span>
+                                                            @*<span id="usercountrycode"></span>*@
+                                                            <span id="showTotalAmountLbl">0</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Number of Days</label>
+                                                    <div class="col-sm-6">
+                                                        <label class="control-label total" id="numberOfDaysLbl">0</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Total Amount</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="hidden" name="amountPaidHdn" id="amountPaidHdn" />
+
+                                                        <label class="control-label total">
+                                                            <span class="selectedCountryCode" aria-hidden="true"></span>
+                                                            @*<span class="usercountry" aria-hidden="true" id="usercountry" style="margin-left: -8px;"></span>*@
+                                                        </label>
+                                                        <label class="control-label total" id="amountPaidLbl" name="amountPaidLbl">0</label>
+                                                        <br />
+                                                        <span class="Adforcurcode AdforCurrencyCode" aria-hidden="true" style="display:none"></span><label class="control-label total" id="amountUsd" style="display:none">0</label>
+                                                        <input type="hidden" id="itnw" name="itnw" />
+                                                        <input type="hidden" value="rup" id="rup" name="finalsubmitamount" />
+                                                        <input type="hidden" name="hamountUsd" id="hamountUsd" value="ha" />
+                                                        <input type="hidden" name="finalamount" id="SeenAmount" />
+                                                        <input type="hidden" id="ConvertCurr_Code" name="countryIsocode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-6 col-sm-4 pull-right">
+                                                <span id="spanmsg" class="col-md-8 text-danger" style="font-size: 16px;margin-top: 18px;">
+                                                </span>
+                                              
+                                               
+                                                <span id="myBtn"  class="btn btn-primary pull-right col-md-4 text-center">Continue to Pay</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Trigger/Open The Modal -->
+                               
+
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="close">&times;</span>
+                                            <h2>Payment Confirmation</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Amount per Day</label>
+                                                <div class="col-sm-6">
+                                                    <label class="control-label total" id="totalAmountLblpaynow" style="display: none;">0</label>
+                                                    <label class="control-label total">
+                                                        <span class="selectedCountryCode" aria-hidden="true"></span>
+                                                        @*<span id="usercountrycodepaynow"></span>*@
+                                                        <span id="showTotalAmountLblpaynow">0</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Number of Days</label>
+                                                <div class="col-sm-6">
+                                                    <label class="control-label total" id="numberOfDaysLblpaynow">0</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Total Amount:</label>
+                                                <div class="col-sm-6">
+                                                    <input type="hidden" name="amountPaidHdnpaynow" id="amountPaidHdnpaynow" />
+
+                                                    <label class="control-label total">
+                                                        <span class="selectedCountryCode" aria-hidden="true"></span>
+                                                        @*<span class="usercountry" aria-hidden="true" id="usercountry" style="margin-left: -8px;"></span>*@
+                                                    </label>
+                                                    <label class="control-label total" id="amountPaidLblpaynow" name="amountPaidLblpaynow">0</label>
+                                                    <br />
+                                                    <span class="Adforcurcode AdforCurrencyCode" aria-hidden="true" style="display:none"></span><label class="control-label total" id="amountUsdpaynow" style="display:none">0</label>
+                                                    <input type="hidden" id="itnwpaynow" name="itnwpaynow" />
+                                                    <input type="hidden" value="rup" id="ruppaynow" name="finalsubmitamountpaynow" />
+                                                    <input type="hidden" name="hamountUsdpaynow" id="hamountUsdpaynow" value="ha" />
+                                                    <input type="hidden" name="finalamountpaynow" id="SeenAmountpaynow" />
+                                                    <input type="hidden" id="ConvertCurr_Codepaynow" name="countryIsocodepaynow" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <h3>
+                                                <input type="button" class="btn btn-primary pull-right col-md-4" style="margin-top:10px;" id="btnsubclick" value="@ViewBag.ButtonText" />
+                                                <input type="submit" class="btn btn-primary pull-right col-md-4" style="margin-top:10px; display:none " id="btnsub" value="@ViewBag.ButtonText" />
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: rgb(255, 255, 255); text-align: center; display: none;" id="loaderDiv2">
+        <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+            <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+        </div>
+    </div>
+</div>
+<input type="hidden" id="sumofallcitypricing" />
+<input type="hidden" id="itnew" />
+<input type="hidden" id="countrycurrencyisocode" />
+<input type="hidden" id="conversion" />
+
+
+
+
+<input type="hidden" id="ConvertCurr_Rate" />
+<script src="~/Plugin/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/Scripts/jquery.validate.min.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Content/js/jquery.maskedinput.min.js"></script>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC-kow6z2nA8oyn24wQw1Yw6H6CjYqswT0&libraries=places&language=en-AU"></script>
+<script src="https://cdn.rawgit.com/ilopX/jquery-ajax-progress/master/dist/jquery.ajax-progress.js"></script>
+<script>
+
+
+    var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {});
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'long_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        console.log(place);
+
+        console.log(place.address_components);
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            console.log(addressType);
+
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+                console.log(val);
+            }
+        }
+    });
+</script>
+
+
+<script>
+
+    var orgfilePath = [];
+    $(document).ready(function () {
+
+        setTimeout(function () {
+
+            dataget();
+        }, 3000);
+        $('#btnsubclick').click(function () {
+
+            if ($('#hdnFilePath').val() == 'FileUploading' || $('#hdnFilePath').val() == "[\"\"]") {
+                alert('Please Wait file is uploading.');
+                return false;
+            }
+            else if ($('#hdnFilePath').val() == '') {
+                alert('Please select atleast one file image/video.');
+                return false;
+            }
+           else if ($('#headline').val() == '') {
+                alert('Please fill headline.');
+                return false;
+            }
+            else if ($('#Features').val() == '') {
+                alert('Please fill Features.');
+                return false;
+            }
+            else if ($('#description').val() == '') {
+                alert('Please fill description.');
+                return false;
+            }
+            else if ($('#AdvertiserEmialId').val() == '') {
+                alert('Please fill AdvertiserEmialId.');
+                return false;
+            }
+            else if ($('#price').val() == '') {
+                alert('Please fill price.');
+                return false;
+            }
+            else if ($('#AdvertiserMobileNumber').val() == '') {
+                alert('Please fill MobileNumber.');
+                return false;
+            }
+            else if ($('#urladdress').val() == '') {
+                alert('Please fill urladdress');
+                return false;
+            }
+            else {
+                CheckAvailability();
+            }
+
+        });
+
+        $('#Country').on("change", function () {
+            dataget();
+            StateBind();
+        });
+
+        $('#state').on("change", function () {
+            CityBind();
+        });
+
+        $('#City').on("change", function () {
+
+        });
+
+        $('#CategoryName').on("change", function () {
+
+            AppentCategoryPrice();
+        });
+        $('#state').trigger('change');
+        $('#AdvertiserMobileNumber').mask("9999999999");
+
+
+        $('#MyForm').submit(function () {
+
+            console.log($("#MyForm").valid());
+            if ($("#MyForm").valid()) {
+                if ('@ViewBag.ButtonText' == "Update") {
+                    if (parseInt('@ViewBag.AdType') == parseInt($('input[name=uploadtype]:checked').val()))
+                        return true;
+                }
+                else {
+
+                   if ($('#hdnFilePath').val() == 'FileUploading' || $('#hdnFilePath').val() == "[\"\"]") {
+                        alert('Please Wait file is uploading.');
+                        return false;
+                    }
+                    else if ($('#hdnFilePath').val() == '') {
+                        alert('Please select atleast one file image/video.');
+                        return false;
+                    }
+                     else if ($('#amountPaidLbl').text() == '0') { 
+                        alert('Please fill Start Date and End Date.');
+                        return false;
+                    }
+
+                    else if ($('#availabilityHdn').val() == '0') {
+                        alert('Space not available for selected categories/set dates.');
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+            }
+
+        });
+
+        $('.ra').change(function () {
+            $('#fileuploader').val('');
+            if ($('.ra:checked').val() === '2') {
+                $('#more').Show();
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').attr('multiple', 'multiple');
+                $("#fileuploader").attr("accept", ".jpg,.jpeg,.png,.wmv,.ogg,.webM,.mp4,.mp3,.3gp");
+                $('#viewfilename').html('');
+            }
+            else if ($('.ra:checked').val() === '3') {
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').removeAttr('multiple');
+                $("#fileuploader").attr("accept", ".wmv,.ogg,.webM,.mp4");
+                $('.fileupld').html('');
+                $('#more').hide();
+                $('#viewfilename').html('');
+            }
+            else if ($('.ra:checked').val() === '4') {
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').removeAttr('multiple');
+                $("#fileuploader").attr("accept", ".mp3,.mp4");
+                $('.fileupld').html('');
+                $('#more').hide();
+                $('#viewfilename').html('');
+            }
+            else {
+                $('.fileupld').html('');
+                $('#more').hide();
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').removeAttr('multiple');
+                $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
+                $('#viewfilename').html('');
+            }
+        });
+
+        var today = new Date();
+        var startDate = new Date('01/01/1990');
+        var FromEndDate = new Date('01/01/1990');
+        var ToEndDate = new Date('01/01/1990');
+        $('#startdate').mask("99/99/9999", { placeholder: 'DD/MM/YYYY' });
+        $('#enddate').mask("99/99/9999", { placeholder: 'DD/MM/YYYY' });
+        $('#startdate').datepicker({
+            weekStart: 1,
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            startDate: new Date()
+        })
+             .on('changeDate', function (selected) {
+                 startDate = new Date(selected.date.valueOf());
+                 startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())) + 1);
+                 $('#enddate').datepicker('setStartDate', startDate);
+             });
+        $('#enddate')
+            .datepicker({
+                weekStart: 1,
+                autoclose: true,
+                format: "dd/mm/yyyy",
+                startDate: new Date()
+            })
+            .on('changeDate', function (selected) {
+                FromEndDate = new Date(selected.date.valueOf());
+                FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())) - 1);
+                $('#startdate').datepicker('setEndDate', FromEndDate);
+            });
+
+        $('#btnAdd').click(
+                function (e) {
+                    if ($('#list1 option').length > 0) {
+
+                        if ($('#list1 option:selected').length > 0) {
+                            $('#list1 > option:selected').appendTo('#list2');
+                            changeListBox();
+                        }
+                        else {
+                            alert('Please select a Category from Available Categories List.');
+                        }
+                    }
+                    e.preventDefault();
+                });
+
+        $('#btnAddAll').click(
+        function (e) {
+            $('#list1 > option').appendTo('#list2');
+            changeListBox();
+            e.preventDefault();
+        });
+
+        $('#btnRemove').click(
+        function (e) {
+            if ($('#list2 option').length > 0) {
+
+                if ($('#list2 option:selected').length > 0) {
+                    $('#list2 > option:selected').appendTo('#list1');
+                    changeListBox();
+                }
+                else {
+                    alert('Please select a Category from Purchased Categories List.');
+                }
+            }
+            e.preventDefault();
+        });
+
+        $('#btnRemoveAll').click(
+        function (e) {
+            $('#totalAmountLbl').text('0');
+            $('#showTotalAmountLbl').text($('#totalAmountLbl').text());
+                $('#totalAmountLbl').text('0');
+                $('#showTotalAmountLbl').text($('#totalAmountLbl').text());
+            $('#list2 > option').appendTo('#list1');
+            changeListBox();
+            e.preventDefault();
+        });
+
+        $('.groupOfTexbox').keypress(function (event) {
+            return isNumber(event, this)
+        });
+
+
+        function isNumber(evt, element) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode != 46 || $(element).val().indexOf('.') != -1))
+                return false;
+            return true;
+        }
+
+        if ('@ViewBag.AdType' == '1') {
+            $('input[type="radio"][value="1"]').prop("checked", true);
+            $('.fileupld').html('');
+            $('#more').hide();
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
+            $('#viewfilename').html('');
+        }
+
+        else if ('@ViewBag.AdType' == '2') {
+            $('input[type="radio"][value="2"]').prop("checked", true);
+            $('.fileupld').html('');
+            $('#more').show();
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".jpg,.jpeg,.png,.wmv,.ogg,.webM,.mp4,.mp3,.mp4,.3gp");
+            $('#viewfilename').html('');
+        }
+
+        else if ('@ViewBag.AdType' == '3') {
+            $('input[type="radio"][value="3"]').prop("checked", true);
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".wmv,.ogg,.webM,.mp4");
+            $('.fileupld').html('');
+            $('#more').hide();
+            $('#viewfilename').html('');
+        }
+
+        else if ('@ViewBag.AdType' == '4') {
+            $('input[type="radio"][value="4"]').prop("checked", true);
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".mp3,.mp4");
+            $('.fileupld').html('');
+            $('#more').hide();
+            $('#viewfilename').html('');
+        }
+    });
+
+    function CehckFileType(input) {
+       
+        $('#hdnFilePath').val('');
+        var fileUpload = $(input).val();
+
+        var extension = fileUpload.substr((fileUpload.lastIndexOf('.') + 1)).toLocaleLowerCase();
+        if ($('.ra:checked').val() == '1') {
+            if (extension == 'jpg' || extension == 'jpeg' || extension == 'png' || extension == 'mp3' || extension == 'mp4' || extension == 'wmv' || extension == '3gp') {
+               
+            }
+
+            else {
+                alert('Only "jpg","jpeg" or "png" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        if ($('.ra:checked').val() == '2') {
+            if (extension == 'jpg' || extension == 'jpeg' || extension == 'png' || extension == 'mp3' || extension == 'mp4' || extension == 'wmv' || extension == '3gp') {
+
+            }
+
+            else {
+                alert('Only "jpg","jpeg" or "png" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        if ($('.ra:checked').val() == '3') {
+
+           // $('#progressbar').progressbar('option', 'value', 0);
+            if (extension == 'mp3' || extension == 'mp4' || extension == 'wmv' || extension == '3gp') {
+
+            }
+
+            else {
+                alert('Only "jpg","jpeg" or "png" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        if ($('.ra:checked').val() == '4') {
+           // $('#progressbar').progressbar('option', 'value', 0);
+            if (extension == 'mp3' || extension == 'mp4') {
+            }
+            else {
+                alert('Only "mp3","mp4" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        var newfiles = $('#fileuploader').val();
+
+       UploadFile($('#fileuploader')[0].files);
+       // sendFile($('#fileuploader')[0].files);
+        $('#hdnFilePath').val('FileUploading');
+        $('#spanmsg').html('Please wait file is uploading.');
+    }
+
+    function sendFile(chunk, FilePartName, orignalFileName) {
+              var FD = new FormData();
+             FD.append('file', chunk, FilePartName);
+        FD.append('OrignalfileName', orignalFileName);
+        $.ajax({
+                 type: "POST",
+                 url: '/User/UploadFile/',
+                 contentType: false,
+                 processData: false,
+                 data: FD,
+                 success: function (msg)  {
+                    $('#spanmsg').html('');
+                    if (msg != null) {
+                        if (jQuery.inArray(msg, orgfilePath) != -1) {
+                        } else {
+                            orgfilePath.push(msg);
+                            $('#hdnFilePath').val('');
+                            $('#hdnFilePath').val(JSON.stringify(orgfilePath));
+                        }
+                    } else {
+                        $('#hdnFilePath').val('FileUploading');
+                    }
+
+            },progress: function(e) {
+            if(e.lengthComputable) {
+                var progress = (e.loaded / e.total) * 100 + '%';
+                console.log(progress);
+                $("#progressbar").progressbar({
+                            value: progress,
+                        }).children('.ui-progressbar-value').html(progress).css("display", "block").css("width", progress).css("text-align", "center");
+                        $("#progressbar").css({ 'background': 'LightYellow' });
+            }
+
+        }
+});
+
+    }
+    function UploadFile(TargetFile) {
+        if (TargetFile.length == 1) {
+            $('#viewfilename').html(TargetFile[0].name);
+        } else {
+            $('#viewfilename').html(TargetFile.length + " files");
+        }
+
+        for (var i = 0; i < TargetFile.length; i++) {
+            // create array to store the buffer chunks
+            var FileChunk = [];
+            // the file object itself that we will work with
+            var file = TargetFile[i];
+            // set up other initial vars
+            var MaxFileSizeMB = 1;
+            var BufferChunkSize = MaxFileSizeMB * 4145728;
+            var ReadBuffer_Size = 1024;
+            var FileStreamPos = 0;
+            // set the initial chunk length
+            var EndPos = BufferChunkSize;
+            var Size = file.size;
+            var newFileName = guid() + "_" + file.name.replace(/\ /g, '_');
+            // add to the FileChunk array until we get to the end of the file
+            while (FileStreamPos < Size) {
+                // "slice" the file from the starting position/offset, to  the required length
+                FileChunk.push(file.slice(FileStreamPos, EndPos));
+                FileStreamPos = EndPos; // jump by the amount read
+                EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+            }
+            // get total number of "files" we will be sending
+            var TotalParts = FileChunk.length;
+            var PartCount = 0;
+            // loop through, pulling the first item from the array each time and sending it
+            while (chunk = FileChunk.shift()) {
+                PartCount++;
+                // file name convention
+                var FilePartName = newFileName + ".part_" + PartCount + "." + TotalParts;
+                // send the file
+                  var precentage = Math.floor((PartCount / TotalParts) * 100) + '%';
+                //  UploadFileChunk(chunk, FilePartName, newFileName,precentage);
+                sendFile(chunk, FilePartName, newFileName);
+            }
+        }
+        $('#fileuploader').val('');
+    }
+
+    function UploadFileChunk(Chunk, FileName, orignalFileName,precentage) {
+        var FD = new FormData();
+        FD.append('file', Chunk, FileName);
+        FD.append('OrignalfileName', orignalFileName);
+        $.ajax({
+            type: "POST",
+            url: '/User/UploadFile/',
+            contentType: false,
+            processData: false,
+            data: FD,
+            beforeSend: function (msg) {
+                console.log(precentage);
+                $("#progressbar").progressbar({
+                     value: precentage,
+                 }).children('.ui-progressbar-value').html(precentage).css("display", "block").css("width", precentage).css("text-align","center");
+                  $("#progressbar").css({ 'background': 'LightYellow' });
+            },
+            success: function (msg) {
+                $('#spanmsg').html('');
+
+
+                if (msg != null) {
+                    if (jQuery.inArray(msg, orgfilePath) != -1) {
+                    } else {
+                        orgfilePath.push(msg);
+                        $('#hdnFilePath').val('');
+                        $('#hdnFilePath').val(JSON.stringify(orgfilePath));
+                    }
+                } else {
+                    $('#hdnFilePath').val('FileUploading');
+                }
+
+            }
+        });
+    }
+
+    function guid() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+    }
+
+    function validateFileSize(file) {
+    }
+    function changeAmount() {
+       
+        $('#showTotalAmountLbl').text('0');
+        $('#showTotalAmountLblpaynow').text('0');
+        var days = $('#numberOfDaysLbl').text();
+        var days = $('#numberOfDaysLblpaynow').text();
+        /* var rate=  $('#itnw').val();*/
+        var rate = 1;
+        var amount = '';
+        var total = '';
+        var paisa = 0.00;
+         // var data = $(".js-example-basic-multiple option:selected").text();
+       var arr= new Array();
+        var selectedOption = $('.js-example-basic-multiple option:selected');
+        $(selectedOption).each(function(index,value) {
+            arr.push($(value).attr("data-name"));
+           paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
+         });
+
+        $('#showTotalAmountLbl').text(paisa + '/day');
+        $('#showTotalAmountLblpaynow').text(paisa + '/day');
+        if (paisa == 0)
+        {
+            $('#showAvailabilityMessageLbl').hide();
+            $('#avatbl').html('');
+        }
+
+        if (days != 0)
+        {
+            paisa * days;
+            $('#amountPaidLbl').text((paisa * days).toFixed(2));
+            $('#amountPaidLblpaynow').text((paisa * days).toFixed(2));
+            $('#SeenAmount').val((paisa * days).toFixed(2));
+            $('#SeenAmountpaynow').val((paisa * days).toFixed(2));
+            $('#beforeconvert').text(paisa * days);
+        }
+
+    }
+
+    function changeListBox() {
+        var categoryIds = '';
+        $('#hdnCategoryIds').val('');
+        $('#showTotalAmountLbl').text('0');
+        $('#totalAmountLbl').text('0');
+        $('#showTotalAmountLblpaynow').text('0');
+        $('#totalAmountLblpaynow').text('0');
+        var amount = '';
+        var total = '';
+        $('#list2 > option').each(function () {
+            amount = $(this).text().split('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0')[1];
+
+            if ($('#totalAmountLbl').text() != '') {
+                total = parseFloat($('#totalAmountLbl').text()) + Number(amount);
+            }
+            else {
+                total = amount;
+            }
+            $('#totalAmountLbl').text(total.toFixed(2));
+
+            if (categoryIds == '') {
+                categoryIds = $(this).val();
+            }
+            else {
+                categoryIds = categoryIds + ',' + $(this).val();
+            }
+            $('#hdnCategoryIds').val(categoryIds);
+
+        });
+        if ($('#totalAmountLbl').text() == '') {
+            $('#showTotalAmountLbl').text('0');
+        }
+        else {
+            $('#showTotalAmountLbl').text($('#totalAmountLbl').text() + ' /day');
+
+        }
+
+        if ($('#numberOfDaysLbl').text() != '0') {
+            //alert($('#numberOfDaysLbl').text() + ' not 0');
+            //$('#amountPaidLbl').text('0');
+            $('#amountPaidLbl').text(($('#totalAmountLbl').text() * $('#numberOfDaysLblpaynow').text()).toFixed(2));
+            $('#amountPaidHdn').val($('#amountPaidLbl').text());
+            $('#amountPaidLblpaynow').text(($('#totalAmountLblpaynow').text() * $('#numberOfDaysLblpaynow').text()).toFixed(2));
+            $('#amountPaidHdnpaynow').val($('#amountPaidLblpaynow').text());
+
+        }
+        else {
+            //alert($('#numberOfDaysLbl').text() + ' 0');
+        }
+
+    }
+
+    function parseDate(str) {
+        var mdy = str.split('/');
+        return new Date(mdy[2], mdy[0] - 1, mdy[1]);
+    }
+
+    function daydiff(first, second) {
+        if (second != 'Invalid Date' && first != 'Invalid Date') {
+            return Math.round((second - first) / (1000 * 60 * 60 * 24));
+        }
+    }
+
+    function calculateTotalDays() {
+        
+        /*var rate = $('#itnw').val();*/
+        var rate = 1;
+        var noofdays = 0;
+        var paisa = 0.00;
+        var TotalDays = '';
+        var startparts = $('#startdate').val().split("/");
+        var dt = new Date(parseInt(startparts[2], 10),
+                          parseInt(startparts[1], 10) - 1,
+                          parseInt(startparts[0], 10));
+
+        var endparts = $('#enddate').val().split("/");
+        var dt1 = new Date(parseInt(endparts[2], 10),
+                          parseInt(endparts[1], 10) - 1,
+                          parseInt(endparts[0], 10));
+        TotalDays = daydiff(dt, dt1);
+
+        if (TotalDays != undefined) {
+            $('#numberOfDaysLbl').text(TotalDays);
+            $('#numberOfDaysLblpaynow').text(TotalDays);
+             var arr= new Array();
+         var selectedOption = $('.js-example-basic-multiple option:selected');
+          $(selectedOption).each(function(index,value) {
+            arr.push($(value).attr("data-name"));
+           paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
+          });
+            $('#showTotalAmountLbl').text(paisa + ' /day');
+            $('#amountPaidLbl').text((paisa * TotalDays).toFixed(2));
+            $('#amountPaidLblpaynow').text((paisa * TotalDays).toFixed(2));
+            $('#SeenAmount').val((paisa * TotalDays).toFixed(2));
+            $('#SeenAmountpaynow').val((paisa * TotalDays).toFixed(2));
+            $('#beforeconvert').text(paisa * TotalDays);
+
+           // $('#City').find('.Checkbox').find("input[type='checkbox']:checked").each(function () {
+           //     paisa = parseInt(parseInt(paisa) + parseInt((this).name));
+           // });
+           // noofdays = parseInt(TotalDays);
+           // $('#amountPaidLbl').text((noofdays * paisa * rate).toFixed(2));
+           // $('#SeenAmount').val((paisa * days * rate).toFixed(2));
+           // $('#beforeconvert').text(paisa * noofdays);
+        }
+        else {
+
+        }
+    }
+
+
+
+</script>
+
+<script>
+
+    function StateBind() {
+       
+        var CountryID = $('#Country').val();
+        if (CountryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/StateLoad",
+                dataType: "json",
+                success: function (msg) {
+
+                    if (msg && msg.statelist.length > 0) {
+                        //var options = "<option value='0'>All</option>";
+                        var options = "";
+                        $.each(msg.statelist, function (key, value) {
+                            options += "<option value=" + value.ID + ">" + value.StateName + "</option>";
+                        });
+                        $('#state').html(options);
+                        $('#state').on("change", function () {
+                           
+                            // CityBind($(this).val());
+                        });
+                        $('#state option').eq(0).attr("selected", "selected");
+                        $('#state').trigger('change');
+                    }
+                    else {
+                        //var options = "<option value='0'>All</option>";
+                        //  var options = "";
+                        //   $('#state').html(options);
+                        //   var optionsCity = "<div class='Checkbox' style='margin-top:14px;list-style-type:none;'><input type='checkbox' value='0' id='zero' checked><label for='All'>All</label></div>";
+                        //   $('#City').html(optionsCity);
+                        $('#state').html("<option value>--Select State--</option>");
+                        $('#City').html("<option style='margin-top: 17px;'>--Select City--</option>");
+                         Sumofcitypricing();
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+                },
+                data: { 'CountryID': CountryID },
+            });
+        }
+        else {
+            $('#state').html("<option value>--Select State--</option>");
+            $('#City').html("<option style='margin-top: 17px;'>--Select City--</option>");
+        }
+    }
+
+    function CityBind() {
+       
+        var StateID = $('#state').val();
+        //var rate = $('#itnw').val();
+        var rate = 1;
+        var usercountry = $('.selectedCountryCode').html();
+        var t = $('#Country').val();
+        if (t == 101) { // case of india
+            rate = 0.013; // 1 INR = 0.013 USD
+        }
+        if (StateID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/CityLoad",
+                dataType: "json",
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.citylist.length > 0) {
+                        var optionsdata = "";
+                        $.each(msg.citylist, function (key, value) {
+                            if (t == 101) { // case of india
+                                optionsdata += "<option value=" + value.ID + " for=" + rate * (parseFloat(value.Price).toFixed(2)) + " data-city=" + value.CityName + "  data-name=" + rate * (parseFloat(value.Price).toFixed(2)) + ">" + value.CityName + " " + rate * (parseFloat(value.Price).toFixed(2)) + " " + usercountry + " (" + (parseFloat(value.Price).toFixed(2)) + " ₹)" + "  </option>";
+                            } else {
+                                optionsdata += "<option value=" + value.ID + " for=" + rate * (parseFloat(value.Price).toFixed(2)) + " data-city=" + value.CityName + "  data-name=" + rate * (parseFloat(value.Price).toFixed(2)) + ">" + value.CityName + " " + rate * (parseFloat(value.Price).toFixed(2)) + " " + usercountry + "  </option>";
+                            }
+                        });
+                        $(".js-example-basic-multiple").html($(optionsdata));
+                    }
+                    else {
+                        $(".js-example-basic-multiple").html("<option value style='margin-top:15px;'>--Select City--</option>");
+                    }
+                    $(".js-example-basic-multiple").on('change', function () { changeAmount(); });
+                    $(".js-example-basic-multiple").trigger('change');
+                },
+                failure: function (msg) {
+                    console.log(msg);
+                },
+                data: { 'StateID': StateID },
+            });
+
+        } else {
+            $(".js-example-basic-multiple").html("<option value style='margin-top: 15px;'>--Select City--</option>");
+        }
+    }
+
+    function AppentCategoryPrice() {
+        var Category = $('#CategoryName').val();
+
+        if (Category == "ALL") {
+            $("#CategoryName option").each(function () {
+                alert($(this).val());
+
+                var ab = "<a href='javascript:;' data-userid='" + item.email + "' style='color:red'  onclick='return DeleteInterestData(" + item.InterestId + ")'><i class='fa fa-remove'></i></a>";
+            });
+        }
+        else {
+            alert(Category);
+        }
+    }
+
+
+    function CheckAvailability() {
+
+        var SubjectID = "";
+        var paisa = 0.00;
+        var cityid = "";
+        var allcityid = "";
+        var startDate = $('#startdate').val();
+        var endDate = $('#enddate').val();
+        //  var numberOfChecked = $('#City').find('.Checkbox').find("input[type='checkbox']:checked").length;
+        var numberOfChecked = $('.js-example-basic-multiple option:selected').length;
+        var selectedOption = $('.js-example-basic-multiple option:selected');
+        $(selectedOption).each(function (index, value) {
+            paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
+        });
+
+        $('#showTotalAmountLbl').text(paisa + '/day');
+        $(selectedOption).each(function (index, value) {
+            allcityid = allcityid + $(value).val() + ',';
+        });
+
+        $(selectedOption).each(function (index, value) {
+            SubjectID = SubjectID + $(value).val() + ',';
+            $('#selid').val(SubjectID);
+        });
+
+        var strVal = $.trim($('#selid').val());
+        var lastChar = strVal.slice(-1);
+
+        if (lastChar == ',') {
+            strVal = strVal.slice(0, -1);
+        }
+        $("#demo").val(strVal);
+        $('#numberOfDaysLbl').text();
+        $('#numberOfDaysLblpaynow').text();
+
+        if (numberOfChecked != 0 && startDate != "" && endDate != "") {
+            var adId = $('#adcreationId').val();
+            if (startDate != "" && endDate != "") {
+                $('#loaderDiv2').show();
+                $.ajax({
+                    type: "POST",
+                    url: "/User/CheckCityAvailability",
+                    dataType: "json",
+                    data: { 'startDate': startDate, 'endDate': endDate, 'allcityId': allcityid },
+                    success: function (msg) {
+                        var city = '';
+                        var html = '';
+                        var options = "";
+                        $('#availabilitySpan').empty();
+                        if (msg[0].CityId != 0) {
+                            var cityname = "";
+                            $(selectedOption).each(function (index, value) {
+                                if (cityname == "") {
+                                    cityname = $(value).attr('data-city');
+                                }
+                                else {
+                                    cityname = cityname + "," + $(value).attr('data-city');
+                                }
+
+                            });
+
+                            //  alert(JSON.stringify(cityname));
+                            $(msg).each(function (i, item) {
+
+                                var d = msg[i].Startdate;
+                                d = d.substr(0, 10).split("-");
+                                d = d[0] + "-" + d[1] + "-" + d[2];
+                                var e = msg[i].Enddate;
+                                e = e.substr(0, 10).split("-");
+                                e = e[0] + "-" + e[1] + "-" + e[2];
+                                $('#availabilitySpan').append(html);
+                                $('#showAvailabilityMessageLbl').removeAttr('style');
+                                $('#showAvailabilityMessageLbl').css({
+                                    'color': 'red',
+                                    'text-align': 'left'
+                                });
+                                $('#showAvailabilityMessageLbl').text('Sorry : ' + cityname + ' is already booked during chosen Time interval. Please choose another date for these cities');
+                                options += "<tr><td style='padding:2px 17px;color:red'>" + d + "</td><td style='padding: 2px 17px;color:red'>" + e + "</td><td style='padding: 2px 17px;color:red' id=c" + msg[i].CityId + "><span id=s" + msg[i].CityId + "></span></td>";
+                                $('#availabilityHdn').val("0");
+                                //   CityName(msg[i].CityId);
+                                $('#loaderDiv2').hide();
+                            });
+                            $('#avatbl').html(options);
+                        }
+                        else {
+                            $('#loaderDiv2').hide();
+                            var cityname = "";
+                            var d = "";
+                            var e = "";
+                            $(selectedOption).each(function (index, value) {
+                                if (cityname == "") {
+                                    cityname = $(value).attr('data-city');
+                                }
+                                else {
+                                    cityname = cityname + "," + $(value).attr('data-city');
+                                }
+
+                            });
+                            d = startDate;
+                            e = endDate;
+                            $('#showAvailabilityMessageLbl').removeAttr('style');
+                            $('#showAvailabilityMessageLbl').css({
+                                'color': 'green',
+                                'text-align': 'left'
+                            });
+                            $('#showAvailabilityMessageLbl').text('Congratulations : You have got space for ' + cityname + ' for dates from ' + d + ' to ' + e + '.');
+                            $('#availabilityHdn').val("1");
+                            $('#avatbl').html('');
+                            $('#btnsub').click();
+                            $('#btnsub').prop("disabled", false);
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+                        $('#loaderDiv2').hide();
+                    },
+
+                });
+            }
+            else {
+                if (startDate == "" && endDate == "") {
+                    $('#showAvailabilityMessageLbl').text('');
+                    $('#avatbl').html('');
+                    alert('Please select city, and set Start and End Date.');
+                }
+            }
+        }
+        else {
+            alert("Please Check Fill all the field of target");
+        }
+
+    }
+
+    function CityName(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/User/CityName',
+            contentType: 'application/json; charset=utf-8',
+            data: { "Id": id },
+            dataType: 'json',
+            success: function (data) {
+                $("#c" + id + "").html(data);
+            },
+        })
+    }
+
+    $.date = function (dateObject) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        console.log(d, day, month, year);
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = month + "/" + day + "/" + year;
+
+        return date;
+    };
+
+    countrydetail();
+
+    function countrydetail() {
+       
+        $.ajax({
+            type: 'GET',
+            url: '/User/GetCountryDetail',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) {
+                console.log("users" + data);
+                $(data).each(function (i, item) {
+                    $("#ConvertCurr_Code").val(item.code);
+                    $("#ConvertCurr_Codepaynow").val(item.code);
+                    $(".usercountry").html(item.currency_symbole);
+                    $("#usercountrycode").html(item.currency_symbole);
+                });
+            },
+        })
+    }
+
+    dataget();
+
+    function dataget() {
+       
+        var t = $('#Country').val();
+        if (t == 101) { // case of india
+            $("#countrycurrencyisocode").val('USD');
+            $(".selectedCountryCode").html('$');
+            currentrate();
+        } else {
+            $.ajax({
+                type: "Get",
+                url: "/User/Get_Country_CurrencyCode_Rate_by_CountryId",
+                data: { "CountryID": t },
+                dataType: "json",
+                success: function (data) {
+                    if (data.length > 0) {
+                        var item = data[0];
+                        $("#countrycurrencyisocode").val(item.code);
+                        $(".selectedCountryCode").html(item.currency_symbole);
+
+                        // $("#ConvertCurr_Code").val(item.code);
+                        // $("#ConvertCurr_Codepaynow").val(item.code);
+                    }
+                    currentrate();
+                },
+                failure: function (data) {
+                    console.log(data);
+                }
+
+            })/*.done(function () { CityBind(); })*/;
+        }
+    }
+
+    // currentrate();
+
+    function currentrate() {
+        var selectediso = $('#countrycurrencyisocode').val();
+        var totalamount = $("#amountPaidLbl").text();
+        var totalamount = $("#amountPaidLblpaynow").text();
+        var code = $('#ConvertCurr_Code').val();
+        var code = $('#ConvertCurr_Codepaynow').val();
+        var settings =
+        {
+            "async": true,
+            //"url": "http://free.currencyconverterapi.com/api/v5/convert?q=USD_" + code + "&compact=y",
+            //"url": "http://free.currencyconverterapi.com/api/v5/convert?q=" + selectediso + "_" + code + "&compact=y",
+            "url": "http://free.currencyconverterapi.com/api/v5/convert?q=" + selectediso + "_" + code + "&compact=y&apiKey=4ae9db91d1be7520f622",
+            "method": "GET"
+        }
+        $.ajax(settings).done(function (response) {
+            //console.log(response['USD_' + selectediso].val);
+            console.log(response[selectediso + "_" + code].val);
+            var total = $('#itnew').val(response[selectediso + "_" + code].val);
+            var d = parseFloat($('#itnew').val());
+            var e = $('#itnw').val(d.toFixed(2));
+            var e = $('#itnwpaynow').val(d.toFixed(2));
+            $('#conversion').val(d.toFixed(2));
+            $('.conversion').text(d.toFixed(2));
+            $('#hamountUsd').val(($('#SeenAmount').val() / $('#itnw').val()).toFixed(2));
+            $('#hamountUsdpaynow').val(($('#SeenAmountpaynow').val() / $('#itnwpaynow').val()).toFixed(2));
+            $('#rup').val($('#amountPaidLbl').text());
+            $('#ruppaynow').val($('#amountPaidLblpaynow').text());
+        }).done(function () { CityBind(); });
+    }
+
+</script>
+<script>
+    function Sumofcitypricing() {
+        $.ajax({
+            type: "Get",
+            url: "/User/SumofAllCityPricing",
+            dataType: "json",
+            success: function (data) {
+                $(data).each(function (i, item) {
+                    $('#sumofallcitypricing').val(item.Price);
+                    $('#showTotalAmountLbl').text(item.Price + '.00 /day');
+                    var days = parseInt($('#numberOfDaysLbl').text());
+                    var days = parseInt($('#numberOfDaysLblpaynow').text());
+                    var amount = parseInt($('#showTotalAmountLbl').text());
+                    $('#zero').attr('name', amount);
+                    $('#amountPaidLbl').text((days * amount).toFixed(2));
+                    $('#amountPaidLblpaynow').text((days * amount).toFixed(2));
+                    $('#SeenAmount').val($('#amountPaidLbl').text().toFixed(2));
+                    $('#SeenAmountpaynow').val($('#amountPaidLblpaynow').text().toFixed(2));
+                });
+            },
+            failure: function (data) {
+                console.log(data);
+            }
+
+        });
+    }
+
+</script>
+
+<script>
+    $(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

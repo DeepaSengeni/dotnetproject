@@ -1,0 +1,514 @@
+﻿@model StudentAppWebsite.Models.NotebookForm
+@{
+    ViewBag.Title = "AddQuestion";
+    int pageid = ViewBag.pageid;
+
+
+}
+<style>
+    .ques {
+        font-weight: bold;
+        color: #504E4E;
+        font-size: 16px;
+        pointer-events: none;
+    }
+
+    .ans {
+        font-weight: 400;
+        color: #000;
+        font-size: 14px;
+    }
+
+    #main-slider-wrapper {
+        max-width: 100% !important;
+        width: 100%;
+    }
+
+    .main-inner {
+        display: inherit;
+        width: 100%;
+        position: relative;
+    }
+
+    /*#SlideshowImages {
+        margin: 50px auto;
+        position: relative;
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+        #SlideshowImages > div {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+        }*/
+    .ad-div {
+        float: left;
+        display: inline-block;
+        color: #666;
+        padding: 4px 27px;
+        height: 35px;
+        margin: 0px 3px;
+    }
+
+
+    .fadein {
+        position: relative;
+        width: 225px;
+        padding-bottom: 10px;
+    }
+</style>
+
+<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/html2canvas.js"></script>
+<script src="~/JsPDF/jspdf.js"></script>
+<script src="~/JsPDF/plugins/addimage.js"></script>
+<script src="~/Scripts/FileSaver.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Plugin/jquery.cycle.all.js"></script>
+<center><span id="messagespan" style="font-size: large; color: green;"></span></center>
+@* <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script>
+        var isIE = false;
+
+        if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+            isIE = true;
+        }
+
+        if (isIE) {
+            $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+
+
+            });
+        }
+        else if ($.browser.mozilla == true) {
+
+        }
+        else {
+            $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                //location.reload(false);
+
+            });
+        }
+    </script>*@
+
+
+
+
+<div class="main-inner">
+    <div class="">
+
+
+        <div class="page-slide-btn">
+            <a href="javascript:;" class="btn btn-primary  hvr-pop prev"><</a>
+            <a href="javascript:;" class="btn btn-primary hvr-pop next">></a>
+        </div>
+
+
+        @{
+            foreach (var id in Model.lstpageIds)
+            {
+                if (id == pageid)
+                {
+                <div id="slid_@id" class="activePage" data-id="@id">
+                    @{ Html.RenderAction("_IndexPartial", new { pageId = pageid }); }
+                </div>
+                        }
+                        else
+                        {
+                        <div id="slid_@id" style="display:none" data-id="@id">
+                        </div>
+                            }
+                        }
+        }
+
+    </div>
+
+</div>
+
+<div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 999999; background-color: rgba(225,225,225,0.5); text-align: center; display: none;" id="loaderDiv2">
+
+
+
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+
+
+    </div>
+</div>
+
+
+@*<style type="text/css">
+        .ui-keyboard {
+            padding: .3em;
+            position: absolute;
+            z-index: 16000;
+        }
+
+        .ui-keyboard-button {
+            height: 2em;
+            width: 2em;
+            margin: .1em;
+        }
+
+        .ui-keyboard-actionkey {
+            width: 4em;
+        }
+
+        .ui-keyboard-space {
+            width: 15em;
+        }
+
+        .ui-keyboard-preview {
+            width: 100%;
+            text-align: left;
+        }
+    </style>*@
+<!-- keyboard widget css & script (required) -->
+<link href="~/Plugin/Keyboard-master/css/keyboard.css" rel="stylesheet">
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.js"></script>
+<!-- keyboard extensions (optional) -->
+<script src="~/Plugin/Keyboard-master/js/jquery.mousewheel.js"></script>
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.extension-typing.js"></script>
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.extension-autocomplete.js"></script>
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.extension-caret.js"></script>
+
+
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+
+<script>
+    var country = "";
+    var state = "";
+    var city = "";
+    //function getLocation() {
+    //    alert(geoplugin_city());
+    //}
+
+    $(document).ready(function () {
+        //  city = geoplugin_city();
+    });
+</script>
+<script>
+    function slideshow(direction) {
+
+        var id = 0;
+        if (direction == "left") {
+            $obj = $('.activePage').next();
+            if ($obj.length > 0) {
+                id = $('.activePage').next().attr('data-id');
+            }
+        }
+        else {
+
+            $obj = $('.activePage').prev();
+            if ($obj.length > 0) {
+                id = $('.activePage').prev().attr('data-id');
+            }
+        }
+
+        if (id > 0) {
+            $('#loaderDiv2').show();
+            $.ajax
+                   ({
+                       type: 'GET',
+                       url: '/Home/_IndexPartial?pageId=' + id,
+
+                       contentType: 'application/json; charset=utf-8',
+                       dataType: 'json',
+                       success: function (data) {
+
+                       }, complete: function (data) {
+                           if (direction == "left") {
+                               $('.activePage').hide("slide", { direction: "left" }, 1000);
+                           }
+                           else {
+                               $('.activePage').hide("slide", { direction: "right" }, 1000);
+                           }
+                           $obj.show("slide", 1000);
+
+                           setTimeout(function () {
+                               $obj.html(data.responseText);
+                               $('.activePage').html('');
+                               $('.activePage').removeClass('activePage');
+                               $obj.addClass('activePage');
+                               $('#loaderDiv2').hide();
+                               AdLoadByBookId(@ViewBag.Book);
+                           }, 1200);
+
+
+                       }
+                   });
+        }
+    }
+
+    $(document).on('click', '.next', function () {
+
+        slideshow("left");
+        AdLoadByBookId(@ViewBag.Book);
+    });
+    $(document).on('click', '.prev', function () {
+
+        slideshow("right");
+        AdLoadByBookId(@ViewBag.Book);
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        Calculator.init();
+        Calculator.initKeyboard();
+        Calculator.attachEvent();
+        gotoQWETY();
+
+        
+
+        AdLoadByBookId(@ViewBag.Book);
+        $(document).on('click', '#removeAnchor1', function () {
+            var id = $(this).attr('data-id');
+            var result = confirm('Are you sure to delete this ad?');
+            if (result == true) {
+                $.ajax({
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    url: "/Home/RemoveAd?AdId=" + id,
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        if (msg == 'success') {
+                            $('#adDiv1').html('');
+                            $('#adDiv1').hide();
+
+                            // mobile View
+                            $('#adDiv2').html('');
+                            $('#adDiv2').hide();
+                        }
+                        else {
+                            alert('Error in deleting ad. Please try again later.');
+                        }
+                    },
+
+                });
+            }
+        });
+        $(document).on('click', '#removeAnchor2', function () {
+            var id = $(this).attr('data-id');
+            var result = confirm('Are you sure to delete this ad?');
+            if (result == true) {
+                $.ajax({
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    url: "/Home/RemoveAd?AdId=" + id,
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        if (msg == 'success') {
+                            $('#adDiv1').html('');
+                            $('#adDiv1').hide();
+
+                            // mobile View
+                            $('#adDiv2').html('');
+                            $('#adDiv2').hide();
+                        }
+                        else {
+                            alert('Error in deleting ad. Please try again later.');
+                        }
+                    },
+
+                });
+            }
+        });
+
+        $('.newKeyboard').keyboard({
+            layout: 'qwerty'
+        });
+
+    });
+
+    function hideAd() {
+        $('#adDiv1').hide();
+        $('#adDiv2').hide();
+    }
+
+    function AdLoadByBookId(bookId) {
+        if (bookId != "") {
+            city = "";
+            //if (city == "") {
+            //    city = geoplugin_city();
+            //}
+            $.ajax({
+                type: "POST",
+                url: "/Home/Ad_LoadBy_BookId",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    var category = '';
+                    var html = '';
+                    if (msg != null && msg.CategoryList.length > 0) {
+                        if ('@ViewBag.LogedInUserRole' == '1' || msg.CategoryList[0].UserId == '@ViewBag.LogedInUserId') {
+                            $('#editAnchor1').removeAttr('href');
+                            $('#editAnchor1').attr('href', '/User/adcreation?adId=' + msg.CategoryList[0].adcreationId + '&PageId=' +@ViewBag.PageId +'&BookId=' + @ViewBag.Book + '');
+
+                            $('#editAnchor2').removeAttr('href');
+                            $('#editAnchor2').attr('href', '/User/adcreation?adId=' + msg.CategoryList[0].adcreationId + '&PageId=' +@ViewBag.PageId +'&BookId=' + @ViewBag.Book + '');
+
+                            $('#removeAnchor1').attr('data-id', msg.CategoryList[0].adcreationId);
+                            $('#removeAnchor2').attr('data-id', msg.CategoryList[0].adcreationId);
+                            $('#submitterAccount1').attr('href', '/User/AccountSettings');
+                            $('#submitterAccount2').attr('href', '/User/AccountSettings');
+                        }
+                        else {
+                            $('#editAnchor1').parent().remove();
+                            $('#editAnchor2').parent().remove();
+                            $('#removeAnchor1').parent().remove();
+                            $('#removeAnchor2').parent().remove();
+                            $('#submitterAccount1').parent().remove();
+                            $('#submitterAccount2').parent().remove();
+                        }
+
+                        $('#studentNameSpan').text(msg.CategoryList[0].StudentName);
+
+                        $('#headlineLbl1').text(msg.CategoryList[0].Headline);
+                        $('#headlineLbl2').text(msg.CategoryList[0].Headline);
+              
+
+                        $('#descriptionLbl1').text(msg.CategoryList[0].Description);
+                        $('#descriptionLbl2').text(msg.CategoryList[0].Description);
+
+
+                        $('#featuresLbl1').text(msg.CategoryList[0].Features);
+                        $('#featuresLbl2').text(msg.CategoryList[0].Features);
+
+                        $('#urlLbl1').text(msg.CategoryList[0].UrlAddress);
+                        $('#urlLbl2').text(msg.CategoryList[0].UrlAddress);
+
+                        $('#priceSpan1').text(msg.CategoryList[0].Price);
+                        $('#priceSpan2').text(msg.CategoryList[0].Price);
+
+                        $('#MobileNumberSpan1').text(msg.CategoryList[0].MobileNumber);
+                        $('#MobileNumberSpan2').text(msg.CategoryList[0].MobileNumber);
+
+                        $.each(msg.CategoryList, function (key, value) {
+                            if (msg.CategoryList[0].Type == 3) {
+                                html = "<video controls autoplay src='" + value.FileUploaded + "'> ";
+                                html += "Your browser does not support HTML5 video.</video> ";
+
+                                // html = "<iframe  src='" + value.FileUploaded + "' frameborder='0' allowfullscreen></iframe>";
+                            }
+                            else {
+                                html += "<img src='" + value.FileUploaded + "' style='position: absolute; top: 0px; left: 0px; display: none; z-index: 3; opacity: 0; width: 200px; height: 200px;'>";
+                            }
+                        });
+
+                        if (msg.CategoryList[0].Type == 2) {
+                            $('#videoDiv1').hide();
+                            $('#videoDiv2').hide();
+                            $('#SlideshowImages1').html(html);
+                            $('#SlideshowImages2').html(html);
+
+                            $('#SlideshowImages1').cycle();
+                            $('#SlideshowImages2').cycle();
+
+                        }
+                        else if (msg.CategoryList[0].Type == 1) {
+                            $('#videoDiv1').hide();
+                            $('#videoDiv2').hide();
+                            $('#SlideshowImages1').html(html);
+                            $('#SlideshowImages2').html(html);
+                        }
+                        else if (msg.CategoryList[0].Type == 3) {
+                            $('#SlideshowImages2').hide();
+                            $('#SlideshowImages1').hide();
+                            $('#videoDiv1').html(html);
+                            $('#videoDiv2').html(html);
+                        }
+                        $('.res').css('cursor', 'pointer');
+                        $('#studentNameSpan').css('cursor', 'pointer');
+                        $('.res').click(function () {
+                            $.ajax({
+                                type: "POST",
+                                url: "/Home/updateClickCount",
+                                dataType: "json",
+                                async: false,
+                                timeout: 3000,
+                                success: function (data) {
+                                    var address = msg.CategoryList[0].UrlAddress;
+                                    if (address && !address.match(/^http([s]?):\/\/.*/)) {
+                                     
+                                        address = 'http://' + address;
+                                    }
+                                    else {
+                                      
+                                        address = address;
+                                    }
+                                    window.location = address;
+                                },
+                                data: { 'AdId': msg.CategoryList[0].adcreationId, 'userId': msg.CategoryList[0].UserId, 'BookId': bookId },
+                            });
+
+                        });
+                        $('#studentNameSpan').click(function () {
+                            window.location = "/User/UserProfile?tab=profile&Id=" + msg.CategoryList[0].UserId + "";
+                        });
+                        $('#adDiv1').show();
+                        //$('#adDiv2').show();
+                    }
+                    else {
+                        $('#SlideshowImages1').html("<img src='/Content/Uploads/Ads/15/0cc57_Lighthouse.jpg'  alt=''>");
+                        $('#SlideshowImages2').html("<img src='/Content/Uploads/Ads/15/0cc57_Lighthouse.jpg'  alt=''>");
+                        $('#adDiv1').hide();
+                        $('#adDiv2').hide();
+                        $("#questionsDiv").css("max-height", "536px");
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+                },
+                data: { 'bookId': bookId, 'city': city },
+            });
+        } else {
+           
+        }
+    }
+</script>
+
+
+
+<script>
+
+    $(".navbar-toggle").click(function () {
+        $(".collapse").toggle();
+    });
+
+
+</script>
+<script type="text/javascript">
+    function callDoSomething() {
+        var theName = document.myForm.personName.value;
+        var theAddress = document.myForm.personAddress.value;
+        var result = Android.doSomething();
+    }
+</script>
+
+
+
+

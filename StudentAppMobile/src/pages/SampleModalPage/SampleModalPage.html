@@ -1,0 +1,64 @@
+<ion-header>
+  <page-layout></page-layout>
+</ion-header>
+    <ion-icon name="md-menu" class="icon-only" (click)="closeModal()"></ion-icon>
+<ion-content >
+  <ion-list>
+    <ion-item>
+      <ion-label>Country</ion-label>
+      <ion-select formControlName="country" name="country" (ionChange)="countrySelect()">
+        <ion-option selected>Select Country</ion-option>
+        <ion-option (ionSelect)="countrySelected($event)" *ngFor="let item of CountryList" value="{{ item['ID'] }}">{{ item['CountryName'] }}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-list radio-group [(ngModel)]="autoManufacturers">
+
+    <ion-list-header>
+      Country
+    </ion-list-header>
+    <div class="lstdesign">
+      <ion-item (ionChange)="countrySelect()" *ngFor="let item of CountryList">
+        <ion-label>{{item.CountryName}}</ion-label>
+        <ion-radio value="{{item.ID}}" (ionSelect)="countrySelected($event)"></ion-radio>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-list radio-group [(ngModel)]="autoManufacturers">
+    <ion-list-header>
+      State
+    </ion-list-header>
+    <div class="lstdesign">
+      <ion-item *ngFor="let item of StateList">
+        <ion-label>{{item.StateName}}</ion-label>
+        <ion-radio value="{{item.ID}}" (ionSelect)="stateSelected($event)"></ion-radio>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-list radio-group [(ngModel)]="autoManufacturers">
+
+    <ion-list-header>
+      City
+    </ion-list-header>
+    <div class="lstdesign">
+      <ion-item *ngFor="let item of CityList">
+        <ion-label>{{item.CityName}}</ion-label>
+        <ion-radio value="{{item.ID}}"></ion-radio>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-list radio-group [(ngModel)]="autoManufacturers">
+    <ion-list-header>
+      Subject
+    </ion-list-header>
+    <div class="lstdesign">
+      <ion-item *ngFor="let item of SubjectList">
+        <ion-label>{{item.SubjectName}}</ion-label>
+        <ion-checkbox [(ngModel)]="item.Id" checked="false" color="Royal"></ion-checkbox>
+      </ion-item>
+    </div>
+  </ion-list>
+
+</ion-content>

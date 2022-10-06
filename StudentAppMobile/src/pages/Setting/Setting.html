@@ -1,0 +1,86 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+    <div class="BigMainWrapper">
+      <div class="SignUpForm-heading">
+        Delete Account<button type="button" (click)="Delete()" style="padding: 10px 47px;margin-top: -8px;float: right;font-size: 16px;background-color: #fff;">Delete</button>
+      </div>
+      <form [formGroup]="settingform" (ngSubmit)="Setting(settingform.value)">
+
+        <div class="mainWrapper">
+          <div class="SignUpForm-heading">Setting</div>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Use the same Email-Id</ion-label>
+              <input type="checkbox" (ionChange)="checkvalue()" id="samevalue">
+            </ion-item>
+            </ion-list>
+            <ion-list>
+              <ion-item [ngClass]="{'error-border':!settingform.controls.Email.valid && settingform.controls.Email.touched}">
+                Use the same : <input type="checkbox" (ionChange)="checkvalue()" id="samevalue">
+                <ion-label floating>Email-Id</ion-label>
+
+                <ion-input formControlName="Email" type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="settingform.controls.Email.hasError('required') && settingform.controls.Email.touched">
+                <p class="error-text">Sorry, Email is required!</p>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="regPassword"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="settingform.controls.regPassword.hasError('required') && settingform.controls.regPassword.touched">
+                <p class="error-text">Sorry, Password is required!</p>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Confirm Password</ion-label>
+                <ion-input formControlName="ConfirmPassword" type="password"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="settingform.controls.ConfirmPassword.hasError('required') && settingform.controls.ConfirmPassword.touched">
+                <p class="error-text">Sorry, ConfirmPassword is required!</p>
+              </ion-item>
+              <ion-item class="error" *ngIf="settingform.controls.ConfirmPassword.hasError('equalTo') && settingform.controls.ConfirmPassword.touched">
+                <p class="error-text">Password Mismatch</p>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>Mobile number</ion-label>
+                <ion-input type="text" formControlName="mobile" name="mobile"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="settingform.controls.mobile.hasError('required') && settingform.controls.mobile.touched">
+                <p class="error-text">Sorry, Mobile number is required!</p>
+              </ion-item>
+              <ion-item class="error" *ngIf="settingform.controls.mobile.hasError('ismobileUnique') && settingform.controls.mobile.touched">
+                <p class="error-text">Mobile No already exists please choose another</p>
+              </ion-item>
+              <ion-buttons end>
+                <button ion-button ng-show="!send" type="button" clear (click)="sendOTP();" end>{{txtSendOTP}}</button>
+              </ion-buttons>
+              <ion-item>
+                <ion-label floating>OTP</ion-label>
+                <ion-input type="number" formControlName="OTP" name="OTP"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="settingform.controls.OTP.hasError('required') && settingform.controls.OTP.touched">
+                <p class="error-text">Verify OTP is required!</p>
+              </ion-item>
+              <ion-buttons end>
+                <ion-icon ios="ios-checkmark" md="md-checkmark" *ngIf="verify" class="text-success"></ion-icon>
+                <ion-label *ngIf="verify" class="text-success">Verified</ion-label>
+                <button ion-button *ngIf="!verify" type="button" clear (click)="verifyOTP();" end>Verify OTP</button>
+              </ion-buttons>
+
+            </ion-list>
+
+        </div>
+
+        <div class="control-wrap">
+          <button ion-button type="submit" [disabled]="!settingform.valid" class="btn btn-block btn-success">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

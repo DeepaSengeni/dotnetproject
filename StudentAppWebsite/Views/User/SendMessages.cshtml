@@ -1,0 +1,102 @@
+﻿@model   StudentAppWebsite.Models.Messages
+
+@{
+    TempData["SuccessMessage"] = "Message sent successfully.";
+    TempData["ErrorMessage"] = "Error in sending Message";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .msgs {
+        border: 1px solid rgb(204, 204, 204);
+        min-height: 170px;
+        padding: 10px;
+        max-height: 170px;
+        overflow-y: auto;
+        text-transform: capitalize;
+    }
+</style>
+
+@*@using (Html.BeginForm("SendMessages", "Admin", FormMethod.Post))
+    {
+
+*@<div class="col-md-12">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" id="errorMessage">@TempData["ErrorMessage"]</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" id="successMessage">@TempData["SuccessMessage"]</div>
+    }
+    @* <div class="alert alert-danger" id="MaxCountAlert" style="display: none">
+            You have reached your max limit of 1500 messages.
+        </div>*@
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default" style="padding:20px 0px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Messages</h3>
+
+                    @* <div class="panel-options">
+                            <a href="#" data-toggle="panel">
+                                <span class="collapse-icon">&ndash;</span>
+                                <span class="expand-icon">+</span>
+                            </a>
+                            <a href="#" data-toggle="remove">&times;
+                            </a>
+                        </div>*@
+                </div>
+                <div class="panel-body">
+                    <div class="form-group clearfix" id="msgDiv">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-8 col-xs-8 input-width">
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.HiddenFor(model => model.count)
+                                @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control sendSms msg", placeholder = "Please Enter Mobile Number" })
+
+                                <div class="text-danger">@Html.ValidationMessageFor(model => model.MobileNo)</div>
+
+
+                            </div>
+                            <div class="icon-img">
+                                <img src="/Content/images/contacts3.png" class="img-responsive logo-design icon-logo" style="width:30px;height:34px;display:none" id="openContact" onclick="HtmlViewer.pickAContactNumber('MobileNo');">
+                            </div>
+                            <div class="addnew-btn">
+                                <a href="javascript:void(0);" class="btn btn-primary add-icn-res" id="msg_txt"><i class="fa fa-plus"></i> Add New </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                        <div style="text-align: left">
+                            <input type="Submit" id="btnSubmit" value="Send" class="btn btn-primary" onclick="return validateInput()" />
+                            <input type="button" id="CancelButton" class="btn btn-primary" value="Cancel" />
+
+                        </div>
+                    </div>
+                    <label>Message</label>
+
+                    @*<textarea class="msgs form-control" id="textSms">@Html.Raw(Model.Message)</textarea>*@
+
+                    <div class="msgs" style="text-transform: none;">
+                        @Html.Raw(HttpUtility.UrlDecode(Model.Message))
+                    </div>
+
+                    <div class="" id="textSms" style="display:none;">
+                        @Html.Raw(Model.Message)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*}*@
+<div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: rgba(225,225,225,0.5); text-align: center; display: none;" id="loaderDiv2">
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+    </div>
+</div>
+<script src="~/Scripts/User/SendMessages.js"></script>

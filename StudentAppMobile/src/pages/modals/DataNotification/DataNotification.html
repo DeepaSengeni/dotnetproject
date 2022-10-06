@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="flag"></ion-icon>
+      Invitations
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<div [innerHtml]="notificationsHtml"></div>-->
+
+  <!--<ion-list>
+    <ion-item *ngFor="let item of items">
+      <div *ngIf="item.Status == 1">
+        <div class="user-notification">
+          <div class="active notification-success invitationLi clearfix">
+            <div (click)="opendetails(item.PageId,item.BookId)">
+
+              <div class="col-md-1 col-sm-1 col-xs-3">
+                <img style="height: 44px; border: 2px solid #f1f1f1; border-radius: 50%;" src="{{url}}{{item.InviterImage}}" class="img-circle img-inline">
+              </div>
+              <div class="col-md-11 col-sm-11 col-xs-9">
+                You have accepted {{item.Inviter == null ? "" : item.Inviter}}  invitation for the discussion over  {{item.BookName == null ? "" : item.BookName}}   submitted by  {{item.BookSubmitter}}
+                <br />
+                <i class="fa fa-user" aria-hidden="true"></i>{{item.DateAccepted == null ? "" : item.DateAccepted}}
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div *ngIf="item.Status == null||item.Status == 0">
+        <div class="user-notification">
+          <div class="active notification-success invitationLi clearfix">
+            <a href="javascript:;" class="notification-msg clearfix">
+              <div class="col-md-1 col-sm-1 col-xs-3">
+                <img src="{{url}}{{item.InviterImage}}" class="img-circle img-inline userpic-32">
+              </div>
+              <div class="col-md-11 col-sm-11 col-xs-9">
+                {{item.Inviter == null ? "" : item.Inviter}}  invites you for the discussion over {{item.BookName == null ? "" : item.BookName}}   submitted by {{item.BookSubmitter}}
+                <br />
+                <i class="fa fa-user" aria-hidden="true"></i>{{item.CreatedDate == null ? "" : item.CreatedDate}}
+              </div>
+            </a>
+          </div>
+          <div style="text-align: right">
+            <a id="" class="btn btn-primary Accept" (click)="UpdateNotificationStatus(item.InvitationListId,1,2)">Accept</a>
+            <a id="" class="btn btn-warning Reject" (click)="UpdateNotificationStatus(item.InvitationListId,2,2)">Deny</a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="item.Status == 2">
+        <div class="user-notification">
+          <div class="active notification-success invitationLi clearfix">
+            <a href="javascript:;" class="notification-msg clearfix">
+              <div class="col-md-1 col-sm-1 col-xs-3">
+                <img src="{{url}}{{item.InviterImage}}" class="img-circle img-inline userpic-32">
+              </div>
+              <div class="col-md-11 col-sm-11 col-xs-9">
+                You have rejected {{item.Inviter == null ? "" : item.Inviter}}  invitation for the discussion over  {{item.BookName == null ? "" : item.BookName}}   submitted by  {{item.BookSubmitter}}
+                <br />
+                <i class="fa fa-user" aria-hidden="true"></i>{{item.DateAccepted == null ? "" : item.DateAccepted}}
+              </div>
+            </a>
+          </div>
+
+
+        </div>
+      </div>
+
+    </ion-item>
+  </ion-list>-->
+  <div *ngFor="let item of items">
+    <div *ngIf="item.Status == 1">
+      <div class="panel-body">
+        <div class="user-notification" (click)="opendetails(item.PageId,item.BookId)">
+          <div>
+            <img src="{{url}}{{item.InviterImage}}">
+          </div>
+          <div>
+            <p> You have accepted {{item.Inviter == null ? "" : item.Inviter}}  invitation for the discussion over  {{item.BookName == null ? "" : item.BookName}}   submitted by  {{item.BookSubmitter}}</p>
+            <p> <ion-icon name="person"></ion-icon>{{item.DateAccepted == null ? "" : item.DateAccepted}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="item.Status == null||item.Status == 0">
+      <div class="panel-body">
+        <div class="user-notification">
+          <div>
+            <img src="{{url}}{{item.InviterImage}}">
+          </div>
+          <div>
+            <p>{{item.Inviter == null ? "" : item.Inviter}}  invites you for the discussion over {{item.BookName == null ? "" : item.BookName}}   submitted by {{item.BookSubmitter}}</p>
+            <p> <ion-icon name="person"></ion-icon>{{item.DateAccepted == null ? "" : item.DateAccepted}}</p>
+          </div>
+        </div>
+        <div style="text-align: right">
+          <a id="" class="btn btn-primary Accept" (click)="UpdateNotificationStatus(item.InvitationListId,1,2)">Accept</a>
+          <a id="" class="btn btn-warning Reject" (click)="UpdateNotificationStatus(item.InvitationListId,2,2)">Deny</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="item.Status == 2">
+      <div class="panel-body">
+        <div class="user-notification">
+          <div>
+            <img src="{{url}}{{item.InviterImage}}">
+          </div>
+          <div>
+            <p> You have rejected {{item.Inviter == null ? "" : item.Inviter}}  invitation for the discussion over  {{item.BookName == null ? "" : item.BookName}}   submitted by  {{item.BookSubmitter}}</p>
+            <p> <ion-icon name="person"></ion-icon>{{item.DateAccepted == null ? "" : item.DateAccepted}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+

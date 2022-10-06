@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Audio Upload
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="Closemodel()">
+        Close
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <input type="hidden" name="hdnImageData" id="screendata" value="dd">
+  <input type="file" name="video" accept="video/*" (change)="uploadvideo($event)" #fileInp>
+  <button type="button" class="add-nb-btn" id="screen" onclick="takeScreenShot2('capture','screendata')">OK</button>
+  <button type="button" id="saveImageBtn2" (click)="change()" style="opacity:0"></button>
+  <div id="capture" style="padding:10px; height:auto;">
+    <video width="290" height="220" controls autoplay *ngIf="playerImg!=''">
+      <source src="{{playerImg}}">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</ion-content>

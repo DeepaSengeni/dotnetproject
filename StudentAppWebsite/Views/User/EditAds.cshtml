@@ -1,0 +1,519 @@
+﻿@model StudentAppWebsite.Models.AdsModel
+@{
+    ViewBag.Title = "SubmittersAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BEGIN CONTENT BODY -->
+<div class="container-fluid">
+   
+   
+        <div class="paddng">
+            @using (Html.BeginForm("EditAds", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "MyForm" }))
+            {
+                <div class="container-fluid signupform">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Edit Ad </h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    @if (TempData["SuccessMessage"] != null)
+                                    {
+                                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                                    }
+                                    else if (TempData["ErrorMessage"] != null)
+                                    {
+
+                                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                                    }
+                                    <div class="form-horizontal ">                                       
+                                        <input type="hidden" name="fileChange" id="fileChange" value="no" />            
+                                        @Html.HiddenFor(m => m.AdcreationId)
+                                        @Html.HiddenFor(m => m.Type, new { @id = "hdnType" })                                       
+                                        <input type="hidden" id="hdnFilePath" name="hdnFilePath" />
+                                        <div class="row">
+                                            <div id="fileShowDiv">
+                                                <div class="col-md-12 paddng">
+                                                    Ad File(s)
+                                                </div>
+                                                
+                                               
+                                                @if(Model.Type == 1 || Model.Type == 2 ){ 
+                                                <div class="col-md-12 paddng">
+                                                    @foreach (var item in Model.AdvertisementFileModels)
+                                                    {
+                                                        <div class="col-md-3">
+                                                            <img src="@item.FileUploaded" alt="@item.FileName" style="height:100px;width:100px"/>
+                                                            @item.FileName
+                                                        </div>
+                                                    }
+                                                </div>
+                                                }
+                                                @if (Model.Type == 4)
+                                                {
+                                                    <div >
+                                                        <a href="@Model.AdvertisementFileModels[0].FileUploaded">
+                                                            @*<img src="~/Content/images/Music-icon.png" style="height:100px;width:100px" />*@
+                                                            @Model.AdvertisementFileModels[0].FileName
+                                                        </a>
+                                                    </div>
+                                                }
+                                                @if (Model.Type == 3)
+                                                {
+                                                    <div>
+                                                        <a href="@Model.AdvertisementFileModels[0].FileUploaded">
+                                                            @*<img src="~/Content/images/video-camera-icon.png" style="height:100px;width:100px" />*@
+                                                            
+                                                                @Model.AdvertisementFileModels[0].FileName
+                                                           
+                                                        </a>
+                                                      </div>
+
+                                                }
+                                                <div class="col-md-12 paddng">
+                                                    <button class="btn btn-success" onclick="showEditFile()" type="button">Change</button>
+                                                </div>
+                                            </div>
+                                      
+                                            <div>
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group" id="fileUploadDiv"  style="display:none;">
+                                                        <label class="col-sm-2 control-label" style="padding-top: 0px;">Add Image</label>
+                                                        <div class="col-sm-10">
+                                                            <span class="top-check">
+                                                                <label>
+                                                                    <input type="radio" checked class="ra" name="uploadtype" value="1" onclick="selectMultiple(1);" />Single Pic
+                                                                </label>
+                                                                <label>
+                                                                    <input id="multiple" type="radio" class="ra" name="uploadtype" value="2" onclick="selectMultiple(2);" />Multiple Pic
+                                                                </label>
+                                                                <label>
+                                                                    <input id="audio" type="radio" class="ra" name="uploadtype" value="4" onclick="selectMultiple(4);" />Audio Clip
+                                                                </label>
+                                                                <label class="video-clip">
+                                                                    <input type="radio" class="ra " name="uploadtype" value="3" onclick="selectMultiple(3);" />Video Clip
+                                                                </label>
+                                                                <input type="file" accept=".jpg,.jpeg,.png,.mp3,.mp4,.wmv" id="fileuploader" name="fileuploader" onchange="CehckFileType(this);" style="width: 100%;" /><span class="fileupld"></span>
+                                                                <a href="#" id="more" style="display: none;">Add More</a><br />
+                                                                @* <span style="color: red;">@Html.ValidationMessage("fileuploader")</span>*@
+                                                                <span id="viewfilename" style=""></span>
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label" style="font-size: 20px; font-weight: 600;">Headline for Ad</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(model => model.Headline, new { @class = "form-control", placeholder = "Headline for Ad" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.Headline)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Features</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(model => model.Features, new { @class = "form-control", placeholder = "Features" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.Features)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Description</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.Description)</div>
+                                                            <label id="CharLength"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Advertiser's Email Id</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(model => model.EmailId, new { @class = "form-control", placeholder = "Advertiser's Email Id" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.EmailId)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Advertiser's Mobile Number</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(model => model.AdvertiserMobileNumber, new { @class = "form-control", placeholder = "Advertiser's Mobile Number" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.AdvertiserMobileNumber)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">WebSite/URL Address</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(model => model.UrlAddress, new { @class = "form-control", placeholder = "URL Address" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.UrlAddress)</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Price of Product/Services</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control groupOfTexbox", placeholder = "Price of Product" })
+                                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.Price)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                          
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-6 col-sm-4 pull-right">
+                                                        <span id="spanmsg" class="col-md-8 text-danger" style="font-size: 16px;margin-top: 18px;">
+                                                        </span>
+                                                        <input type="submit" class="btn btn-primary pull-right col-md-4" style="margin-top:10px;" id="btnsub" value="Update" />                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }          
+        </div>
+
+    <div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: rgb(255, 255, 255); text-align: center; display: none;" id="loaderDiv2">
+        <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+            <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+        </div>
+    </div>
+    </div>
+<!-- END CONTENT BODY -->
+
+<script>
+
+    var orgfilePath = [];
+    $(document).ready(function () {
+
+      
+        $('#btnsubclick').click(function () {
+
+            if ($('#hdnFilePath').val() == 'FileUploading' || $('#hdnFilePath').val() == "[\"\"]") {
+                alert('Please Wait file is uploading.');
+                return false;
+            }
+            else if ($('#hdnFilePath').val() == '') {
+                alert('Please select atleast one file image/video.');
+                return false;
+            }
+            else if ($('#headline').val() == '') {
+                alert('Please fill headline.');
+                return false;
+            }
+            else if ($('#Features').val() == '') {
+                alert('Please fill Features.');
+                return false;
+            }
+            else if ($('#description').val() == '') {
+                alert('Please fill description.');
+                return false;
+            }
+            else if ($('#AdvertiserEmialId').val() == '') {
+                alert('Please fill AdvertiserEmialId.');
+                return false;
+            }
+            else if ($('#price').val() == '') {
+                alert('Please fill price.');
+                return false;
+            }
+            else if ($('#AdvertiserMobileNumber').val() == '') {
+                alert('Please fill MobileNumber.');
+                return false;
+            }
+            else if ($('#urladdress').val() == '') {
+                alert('Please fill urladdress');
+                return false;
+            }
+            else {
+                CheckAvailability();
+            }
+
+        });
+
+   
+
+      
+       // $('#AdvertiserMobileNumber').mask("9999999999");
+
+
+        $('#MyForm').submit(function () {
+
+            console.log($("#MyForm").valid());
+            if ($("#MyForm").valid()) {
+                if ('@ViewBag.ButtonText' == "Update") {
+                    if (parseInt('@ViewBag.AdType') == parseInt($('input[name=uploadtype]:checked').val()))
+                        return true;
+                }
+                else {
+
+                   if ($('#hdnFilePath').val() == 'FileUploading' || $('#hdnFilePath').val() == "[\"\"]") {
+                        alert('Please Wait file is uploading.');
+                        return false;
+                    }
+                    else if ($('#hdnFilePath').val() == '') {
+                        alert('Please select atleast one file image/video.');
+                        return false;
+                    }                    
+                    else {
+                        return true;
+                    }
+                }
+            }
+
+        });
+
+        $('.ra').change(function () {
+            $('#fileuploader').val('');
+            if ($('.ra:checked').val() === '2') {
+                //$('#more').show();
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').attr('multiple', 'multiple');
+                $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
+                $('#viewfilename').html('');
+            }
+            else if ($('.ra:checked').val() === '3') {
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').removeAttr('multiple');
+                $("#fileuploader").attr("accept", ".wmv,.ogg,.webM,.mp4");
+                $('.fileupld').html('');
+                $('#more').hide();
+                $('#viewfilename').html('');
+            }
+            else if ($('.ra:checked').val() === '4') {
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').removeAttr('multiple');
+                $("#fileuploader").attr("accept", ".mp3,.mp4");
+                $('.fileupld').html('');
+                $('#more').hide();
+                $('#viewfilename').html('');
+            }
+            else {
+                $('.fileupld').html('');
+                $('#more').hide();
+                $('#fileuploader').removeAttr('accept');
+                $('#fileuploader').removeAttr('multiple');
+                $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
+                $('#viewfilename').html('');
+            }
+        });
+
+             
+
+      
+
+        $('.groupOfTexbox').keypress(function (event) {
+            return isNumber(event, this)
+        });
+
+
+        function isNumber(evt, element) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode != 46 || $(element).val().indexOf('.') != -1))
+                return false;
+            return true;
+        }
+
+        if ('@ViewBag.AdType' == '1') {
+            $('input[type="radio"][value="1"]').prop("checked", true);
+            $('.fileupld').html('');
+            $('#more').hide();
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
+            $('#viewfilename').html('');
+        }
+
+        else if ('@ViewBag.AdType' == '2') {
+            $('input[type="radio"][value="2"]').prop("checked", true);
+            $('.fileupld').html('');
+            $('#more').show();
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
+            $('#viewfilename').html('');
+        }
+
+        else if ('@ViewBag.AdType' == '3') {
+            $('input[type="radio"][value="3"]').prop("checked", true);
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".wmv,.ogg,.webM,.mp4");
+            $('.fileupld').html('');
+            $('#more').hide();
+            $('#viewfilename').html('');
+        }
+
+        else if ('@ViewBag.AdType' == '4') {
+            $('input[type="radio"][value="4"]').prop("checked", true);
+            $('#fileuploader').removeAttr('accept');
+            $("#fileuploader").attr("accept", ".mp3,.mp4");
+            $('.fileupld').html('');
+            $('#more').hide();
+            $('#viewfilename').html('');
+        }
+    });
+
+    function CehckFileType(input) {
+
+        $('#hdnFilePath').val('');
+        var fileUpload = $(input).val();
+
+        var extension = fileUpload.substr((fileUpload.lastIndexOf('.') + 1)).toLocaleLowerCase();
+        if ($('.ra:checked').val() == '1') {
+            if (extension == 'jpg' || extension == 'jpeg' || extension == 'png') {
+
+            }
+
+            else {
+                alert('Only "jpg","jpeg" or "png" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        if ($('.ra:checked').val() == '2') {
+            if (extension == 'jpg' || extension == 'jpeg' || extension == 'png') {
+
+            }
+
+            else {
+                alert('Only "jpg","jpeg" or "png" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        if ($('.ra:checked').val() == '3') {
+            if (extension == 'mp3' || extension == 'mp4' || extension == 'wmv' || extension == '3gp') {
+
+            }
+
+            else {
+                alert('Only "jpg","jpeg" or "png" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        if ($('.ra:checked').val() == '4') {
+            if (extension == 'mp3' || extension == 'mp4') {
+            }
+            else {
+                alert('Only "mp3","mp4" extensions files are supported.');
+                $(input).val('');
+                return false;
+            }
+        }
+        var newfiles = $('#fileuploader').val();
+
+        UploadFile($('#fileuploader')[0].files);
+        $('#hdnFilePath').val('FileUploading');
+        $('#spanmsg').html('Please wait file is uploading.');
+    }
+
+    function UploadFile(TargetFile) {
+        if (TargetFile.length == 1) {
+            $('#viewfilename').html(TargetFile[0].name);
+        } else {
+            $('#viewfilename').html(TargetFile.length + " files");
+        }
+
+        for (var i = 0; i < TargetFile.length; i++) {
+            // create array to store the buffer chunks
+            var FileChunk = [];
+            // the file object itself that we will work with
+            var file = TargetFile[i];
+            // set up other initial vars
+            var MaxFileSizeMB = 1;
+            var BufferChunkSize = MaxFileSizeMB * 4145728;
+            var ReadBuffer_Size = 1024;
+            var FileStreamPos = 0;
+            // set the initial chunk length
+            var EndPos = BufferChunkSize;
+            var Size = file.size;
+            var newFileName = guid() + "_" + file.name.replace(/\ /g, '_');
+            // add to the FileChunk array until we get to the end of the file
+            while (FileStreamPos < Size) {
+                // "slice" the file from the starting position/offset, to  the required length
+                FileChunk.push(file.slice(FileStreamPos, EndPos));
+                FileStreamPos = EndPos; // jump by the amount read
+                EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+            }
+            // get total number of "files" we will be sending
+            var TotalParts = FileChunk.length;
+            var PartCount = 0;
+            // loop through, pulling the first item from the array each time and sending it
+            while (chunk = FileChunk.shift()) {
+                PartCount++;
+                // file name convention
+                var FilePartName = newFileName + ".part_" + PartCount + "." + TotalParts;
+                // send the file
+                UploadFileChunk(chunk, FilePartName, newFileName);
+            }
+        }
+        $('#fileuploader').val('');
+    }
+
+    function UploadFileChunk(Chunk, FileName, orignalFileName) {
+        var FD = new FormData();
+        FD.append('file', Chunk, FileName);
+        FD.append('OrignalfileName', orignalFileName);
+
+        $.ajax({
+            type: "POST",
+            url: '/User/UploadFile/',
+            contentType: false,
+            processData: false,
+            data: FD,
+            success: function (msg) {
+                console.log(msg);
+                $('#spanmsg').html('');
+                if (msg != null) {
+                    if (jQuery.inArray(msg, orgfilePath) != -1) {
+                       
+                    } else {
+                       
+                        orgfilePath.push(msg);
+                        $('#hdnFilePath').val('');
+                        $('#hdnFilePath').val(JSON.stringify(orgfilePath));
+                        $('#fileChange').val("yes");
+                    }
+                } else {
+                    $('#hdnFilePath').val('FileUploading');
+                }
+            }
+        });
+    }
+
+    function guid() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+    }
+
+    function validateFileSize(file) {
+    }
+
+   
+
+
+
+</script>
+<script>
+   function selectMultiple(index){
+        $('#hdnType').val(index);
+    }
+
+    function showEditFile() {
+      
+        $('#fileShowDiv').css('display', 'none');
+        $('#fileUploadDiv').css('display', 'block');
+    }
+</script>
+
+
+

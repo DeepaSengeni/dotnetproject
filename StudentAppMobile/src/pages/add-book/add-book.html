@@ -1,0 +1,106 @@
+<ion-header>
+  
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+    <!--<div class="mainHeader">
+      <ion-navbar class="nav-bar-main">
+        <button ion-button menuToggle>
+          <ion-icon class="nav-bar-icon" name="menu"></ion-icon>
+        </button>
+      </ion-navbar>
+      <div class="mainHeaderIcon"><span class="fa fa-bars fa-2x pull-left" aria-hidden="true"></span> </div>
+      <div class="header-wrap">
+        <div class="container">
+          <div class="logo-wrap textCenter"> <img src="assets/images/logo.png" alt="Notetor Logo"> </div>
+          <div class="search-wrap signUp">
+            <form>
+              <div class="control-wrap textCenter home-create-wrap">
+                <button ion-button color="light" class="home-create-btn" round type="button" (click)="login($event);">
+                  <ion-icon class="home-create-icon" name="ios-navigate-outline"></ion-icon> Create Notebook
+                </button>
+              </div>
+              <div class="control-wrap">
+                <ion-searchbar animated="true" autocomplete="on" placeholder="Find a Friend..." (ionInput)="onInput($event)"></ion-searchbar>
+              </div>
+              <ion-grid>
+                <ion-row text-center>
+                  <ion-col>
+                    <button ion-button clear>
+                      <ion-icon name="home" class="home-btn-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button ion-button clear>
+                      <ion-icon name="people" class="home-btn-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col>
+                    <button ion-button clear>
+                      <ion-icon name="flag" class="home-btn-icon"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!--End of mainHeader-->
+
+
+    <div class="BigMainWrapper">
+      <div class="home-note-slice" padding no-margin>
+        <div padding class="textCenter">
+          <div class="mainWrapper add-page">
+            <div class="pageButon textCenter">
+              <button ion-button> <ion-icon name="home"></ion-icon><span class="add-pg-sp"> Add Page</span> </button>
+            </div>
+            <div class="clearfix"></div>
+            <div class="textCenter m-t-20">
+              <form>
+                <ion-list radio-group>
+                  <ion-list-header>
+                    <h3>Add Page as</h3>
+                  </ion-list-header>
+                  <ion-item>
+                    <ion-label>Image</ion-label>
+                    <ion-radio checked="true" value="Image"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Text</ion-label>
+                    <ion-radio value="Text"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Audio</ion-label>
+                    <ion-radio value="Audio"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Video</ion-label>
+                    <ion-radio value="Video"></ion-radio>
+                  </ion-item>
+                </ion-list>
+              </form>
+            </div>
+            <div class="m-t-20 textCenter">
+              <button ion-button class="btn btn-blue">Page no 7 </button> <button ion-button class="btn btn-blue">Add Page </button>
+            </div>
+            <div class="m-t-10 textCenter">
+              <button ion-button class="btn btn-blue">Save</button> <button ion-button class="btn btn-blue">Add New </button>
+            </div>
+            <div class="m-t-10 textCenter">
+              <button ion-button class="btn btn-blue">Help</button> <button ion-button class="btn btn-blue"> Exit </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--End of BigMainWrapper-->
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,292 @@
+﻿@model  StudentAppWebsite.Models.StudentRegistration
+
+@{
+    ViewBag.Title = "CityPricing";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="col-md-12">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+</div>
+@using (Html.BeginForm("EditInstitute", "Admin", FormMethod.Post))
+{
+
+    @* <div class="Instituteform">*@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">City List</h3>
+
+                    <div class="panel-options">
+                        <a href="#" data-toggle="panel">
+                            <span class="collapse-icon">&ndash;</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">
+                            &times;
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal ">
+                        <h3 style="text-align:center">All countries amount in USD ($) </h3>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="">
+                                    <label class="control-label">Country</label>
+                                    <div class="">
+                                        @Html.DropDownListFor(model => model.Country, new SelectList(Model.Countrylist, "Id", "CountryName"), "--Select Country--", new { @class = "form-control", placeholder = "Stream Catagory" })
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-md-2">
+
+                                <div class="">
+                                    <label class="control-label">Currency</label>
+                                    <div class="">
+                                      <label id="CurrencyCode" style="padding-left:15px;padding-top:5px"></label>
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="col-md-5">
+                                <div class="">
+                                    <label class="control-label">State</label>
+                                    <div class="">
+                                        @Html.DropDownListFor(model => model.state, new SelectList(Model.statelist, "Id", "StateName"), "--Select State--", new { @class = "form-control", placeholder = "Stream Catagory" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="table-responsive" style="margin-top:20px">
+                                <table id="CityTable" class="table table-small-font table-bordered table-striped" >
+                                    <thead>
+                                        <tr style="background-color:#004293">
+                                            <th style="color: #ffffff">City Name</th>
+                                            <th style="color: #ffffff">Price</th>
+                                            @*<th style="color: #ffffff">Currency</th>*@
+                                            <th style="color: #ffffff">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(var item in  Model.citylist)
+                                        {
+                                        <tr id="@item.ID">
+                                            <td>@item.CityName</td>
+
+                                            <td>@item.Price</td>
+                                            @*<td class="allcityCodenew"></td>*@
+                                            <td><a href='javascript:;' onclick='ediPrice(this)'><i class='fa fa-pencil'></i></a></td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<input type="hidden" id="allcityCode" />
+
+<script>
+ 
+        var c=$('#allcityCode').val();
+        $('#CityTable tbody').find('.allcityCodenew').append(c);
+
+
+</script>
+
+<script type="text/javascript">
+
+
+    $('#Country').on("change", function () {
+        StateBind($(this).val());
+        $('#CityTable tbody').html('');
+    });
+
+    $('#state').on("change", function () {
+
+        CityBind($(this).val());
+    });
+
+
+
+</script>
+
+<script>
+    function StateBind(set) {
+        var CountryID = set;
+        if (CountryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/StateLoad",
+                dataType: "json",
+                success: function (msg) {
+
+                    if (msg && msg.statelist.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option>--Select State--</option>";
+                        $.each(msg.statelist, function (key, value) {
+
+                            options += "<option value=" + value.ID + ">" + value.StateName + "</option>";
+                        });
+                        $('#state').html(options);
+                       
+                        $('#state option').eq(1).attr("selected", "selected");
+                        var t = $('#state option').eq(1).val();
+                        CityBind(t);
+                     
+                    }
+                    else {
+                        var options = "<option>--Select State--</option>";
+                        $('#state').html(options);
+                    }
+                },
+                failure: function (msg) {
+
+
+                },
+                data: { 'CountryID': CountryID },
+            });
+        } else {
+            $('#state').html("<option value>--Select State--</option>");
+        }
+    }
+
+
+
+
+    function CityBind(ob) {
+        var StateID = ob;
+
+        if (StateID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/CityLoad",
+                dataType: "json",
+                success: function (odata) {
+                    //console.log(odata.citylist);
+                    $('#CityTable tbody').html('');
+                    if (odata != null && odata.citylist.length > 0) {
+                        for (var count = 0; count < odata.citylist.length; count++) {
+                            var tableHtml = '<tr id="' + odata.citylist[count].ID + '"><td>' + odata.citylist[count].CityName + '</td><td>' + odata.citylist[count].Price + '</td><td><a href="javascript:;" onclick="ediPrice(this)"><i class="fa fa-pencil"></i></a></td></tr>';
+                            $('#CityTable tbody').append(tableHtml);
+                        }
+                        var c = $('#allcityCode').val();
+                        $('#CityTable tbody').find('.allcityCodenew').text(c);
+                    }
+                    else
+                    {
+                        $('#CityTable tbody').html('');
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'StateID': StateID },
+            });
+        }
+        else
+        {
+            alert("blank");
+        }
+    }
+
+  
+
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#CityTable").dataTable({
+            aLengthMenu: [
+                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+            ]
+        });
+    });
+
+
+
+    function ediPrice(obj)
+    {
+        var currentPrice = $('.editablePrice').val();
+        $('.editablePrice').parent().html(parseFloat(currentPrice).toFixed(2));
+        var trObj = $(obj).parents('tr');
+        var rowId = $(trObj).attr('id');
+        var priceObj = $(trObj).find('td').eq(1);
+       
+        var oldPrice = priceObj.text();
+        priceObj.html('<input type="number" class="form-control editablePrice" data-oldPrice="' + $.trim(oldPrice) + '" data-rowId="' + rowId + '" value="' + $.trim(oldPrice) + '"/>');
+        $('.editablePrice').focus();
+        $('.editablePrice').on('blur', function () {
+            var newValue = $(this).val();
+            alert(newValue);
+            if (parseFloat(newValue) > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/CityPricing_InsertUpdate",
+                    dataType: "json",                  
+                    success: function (msg) {
+                        $('.editablePrice').parent().html(parseFloat(newValue).toFixed(2));
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'cityId': rowId, 'price': newValue },
+                });
+            }
+          
+        });
+    }
+
+
+    $('#Country').change(function () {
+
+        getcurrenycode();
+    });
+
+    getcurrenycode();
+    
+    function getcurrenycode() {
+        var t = $('#Country').val();
+        $.ajax({
+            type: "Get",
+            url: "/User/Get_Country_CurrencyCode_Rate_by_CountryId",
+            data: { "CountryID": t },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $(data).each(function (i, item) {
+                    $("#CurrencyCode").html(item.currency_symbole);
+                    $("#allcityCode").val(item.currency_symbole);
+                    $('#CityTable tbody').find('.allcityCodenew').html(item.currency_symbole);
+                   
+                });
+            },
+            failure: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    
+   
+</script>
+
+
+
+
+

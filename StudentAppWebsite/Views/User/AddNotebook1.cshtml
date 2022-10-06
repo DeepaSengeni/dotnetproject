@@ -1,0 +1,2204 @@
+﻿@using System.Text.RegularExpressions;
+@model StudentAppWebsite.Models.NotebookForm
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<style>
+    .wrs_hand .wrs_canvasContainer .wrs_previewImage, .wrs_hand .wrs_canvasContainer .wrs_previewMathML {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        pointer-events: none;
+        width: 2em;
+    }
+</style>
+<style>
+
+    .modal .modal-dialog .modal-content .modal-body {
+        padding: 20px 20px !important;
+    }
+
+    .btn {
+        border-radius: 5px;
+    }
+
+
+    .all-new-btn .btn-primary {
+        width: 128px;
+    }
+
+
+    .childEditor {
+    }
+
+    .font-collection a {
+        padding: 7px 14px;
+        background: #dad7d7;
+        margin-right: 0px;
+    }
+
+    .font-collection span:last-child {
+        margin-right: 0px;
+    }
+
+    html, body {
+        overflow-x: hidden;
+    }
+
+    #myModalVideo .modal-footer {
+        padding: 15px !important;
+    }
+
+    .invisiblePanel {
+        display: none !important;
+    }
+</style>
+<style>
+
+    .ui-widget-header {
+        background: #cedc98;
+        border: 1px solid #DDDDDD;
+        color: #333333;
+        font-weight: bold;
+    }
+
+    .drp {
+        height: 34px;
+    }
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+    .close {
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        right: 16px;
+        top: 6px;
+        color: #002858 !important;
+    }
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+    .attach-my-document {
+        position: absolute;
+        right: 678px;
+    }
+    .attch-icon-box p .fa {
+        font-size: 100px;
+        text-align: center;
+        padding: 10px;
+        color: #165cb1!important;
+    }
+    .attch-icon-box p {
+        color: #15529dd6!important;
+        font-weight:600!important;
+    }
+    .attch-icon-box p a {
+        color: #15529dd6 !important;
+    }
+        .attch-icon-box :hover  {
+            color: #f0ad4e !important;
+        }
+    .attch-icon-box .fa:hover {
+        color: #f0ad4e !important;
+    }
+    .my-model-content {
+        box-shadow: 0px 1px 23px 6px!important;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 50px;
+        border: 1px solid #888;
+        width: 60% !important;
+        height: 230px;
+        border-radius:8px;
+    }
+    @@media(max-width:768px){
+        .my-model-content {
+            width: 100% !important;
+            height: 270px;
+        }
+        .attch-icon-box p .fa {
+            font-size: 35px!important;
+            z-index: 999;
+        }
+
+        .layout-find-frnd-btnmobile {
+            position: relative;
+            z-index: 0!important;
+        }
+        .btn-breadcrumb .btn:not(:last-child):after {
+            position: absolute!important;
+            z-index: -3!important;
+        }
+        .btn-breadcrumb .btn:not(:last-child):before {
+            position: absolute !important;
+            z-index: -3 !important;
+        }
+        .btn-group-vertical > .btn.active, .btn-group-vertical > .btn:active, .btn-group-vertical > .btn:focus, .btn-group-vertical > .btn:hover, .btn-group > .btn.active, .btn-group > .btn:active, .btn-group > .btn:focus, .btn-group > .btn:hover {
+            z-index: 1!important;
+        }
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#submit").on("submit", function () {
+            $("#pageloader").fadeIn();
+        });//submit
+    });
+</script>
+@*<div id="pageloader">
+    <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+</div>*@
+<div  style="position: fixed; height: 100%; width: 100%; top: 0; left: 0; z-index: 5; display: none; background-color: rgba(225,225,225,0.5); text-align: center" id="pageloader">
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+    </div>
+</div>
+@*<style>
+    #pageloader {
+        background: rgba( 255, 255, 255, 0.8 );
+        display: none;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 9999;
+    }
+
+        #pageloader img {
+            left: 50%;
+            margin-left: -32px;
+            margin-top: -32px;
+            position: absolute;
+            top: 50%;
+        }
+</style>*@
+<script>
+    window.onload = function () {
+        TextPage("Text");
+    };
+</script>
+<!-- keyboard widget css & script (required) -->
+<link href="~/Plugin/Keyboard-master/css/keyboard.css" rel="stylesheet">
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.js"></script>
+<!-- keyboard extensions (optional) -->
+<script src="~/Plugin/Keyboard-master/js/jquery.mousewheel.js"></script>
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.extension-typing.js"></script>
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.extension-autocomplete.js"></script>
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.extension-caret.js"></script>
+
+<script src="~/Plugin/Keyboard-master/js/jquery.keyboard.js"></script>
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.js"></script>*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="~/Content/ckeditor1/ckeditor.js"></script>
+@*<link href="~/Content/ckeditor1/plugins/ckeditor_wiris/template.css" rel="stylesheet" />*@
+@*<script src="~/Content/Ckeditor5/src/ckeditor.js"></script>*@
+@*<script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>*@
+
+<div class="container-fluid ">
+    @using (Html.BeginForm("AddNotebook", "User", FormMethod.Post, new { @id = "NotebookForm" }))
+    {
+        <!-- Tab panes -->
+    <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+            <div class="btn-group btn-breadcrumb" id="breadcrumbs">
+                <a href="/Home/Home" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
+                <a href="/Home/Notebook_Pages?BookId=@Model.NotebookId" class="btn btn-warning">@Model.SubjectName</a>
+                <a class="btn btn-warning" id="myBtn"> <i class="fa fa-paperclip" aria-hidden="true"></i>  </a>
+
+                <select onchange="AddPage(this.value)" class="btn btn-warning drp" id="pagetypesselect" style="display:none">
+                    <option disabled hidden>Add Page</option>
+                    <option name="pageType" value="Text" >Add Page as Text</option>
+                    <option name="pageType" value="Image">Add Page as Image</option>
+                    <option name="pageType" value="Audio"> Add Page as Audio</option>
+                    <option name="pageType" value="Video">Add Page as Video</option>
+                </select>
+
+                @if (ViewBag.PageId != null && Convert.ToInt32(ViewBag.PageId) > 0)
+                {
+                    <a href="/Home/Index?PageId=@Model.Id&BookId=@Model.BookId" class="btn btn-warning" style="display:none">Page No.: @Model.PageNumber</a>
+                }
+                <a href="#" class="btn btn-warning" style="visibility:hidden">@(ViewBag.PageId != null && Convert.ToInt32(ViewBag.PageId) > 0 ? "Edit" : "Add Page")</a>
+            </div>
+        </div>
+
+       
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content my-model-content">
+                <span class="close">&times;</span>
+                <div class="row">
+
+                    <div class="col-xs-6 col-sm-6  col-md-3 col-lg-3 col-xl-3 attch-icon-box text-center">
+                        <p ><a  onclick="AddPage(this.value='Text')"  name="pageType"  id="pagetypesselect"><i class="fa fa-file-text-o" aria-hidden="true"></i> <br />Add Page as Text</a></p>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6  col-md-3 col-lg-3 col-xl-3 attch-icon-box text-center">
+                        <p ><a  onclick="AddPage(this.value='Image')" name="pageType"  id="pagetypesselect"><i class="fa fa-picture-o" aria-hidden="true"></i> <br />Add Page as Image</a></p>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6  col-md-3 col-lg-3 col-xl-3 attch-icon-box text-center">
+                        <p ><a onclick="AddPage(this.value='Audio')"  name="pageType"  id="pagetypesselect"><i class="fa fa-file-audio-o" aria-hidden="true"></i><br /> Add Page as Audio</a></p>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6  col-md-3 col-lg-3 col-xl-3 attch-icon-box text-center">
+                        <p ><a href="#" onclick="AddPage(this.value='Video')"  name="pageType"  id="pagetypesselect"><i class="fa fa-video-camera" aria-hidden="true"></i><br />Add Page as Video</a></p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+        <div class="all-new-btn">
+            <input type="hidden" id="type" name="type" />
+            @*@if (Model.Id == 0)
+                {
+                    Model.PageNumber++;
+                }*@
+            @if (ViewBag.PageId == 0)
+            {
+                Model.PageNumber++;
+            }
+
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.PageNumber)
+            @Html.HiddenFor(m => m.Content)
+            @Html.HiddenFor(m => m.NotebookId)
+            @Html.HiddenFor(m => m.ChapterName, new { @class = "Chapter" })
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    @if (Model.PageType == "Audio")
+                    {
+                    <input type="hidden" id="hdnPageType" name="hdnPageType" value="Audio" />
+                    }
+                    else if (Model.PageType == "Video")
+                    {
+                    <input type="hidden" id="hdnPageType" name="hdnPageType" value="Video" />
+                    }
+                    else if (Model.PageType == "Text")
+                    {
+                    <input type="hidden" id="hdnPageType" name="hdnPageType" value="Text" />
+                    }
+                    else
+                    {
+                    <input type="hidden" id="hdnPageType" name="hdnPageType" value="Image" />
+                    }
+                    <input type="hidden" id="hdnPageType" name="hdnPageType" value="Text" />
+                    <input type="hidden" id="pageimagedata" value="@Model.PageImage" />
+                    <input type="hidden" id="ImageSrc" name="ImageSrc" />
+                    <input type="hidden" id="ImageName" name="ImageName" />
+                    <input type="hidden" id="ScreenShot" name="ScreenShot" />
+                    <input type="hidden" id="AudioSrc" name="AudioSrc" />
+                    <input type="hidden" id="VideoSrc" name="VideoSrc" />
+
+                    @*<a href="#pageModal" data-toggle="modal" class="btn btn-primary sm-btn" disabled="disabled">Page No. @Model.PageNumber</a>*@
+                    <a href="#pageModal" data-toggle="modal" class="btn btn-primary sm-btn" id="PageNumbershow">Page No. @Model.PageNumber</a>
+                    <a class="btn btn-primary sm-btn chp @(Model.IsHtml == false ? " invisiblePanel" : "" )" href="#ChapterModal" data-toggle="modal" id="ChapterName">Chapter Name</a>
+                    @*   <a class="btn btn-primary sm-btn" href="#myModal" data-toggle="modal" id="heading" @(Model.IsHtml= =false ? "disabled" : "" )>Heading</a>
+                    <button type="button" class="btn btn-primary sm-btn write" id="startwriting" @(Model.IsHtml= =false ? "disabled" : "" )>Start Writing</button>*@
+                    <button id="scientificKey" type="button" style="display:none" class="btn btn-primary sm-btn key @(Model.IsHtml == false ? " invisiblePanel" : "" )">Scientific Keyboard</button>
+                    <a class="btn btn-primary sm-btn invisiblePanel @((Model.PageType == " Audio"||Model.PageType= ="Video" )?"invisiblePanel":"")" href="#myModal1" data-toggle="modal" id="AddImage" style="display:none !important;">Add Image</a>
+                    <a class="btn btn-primary sm-btn invisiblePanel @(Model.PageType!=" Audio"?"invisiblePanel":"")" href="#myModalAudio" data-toggle="modal" id="AddAudio" style="display:none !important;">Add Audio</a>
+                    <a class="btn btn-primary sm-btn  invisiblePanel @(Model.PageType!=" Audio"?"invisiblePanel":"")" href="#myModalVideo" data-toggle="modal" id="AddVideo" style="display:none !important;">Add Video</a>
+                    <button type="button" style="display:none" class="btn btn-primary sm-btn marker @(Model.IsHtml == false ? " invisiblePanel" : "" )" id="marker">Marker</button>
+                    <button type="button" class="btn btn-primary sm-btn submit">Save</button>
+                    <button type="button" class="btn btn-primary sm-btn new">Add New</button>
+                    <a type="button" class="btn btn-primary sm-btn tool" href="#ToolsModal" data-toggle="modal" id="Tools" style="display: none !important">View Image</a>
+                    <button type="button" class="btn btn-primary sm-btn" onclick="helpwindow()">Help</button>
+                    @*<button type="button" class="btn btn-primary sm-btn" onclick="TakeScreenShot()">ScreenShot</button>*@
+                    <button type="button" class="btn btn-primary sm-btn exit">Exit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                }
+                else if (TempData["ErrorMessage"] != null)
+                {
+
+                    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                }
+                <div id="MsgDiv" class="col-md-12">
+                    <div class="progressbar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-inner">
+            <div class="row">
+                <div class="col-md-12 addbk" style="background-color: rgb(129, 164, 209); height: 888px; ">
+                    <div id="getscreenshot">
+                        <script>
+                            $(document).ready(function () {
+
+                                //initialize CKEditor by givin id of textarea
+                                CKEDITOR.replace('PageImage');
+                                CKEDITOR.instances['PageImage'].setData($("#HdnPageImage").val());
+                                //call on form submit
+                                $('#NotebookForm').on('submit', function () {
+                                    //get each instance of ckeditor
+                                    for (instance in CKEDITOR.instances) {
+                                        //update element
+                                        CKEDITOR.instances[instance].updateElement();
+                                    }
+
+                                    //set updated value in textarea
+                                    $('#PageImage').val(CKEDITOR.instances["PageImage"].getData());
+                                });
+                            })
+                        </script>
+
+                        @Html.TextAreaFor(m => m.PageImage, htmlAttributes: new { @id = "PageImage" })
+                        <input id="HdnPageImage" type="hidden" value="@HttpUtility.HtmlDecode(Model.PageImage)" />
+                    </div>
+                    @*else if (Model.PageImage == null)
+                        {
+                            @Html.TextAreaFor(m => m.PageImage);
+                            <script>
+                                $(document).ready(function () {
+                                    //initialize CKEditor by givin id of textarea
+                                    CKEDITOR.replace('PageImage');
+
+                                    //call on form submit
+                                    $('#NotebookForm').on('submit', function () {
+
+                                        //get each instance of ckeditor
+                                        for (instance in CKEDITOR.instances) {
+                                            //update element
+                                            CKEDITOR.instances[instance].updateElement();
+                                        }
+
+                                        //set updated value in textarea
+                                        $('#PageImage').val(CKEDITOR.instances["PageImage"].getData());
+                                    });
+                                })
+                            </script>
+                        }*@
+
+                    <div class="notebookEditor" id="editorDiv" style="visibility:hidden">
+                    </div>
+                </div>
+
+
+
+                @*<script>
+                        $(document).ready(function () {
+                            $('#editorDiv').summernote();
+                        });
+                    </script>*@
+            </div>
+        </div>
+    }
+    @*<div id="formattingToolDiv" style="visibility: hidden">
+            <div class="col-md-12" style="text-align: center;">
+                <select id="fontfamilySelect" style="width: 207px; height: 26px; margin-top: 5px;"></select>
+
+                <select id="fontsizeSelect" style="width: 60px; height: 26px; margin-top: 5px;"></select>
+                <div class="font-collection" style="display: inline-block; background: #E9E7E7; padding: 4px 0px 3px; border: 1px solid #ddd;">
+
+                    <span style="cursor: pointer" id="boldAnchor">
+                        <a href="javascript:;"><i class="fa fa-bold" style="color: #666;"></i></a>
+                    </span>
+                    <span style="cursor: pointer" id="italicsAnchor">
+                        <a href="javascript:;" id=""><i class="fa fa-italic" style="color: #666;"></i></a>
+                    </span>
+                    <span style="cursor: pointer" id="underlineAnchor">
+                        <a href="javascript:;" id=""><i class="fa fa-underline" style="color: #666;"></i></a>
+                    </span>
+                    <span style="cursor: pointer" id="centerAnchor">
+                        <a href="javascript:;" id=""><i class="fa fa-align-center" style="color: #838383;"></i></a>
+                    </span>
+                    <span style="cursor: pointer" id="leftAnchor">
+                        <a href="javascript:;" id=""><i class="fa fa-align-left" style="color: #838383;"></i></a>
+                    </span>
+                    <span style="cursor: pointer" id="rightAnchor">
+                        <a href="javascript:;" id=""><i class="fa fa-align-right" style="color: #838383;"></i></a>
+                    </span>
+                    <span style="cursor: pointer" id="justifyAnchor">
+                        <a href="javascript:;" id=""><i class="fa fa-align-justify" style="color: #838383;"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>*@
+
+
+</div>
+<div id="ImageEditorDiv" style="height: 100%; width: 100%;"></div>
+
+<div class="col-md-7"></div>
+<div class="col-md-5">
+    @{Html.RenderPartial("/Views/Home/_Keyboard.cshtml");}
+</div>
+</div>
+<div class="modal fade" id="ToolsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        '
+        <div class="modal-header">
+            <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;">
+                <span data-name="FeedBackmessage">Tools</span>
+                <button id="toolsClose" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+            </h4>
+        </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <form id="silderInput">
+                        @* <label for="hue">Hue</label>
+                            <input id="hue" name="hue" type="range" min="0" max="300" value="0">*@
+                        @*<label for="contrast">Contrast</label>
+                            <input id="contrast" name="contrast" type="range" min="-20" max="20" value="0">
+
+                            <label for="brightness">Brightness</label>
+                            <input id="brightness" name="brightness" type="range" min="-20" max="20" value="0">*@
+                        <div id="AlignSelect">
+                            <label for="alignment">Alignment</label>
+                            <select id="alignment">
+                                <option value="Left">Left</option>
+                                <option value="Right">Right</option>
+                            </select>
+                        </div>
+                        <div id="canvasDiv">
+                        </div>
+                    </form>
+
+                </div>
+                <button name="submit_Tools" id="submit_Tools" class="btn btn-primary" type="submit">Ok</button>
+                <button data-dismiss="modal" class="btn btn-primary" type="button" id="Toolsclose">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        '
+        <div class="modal-header">
+            <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;">
+                <span data-name="FeedBackmessage">Heading</span>
+                <button id="btnClose" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+            </h4>
+        </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <input type="hidden" id="model_content_cid" class="form-control" name="model_content_cid" value="">
+                    <label for="exampleInputEmail1">Heading<span class="red_clr f_bold">*</span></label>
+                    <input type="text" id="model_content_heading" class="form-control" name="model_content_heading">
+                    <div class="text-danger" id="content_heading_error"></div>
+                    <span id="Errormsg" class="text-danger"></span>
+                </div>
+                <button name="submit_head" id="submit_head" class="btn btn-primary" type="submit">Submit</button>
+                <button data-dismiss="modal" class="btn btn-primary" type="button" id="close">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Audio Modal -->
+<div id="myModalAudio" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Audio Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="fileType">Upload Audio File</h4>
+            </div>
+            <div class="modal-body">
+
+                <br />
+                <div id="audioFile">
+                    <input type="file" name="audio" id="audio-upload" accept="audio/mp3" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button name="submit_Audio" id="submit_Audio" class="btn btn-primary" type="submit">Ok</button>
+                <button data-dismiss="modal" class="btn btn-primary" type="button" id="Audioclose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Video Modal -->
+<div id="myModalVideo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Video Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="fileType">Upload Media File</h4>
+            </div>
+            <div class="modal-body">
+                @*<div class="progressbar"></div>*@
+                <br />
+                <div id="videoFile">
+                    <input type="file" name="audio" id="video-upload" accept=".ogg,.webM,.mp4" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button name="submit_Video" id="submit_Video" class="btn btn-primary" type="submit">Ok</button>
+                <button data-dismiss="modal" class="btn btn-primary" type="button" id="Videoclose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ChapterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;">
+                <span data-name="FeedBackmessage">Chapter Name</span>
+                <button id="btnClose_Chapter" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+            </h4>
+        </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <input type="hidden" id="model_Chapter_cid" class="form-control" name="model_Chapter_cid" value="@Model.ChapterName">
+                    <label for="exampleInputEmail1">Chapter Name<span class="red_clr f_bold">*</span></label>
+                    <input type="text" id="model_content_Chapter" class="form-control" name="model_content_Chapter" value="@Model.ChapterName">
+                    <div class="text-danger" id="content_Chapter_error"></div>
+                </div>
+                <button name="submit_Chapter" id="submit_Chapter" class="btn btn-primary" type="submit">Submit</button>
+                <button data-dismiss="modal" class="btn btn-primary" type="button" id="closeChapter">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;">
+                    <span data-name="FeedBackmessage">Add image</span>
+                    <button id="btnClose" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <br />
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Select Image<span class="red_clr f_bold">*</span></label>
+                    <input type="file" id="model_content_image" name="model_content_image[]">
+                </div>
+                <button data-dismiss="modal" class="btn btn-primary" type="button" id="ImageClose">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="pageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="font-size: 16px; font-weight: 800; text-transform: capitalize;">
+                    <span data-name="FeedBackmessage">Page No.</span>
+                    <button id="btnClose" type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label>Page No.<span class="red_clr f_bold">*</span></label>
+                    <input type="number" id="model_content_page" name="model_content_page" class="form-control" value="@Model.PageNumber">
+                    <div class="text-danger" id="content_PageNo_error"></div>
+                </div>
+                <button type="button" name="savePageNo" class="btn btn-primary Save" id="savePageNo">Save</button>
+                @*<button data-dismiss="modal" class="btn btn-primary close" type="button">Close</button>*@
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@*Image manipulation *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
+<script src="~/Scripts/caman.full.min.js"></script>
+@*Image manipulation *@
+<script>
+    (function ($, window, undefined) {
+        //is onprogress supported by browser?
+        var hasOnProgress = ("onprogress" in $.ajaxSettings.xhr());
+
+        //If not supported, do nothing
+        if (!hasOnProgress) {
+            return;
+        }
+
+        //patch ajax settings to call a progress callback
+        var oldXHR = $.ajaxSettings.xhr;
+        $.ajaxSettings.xhr = function () {
+            var xhr = oldXHR();
+            if (xhr instanceof window.XMLHttpRequest) {
+                xhr.addEventListener('progress', this.progress, false);
+            }
+
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', this.progress, false);
+            }
+
+            return xhr;
+        };
+    })(jQuery, window);
+</script>
+<script>
+
+        $(document).ready(function () {
+           // $('.successmsg').hide();
+            AddNewPage();
+        });
+        function AddNewPage() {
+             if (Boolean( @(Convert.ToInt32(ViewBag.PageId != null && Convert.ToInt32(ViewBag.PageId) > 0)))) {
+                AddPage($('#hdnPageType').val());
+                $("#pagetypesselect").val($('#hdnPageType').val());
+                var datainpageimage = $('#pageimagedata').val();
+
+                if ($('#hdnPageType').val() == "Text") {
+                    $('#editorDiv').html(datainpageimage);
+
+                }
+                 if ($('#hdnPageType').val() == "Audio")
+                {
+                    var content = "<div class='audioContainer' style='display: table; width: 100%; height: 100%;'>" +
+                        "<div style='display: table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>" +
+                        "<audio controls src=" + datainpageimage + " >" +
+                        "Your browser does not support the audio element." +
+                        "</audio>" +
+                        "</div>" +
+                        "</div>";
+                    $('#editorDiv').html(content);
+                }
+                else if ($('#hdnPageType').val() == "Video") {
+                    var content = "<div class='videoContainer'>" +
+                        "<div style='text-align: center;'>" +
+                        "<video id='myVideo' controls autoplay style='width:100%' src=" + datainpageimage + ">" +
+                        "Your browser does not support HTML5 video." +
+                        "</video>" +
+                        "</div>" +
+                        "</div>";
+                    $('#editorDiv').html(content);
+                }
+                else {
+                    var content = "<div class='imageContainer' style='display: table; width: 100%; height: 100%;'>" +
+                        "<div style='display:table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>" +
+                        "<img id='mainpageimg' style='display:inline-block;max-width: 1024px;' src=''/>" +
+                        "</div>" +
+                        "</div>";
+                    $('#editorDiv').html(content);
+                    $("#mainpageimg").attr("src", datainpageimage);
+                }
+            }
+            else {
+                //$("#pagetypesselect").val("Text");
+               // AddPage("Text");
+            }
+        }
+        //setup before functions
+
+        var checksubmitformcount = 0;
+        window.onbeforeunload = function (e) {
+            datainsert();
+        }
+
+        if (window.keyCode == 116) {
+            datainsert();
+        }
+
+
+        window.onbeforeunload = function () {
+            if ($('#hdnPageType').val() == "Text") {
+                if (checksubmitformcount <= 0) {
+                  //  $('.submit').click();
+                }
+            }
+        };
+
+        function datainsert() {
+            if ($('#hdnPageType').val() == "Text") {
+                if (checksubmitformcount <= 0) {
+                  //  $('.submit').click();
+                }
+            }
+        }
+
+
+</script>
+<script>
+    function helpwindow() {
+        var Mywindow = window.open("/User/HelpPage", 'PoP_Up', 'height=660,width=760,left=100,top=30,resizable=No,scrollbars=No,toolbar=no,menubar=no,location=no,directories=no, status=No');
+        //var Mywindow = window.open("/User/HelpPage", 'PoP_Up', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=1366,height=760');
+    }
+</script>
+<script>
+
+
+
+
+    function AddPage(type) {
+        debugger;
+        // $('.alert-success').hide();
+        
+        switch (type) {
+            case "Text":
+                TextPage("Text")
+                break;
+            case "Image":
+                performClick("model_content_image");
+                ImagePage("Image");
+                break;
+            case "Audio":
+                performClick("audio-upload");
+                AudioPage("Audio")
+                break;
+            case "Video":
+                performClick("video-upload");
+                VideoPage("Video");
+               
+
+                break;
+            default:
+                break;
+
+        }
+    }
+    function applyFilters() {
+        //var hue = parseInt($('#hue').val());
+        var cntrst = parseInt($('#contrast').val());
+        var britns = parseInt($('#brightness').val());
+        var ImageSrc = $('#ImageSrc').val();
+
+        Caman('#CanvasImage', ImageSrc, function () {
+            this.revert(false);
+            //this.hue(hue);
+            this.contrast(cntrst);
+            this.brightness(britns);
+            this.render(function () {
+                //this.save('png');
+                var image = this.toBase64();
+                $('#ImageSrc').val(image);
+            });
+
+        });
+    }
+
+    function SaveEditedImage() {
+        debugger;
+        var ImageSrc = $('#ImageSrc').val();
+        // alert(ImageSrc);
+        previewFile(ImageSrc, "pageImage", $('#contrast').val(), $('#brightness').val(), $('#alignment').val());
+        $('#contrast').val(0)
+        $('#brightness').val(0)
+        $('#ImageEditorDiv').html('');
+    }
+    function loadImgInCanvas(src, Contrast, brightness, alignment) {
+        //alert();
+        $('#contrast').val(Contrast);
+        $('#brightness').val(brightness);
+        // $('#alignment').val(alignment);
+        //$('#ImageSrc').val(src);
+        $('#Tools').click();
+        $('#canvasDiv').html('');
+        $('#canvasDiv').html('<canvas id="CanvasImage" style="max-width: 100%;"></canvas>');
+        Caman("#CanvasImage", src, function () { });
+        if ($('#hdnPageType').val() != "Text") {
+            $('#AlignSelect').hide();
+
+        }
+
+    }
+
+    function editImgInCanvas(obj) {
+        var src = $(obj).find('img').attr('src');
+        getBase64Image($(obj).find('img').attr('src'));
+        var Contrast = $(obj).find('img').attr('data-contrast');
+        var brightness = $(obj).find('img').attr('data-brightness');
+        var alignment = $(obj).find('img').attr('data-alignment');
+        loadImgInCanvas(src, Contrast, brightness, alignment);
+        $(obj).addClass('Clicked');
+
+
+
+
+    }
+    function getBase64Image(img) {
+        $('#ImageEditorDiv').html('<img src="' + img + '"/>');
+        var base64data = "";
+        html2canvas($('#ImageEditorDiv'), {
+            onrendered: function (canvas) {
+                base64data = canvas.toDataURL("image/png");
+                $('#ImageSrc').val(base64data);
+            }
+        });
+        //// Create an empty canvas element
+        //var canvas = document.createElement("canvas");
+        //canvas.width = img.width;
+        //canvas.height = img.height;
+
+        //// Copy the image contents to the canvas
+        //var ctx = canvas.getContext("2d");
+        //ctx.drawImage(img, 0, 0);
+
+        //// Get the data-URL formatted image
+        //// Firefox supports PNG and JPEG. You could check img.src to guess the
+        //// original format, but be aware the using "image/jpg" will re-encode the image.
+        //var dataURL = canvas.toDataURL("image/png");
+
+        //return base64data;
+    }
+
+</script>
+<script type="text/javascript">
+    function performClick(elemId) {
+        debugger;
+        var elem = document.getElementById(elemId);
+        if (elem && document.createEvent) {
+            var evt = document.createEvent("MouseEvents");
+            evt.initEvent("click", true, false);
+            elem.dispatchEvent(evt);
+        }
+    }
+</script>
+<script>
+    function doneTyping() {
+
+        datahtml = $(".childEditor").html();
+        var chapter = $('#editorDiv').find('div').eq(0).html();
+
+
+        image = '', type = "pageScreenShot", CONTRAST = 0, BRIGHTNESS = 0, ALIGN = 0;
+        html2canvas($('#editorDiv'), {
+            onrendered: function (canvas) {
+                //document.body.appendChild(canvas);
+                $('#ScreenShot').val(canvas.toDataURL("image/png"));
+                image = $('#ScreenShot').val();
+                 previewFile($('#ScreenShot').val(), "pageScreenShot", 0, 0, 0);
+                $('#ImageClose').click();
+                var src = image;
+                var fileName = "";
+
+                if (type == "pageScreenShot") {
+                    fileName = "Page_ScreenShot.png";
+                }
+                else {
+                    fileName = $('#ImageName').val();
+                }
+                var pic = src.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/User/UploadPic',
+                    data: '{ "imageData" : "' + pic + '","filename":"' + fileName + '" }',
+                    contentType: 'application/json; charset=utf-8',
+                    async: false,
+                    timeout: 3000,
+                    dataType: 'json',
+                    success: function (msg) {
+                        if (type == "pageScreenShot") {
+                            $('#ScreenShot').val(msg);
+
+                        }
+                        else {
+                            if ($('.Clicked').length > 0) {
+                                $('.Clicked').find('img').removeAttr('src').attr('src', msg);
+
+                                $('.Clicked').find('img').attr('data-brightness', BRIGHTNESS);
+
+                                $('.Clicked').find('img').attr('data-contrast', CONTRAST);
+                                $('.Clicked').find('img').attr('data-alignment', ALIGN);
+                                $('.Clicked').parent().css({
+                                    'height': '250px',
+                                    'width': '250px',
+
+                                    'float': $('#alignment').val(),
+                                });
+                            } else {
+
+                                if ($('#hdnPageType').val() == "Text") {
+
+                                    if ($('#editorDiv').find('.childEditor').length > 0) {
+                                        $('#editorDiv').find('.childEditor').append("<a  ondblclick='editImgInCanvas(this)'><div class='imageContainer' style='height:100%;width:100%;float:" + $('#alignment').val() + "'><img src='" + msg + "' style='height:100%;width:100%' data-brightness='" + BRIGHTNESS + "' data-contrast='" + CONTRAST + "' data-alignment='" + ALIGN + "'/></a></div><br>");
+                                    }
+                                    else {
+                                        $('#editorDiv').append("<div class='childEditor' style='height:100%' id='editor' onkeydown='return checkMaxLen(event)'><a  ondblclick='editImgInCanvas(this)'><div class='imageContainer' style='height:100%;width:100%;float:" + $('#alignment').val() + "'><img src='" + msg + "' style='height:100%;width:100%' data-brightness='" + BRIGHTNESS + "' data-contrast='" + CONTRAST + "'  data-alignment='" + ALIGN + "'/></a></div><br></div>");
+                                    } $(".imageContainer").resizable({ containment: "#editorDiv" });
+
+                                }
+                                else {
+
+                                    $('#editorDiv').html("<div class='imageContainer' style='display:table;width:100%;height:100%;'><div style='display:table-cell;width:100%;height:100%;vertical-align:middle;text-align:center;'><a><img  src='" + msg + "' style='display:inline-block;max-width: 1024px;' /></a></div></div>");
+                                    $('#ImageSrc').val(msg);
+
+                                }
+                            }
+
+
+
+                        }
+
+
+
+                    },
+                    complete: function () {
+                        //   alert(customHtml);
+                        var form = $('#NotebookForm');
+                        var url = "/User/UpdateNotebookText";
+                        //$('#Content').val($('#editor').html());
+                        $('#Content').val('<div>' + chapter + '</div><div class="childEditor" style="height:100%">' + datahtml + '</div>');
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: form.serialize(), // serializes the form's elements.
+                            success: function (data) {
+                                //$('#MsgDiv').addClass('alert alert-success').html('Click save button to save page in notebook successfully.').fadeIn().fadeOut(10000);
+                            }
+                        }).done(function (data) {
+                            if (data != 1) {
+                                pageId = data;
+                                $('#Id').val(pageId);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        //  alert("Stop typing before 5 Sec");
+    }
+</script>
+<script>
+
+        var datahtml = "";
+        var del = false;
+        $(document).ready(function () {
+            Calculator.init();
+            Calculator.initKeyboard();
+            Calculator.attachEvent();
+            $('input[type=range]').change(applyFilters);
+
+            $('#submit_Tools').on('click', function () {
+
+                SaveEditedImage();
+                $('#Toolsclose').click();
+                $('#MsgDiv').addClass('alert alert-success').html('Click save button to save page in notebook successfully.');
+                $('.successmsg').text('Click save button to save page in notebook successfully');
+                $('.successmsg').show();
+
+            });
+
+            $('#Toolsclose').click('click', function () {
+                $('#ImageEditorDiv').html('');
+                $('.Clicked').removeClass('Clicked');
+            });
+
+            $('#toolsClose').click('click', function () {
+                $('#ImageEditorDiv').html('');
+                $('.Clicked').removeClass('Clicked');
+            });
+            $('#Toolsclose').on()
+
+            if ('@Model.IsHtml' != true) {
+                $('#ImageSrc').val($('#mainpageimg').attr('src'));
+            }
+
+            $('.newKeyboard').keyboard({
+                layout: 'qwerty'
+            });
+            $('#savePageNo').on('click', function () {
+                var pageNo = $('#model_content_page').val();
+                $('#PageNumber').val(pageNo);
+                $('#PageNumbershow').html('Page No. ' + pageNo);
+            });
+            $('#submit_Audio').on('click', function () {
+                if ($("#audio-upload").val() != '') {
+                    SaveAudioFile();
+                    $('#Audioclose').click();
+                    $('#MsgDiv').addClass('alert alert-success').html('Click save button to save page in notebook successfully.');
+                    $('.successmsg').text('Click save button to save page in notebook successfully');
+                    $('.successmsg').show();
+                }
+                else {
+                    alert('Please select atleast one audio file.');
+                }
+            });
+            $('#audio-upload').bind('change', function () {
+                var ext = $('#audio-upload').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) != -1) {
+                    alert('This is not an allowed file type.');
+                    $('#audio-upload').val('');
+                }
+                if ($("#audio-upload").val() != '') {
+                    SaveAudioFile();
+                    $('#Audioclose').click();
+                    $('#MsgDiv').addClass('alert alert-success').html('Click save button to save page in notebook successfully.');
+                    //$('.successmsg').text('Click save button to save page in notebook successfully');
+                    //$('.successmsg').show();
+                }
+            });
+            function SaveAudioFile() {
+                debugger;
+                previewAudioFile($('#audio-upload')[0].files);
+                $('#ImageEditorDiv').html('');
+                var tempAudioHtml = "<div class='audioContainer'>";
+                tempAudioHtml += "<div style='text-align: center;'>";
+                tempAudioHtml += "Please Wait file is uploading...";
+                tempAudioHtml += "</div><div class='progressbar'></div> </div>";
+                $('#editorDiv').html(tempAudioHtml);
+              //  pro(5);
+            }
+    var UloadedAudiofile=0;
+            function previewAudioFile(TargetFile) {
+                debugger;
+                var pageId = 0;
+                 UloadedAudiofile=0;
+                // create array to store the buffer chunks
+                var FileChunk = [];
+                // the file object itself that we will work with
+                var file = TargetFile[0];
+                // set up other initial vars
+                var MaxFileSizeMB = 1;
+                var BufferChunkSize = MaxFileSizeMB * 4145728;
+                var ReadBuffer_Size = 1024;
+                var FileStreamPos = 0;
+                // set the initial chunk length
+                var EndPos = BufferChunkSize;
+                var Size = file.size;
+         console.log("file size "+Size);
+                var newFileName = guid() + "_" + file.name.replace(/\ /g, '_');
+                // add to the FileChunk array until we get to the end of the file
+                while (FileStreamPos < Size) {
+                    // "slice" the file from the starting position/offset, to  the required length
+                    FileChunk.push(file.slice(FileStreamPos, EndPos));
+                    FileStreamPos = EndPos; // jump by the amount read
+                    EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+                }
+                // get total number of "files" we will be sending
+                var TotalParts = FileChunk.length;
+                var PartCount = 0;
+                // loop through, pulling the first item from the array each time and sending it
+                var progTotalParts = TotalParts;
+                while (chunk = FileChunk.shift()) {
+                    PartCount++;
+                    // file name convention
+                    var FilePartName = newFileName + ".part_" + PartCount + "." + TotalParts;
+                    // send the file
+                     var precentage =Math.floor((PartCount /TotalParts) * 100) + '%';
+                    UploadAudioFileChunk(chunk, FilePartName, newFileName,Size);
+
+                    progTotalParts--;
+                }
+
+                $('#audio-upload').val('');
+            }
+
+            function UploadAudioFileChunk(Chunk, FileName, orignalFileName,Size) {
+                debugger;
+                var FD = new FormData();
+                FD.append('file', Chunk, FileName);
+                FD.append('OrignalfileName', orignalFileName);
+
+                $.ajax({
+                    type: "POST",
+                    url: '/User/UploadAudioFile/',
+                    contentType: false,
+                    processData: false,
+                    data: FD,
+                    success: function (msg) {
+                        if (msg != null) {
+                            var data = msg;
+                            var tempVideoHtml = "";
+                            if (data[0] == "True") {
+                                tempAudioHtml = "<div class='audioContainer' style='display: table; width: 100%; height: 100%;'>";
+                                tempAudioHtml += "<div style='display: table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>";
+                                tempAudioHtml += "<audio id='myAudio' controls src=" + data[1] + ">";
+                                tempAudioHtml += "Your browser does not support the audio element.";
+                                tempAudioHtml += "</audio></div></div>";
+                                $('#editorDiv').html(tempAudioHtml);
+                                $('#AudioSrc').val(data[1]);
+                            //    $('#NotebookForm').submit();
+                            }
+                            else {
+                            }
+
+                        }
+                    },
+                    progress: function (e) {
+                  console.log(e.total);
+                if(e.lengthComputable) {
+                    var progress =  (parseInt(((UloadedAudiofile+e.loaded) / Size) * 100)) + '%';
+                    console.log(progress);
+                    $(".progressbar").progressbar({
+                                value: progress,
+                            }).children('.ui-progressbar-value').html(progress).css("display", "block").css("width", progress).css("text-align", "center");
+                            $(".progressbar").css({ 'background': 'LightYellow' });
+                }
+
+            },
+                    complete: function () {
+                  UloadedAudiofile+=Chunk.size;
+                       // pro(100 / ptotalpart);
+                    }
+                });
+            }
+
+            $('#video-upload').bind('change', function () {
+                var ext = $('#video-upload').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg','wmv']) != -1) {
+                    alert(ext +'. is not an allowed file type.');
+                    $('#video-upload').val('');
+                }
+                 if ($('#video-upload').val != '') {
+                    SaveVideoFile();
+                }
+            });
+
+            $('#submit_Video').on('click', function () {
+
+                if ($('#video-upload').val != '') {
+                    SaveVideoFile();
+                    $('#Videoclose').click();
+                }
+                else {
+                    alert('Please select atleast one video file.');
+                }
+            });
+
+        });
+
+    function SaveVideoFile() {
+        debugger;
+            previewVideoFile($('#video-upload')[0].files);
+            $('#ImageEditorDiv').html('');
+
+            var tempVideoHtml = "<div class='videoContainer'>";
+            tempVideoHtml += "<div style='text-align: center;'>";
+            tempVideoHtml += "Please Wait file is uploading...";
+            tempVideoHtml += "</div><div class='progressbar'></div> </div>";
+            $('#editorDiv').html(tempVideoHtml);
+            //pro(5);
+        }
+     var Uploadedtotal = 0;
+        function previewVideoFile(TargetFile) {
+     Uploadedtotal = 0
+            // create array to store the buffer chunks
+            var FileChunk = [];
+            // the file object itself that we will work with
+            var file = TargetFile[0];
+            // set up other initial vars
+            var MaxFileSizeMB = 1;
+            var BufferChunkSize = MaxFileSizeMB * 4145728;
+            var ReadBuffer_Size = 1024;
+            var FileStreamPos = 0;
+            // set the initial chunk length
+            var EndPos = BufferChunkSize;
+            var Size = file.size;
+        console.log("file size"+Size);
+            var newFileName = guid() + "_" + file.name.replace(/\ /g, '_');
+            // add to the FileChunk array until we get to the end of the file
+            while (FileStreamPos < Size) {
+                // "slice" the file from the starting position/offset, to  the required length
+                FileChunk.push(file.slice(FileStreamPos, EndPos));
+                FileStreamPos = EndPos; // jump by the amount read
+                EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+            }
+            // get total number of "files" we will be sending
+            var TotalParts = FileChunk.length;
+            var PartCount = 0;
+            var progTotalParts = TotalParts
+            // loop through, pulling the first item from the array each time and sending it
+            while (chunk = FileChunk.shift()) {
+                PartCount++;
+                // file name convention
+                var FilePartName = newFileName + ".part_" + PartCount + "." + TotalParts;
+                // send the file
+                UploadVideoFileChunk(chunk, FilePartName, newFileName, progTotalParts,Size);
+                progTotalParts--;
+
+            }
+            $('#video-upload').val('');
+        }
+
+        function UploadVideoFileChunk(Chunk, FileName, orignalFileName, ptotalpart,Size) {
+            var FD = new FormData();
+            FD.append('file', Chunk, FileName);
+            FD.append('OrignalfileName', orignalFileName);
+
+            $.ajax({
+                type: "POST",
+                url: '/User/UploadVideoFile/',
+                contentType: false,
+                processData: false,
+                data: FD,
+                success: function (msg) {
+                    if (msg != null) {
+                        var data = msg;
+                        var tempVideoHtml = "";
+                        if (data[0] == "True") {
+                            tempVideoHtml = "<div class='videoContainer'>";
+                            tempVideoHtml += "<div style='text-align: center;'>";
+                            tempVideoHtml += "<video id='myVideo' controls style='width:100%' src=" + data[1] + " >";
+                            tempVideoHtml += "Your browser does not support HTML5 video.";
+                            tempVideoHtml += "</video></div></div>";
+                            $('#editorDiv').html(tempVideoHtml);
+                            $('#VideoSrc').val(data[1]);
+                            $('#myVideo')[0].play();
+                            takethumbnail();
+
+                        } else {
+
+                        }
+                    }
+
+                },
+                progress: function (e) {
+                if(e.lengthComputable) {
+     console.log( e.total);
+                    var progress = (parseInt(((Uploadedtotal+e.loaded) / Size) * 100)) + '%';
+                    console.log(progress);
+                    $(".progressbar").progressbar({
+                                value: progress,
+                            }).children('.ui-progressbar-value').html(progress).css("display", "block").css("width", progress).css("text-align", "center");
+                            $(".progressbar").css({ 'background': 'LightYellow' });
+                }
+
+            },
+                complete: function () {
+                    Uploadedtotal += Chunk.size;
+                }
+            });
+        }
+
+
+        function guid() {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+        }
+        function pro(progVal) {
+            $("#progressbar-1").progressbar({
+                value: progVal
+            });
+        }
+
+
+
+    function TextPage(obj) {
+        debugger;
+            if (!$(obj).hasClass('active')) {
+                $('#hdnPageType').val('Text');
+                $('#editorDiv').css('background-color', 'white')
+                $('#heading').removeAttr('disabled');
+                $('#hdnPageType').val('Text');
+                $('#editorDiv').html('<div contenteditable="false"><h2 class="chptrttl" id="ChapterTitle"></h2></div><div class="childEditor" style="height: 100%;"><div id="editor" class="add-notebook-editor"  style="min-height:100%;width:100%;float:left;display:inline-block;z-index:999;position:relative;height:770px;" contenteditable="true"></div></div>');
+                //$('#editor').attr('contenteditable', false);
+                $('#AddImage').html('Add Image');
+
+                $('#startwriting').click();
+                $('#formattingToolDiv').css('visibility', 'visible');
+
+                $('#AddImage').removeClass('invisiblePanel');
+                $('#AddAudio').addClass('invisiblePanel');
+                $('#AddVideo').addClass('invisiblePanel');
+
+                $('#scientificKey').removeClass('invisiblePanel');
+                $('#ChapterName').removeClass('invisiblePanel');
+                $('#marker').removeClass('invisiblePanel');
+                $('#videoFile').addClass('invisiblePanel');
+                $('#audioFile').addClass('invisiblePanel');
+                $('.popx').removeClass('invisiblePanel');
+                $('#myModal').hide();
+                var typingTimer;                //timer identifier
+                var doneTypingInterval = 3000;  //time in ms, 5 second for example
+                var pageId = 0;
+
+                $(document).ready(function () {
+                    var $input = $('#editor');
+                $input.on('keyup', function (e) {
+                        if (e.keyCode === 13) {
+                            document.execCommand('insertHTML', false, '<br/>');
+                            return false;
+                        }
+                        clearTimeout(typingTimer);
+                        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+                    });
+                    $input.on('keydown', function () {
+                        clearTimeout(typingTimer);
+                    });
+
+                });
+                //user is "finished typing," do something
+                function doneTyping() {
+
+                    datahtml = $(".childEditor").html();
+                    var chapter = $('#editorDiv').find('div').eq(0).html();
+
+
+                    image = '', type = "pageScreenShot", CONTRAST = 0, BRIGHTNESS = 0, ALIGN = 0;
+                    html2canvas($('#editorDiv'), {
+                        onrendered: function (canvas) {
+                            //document.body.appendChild(canvas);
+                            $('#ScreenShot').val(canvas.toDataURL("image/png"));
+                            image = $('#ScreenShot').val();
+                           // previewFile($('#ScreenShot').val(), "pageScreenShot", 0, 0, 0);
+                            $('#ImageClose').click();
+                            var src = image;
+                            var fileName = "";
+
+                            if (type == "pageScreenShot") {
+                                fileName = "Page_ScreenShot.png";
+                            }
+                            else {
+                                fileName = $('#ImageName').val();
+                            }
+                            var pic = src.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/User/UploadPic',
+                                data: '{ "imageData" : "' + pic + '","filename":"' + fileName + '" }',
+                                contentType: 'application/json; charset=utf-8',
+                                async: false,
+                                timeout: 3000,
+                                dataType: 'json',
+                                success: function (msg) {
+                                    if (type == "pageScreenShot") {
+                                        $('#ScreenShot').val(msg);
+
+                                    }
+                                    else {
+                                        if ($('.Clicked').length > 0) {
+                                            $('.Clicked').find('img').removeAttr('src').attr('src', msg);
+
+                                            $('.Clicked').find('img').attr('data-brightness', BRIGHTNESS);
+
+                                            $('.Clicked').find('img').attr('data-contrast', CONTRAST);
+                                            $('.Clicked').find('img').attr('data-alignment', ALIGN);
+                                            $('.Clicked').parent().css({
+                                                'height': '250px',
+                                                'width': '250px',
+
+                                                'float': $('#alignment').val(),
+                                            });
+                                        } else {
+
+                                            if ($('#hdnPageType').val() == "Text") {
+
+                                                if ($('#editorDiv').find('.childEditor').length > 0) {
+                                                    $('#editorDiv').find('.childEditor').append("<a  ondblclick='editImgInCanvas(this)'><div class='imageContainer' style='height:100%;width:100%;float:" + $('#alignment').val() + "'><img src='" + msg + "' style='height:100%;width:100%' data-brightness='" + BRIGHTNESS + "' data-contrast='" + CONTRAST + "' data-alignment='" + ALIGN + "'/></a></div><br>");
+                                                }
+                                                else {
+                                                    $('#editorDiv').append("<div class='childEditor' style='height:100%' id='editor' onkeydown='return checkMaxLen(event)'><a  ondblclick='editImgInCanvas(this)'><div class='imageContainer' style='height:100%;width:100%;float:" + $('#alignment').val() + "'><img src='" + msg + "' style='height:100%;width:100%' data-brightness='" + BRIGHTNESS + "' data-contrast='" + CONTRAST + "'  data-alignment='" + ALIGN + "'/></a></div><br></div>");
+                                                } $(".imageContainer").resizable({ containment: "#editorDiv" });
+
+                                            }
+                                            else {
+
+                                                $('#editorDiv').html("<div class='imageContainer' style='display:table;width:100%;height:100%;'><div style='display:table-cell;width:100%;height:100%;vertical-align:middle;text-align:center;'><a><img  src='" + msg + "' style='display:inline-block;max-width: 1024px;' /></a></div></div>");
+                                                $('#ImageSrc').val(msg);
+
+                                            }
+                                        }
+
+
+
+                                    }
+
+
+
+                                },
+                                complete: function () {
+                                 //   alert(customHtml);
+                                    var form = $('#NotebookForm');
+                                    var url = "/User/UpdateNotebookText";
+                                    //$('#Content').val($('#editor').html());
+                                    $('#Content').val('<div>' + chapter + '</div><div class="childEditor" style="height:100%">' + datahtml + '</div>');
+                                    $.ajax({
+                                        type: "POST",
+                                        url: url,
+                                        data: form.serialize(), // serializes the form's elements.
+                                        success: function (data) {
+                                            //$('#MsgDiv').addClass('alert alert-success').html('Click save button to save page in notebook successfully.').fadeIn().fadeOut(10000);
+                                        }
+                                    }).done(function (data) {
+                                        if (data != 1) {
+                                            pageId = data;
+                                            $('#Id').val(pageId);
+                                        }
+                                    });
+                                }
+                            });
+
+
+
+                        }
+                    });
+
+
+
+                  //  alert("Stop typing before 5 Sec");
+                }
+
+                setCaret();
+            }
+        }
+
+    function ImagePage(obj) {
+            if (!$(obj).hasClass('active')) {
+                $('#hdnPageType').val('Image');
+                $('#getscreenshot').css('visibility', 'hidden');
+                $('#editorDiv').css('background-color', 'white')
+                $('#heading').attr('disabled', 'disabled');
+                //$('.chp').attr('disabled', 'disabled');
+                $('#startwriting').attr('disabled', 'disabled');
+                $('#editorDiv').html('');
+                $('#editor').attr('contenteditable', false);
+                $('#AddImage').html('Add Image');
+                //$('#Tools').show();
+                $('#page').css('visibility', 'hidden');
+                $('#formattingToolDiv').css('visibility', 'hidden');
+                $('#AddImage').removeClass('invisiblePanel');
+                $('#AddAudio').addClass('invisiblePanel');
+                $('#AddVideo').addClass('invisiblePanel');
+                $('#scientificKey').addClass('invisiblePanel');
+                $('#ChapterName').addClass('invisiblePanel');
+                $('#marker').addClass('invisiblePanel');
+                $('#videoFile').addClass('invisiblePanel');
+                $('#audioFile').addClass('invisiblePanel');
+                $('.popx').addClass('invisiblePanel');
+                $('#myModal').hide();
+            }
+        }
+
+        function AudioPage(obj) {
+            if (!$(obj).hasClass('active')) {
+                $('#getscreenshot').css('visibility', 'hidden');
+                $('#editorDiv').css('background-color', 'white')
+                $('#heading').attr('disabled', 'disabled');
+                //  $('.chp').attr('disabled', 'disabled');
+                $('#startwriting').attr('disabled', 'disabled');
+
+
+                $('#hdnPageType').val('Audio');
+                $('#editorDiv').html('<div id="editorDiv"></div>');
+                $('#editor').attr('contenteditable', false);
+
+                //$('#Tools').show();
+                $('#formattingToolDiv').css('visibility', 'hidden');
+                $('#fileType').val('Upload Media File');
+
+
+                $('#AddImage').addClass('invisiblePanel');
+                $('#AddAudio').removeClass('invisiblePanel');
+                $('#AddVideo').addClass('invisiblePanel');
+                $('#scientificKey').addClass('invisiblePanel');
+                $('#ChapterName').addClass('invisiblePanel');
+                $('#marker').addClass('invisiblePanel');
+                $('#videoFile').addClass('invisiblePanel');
+                $('#audioFile').removeClass('invisiblePanel');
+                $('.popx').addClass('invisiblePanel');
+                $('#myModal').hide();
+            }
+        }
+
+        function VideoPage(obj) {
+            if (!$(obj).hasClass('active')) {
+                $('#getscreenshot').css('visibility', 'hidden');
+                $('#editorDiv').css('background-color', 'white')
+                $('#heading').attr('disabled', 'disabled');
+                $('#startwriting').attr('disabled', 'disabled');
+                $('#hdnPageType').val('Video');
+                $('#editorDiv').html('');
+                $('#editor').attr('contenteditable', false);
+                $('#formattingToolDiv').css('visibility', 'hidden');
+                $('#fileType').val('Upload Media File');
+
+                $('#AddImage').addClass('invisiblePanel');
+                $('#AddAudio').addClass('invisiblePanel');
+                $('#AddVideo').removeClass('invisiblePanel');
+                $('#scientificKey').addClass('invisiblePanel');
+                $('#ChapterName').addClass('invisiblePanel');
+                $('#marker').addClass('invisiblePanel');
+                $('#videoFile').removeClass('invisiblePanel');
+                $('#audioFile').addClass('invisiblePanel');
+                $('.popx').addClass('invisiblePanel');
+                $('#myModal').hide();
+            }
+        }
+
+</script>
+<script>
+    $(document).ready(function () {
+        if ($('#hdnPageType').val() == 'Text') {
+            if ($('#editorDiv').find('.childEditor').length == 0) {
+                $('#editorDiv').append('<div class="childEditor" ><div contenteditable="true" id="editor"  style="min-height:100%;width:100%;float:left;display:inline-block;z-index:999;position:relative;height:770px; border:solid 2px black"><div></div>');
+            }
+            else {
+                $('#editorDiv').find('.childEditor').css('height', '100%');
+
+                var textHtml = $('#editorDiv').find('.childEditor').html();
+                $('#editorDiv').find('.childEditor').html('<div contenteditable="true" id="editor"  style="min-height:100%;width:100%;float:left;display:inline-block;z-index:999;position:relative;height:770px;border:solid 2px black">' + textHtml + '<div>');
+                // alert("Submit record");
+            }
+            var lineHeight = parseInt($('#editor').css('line-height'));
+            //var ce = $('#editable')[0].getClientRects();
+            var ce = $('#editor').offset();
+            //  alert("Submit Ce");
+
+            $('#editor').bind('keypress', function (e) {
+                //  alert("first");
+                // alert("bind function key peress");
+                var lineCount = $('#editor').height() / lineHeight;
+                //alert($(window).scrollTop());
+                if (window.getSelection) {
+                    var save = window.getSelection();
+                    var s = window.getSelection();
+                    //s.modify('extend', 'forward', 'character');
+                    // s.modify('extend','forward','line');
+                    range = s.getRangeAt(0);
+                    var p = range.getClientRects();
+                    var top;
+                    //console.log(p);
+                    if (typeof p[1] != "undefined") {
+                        top = p[1].top + $(window).scrollTop();
+                    } else if (typeof p[0] != "undefined") {
+                        top = p[0].top + $(window).scrollTop();
+                    }
+                    else {
+                        // sigh... let's make a real work around then
+                        range.insertNode($('<canvas />').attr('id', 'tempCaretFinder')[0]);
+                        var p = $('canvas#tempCaretFinder').offset();
+                        $('canvas#tempCaretFinder').remove();
+                        top = p.top;
+
+                    }
+
+                    // console.log(top-ce.top);
+                    var lineNumber = (Math.ceil((top - ce.top) / lineHeight));
+
+                    if ((lineNumber + 1) > 26 || lineNumber > 25) {
+                        alert('You can not write more on this page. Try adding a new page.');
+                        return false;
+                    }
+
+                    //  console.log("Caret line: " + (Math.ceil((top - ce.top) / lineHeight)));
+
+
+
+                } else if (document.selection) {
+                    // the IE way, which should be relatively easier. as TextRange objects return offsets directly.
+                    range = document.selection.createRange();
+                }
+
+            });
+        }
+
+         var lineNumber = 0;
+          $set = "true";
+        $('.slider').slider()
+        $("#divProcessing").hide();
+
+        $(".key").click(function () {
+
+            $(".popx").toggle();
+            gotoQWETY();
+        });
+
+        $('.write').click(function () {
+
+            if ($('#editorDiv').find('.childEditor').length == 0) {
+                $('#editorDiv').append('<div class="childEditor" ><div contenteditable="true" id="editor" style="min-height:100%;width:100%;float:left;display:inline-block;z-index:999;position:relative;height:770px;"><div></div>');
+            }
+            var lineHeight = parseInt($('#editor').css('line-height'));
+            //var ce = $('#editable')[0].getClientRects();
+            var ce = $('#editor').offset();
+
+            $('#editor').bind('keypress', function (e) {
+                //    alert("Second");
+                var lineCount = $('#editor').height() / lineHeight;
+                //alert($(window).scrollTop());
+                if (window.getSelection) {
+                    var save = window.getSelection();
+                    var s = window.getSelection();
+                    //s.modify('extend', 'forward', 'character');
+                    // s.modify('extend','forward','line');
+                    range = s.getRangeAt(0);
+                    var p = range.getClientRects();
+                    var top;
+                    //console.log(p);
+                    if (typeof p[1] != "undefined") {
+                        top = p[1].top + $(window).scrollTop();
+                    } else if (typeof p[0] != "undefined") {
+                        top = p[0].top + $(window).scrollTop();
+                    }
+                    else {
+                        // sigh... let's make a real work around then
+                        range.insertNode($('<canvas />').attr('id', 'tempCaretFinder')[0]);
+                        var p = $('canvas#tempCaretFinder').offset();
+                        $('canvas#tempCaretFinder').remove();
+                        top = p.top;
+
+                    }
+
+                    // console.log(top-ce.top);
+                    var lineNumber = (Math.ceil((top - ce.top) / lineHeight));
+
+                    if ((lineNumber + 1) > 26 || lineNumber > 25) {
+                        alert('You can not write more on this page. Try adding a new page.');
+                        return false;
+                    }
+
+                    console.log("Caret line: " + (Math.ceil((to0p - ce.top) / lineHeight)));
+
+
+
+                } else if (document.selection) {
+                    // the IE way, which should be relatively easier. as TextRange objects return offsets directly.
+                    range = document.selection.createRange();
+                }
+
+            });
+
+            $('.childEditor').css('max-width', $(window).width() + 'px');
+
+            $('.write').attr('disabled', 'disabled');
+            $('.key').removeAttr('disabled');
+
+        });
+
+        $('.exit').click(function () {
+            window.location = "/Home/Home";
+        });
+
+
+        $('.Save').click(function () {
+
+
+            if ($('#model_content_page').val().length == 0) {
+
+                $('#content_PageNo_error').html('page no is required')
+                return false;
+            }
+            else {
+
+                $('#content_PageNo_error').html('')
+                $('.close').click();
+
+            }
+        });
+
+        $('#submit_head').click(function () {
+
+            if ($('#model_content_heading').val().length == 0) {
+
+                $('#content_heading_error').html('Heading is required');
+                return false;
+            }
+            else {
+                // return true;
+                $('#content_heading_error').html('');
+
+            }
+
+            var heading = '<h2 style="font-size:28px;color:#3ba9e0;text-transform:capitalize;">' + $('#model_content_heading').val() + '' + '</h2>';
+            $('#editor').append(heading);
+            $('#editor').append('<br>');
+
+
+            $('#model_content_heading').val('');
+            $('#close').click();
+            // alert($('#model_content_heading').length);
+
+        });
+
+        $('#submit_Chapter').click(function () {
+            // alert($('#model_content_Chapter').val());
+
+            if ($('#model_content_Chapter').val().length == 0) {
+
+                //$('#content_Chapter_error').html('Chapter Name is required');
+                //return false;
+            }
+            else {
+                $('#content_Chapter_error').html('');
+                $('#ChapterTitle').html($('#model_content_Chapter').val());
+                $('#ChapterName').val($('#model_content_Chapter').val());
+            }
+            $('#closeChapter').click();
+        });
+
+
+
+        var validFileExtensions = [".png", ".gif", ".bmp", ".jpeg", ".jpg", ".tif", ".tiff", ".jif", ".jfif", ".jp2", ".jpx", ".j2k", ".j2c", ".psd", ".pspimage", ".thm", ".yuv", ".ai", ".drw", ".eps", ".ps", ".svg", ".fpx", ".pcd"];
+
+        $('#model_content_image').on('change', function (ev) {
+            $('#ImageClose').click();
+            $('#ImageName').val(this.files[0].name);
+            var extension = '.' + this.files[0].name.replace(/^.*\./, '');
+            if (validFileExtensions.indexOf(extension) != -1) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#ImageSrc').val(e.target.result);
+                    //loadImgInCanvas(e.target.result, 0, 0);
+                    $('#submit_Tools').click();
+                }
+                reader.readAsDataURL($(this)[0].files[0]);
+            }
+            else {
+                alert('Please choose valid image file, Allowed file types are \n\n' + validFileExtensions.join(' , '))
+                return false;
+            }
+        });
+
+
+        $('#model_content_Chapter').on("blur", function () {
+            checkpageExistence();
+
+        });
+
+
+        $('.submit').click(function () {
+    
+            TakeScreenShot();
+            checksubmitformcount = 1;
+            $('#PageNumber').val($('#model_content_page').val());
+            if ($('#PageNumber').val().length == 0) {
+
+                alert('Please add a page number');
+                return false;
+            }
+            else if ($('#hdnPageType').val() == "Text") {
+
+
+                while ($(".childEditor").find('div:not(.imageContainer )').length > 0) {
+                    $(".childEditor").find('div:not(.imageContainer )').each(function () {
+                        var data = $(this).html();
+
+                        $(this).replaceWith(data);
+
+                    });
+
+                }
+                datahtml = $(".childEditor").html();
+
+                var chapter = $('#editorDiv').find('div').eq(0).html();
+                $('#Content').val('<div>' + chapter + '</div><div class="childEditor" style="height:100%">' + datahtml + '</div>');
+
+                return true;
+                //}
+            }
+            else {
+
+                //$('#MsgDiv').fadeIn().fadeOut(10000);
+                // AddNewPage();
+                //  $('#NotebookForm').submit();
+
+
+            }
+
+        });
+        $('#editorDiv').bind("DOMSubtreeModified", function () {
+            $('#type').val('change');
+        });
+
+        $('.new').click(function () {
+            $('#ChapterName').val($('#model_content_Chapter').val());
+            if ($('#type').val() == 'change') {
+                var cnfrm = confirm("Do you want to Save Current Detail before opening new page?");
+                if (cnfrm) {
+                    $('#Content').val($('#editor').html());
+                    $('#PageNumber').val($('#model_content_page').val());
+                    if ($('#PageNumber').val().length == 0) {
+                        alert('Please add a page number');
+                        return false;
+                    }
+                    else if ($('#ChapterName').val().length == 0) {
+                        // $('#content_Chapter_error').html('Chapter Name is required')
+                        alert('Please add a Chapter');
+                        return false;
+                    }
+                    else {
+                        $('div').removeAttr('contenteditable');
+                        TakeScreenShot();
+
+                        //return true;
+                    }
+
+                }
+                else {
+
+                    window.location = "/User/AddNotebook?bookId=" + $('#NotebookId').val() + "";
+                    return false;
+                }
+            }
+            else {
+                alert('You are already have new page!');
+                return false;
+            }
+        });
+
+        $('#model_content_page').on('change', function () {
+
+            if ($.isNumeric($(this).val())) {
+                checkpageExistence();
+            }
+            else {
+                $(this).val('');
+            }
+        });
+        $('#model_content_page').on('blur', function () {
+
+            if ($.isNumeric($(this).val())) {
+                checkpageExistence();
+            }
+            else {
+                $(this).val('');
+            }
+        });
+
+        // $('#startwriting').trigger('click');
+
+        if ($('input[name=pageType]:checked').val() == "Text") {
+            setCaret();
+        }
+    });
+
+    function setCaret() {
+        var el = document.getElementById("editor");
+        placeCaretAtEnd(el);
+
+    }
+
+
+
+</script>
+@*<script src="~/Content/js/bootstrap-slider.js"></script>*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/Scripts/bililiteRange.js"></script>
+<script src="/Scripts/jquery.sendkeys.js"></script>
+<script>
+
+</script>
+<script>
+
+    function backspaceFunction() {
+        if ($("#editor").text().length == 0) {
+            $('#editor').empty();
+        }
+        $("#editor").sendkeys("{backspace}");
+    }
+    function deleteFunction() {
+        if ($("#editor").text().length == 0) {
+            $('#editor').empty();
+        }
+        $("#editor").sendkeys("{del}");
+    }
+
+
+    function selectText(hexColor) {
+        var selection = window.getSelection().getRangeAt(0);
+        var selectedText = selection.extractContents();
+        var span = document.createElement('span');
+        span.style.backgroundColor = hexColor;
+        span.className = 'selected-text';
+        span.appendChild(selectedText);
+
+        selection.insertNode(span);
+
+
+        if ($(span)[0].nextSibling.nodeValue.charAt(0) == '') {
+            $(span).after("&nbsp;");
+        }
+
+    }
+
+    function unselectText() {
+        $('#editor').find('.selected-text').contents().unwrap();;
+    }
+
+    $('.marker').on('click', function () {
+        selectText('#f90');
+
+    });
+
+
+    function previewFile(image, type, CONTRAST, BRIGHTNESS, ALIGN) {
+        //    $('#NotebookForm').submit();
+        $('#ImageClose').click();
+        var src = image;
+        var fileName = "";
+
+        if (type == "pageScreenShot") {
+            fileName = "Page_ScreenShot.png";
+        }
+        else {
+            fileName = $('#ImageName').val();
+        }
+        var pic = src.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+
+        $.ajax({
+            type: 'POST',
+            url: '/User/UploadPic',
+            data: '{ "imageData" : "' + pic + '","filename":"' + fileName + '" }',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            timeout: 3000,
+            dataType: 'json',
+            success: function (msg) {
+                if (type == "pageScreenShot") {
+                    $('#ScreenShot').val(msg);
+                }
+                else {
+                    if ($('.Clicked').length > 0) {
+                        $('.Clicked').find('img').removeAttr('src').attr('src', msg);
+
+                        $('.Clicked').find('img').attr('data-brightness', BRIGHTNESS);
+
+                        $('.Clicked').find('img').attr('data-contrast', CONTRAST);
+                        $('.Clicked').find('img').attr('data-alignment', ALIGN);
+                        $('.Clicked').parent().css({
+                            'height': '250px',
+                            'width': '250px',
+                            'float': $('#alignment').val(),
+                        });
+                    } else {
+
+                        if ($('#hdnPageType').val() == "Text") {
+
+                            if ($('#editorDiv').find('.childEditor').length > 0) {
+                                $('#editorDiv').find('.childEditor').append("<a  ondblclick='editImgInCanvas(this)'><div class='imageContainer' style='height:250px;width:250px;float:" + $('#alignment').val() + "'><img src='" + msg + "' style='height:100%;width:100%' data-brightness='" + BRIGHTNESS + "' data-contrast='" + CONTRAST + "' data-alignment='" + ALIGN + "'/></a></div><br>");
+                            }
+                            else {
+                                $('#editorDiv').append("<div class='childEditor' style='height:100%' id='editor' onkeydown='return checkMaxLen(event)'><a  ondblclick='editImgInCanvas(this)'><div class='imageContainer' style='height:250px;width:250px;float:" + $('#alignment').val() + "'><img src='" + msg + "' style='height:100%;width:100%' data-brightness='" + BRIGHTNESS + "' data-contrast='" + CONTRAST + "'  data-alignment='" + ALIGN + "'/></a></div><br></div>");
+                            } $(".imageContainer").resizable({ containment: "#editorDiv" });
+
+                        }
+                        else {
+                            $('#editorDiv').html("<div class='imageContainer' style='display:table;width:100%;height:100%;'><div style='display:table-cell;width:100%;height:100%;vertical-align:middle;text-align:center;'><a><img  src='" + msg + "' style='display:inline-block;max-width: 1024px;' /></a></div></div>");
+                            $('#ImageSrc').val(msg);
+                        }
+                    }
+
+
+
+                }
+
+
+
+            },
+            complete: function () {
+                // $("#loaderDiv2").hide();
+            }
+        });
+
+
+
+
+
+        //}
+
+        //if (file) {
+        //    reader.readAsDataURL(file);
+        //}
+
+    }
+
+    function checkpageExistence() {
+
+        $.ajax({
+            type: "POST",
+            url: "/User/CheckPageExistence",
+            dataType: "json",
+            async: false,
+            timeout: 3000,
+            success: function (msg) {
+                var data = JSON.parse(msg);
+
+                if (data != null) {
+                    if (data.status == '-1') {
+                        alert('Page number already exist.Please select any different page number.');
+                        $('#model_content_page').val('');
+                    }
+                    else if (data.status == '-2') {
+                        alert('Chapter name already exist.Please enter any different chapter name.');
+                        $('#model_content_Chapter').val('');
+                    }
+                    else {
+                    }
+
+                }
+
+
+            },
+            failure: function (msg) {
+                console.log(msg);
+
+            },
+            complete: function () {
+
+            },
+            data: { 'bookId': $('#NotebookId').val(), 'pageNo': ($('#model_content_page').val().length > 0 ? $('#model_content_page').val() : 0), 'ChapterName': $('#model_content_Chapter').val() },
+        });
+    }
+
+    function placeCaretAtEnd(el) {
+        // el.focus();
+        //if (typeof window.getSelection != "undefined"
+        //    && typeof document.createRange != "undefined") {
+        //    var range = document.createRange();
+        //    range.selectNodeContents(el);
+        //    range.collapse(false);
+        //    var sel = window.getSelection();
+        //    sel.removeAllRanges();
+        //    sel.addRange(range);
+        //} else if (typeof document.body.createTextRange != "undefined") {
+        //    var textRange = document.body.createTextRange();
+        //    textRange.moveToElementText(el);
+        //    textRange.collapse(false);
+        //    textRange.select();
+        //}
+    }
+
+    var charactersInLine = 0;
+    function checkMaxLen(e) {
+        var x = e.which || e.keyCode;
+
+        if (($('#editor').prop('scrollHeight') > 772) && x != 8) {
+            //    alert('max Number of lines reached.');
+            //    return false;
+            e.preventDefault();
+            //    //$('#editor').prop('contenteditable', 'false');
+
+        }
+    }
+</script>
+
+@*Screen Shots scripts start *@
+<script src="~/Content/js/html2canvas.min.js"></script>
+<script type="text/javascript">
+
+    function TakeScreenShot() {
+        html2canvas($('#getscreenshot'), {
+            onrendered: function (canvas) {
+                //document.body.appendChild(canvas);
+                $('#ScreenShot').val(canvas.toDataURL("image/png"));
+                previewFile($('#ScreenShot').val(), "pageScreenShot", 0, 0, 0);
+                $('#NotebookForm').submit();
+                //  $('#NotebookForm').Attributes.Add("onclick", "return false;");
+            }
+        });
+    }
+
+    function takethumbnail() {
+
+        var time = 15;
+        var scale = 1;
+
+        var video_obj = null;
+
+        document.getElementById('myVideo').addEventListener('loadedmetadata', function () {
+            this.currentTime = time;
+            video_obj = this;
+
+        }, false);
+
+        document.getElementById('myVideo').addEventListener('loadeddata', function () {
+            var video = document.getElementById('myVideo');
+
+            var canvas = document.createElement("canvas");
+            canvas.width = 320;
+            canvas.height = 240;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+            $('#ScreenShot').val(canvas.toDataURL("image/png"));
+            previewFile($('#ScreenShot').val(), "pageScreenShot", 0, 0, 0);
+            //  $('#NotebookForm').submit();
+            $('#MsgDiv').addClass('alert alert-success').html('Click save button to save page in notebook successfully.');
+            //$('.successmsg').text('Click save button to save page in notebook successfully');
+            //$('.successmsg').show();
+            video_obj.currentTime = 0;
+
+        }, false);
+    }
+
+    $(".alert").fadeIn().fadeOut(10000);
+</script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script src="~/Scripts/home.js"></script>
+@*Screen Shots scripts end *@
+
+
+

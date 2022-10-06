@@ -1,0 +1,171 @@
+<style>
+  .span {
+    display: inline-block !important;
+  }
+</style>
+
+<ion-content>
+  <div>
+    <div class="notebookEditor" id="editorDiv" style="margin-top:16px;">
+      <div contenteditable="false">
+      </div>
+      <div class="childEditor" style="height: 100%;">
+        <div id="editor" class=" add-notebook-editor" style="width:100%;float:left;display:inline-block;z-index:999;position:relative;    height: auto;    overflow: auto;    max-height: 130px;    min-height: 130px;    border: 1px solid #ccc;    padding: 10px 10px;    margin-top: 2px" contenteditable="false">
+          <br>
+          <div class="span">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="imageContainer" style="display: table; width: 100%; height: 100%;">
+      <div style="display:table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;">
+        <img id="mainpageimg" style="display:inline-block;max-width: 1024px;" src="" />
+      </div>
+    </div>
+    <div class="text-right">
+      <button ion-button type="submit" class="btn btn-primary" style="margin-top: 5px;padding:6px 6px;" id="submitQuestion">Post</button>
+      <button type="button" class="btn btn-primary" style="margin-top: 5px;padding:6px  5px;" id="cancel">Cancel</button>
+    </div>
+
+    <div class="popx">
+      <div class="arrow_box"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="btn-area1">
+            <a href="javascript:;" class="top-button" onclick="return defaultScientific_KeyBoard();">Scientific Keyboard</a>
+            <a href="javascript:;" class="top-button" onclick="gotoSpecialSymbols();">Special symbols</a>
+            <a href="javascript:;" class="top-button" onclick="return gotoQWETY();">Qwerty Keyboard</a>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="btn-area2 clearfix">
+          <div class="col-md-12" id="keyboadArea">
+            <span data-attr="1" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img1.png" />
+              </a>
+            </span>
+            <span data-attr="2" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/im2.png" />
+              </a>
+            </span>
+            <span data-attr="3" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/im3.png" />
+              </a>
+            </span>
+            <span data-attr="4" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img4.png" />
+              </a>
+            </span>
+            <span data-attr="5" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img5.png" />
+              </a>
+            </span>
+            <span data-attr="6" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img6.png" />
+              </a>
+            </span>
+            <span data-attr="7" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/im7.png" />
+              </a>
+            </span>
+            <span data-attr="8" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img8.png" />
+              </a>
+            </span>
+            <span data-attr="9" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img9.png" />
+              </a>
+            </span>
+            <span data-attr="10" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img10.png" />
+              </a>
+            </span>
+            <span data-attr="11" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img11.png" />
+              </a>
+            </span>
+            <span data-attr="12" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img12.png" />
+              </a>
+            </span>
+            <span data-attr="80" data-text="∪" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img13.png" />
+              </a>
+            </span>
+            <span data-attr="80" data-text="∩" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img14.png" />
+              </a>
+            </span>
+            <span data-attr="15" class="KeyboardKey">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/img15.png" />
+
+              </a>
+            </span>
+
+          </div>
+          <table class="ruled prec-form-char" style="display: none;">
+            <tr>
+              <td>
+                <textarea id="powerTextbox">\\html'&lt;div contenteditable="true" class="textbox text"&gt;x&lt;/div&gt;'</textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <textarea id="mathSrc1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox"&gt;&lt;/div&gt;'</textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="mathTgt1"></div>
+              </td>
+            </tr>
+          </table>
+          <div style="float: right; position: absolute; bottom: -12px; right: 8px;display:none" id="commonKeys">
+            <span class="KeyboardKey" data-attr="80" data-text="&nbsp;">
+              <a href="javascript:;" class="button">
+                <img src="assets/custom/KeyboardIcons/images/space.png" />
+              </a>
+            </span>
+            <span class="KeyboardKey">
+              <a href="javascript:;" class="button" onclick="backspaceFunction()">
+                <img src="assets/custom/KeyboardIcons/images/special character/bksp.png" />
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: none">
+      <textarea id="dy" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;dy&lt;/div&gt;'</textarea>
+      <textarea id="dx" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;dx&lt;/div&gt;'</textarea>
+      <textarea id="dy1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;△y&lt;/div&gt;'</textarea>
+      <textarea id="dx1" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;△x&lt;/div&gt;'</textarea>
+      <textarea id="dy2" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;∂y&lt;/div&gt;'</textarea>
+      <textarea id="dx2" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;∂x&lt;/div&gt;'</textarea>
+      <textarea id="dy3" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;δy&lt;/div&gt;'</textarea>
+      <textarea id="dx3" style="height: 10px;">\\html'&lt;div contenteditable="true" class="textbox text"&gt;δx&lt;/div&gt;'</textarea>
+    </div>
+    <div id="question" style="border:1px solid #000;min-height:50px;background-color:#fff;display:none;"></div>
+    <!-- Keyboard -->
+
+
+  </div>
+</ion-content>

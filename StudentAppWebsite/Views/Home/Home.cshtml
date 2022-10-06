@@ -1,0 +1,1759 @@
+﻿@model StudentAppWebsite.Models.StudentRegistration
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/html2canvas.js"></script>
+<script src="~/JsPDF/jspdf.js"></script>
+<script src="~/JsPDF/plugins/addimage.js"></script>
+
+<style type="text/css">
+    .break-word {
+        word-wrap: break-word;
+    }
+
+    body {
+        background: #f5f5f5 !important;
+    }
+
+    .minimize, .maximize {
+        cursor: pointer;
+    }
+
+    .hide-content {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+    /*.Inno_inv_val_1 {
+        height: 25px;
+        width: 25px;
+        border-radius: 50px;
+        background-color: #008000;
+        font-weight: bold;
+        padding-top: 1px;
+        padding-left: 11px;
+        left: 10px;
+        top: 30px;
+        position: absolute;
+        font-size: 15px;
+        color: black;
+        margin-left: 80%;
+        color: #f5f5f5;
+    }*/
+    .Inno_inv_val_1 {
+        background-color: #008000;
+        left: auto;
+        top: 45px;
+        height: 25px;
+        width: 25px;
+        padding-left: 0;
+        right: 0;
+        padding-top: 1px;
+        text-align: center;
+        border-radius: 50px;
+        position: absolute;
+        font-size: 15px;
+        color: #f5f5f5;
+    }
+
+    .Inno_inv_val_2 {
+        height: 25px;
+        width: 25px;
+        padding-left: 11px;
+        font-weight: bold;
+        padding-top: 1px;
+        border-radius: 50px;
+        background-color: #ffa500;
+        color: #fffbfb !important;
+        font-size: 15px;
+        left: auto;
+        top: auto;
+        position: absolute;
+        color: black;
+        right: 0;
+        bottom: 25px;
+    }
+    /*.Inno_inv_val_2 {
+        height: 25px;
+        width: 25px;
+        padding-left: 11px;
+        font-weight: bold;
+        padding-top: 1px;
+        border-radius: 50px;
+        background-color: #ffa500;
+        color: #fffbfb !important;
+        font-size: 15px;
+        left: 142px;
+        top: 251px;
+        position: absolute;
+        color: black;
+    }*/
+    @@media screen and (min-width: 768px) and (max-width: 840px) {
+        /*.Inno_inv_val_1 {
+            background-color: #008000;
+            left: 9px;
+            position: absolute;
+            top: 25px;
+            height: 25px;
+            width: 25px;
+            padding-left: 8px;
+            padding-top: 1px;
+        }*/
+    }
+
+    @@media screen and (min-width: 320px) and (max-width: 400px) {
+        /*.Inno_inv_val_1 {
+            background-color: #008000;
+            left: 22px;
+            position: absolute;
+            top: 42px;
+            height: 25px;
+            width: 25px;
+            padding-left: 11px;
+            padding-top: 1px;
+        }*/
+        .Inno_inv_val_2 {
+            height: 25px;
+            width: 25px;
+            padding-left: 11px;
+            font-weight: bold;
+            padding-top: 1px;
+            border-radius: 50px;
+            background-color: #ffa500;
+            color: #fffbfb !important;
+            font-size: 15px;
+            left: 214px;
+            top: 372px;
+            position: absolute;
+            color: black;
+        }
+    }
+
+
+
+    .Inno_inv_val_0 {
+        display: none;
+    }
+</style>
+
+<style>
+</style>
+<div style="position: fixed; height: 100%; width: 100%; top: 0; left: 0; z-index: 5; display: none; background-color: rgba(225,225,225,0.5); text-align: center" id="loaderDiv2">
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+    </div>
+</div>
+@using (Html.BeginForm("Home", "Home", FormMethod.Post))
+{
+
+    <input type="hidden" id="offset" />
+    <section class="category">
+        <div class=" container-fluid">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 right-bx display-pc">
+                    <form name="notebook_srch_frm">
+                        <div class="option">
+                            <p class="option-text">
+                                Country
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="countryDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @*<label><input type="radio" value="" checked/>All</label>*@
+                                        @foreach (var Countries in Model.Countrylist)
+                                        {<div class="radio">
+
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.Country, Countries.ID, new { @class = "Country" })
+                                                    @Countries.CountryName
+                                                </label>
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <p class="option-text">
+                                State
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="stateDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @foreach (var States in Model.statelist)
+                                        {
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.state, States.ID, new { @class = "State" })
+                                                    @States.StateName
+                                                </label>
+                                            </div>}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <p class="option-text">
+                                City
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="cityDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @foreach (var Cities in Model.citylist)
+                                        {<div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.City, Cities.ID, new { @class = "City" })
+                                                    @Cities.CityName
+                                                </label>
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: rgba(225,225,225,0.5); text-align: center; display: none;" id="loaderDiv2">
+
+                            <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+                                <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+
+                            </div>
+                        </div>
+                        <div class="option" style="display:none;">
+                            <p class="option-text">
+                                Categories
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="ctgryDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @foreach (var Categories in Model.CategoryList)
+                                        {<div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.Category, Categories.Id, new { @class = "Category" })
+                                                    @Categories.CategoryName
+                                                </label>
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="option" style="display:none;">
+                            <p class="option-text">
+                                Streams
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="strmDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @foreach (var Streams in Model.StreamList)
+                                        {<div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.Stream, Streams.Id, new { @class = "Streams" })
+                                                    @Streams.StreamName
+                                                </label>
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="option" style="display:none;">
+                            <p class="option-text">
+                                COACHING / COLLEGE / SCHOOL
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="instDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @foreach (var Institutes in Model.InstituteList)
+                                        {<div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(model => model.InstituteName, Institutes.Id, new { @class = "Institute" })
+                                                    @Institutes.InstituteName
+                                                </label>
+                                            </div>
+
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="option">
+                            <p class="option-text">
+                                Subjects
+                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                            </p>
+                            <div class="option-box zoomTarget">
+                                <ul id="subDiv" style="padding-left: 10px;">
+                                    <li>
+                                        @for (int i = 0; i < Model.SubjectsList.Count; i++)
+                                        {<div class="Checkbox">
+                                                <label>
+                                                    @Html.CheckBoxFor(model => model.SubjectsList[i].IsChecked, new { @class = "Subject", @value = Model.SubjectsList[i].Id })
+                                                    @Model.SubjectsList[i].SubjectName
+                                                    @Html.HiddenFor(m => Model.SubjectsList[i].SubjectName)
+                                                    @Html.HiddenFor(m => Model.SubjectsList[i].Id)
+                                                </label>
+                                            </div>
+
+                                        }
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-9 col-sm-9 left-bx">
+                    <div class="row">
+                        <div class="filter-menu right-bx display-mobile">
+                            <button class="btn btn-primary filetcollapse-btn " type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                Search by filters
+                            </button>
+                            <div class="collapse" id="collapseExample">
+                                <div class="well">
+                                    <form name="notebook_srch_frm">
+                                        <div class="option">
+                                            <p class="option-text">
+                                                Country
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="countryDivi" style="padding-left: 10px;">
+                                                    <li>
+
+                                                        @foreach (var Countries in Model.Countrylist)
+                                                        {<div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.Country, Countries.ID, new { @class = "Country1" })
+                                                                    @Countries.CountryName
+
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="option">
+                                            <p class="option-text">
+                                                State
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="stateDivi" style="padding-left: 10px;">
+                                                    <li>
+                                                        @foreach (var States in Model.statelist)
+                                                        {
+                                                            <div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.state, States.ID, new { @class = "State1" })
+                                                                    @States.StateName
+                                                                </label>
+                                                            </div>}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="option">
+                                            <p class="option-text">
+                                                City
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="cityDivi" style="padding-left: 10px;">
+                                                    <li>
+                                                        @foreach (var Cities in Model.citylist)
+                                                        {<div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.City, Cities.ID, new { @class = "City1" })
+                                                                    @Cities.CityName
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: rgba(225,225,225,0.5); text-align: center; display: none;" id="loaderDiv2">
+
+                                            <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+                                                <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+
+                                            </div>
+                                        </div>
+                                        <div class="option" style="display:none;">
+                                            <p class="option-text">
+                                                Categories
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="ctgryDiv" style="padding-left: 10px;">
+                                                    <li>
+                                                        @foreach (var Categories in Model.CategoryList)
+                                                        {<div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.Category, Categories.Id, new { @class = "Category" })
+                                                                    @Categories.CategoryName
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="option" style="display:none;">
+                                            <p class="option-text">
+                                                Streams
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="strmDiv" style="padding-left: 10px;">
+                                                    <li>
+                                                        @foreach (var Streams in Model.StreamList)
+                                                        {<div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.Stream, Streams.Id, new { @class = "Streams" })
+                                                                    @Streams.StreamName
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="option" style="display:none;">
+                                            <p class="option-text">
+                                                COACHING / COLLEGE / SCHOOL
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="instDiv" style="padding-left: 10px;">
+                                                    <li>
+                                                        @foreach (var Institutes in Model.InstituteList)
+                                                        {
+                                                            <div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.InstituteName, Institutes.Id, new { @class = "Institute" })
+                                                                    @Institutes.InstituteName
+                                                                </label>
+                                                            </div>
+
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="option">
+                                            <p class="option-text">
+                                                Subjects
+                                                <span style="float: right" class="minimize"><i class="fa fa-minus"></i></span>
+                                            </p>
+                                            <div class="option-box zoomTarget">
+                                                <ul id="subDiv" style="padding-left: 10px;">
+                                                    <li>
+                                                        @for (int i = 0; i < Model.SubjectsList.Count; i++)
+                                                        {
+                                                            <div class="Checkbox">
+                                                                <label>
+                                                                    @Html.CheckBoxFor(model => model.SubjectsList[i].IsChecked, new { @class = "Subject", @value = Model.SubjectsList[i].Id })
+                                                                    @Model.SubjectsList[i].SubjectName
+                                                                    @Html.HiddenFor(m => Model.SubjectsList[i].SubjectName)
+                                                                    @Html.HiddenFor(m => Model.SubjectsList[i].Id)
+                                                                </label>
+                                                            </div>
+
+                                                        }
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <form name="srch_box_form" id="srch_box_form">
+                            <div class="search-bx">
+                                <div class="col-md-12">
+                                    <input type="hidden" id="hidden" />
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Text, new { @class = "form-control", @style = "border: 1px solid rgb(99, 179, 248);", @placeholder = "Search notebooks by (Creator, Subject)" })
+                                        <span class=" input-group-addon src-btn" id="btnSearch" style="cursor: pointer;">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*                    <div class="row mobile-back">
+                            <div class="col-md-12 find-frnd-btnmobile">
+                                <div class="input-group">
+                                    <input type="text" class="form-control inputSearch" id="searchbox" placeholder="Find a Friend....." aria-describedby="searchbox">
+                                    <span class="input-group-addon searchbtn" id="searchbtn" style="cursor: pointer;">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>*@
+                    <form>
+                        <div class="row main">
+                            <div id="NotebookDetail" class="clearfix" style="border-top: 22px solid #ccc;">
+                                @foreach (var item in Model.NotebookFormList)
+                                {
+                                    string[] chapterdata = null;
+                                    var chapterName = item.ChapterName;
+                                    if (chapterName != null)
+                                    {
+                                        chapterdata = chapterName.Split(',');
+                                    }
+                                    <div class="col-md-3 col-sm-4 col-xs-6 article">
+                                        <div class="imgdiv" style="cursor:pointer" onclick="window.open('/Home/Notebook_Pages?BookId=@item.NotebookId','_self')">
+                                            <div class="imgagediv">
+                                                <img src="~/Content/images/notebooks.png" />
+                                            </div>
+                                            <div class="textdiv">
+                                                <div class="main1">
+                                                    <div class="main2">
+                                                        <div class="@((item.Innovation_Investment==1)?"Inno_inv_val_1":(item.Innovation_Investment==2)?"Inno_inv_val_2":"Inno_inv_val_0")">I</div>
+                                                        <img src="@item.SubmitterPic" class="img-circle" width="10%" height="60%" />
+
+                                                        @* <div  title="@item.SubjectName"><a href="/Home/Notebook_Pages?BookId=@item.NotebookId">@(!string.IsNullOrEmpty(item.SubjectName) && item.SubjectName.Length > 50 ? item.SubjectName.Substring(0, 50) : item.SubjectName)</a></div>*@
+                                                        <div title="@item.SubjectName"><a href="/Home/Notebook_Pages?BookId=@item.NotebookId">@item.SubjectName</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-of-students">
+                                            <ul>
+                                                @*<li title="@item.ChapterName">Chapter: <span>@(chapterdata != null ? (chapterdata[0].Length > 15 ? chapterdata[0].Substring(0, 15) : chapterdata[0]) : string.Empty)</span></li>*@
+                                                <li class="sub-height hide-content " style="word-break:break-all" title="@item.SubjectName">Subject: <span>@item.SubjectName</span></li>
+                                                <li class="submit-height hide-content" style="word-break:break-all" title="@item.FirstName @item.LastName">Creator: <span>@((!string.IsNullOrEmpty(item.FirstName)) && (!string.IsNullOrEmpty(item.LastName)) ? item.FirstName + ' ' + item.LastName : "")</span></li>
+                                                @*<li title="@item.TeachereName">Teacher: <span>@(!string.IsNullOrEmpty(item.TeachereName) && item.TeachereName.Length > 15 ? (item.TeachereName.Substring(0, 15)) : item.TeachereName)</span></li>*@
+                                                <li style="display:none;" class="two_rows" title="@item.CollegeId">Coaching/College/School: <span class="hide-content">@(item.CollegeId)</span></li>
+                                            </ul>
+                                        </div>
+
+                                        <p class="btn-all-main">
+                                            @Html.HiddenFor(model => model.NotebookId)
+                                            <a href="/Home/NoteBookDetails?BookId=@item.NotebookId" class="btn btn-primary all-propety">All Properties</a>
+                                            @*<input type="button" id="DownloadButton" class="btn btn-success" value="Download" onclick="return Downloadbook()" />*@
+                                            @*<a href="javascript:;" class="btn btn-success" onclick="Downloadbook('@item.NotebookId','@item.SubjectName')">Download</a>*@
+                                        </p>
+                                    </div>
+
+
+                                }
+
+                                @* <div class="col-md-12" id="show_more_main11" style="clear: both;">
+                                        <a href="#" class="show_more">More...</a>
+
+                                    </div>*@
+                            </div>
+                            <div id="NotebookDetailNew">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        var offset = '@(Model.NotebookFormList != null ? (Model.NotebookFormList.Count == 12 ? 1 : -1) : -1)';
+        $('#offset').val(offset);
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+
+                loadMoreData();
+            }
+        });
+
+
+
+        $(document).on('click', '.minimize', function () {
+            $(this).parent().next().hide(500);
+            $(this).addClass('maximize');
+            $(this).find('i').addClass('fa-plus');
+            $(this).find('i').removeClass('fa-minus');
+            $(this).removeClass('minimize');
+        });
+        $(document).on('click', '.maximize', function () {
+            $(this).parent().next().show(500);
+            $(this).addClass('minimize');
+            $(this).removeClass('maximize');
+            $(this).find('i').removeClass('fa-plus');
+            $(this).find('i').addClass('fa-minus');
+        });
+
+
+
+    </script>
+    <div id="export-content" style="font-size: 18px;">
+        @if (Model.IsHtml != true)
+        {
+            <img src="@Model.PageImage" />
+        }
+        else
+        {
+            @Html.Raw(Model.PageImage)
+        }
+    </div>
+    <input type="hidden" value="" id="countrydata" />
+    <input type="hidden" value="" id="statedata" />
+    <input type="hidden" value="" id="citydata" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#srch_box_form").keypress(function (e) {
+
+                var kCode = e.keyCode || e.charCode //for cross browser
+
+                if (kCode == 13) {
+
+                    $("#btnSearch").click();
+                    return false;
+                }
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $('.option-box').slimScroll({
+                    height: '140px'
+                });
+            });
+            $('#Text').on("keyup", function () {
+            });
+
+            if ($('.Country').val() == "0") {
+                options = '<div class="radio"> <label><input id="state" class="State" type="radio" value="0" name="state"  >Select All</label></div>';
+                $('#stateDiv:visible').find('li').html(options);
+                $('#state:visible').eq(0).prop('checked', true).trigger('change');
+
+                options1 = '<div class="radio"> <label><input id="city" class="City" type="radio" value="0" name="city"  />Select All</label></div>';
+                $('#cityDiv:visible').find('li').html(options1);
+
+                $('#city:visible').eq(0).prop('checked', true).trigger('change');
+            }
+            if ($('.Country1').val() == "0") {
+                options = '<div class="radio"> <label><input id="state1" class="State1" type="radio" value="0" name="state1"  >Select All</label></div>';
+                $('#stateDivi').find('li').html(options);
+                $('#state1').eq(0).prop('checked', true).trigger('change');
+
+                options1 = '<div class="radio"> <label><input id="city1" class="City1" type="radio" value="0" name="city1"  />Select All</label></div>';
+                $('#cityDivi').find('li').html(options1);
+
+                $('#city1').eq(0).prop('checked', true).trigger('change');
+            }
+
+
+            $('.Country').on("change", function () {
+                $('#countrydata').val($(this).val());
+                StateBind($(this).val());
+                if ($(this).val() != "0") {
+                    $('#cityDiv:visible').find('li').html("");
+                }
+                SearchBooksByName($("#Text").val());
+
+            });
+
+            $('.State').on("change", function () {
+
+               
+                $('#statedata').val($(this).val());
+                //   alert($(this).val());
+                CityBind($(this).val());
+                // alert($('#statedata').val());
+            });
+
+            $('.City').on("change", function () {
+                $('#citydata').val($(this).val());
+                InstituteBind();
+            });
+
+            $('.Country1').on("change", function () {
+                $('#countrydata').val($(this).val());
+                MobileStateBind($(this).val());
+                if ($(this).val() != "0") {
+                    $('#cityDiv:visible').find('li').html("");
+                }
+            });
+
+            $('.State1').on("change", function () {
+
+                $('#statedata').val($(this).val());
+                MobileCityBind($(this).val());
+
+            });
+
+            $('.City1').on("change", function () {
+                $('#citydata').val($(this).val());
+                InstituteBind();
+            });
+
+
+
+            $('.Category').on("change", function () {
+                StreamBind($(this).val());
+                SearchBooksByCatInsStrSub();
+            });
+            $('.Streams').on("change", function () {
+                InstituteBind();
+                SearchBooksByCatInsStrSub();
+
+
+            });
+            $('.Institute').on("change", function () {
+
+                //  alert();
+                SearchBooksByCatInsStrSub();
+
+
+            });
+            $('.Subject').on("change", function () {
+                Text = $('#Text').val();
+                SearchBooksByName(Text);
+                //SearchBooksByCatInsStrSub();
+            });
+
+            $('#btnSearch').click(function () {
+                Text = $('#Text').val();
+                $('#NotebookDetailNew').show();
+                SearchBooksByName(Text);
+
+            });
+
+        });
+
+    </script>
+
+    <script src="~/Scripts/html2canvas.js"></script>
+    <script src="~/JsPDF/jspdf.js"></script>
+    <script src="~/JsPDF/plugins/addimage.js"></script>
+    <script src="~/Scripts/FileSaver.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+
+    <script>
+        function StateBind(country) {
+            if (country == "0") {
+                country = "";
+            }
+            var CountryID = country;
+
+            //  alert(CountryID);
+            if (CountryID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/StateLoad",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "";
+                            $.each(msg.statelist, function (key, value) {
+                                console.log(value.Id);
+                                options += '<div class="radio"> <label><input id="state" class="State" type="radio" value="' + value.ID + '" name="state"  >' + value.StateName + '</label></div>';
+                            });
+                            $('#stateDiv').find('li').html(options);
+                            $('#stateDivi').find('li').html(options);
+
+                            $('.State').on("change", function () {
+                                CityBind($(this).val());
+                                SearchBooksByName($("#Text").val());
+                            });
+
+                            $('#state').eq(0).prop('checked', true).trigger('change');
+                        }
+                        else {
+
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'CountryID': CountryID },
+                });
+            } else {
+                options = '<div class="radio"> <label><input id="state" class="State" type="radio" value="0" name="state"  >Select All</label></div>';
+                $('#stateDiv').find('li').html(options);
+                $('#stateDivi').find('li').html(options);
+                $('#state').eq(0).prop('checked', true).trigger('change');
+
+                options1 = '<div class="radio"> <label><input id="city" class="City" type="radio" value="0" name="city"  />Select All</label></div>';
+                $('#cityDiv').find('li').html(options1);
+                $('#cityDivi').find('li').html(options1);
+                $('#city').eq(0).prop('checked', true).trigger('change');
+                $('#state').html("<option value>Select</option>");
+            }
+        }
+
+
+        function CityBind(State) {
+            if (State == "0") {
+                State = "";
+            }
+            var StateID = State;
+            //    alert("StateId" + StateID);
+            if (StateID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/CityLoad",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "";
+                            $.each(msg.citylist, function (key, value) {
+                                console.log(value.Id);
+                                options += '<div class="radio"> <label><input id="city" class="City" type="radio" value="' + value.ID + '" name="city"  />' + value.CityName + '</label></div>';
+                                // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                            });
+                            $('#cityDiv').find('li').html(options);
+                            $('#cityDivi').find('li').html(options);
+                            $('#city').eq(0).prop('checked', true).trigger('change');
+                            $(".City").change(function () {
+                                SearchBooksByName($("#Text").val());
+                            });
+                        }
+                        else {
+
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'StateID': StateID },
+                });
+            } else {
+                options1 = '<div class="radio"> <label><input id="city" class="City" type="radio" value="0" name="city"  />Select All</label></div>';
+                $('#cityDiv').find('li').html(options1);
+                $('#cityDivi').find('li').html(options1);
+                $('#city').eq(0).prop('checked', true).trigger('change');
+                $('#City').html("<option value>Select</option>");
+            }
+        }
+
+        function MobileStateBind(country) {
+            if (country == "0") {
+                country = "";
+            }
+            var CountryID = country;
+
+            //  alert(CountryID);
+            if (CountryID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/StateLoad",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "";
+                            $.each(msg.statelist, function (key, value) {
+                                console.log(value.Id);
+                                options += '<div class="radio"> <label><input id="state1" class="State1" type="radio" value="' + value.ID + '" name="state1"  >' + value.StateName + '</label></div>';
+                            });
+                            //   $('#stateDiv').find('li').html(options);
+                            $('#stateDivi').find('li').html(options);
+
+                            $('.State1').on("change", function () {
+                                MobileCityBind($(this).val());
+                            });
+                            $('#state1').eq(0).prop('checked', true).trigger('change');
+                        }
+                        else {
+
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'CountryID': CountryID },
+                });
+            } else {
+                options = '<div class="radio"> <label><input id="state11" class="State1" type="radio" value="0" name="state1"  >Select All</label></div>';
+                //  $('#stateDiv').find('li').html(options);
+                $('#stateDivi').find('li').html(options);
+                $('#state1').eq(0).prop('checked', true).trigger('change');
+
+                options1 = '<div class="radio"> <label><input id="city1" class="City1" type="radio" value="0" name="city1"  />Select All</label></div>';
+                // $('#cityDiv').find('li').html(options1);
+                $('#cityDivi').find('li').html(options1);
+                $('#city1').eq(0).prop('checked', true).trigger('change');
+                $('#state').html("<option value>Select</option>");
+            }
+        }
+
+
+        function MobileCityBind(State) {
+            if (State == "0") {
+                State = "";
+            }
+            var StateID = State;
+            //    alert("StateId" + StateID);
+            if (StateID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/CityLoad",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "";
+                            $.each(msg.citylist, function (key, value) {
+                                console.log(value.Id);
+                                options += '<div class="radio"> <label><input id="city1" class="City1" type="radio" value="' + value.ID + '" name="city1"  />' + value.CityName + '</label></div>';
+                                // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                            });
+                            // $('#cityDiv').find('li').html(options);
+                            $('#cityDivi').find('li').html(options);
+                            $('#city1').eq(0).prop('checked', true).trigger('change');
+                        }
+                        else {
+
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'StateID': StateID },
+                });
+            } else {
+                options1 = '<div class="radio"> <label><input id="city1" class="City1" type="radio" value="0" name="city1"  />Select All</label></div>';
+                //     $('#cityDiv').find('li').html(options1);
+                $('#cityDivi').find('li').html(options1);
+                $('#city1').eq(0).prop('checked', true).trigger('change');
+                $('#City').html("<option value>Select</option>");
+            }
+        }
+
+
+
+
+        function StreamBind(Category) {
+            var CategoryID = Category;
+            if (CategoryID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/StreamsLoadByCategoryId",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg.HomeList.length > 0) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "";
+                            $.each(msg.HomeList, function (key, value) {
+                                console.log(value.Id);
+                                options += '<div class="radio"> <label><input id="Stream" class="Streams" type="radio" value="' + value.Id + '" name="Stream"  />' + value.StreamName + '</label></div>';
+                                // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                            });
+
+                            $('#strmDiv').find('li').html(options);
+                            $('.Streams').on("change", function () {
+
+                                InstituteBind();
+                            });
+                            $('.Streams').eq(0).prop('checked', true).trigger('change');
+                        }
+                        else {
+                            $('#strmDiv').find('li').html('NO STREAMS');
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'CategoryID': CategoryID },
+                });
+            } else {
+                $('#Category').html("<option value>Select</option>");
+            }
+        }
+
+        function InstituteBind() {
+            var StreamId = $('.Streams:checked').val();
+            if (StreamId != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/InstitutesLoadByStreamID",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg.instituteNewList.length > 0) {
+                            //var options = "<option value='0'>Select</option>";
+                            var Instituteoptions = "";
+
+                            $.each(msg.instituteNewList, function (key, value) {
+                                console.log(value.Id);
+                                Instituteoptions += '<div class="radio"> <label><input id="Institute" class="Institute" type="radio" value="' + value.Id + '" name="Institute"  />' + value.InstituteName + '</label></div>';
+                                // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                            });
+
+
+
+                            $('#instDiv').find('li').html(Instituteoptions);
+                            $('.Institute').on("change", function () {
+
+                                SearchBooksByCatInsStrSub();
+                            });
+                            $('.Institute').eq(0).prop('checked', true).trigger('change');
+                        }
+                        else {
+                            $('#instDiv').find('li').html('NO COLLEGES');
+
+                        }
+
+                        if (msg.SubjectsList.length > 0) {
+                            var Subjectsoptions = "";
+                            $.each(msg.SubjectsList, function (key, value) {
+
+                                Subjectsoptions += '<div class="Checkbox"><label><input id="Subject" class="Subject" type="checkbox" value="' + value.Id + '" name="Subject"  /> ' + value.SubjectName + '</label></div>';
+                                // options += "option value=" + value.Value + ">" + value.Text + "</option>";
+                            });
+
+                            $('#subDiv').find('li').html(Subjectsoptions);
+                            $('.Subject').on("change", function () {
+                                SearchBooksByName($("#Text").val());
+                                //SearchBooksByCatInsStrSub();
+                                //InstituteBind($(this).val());
+                            });
+                        }
+                        else {
+
+                            $('#subDiv').find('li').html('NO SUBJECTS');
+                        }
+
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'StreamId': StreamId, 'CityId': $('.City:checked').val() },
+                });
+            }
+        }
+
+
+
+        function SearchBooksByCatInsStrSub() {
+            $('#loaderDiv2').show();
+            var CategoryID = '';
+            var selectedVal = "";
+            var selected = $("#ctgryDiv input[type='radio']:checked");
+            if (selected.length > 0) {
+                CategoryID = selected.val();
+
+            }
+            var StreamID = '';
+            var selectedStream = $("#strmDiv  input[type='radio']:checked");
+            if (selectedStream.length > 0) {
+                StreamID = selectedStream.val();
+
+            }
+            var InstituteID = '';
+            var selectedInstitute = $("#instDiv  input[type='radio']:checked");
+            if (selectedInstitute.length > 0) {
+                InstituteID = selectedInstitute.val();
+
+            }
+
+            var SubjectID = "";
+            $('#subDiv').find('.Checkbox').find("input[type='checkbox']:checked").each(function () {
+                SubjectID = SubjectID + (this).value + ',';
+            });
+
+            //$('.Subject:checked').map(function (_, el) {
+            //    return $(el).val();
+            //    alert($(el).val());
+            //}).get();
+            //$(".option").find('#subDiv').click(function () {
+            //    //  alert("Handler for .click() called.");
+            //});
+
+            //$('#subDiv').on("click", function () {
+
+
+
+            //    alert();
+
+
+            //});
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/SearchBookByCatStrInsSub",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderDiv2').hide();
+                    if (data != null && data.NotebookFormList != null && data.NotebookFormList.length > 0) {
+                        var html = "";
+                        $.each(data.NotebookFormList, function (i, item) {
+
+                            //var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                            //var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            //var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            //var Student = (item["StudentName"] != null ? item["StudentName"] : "");
+                            //var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            //var Teacher = (item["TeachersName"] != null ? item["TeachersName"] : "");
+                            //var TeacherSubstring = (Teacher.length > 15 ? item["TeachersName"].substr(0, 15) : Teacher);
+                            //var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            //var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            //var Chapter = (item["ChapterName"] != null ? item["ChapterName"] : "");
+                            //var ChapterSubstring = (Chapter.length > 15 ? item["ChapterName"].substr(0, 15) : Chapter);
+                            //var Id = (item["Id"] != null ? item["Id"] : "");
+                            //// alert(Id);
+                            //// html += '<div class="col-md-3"><div class="detail"><a href="/Home/NoteBookDetails?BookId="><p class="index_book" title="' + item["SubjectId"] + '" >' + SubjectSubstring + '</p></a><ul><li title="' + item["ChapterName"] + '">Chapter: <span>' + ChapterSubstring + '</span></li><li title="' + item["SubjectId"] + '">Subject: <span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Student: <span>' + StudentSubstring + '</span></li><li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School: <span>' + CollegeSubstring + '</span></li></ul><br /><p><button type="button" class="btn btn-primary ">All Properties</button>&nbsp;<a href="#">Download</a><!-- <button type="button" class="btn btn-info dwnld-btn">Download</button>--></p></div></div>';
+                            ////html += '<div class="col-md-3 col-sm-4"> <div class="imgdiv"><div class="imgagediv"><a href="Notebook_Pages?BookId=' + Id + '"><img src="/Content/images/notebooks.png"></div><div class="textdiv"><div class="main1"> <div class="main2"><div  title="' + item["SubjectId"] + '" >' + SubjectSubstring50 + '</div></a></div></div></div> </div><div class="list-of-students"><ul><li title="' + item["SubjectId"] + '">Subject:<span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Submitter:<span>' + StudentSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + CollegeSubstring + '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' + Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+                            //html += '<div class="col-md-3 col-sm-4 article"> <div class="imgdiv"><div class="imgagediv"><a href="/Home/Notebook_Pages?BookId=' +
+                            //    Id + '"><img src="/Content/images/notebooks.png"></div><div class="textdiv"><div class="main1"> <div class="main2"><div style="word-break:break-all"  title="' +
+                            //    item["SubjectId"] + '" >' + Subject + '</div></a></div></div></div> </div><div class="list-of-students"><ul><li style="word-break:break-all" title="' +
+                            //    item["SubjectId"] + '">Subject:<span>' + Subject + '</span></li><li style="word-break:break-all" title="' + item["StudentName"] + '">Submitter:<span>' +
+                            //    Student + '</span></li><li style="word-break:break-all" class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + College +
+                            //    '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' +
+                            //    Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+                            totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                            var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                            var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            var FirstName = (item["StudentName"] != null ? item["StudentName"] : "");
+                            //var LastName = (item["LastName"] != null ? item["LastName"] : "");
+                            var Student = FirstName;
+                            var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            var Id = (item["Id"] != null ? item["Id"] : 0);
+                            var SubmitterPic = (item["SubmitterPic"] != null ? item["SubmitterPic"] : "");
+                            var Innovation_Investment = (item["Innovation_Investment"] != null ? item["Innovation_Investment"] : "");
+
+
+                            html += '<div class="col-md-3 col-sm-4 col-xs-6 article" >';
+                            html += '<div class="imgdiv" style="cursor:pointer" onclick="window.open(&#39;/Home/Notebook_Pages?BookId=' + Id + '&#39;,&#39;_self&#39;)">';
+                            html += '<div class="imgagediv"><img src="/Content/images/notebooks.png">';
+                            html += '</div>';
+                            html += '<div class="textdiv">';
+                            html += '<div class="main1">';
+                            html += '<div class="main2">';
+                            html += '<div class="inno ' + (Innovation_Investment == 1 ? "Inno_inv_val_1 " : (Innovation_Investment == 2 ? "Inno_inv_val_2" : "Inno_inv_val_0")) + '">I</div>';
+                            html += '<img src="' + (SubmitterPic.trim().length > 0 ? SubmitterPic : "\Images\6GS4E2B.png") + '" class="img-circle" height="60%" width="10%">';
+                            html += '<div style="word-break:break-all" title="' + Subject + '">';
+                            html += '<a href="/Home/Notebook_Pages?BookId=' + Id + '">' + Subject + '</a>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="list-of-students">';
+                            html += '<ul>';
+
+                            html += '<li class="sub-height hide-content" style="word-break:break-all" title="' + Subject + '">Subject: ';
+                            html += "<span>" + Subject + "</span>";
+                            html += '</li>';
+                            html += '<li class="submit-height hide-content" style="word-break:break-all" title="' + Student + '">Creator: ';
+                            html += '<span >' + Student + '</span>';
+                            html += '</li>';
+
+                            //html += '<li style="" class="two_rows" title="' + College + '">Coaching/College/School: ';
+                            //html += '<span class="hide-content">' + College + '</span>';
+                            //html += '</li>';
+                            html += '</ul>';
+                            html += '</div>';
+                            html += '<p class="btn-all-main">';
+                            html += '<input id="NotebookId" name="NotebookId" value="' + Id + '" type="hidden">';
+                            html += '<a href="/Home/NoteBookDetails?BookId=' + Id + '" class="btn btn-primary all-propety">All Properties</a>';
+                            //html += '&nbsp; <a href="javascript:;" class="btn btn-success" onclick="Downloadbook(&#39;' + Id + '&#39;,&#39;' + Subject + '&#39;)">Download</a>';
+                            html += '</p>';
+                            html += '</div>';
+                            //html += '<div class="col-md-3 col-sm-4 col-xs-6 article" style="height: 483px;" id="blackdiv"></div>';
+
+                        });
+                        $('#NotebookDetailNew').html(html);
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').remove('No Records Found');
+                        $('#NotebookDetailNew').removeClass('NotebookStyle');
+                        // equalheight('.main .article');
+
+
+                    }
+                    else {
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').html('No Records Found');
+                        $('#NotebookDetailNew').addClass('NotebookStyle');
+                    }
+                    // .addClass('.alert alert-danger')
+
+
+
+                },
+                failure: function (msg) {
+                    $('#loaderDiv2').hide();
+                    console.log(msg);
+
+                },
+                data: {
+                    "CategoryID": CategoryID,
+                    "StreamID": StreamID,
+                    "InstituteID": InstituteID,
+                    "SubjectID": SubjectID
+
+
+                },
+            });
+
+
+        }
+
+
+        function SearchBooksByFilters() {
+            $('#loaderDiv2').show();
+            var CategoryID = '';
+            var selectedVal = "";
+            var selected = $("#ctgryDiv input[type='radio']:checked");
+            if (selected.length > 0) {
+                CategoryID = selected.val();
+
+            }
+            var StreamID = '';
+            var selectedStream = $("#strmDiv  input[type='radio']:checked");
+            if (selectedStream.length > 0) {
+                StreamID = selectedStream.val();
+
+            }
+            var InstituteID = '';
+            var selectedInstitute = $("#instDiv  input[type='radio']:checked");
+            if (selectedInstitute.length > 0) {
+                InstituteID = selectedInstitute.val();
+
+            }
+
+            var SubjectID = "";
+            $('#subDiv').find('.Checkbox').find("input[type='checkbox']:checked").each(function () {
+                SubjectID = SubjectID + (this).value + ',';
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/SearchBookByCatStrInsSub",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (data) {
+                    console.log(data);
+                    $('#loaderDiv2').hide();
+                    if (data != null && data.NotebookFormList != null && data.NotebookFormList.length > 0) {
+                        var html = "";
+                        $.each(data.NotebookFormList, function (i, item) {
+
+                            //var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                            //var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            //var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            //var Student = (item["StudentName"] != null ? item["StudentName"] : "");
+                            //var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            //var Teacher = (item["TeachersName"] != null ? item["TeachersName"] : "");
+                            //var TeacherSubstring = (Teacher.length > 15 ? item["TeachersName"].substr(0, 15) : Teacher);
+                            //var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            //var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            //var Chapter = (item["ChapterName"] != null ? item["ChapterName"] : "");
+                            //var ChapterSubstring = (Chapter.length > 15 ? item["ChapterName"].substr(0, 15) : Chapter);
+                            //var Id = (item["Id"] != null ? item["Id"] : "");
+                            //// alert(Id);
+                            //// html += '<div class="col-md-3"><div class="detail"><a href="/Home/NoteBookDetails?BookId="><p class="index_book" title="' + item["SubjectId"] + '" >' + SubjectSubstring + '</p></a><ul><li title="' + item["ChapterName"] + '">Chapter: <span>' + ChapterSubstring + '</span></li><li title="' + item["SubjectId"] + '">Subject: <span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Student: <span>' + StudentSubstring + '</span></li><li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School: <span>' + CollegeSubstring + '</span></li></ul><br /><p><button type="button" class="btn btn-primary ">All Properties</button>&nbsp;<a href="#">Download</a><!-- <button type="button" class="btn btn-info dwnld-btn">Download</button>--></p></div></div>';
+                            ////html += '<div class="col-md-3 col-sm-4"> <div class="imgdiv"><div class="imgagediv"><a href="Notebook_Pages?BookId=' + Id + '"><img src="/Content/images/notebooks.png"></div><div class="textdiv"><div class="main1"> <div class="main2"><div  title="' + item["SubjectId"] + '" >' + SubjectSubstring50 + '</div></a></div></div></div> </div><div class="list-of-students"><ul><li title="' + item["SubjectId"] + '">Subject:<span>' + SubjectSubstring + '</span></li><li title="' + item["StudentName"] + '">Submitter:<span>' + StudentSubstring + '</span></li><li class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + CollegeSubstring + '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' + Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+                            //html += '<div class="col-md-3 col-sm-4 article"> <div class="imgdiv"><div class="imgagediv"><a href="/Home/Notebook_Pages?BookId=' +
+                            //    Id + '"><img src="/Content/images/notebooks.png"></div><div class="textdiv"><div class="main1"> <div class="main2"><div style="word-break:break-all"  title="' +
+                            //    item["SubjectId"] + '" >' + Subject + '</div></a></div></div></div> </div><div class="list-of-students"><ul><li style="word-break:break-all" title="' +
+                            //    item["SubjectId"] + '">Subject:<span>' + Subject + '</span></li><li style="word-break:break-all" title="' + item["StudentName"] + '">Submitter:<span>' +
+                            //    Student + '</span></li><li style="word-break:break-all" class="two_rows" title="' + item["CollegeId"] + '">Coaching/College/School:<span>' + College +
+                            //    '</span></li></ul></div><p class="btn-all-main"><a class="btn btn-primary all-propety" href="/Home/NoteBookDetails?BookId=' +
+                            //    Id + '">All Properties</a>&nbsp;<a id="" href="javascript:;" class="btn btn-success" onclick="Downloadbook(' + Id + ')">Download</a></p></div>'; //<li title="' + item["TeachersName"] + '">Teacher: <span>' + TeacherSubstring + '</span></li>
+                            totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                            var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                            var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            var FirstName = (item["StudentName"] != null ? item["StudentName"] : "");
+                            //var LastName = (item["LastName"] != null ? item["LastName"] : "");
+                            var Student = FirstName;
+                            var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            var Id = (item["Id"] != null ? item["Id"] : 0);
+                            var SubmitterPic = (item["SubmitterPic"] != null ? item["SubmitterPic"] : "");
+                            var Innovation_Investment = (item["Innovation_Investment"] != null ? item["Innovation_Investment"] : "");
+
+
+                            html += '<div class="col-md-3 col-sm-4 col-xs-6 article" >';
+                            html += '<div class="imgdiv" style="cursor:pointer" onclick="window.open(&#39;/Home/Notebook_Pages?BookId=' + Id + '&#39;,&#39;_self&#39;)">';
+                            html += '<div class="imgagediv"><img src="/Content/images/notebooks.png">';
+                            html += '</div>';
+                            html += '<div class="textdiv">';
+                            html += '<div class="main1">';
+                            html += '<div class="main2">';
+                            html += '<div class="inno ' + (Innovation_Investment == 1 ? "Inno_inv_val_1 " : (Innovation_Investment == 2 ? "Inno_inv_val_2" : "Inno_inv_val_0")) + '">I</div>';
+                            html += '<img src="' + (SubmitterPic.trim().length > 0 ? SubmitterPic : "\Images\6GS4E2B.png") + '" class="img-circle" height="60%" width="10%">';
+                            html += '<div style="word-break:break-all" title="' + Subject + '">';
+                            html += '<a href="/Home/Notebook_Pages?BookId=' + Id + '">' + Subject + '</a>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="list-of-students">';
+                            html += '<ul>';
+
+                            html += '<li class="sub-height hide-content" style="word-break:break-all" title="' + Subject + '">Subject: ';
+                            html += "<span>" + Subject + "</span>";
+                            html += '</li>';
+                            html += '<li class="submit-height hide-content" style="word-break:break-all" title="' + Student + '">Creator: ';
+                            html += '<span >' + Student + '</span>';
+                            html += '</li>';
+
+                            //html += '<li style="" class="two_rows" title="' + College + '">Coaching/College/School: ';
+                            //html += '<span class="hide-content">' + College + '</span>';
+                            //html += '</li>';
+                            html += '</ul>';
+                            html += '</div>';
+                            html += '<p class="btn-all-main">';
+                            html += '<input id="NotebookId" name="NotebookId" value="' + Id + '" type="hidden">';
+                            html += '<a href="/Home/NoteBookDetails?BookId=' + Id + '" class="btn btn-primary all-propety">All Properties</a>';
+                            //html += '&nbsp; <a href="javascript:;" class="btn btn-success" onclick="Downloadbook(&#39;' + Id + '&#39;,&#39;' + Subject + '&#39;)">Download</a>';
+                            html += '</p>';
+                            html += '</div>';
+                            //html += '<div class="col-md-3 col-sm-4 col-xs-6 article" style="height: 483px;" id="blackdiv"></div>';
+
+                        });
+                        $('#NotebookDetailNew').html(html);
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').remove('No Records Found');
+                        $('#NotebookDetailNew').removeClass('NotebookStyle');
+                        // equalheight('.main .article');
+
+
+                    }
+                    else {
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').html('No Records Found');
+                        $('#NotebookDetailNew').addClass('NotebookStyle');
+                    }
+                    // .addClass('.alert alert-danger')
+
+
+
+                },
+                failure: function (msg) {
+                    $('#loaderDiv2').hide();
+                    console.log(msg);
+
+                },
+                data: {
+                    "CategoryID": CategoryID,
+                    "StreamID": StreamID,
+                    "InstituteID": InstituteID,
+                    "SubjectID": SubjectID
+
+
+                },
+            });
+
+
+        }
+
+
+
+        function SearchBooksByName(Text) {
+            debugger;
+            var countryId = ""; var city = ""; var state = ""; var subject = "";
+            var webcountry = $("input[name='Country']:checked").val();
+            var webstate = $("input[name='state']:checked").val();
+            var webcity = $("input[name='city']:checked").val();
+            //var websubject = $("input[name='Subject']:checked").val();
+            if (webcountry != undefined || webstate || undefined || webcity != undefined) {
+                countryId = webcountry == undefined ? 0: webcountry;
+                state = webstate == undefined ? 0: webstate;
+                city = webcity == undefined ? 0: webcity;
+                //subject = websubject == undefined ? 0: websubject;
+            }
+            else if (webcountry != undefined && webstate != undefined && webcity != undefined) {
+
+                countryId = webcountry;
+                state = webstate;
+                city = webcity;
+                subject = websubject;
+            }
+            else {
+                countryId = $("input.Country1[type=radio]:checked").val();
+                state = $("input[name='state1']:checked").val();
+                city = $("input[name='city1']:checked").val();
+                subject = $("input[name='Subject']:checked").val();
+            }
+            //var SubjectID = "";
+            $('#subDiv').find('.Checkbox').find("input[type='checkbox']:checked").each(function () {
+                subject = subject + (this).value + ',';
+            });
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/SearchBooksByName",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (data) {
+                    console.log(data);
+
+                    if (data != null && data.NotebookFormList != null && data.NotebookFormList.length > 0) {
+                        var html = "";
+                        $.each(data.NotebookFormList, function (i, item) {
+
+                            totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                            var Subject = (item["SubjectId"] != null ? item["SubjectId"] : "");
+                            var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                            var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                            var FirstName = (item["StudentName"] != null ? item["StudentName"] : "");
+                            //var LastName = (item["LastName"] != null ? item["LastName"] : "");
+                            var Student = FirstName;
+                            var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                            var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                            var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                            var Id = (item["Id"] != null ? item["Id"] : 0);
+                            var SubmitterPic = (item["SubmitterPic"] != null ? item["SubmitterPic"] : "");
+                            var Innovation_Investment = (item["Innovation_Investment"] != null ? item["Innovation_Investment"] : "");
+
+
+                            html += '<div class="col-md-3 col-sm-4 col-xs-6 article" >';
+                            html += '<div class="imgdiv" style="cursor:pointer" onclick="window.open(&#39;/Home/Notebook_Pages?BookId=' + Id + '&#39;,&#39;_self&#39;)">';
+                            html += '<div class="imgagediv"><img src="/Content/images/notebooks.png">';
+                            html += '</div>';
+                            html += '<div class="textdiv">';
+                            html += '<div class="main1">';
+                            html += '<div class="main2">';
+                            html += '<div class="inno ' + (Innovation_Investment == 1 ? "Inno_inv_val_1 " : (Innovation_Investment == 2 ? "Inno_inv_val_2" : "Inno_inv_val_0")) + '">I</div>';
+                            html += '<img src="' + (SubmitterPic.trim().length > 0 ? SubmitterPic : "\Images\6GS4E2B.png") + '" class="img-circle" height="60%" width="10%">';
+                            html += '<div style="word-break:break-all" title="' + Subject + '">';
+                            html += '<a href="/Home/Notebook_Pages?BookId=' + Id + '">' + Subject + '</a>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="list-of-students">';
+                            html += '<ul>';
+
+                            html += '<li class="sub-height hide-content" style="word-break:break-all" title="' + Subject + '">Subject: ';
+                            html += "<span>" + Subject + "</span>";
+                            html += '</li>';
+                            html += '<li class="submit-height hide-content" style="word-break:break-all" title="' + Student + '">Creator: ';
+                            html += '<span>' + Student + '</span>';
+                            html += '</li>';
+
+                            //html += '<li style="" class="two_rows" title="' + College + '">Coaching/College/School: ';
+                            //html += '<span class="hide-content">' + College + '</span>';
+                            //html += '</li>';
+                            html += '</ul>';
+                            html += '</div>';
+                            html += '<p class="btn-all-main">';
+                            html += '<input id="NotebookId" name="NotebookId" value="' + Id + '" type="hidden">';
+                            html += '<a href="/Home/NoteBookDetails?BookId=' + Id + '" class="btn btn-primary all-propety">All Properties</a>';
+                            //   html += '&nbsp; <a href="javascript:;" class="btn btn-success" onclick="Downloadbook(&#39;' + Id + '&#39;,&#39;' + Subject + '&#39;)">Download</a>';
+                            html += '</p>';
+                            html += '</div>';
+
+
+
+                        });
+                        $('#NotebookDetailNew').html(html);
+                        $('#NotebookDetail').hide();
+
+                        $('#NotebookDetailNew').removeClass('NotebookStyle');
+                        // equalheight('.main .article');
+                    }
+                    else {
+                        $('#NotebookDetail').hide();
+                        $('#NotebookDetailNew').html('No Records Found');
+                        $('#NotebookDetailNew').addClass('NotebookStyle');
+                    }
+                    // .addClass('.alert alert-danger')
+
+
+
+                },
+                failure: function (msg) {
+                    console.log(msg);
+                },
+                data: { 'Text': Text, 'country': countryId, 'state': state, 'city': city, 'subject': subject },
+            });
+
+        }
+
+        function Downloadbook(id, SubjectName) {
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/Downloadbook",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (data) {
+                    //console.log(data);
+
+                    if (data != null && data.length > 0) {
+                        var html = "";
+                        // var BookTitle = "";
+                        $.each(data, function (i, item) {
+
+                            if (item["IsHtml"] == true || item["IsHtml"] == 'true') {
+                                html += item["PageImage"];
+                                // BookTitle += item["SubjectId"];
+                            }
+                            else {
+                                html += "<img src='" + item["PageImage"] + "' />";
+                            }
+
+                        });
+                        console.log(html);
+                        var ExportData = "<Center>" + html + "</Center>";
+                        // var subject = BookTitle
+
+                        $("#export-content").html(ExportData);
+                        $('#loaderDiv2').show();
+                        //if ($.browser.mozilla == true) {
+                        window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                        $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                            $('#export-content').removeClass('updateEditor');
+                            $('#export-content').removeClass('notebookEditor');
+                            $('#export-content').css('background-color', 'white');
+
+                            setTimeout(function () {
+
+                                html2canvas($('#export-content'), {
+
+                                    onrendered: function (canvas) {
+                                        var img = canvas.toDataURL('image/jpeg');
+
+                                        var doc = new jsPDF();
+
+                                        doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                                        $('#loaderDiv2').hide();
+                                        //$("#export-content").html('');
+                                        $("#export-content").hide();
+
+
+
+
+                                        doc.save(SubjectName + ".pdf");
+
+                                        location.reload(true);
+                                    }
+                                });
+                            }, 500);
+                        });
+
+
+                        //}
+                        //else {
+                        //    $('#export-content').removeClass('updateEditor');
+                        //    $('#export-content').removeClass('notebookEditor');
+                        //    $('#export-content').css('background-color', 'white');
+
+                        //    html2canvas($('#export-content'), {
+                        //        onrendered: function (canvas) {
+                        //            var img = canvas.toDataURL('image/jpeg');
+
+                        //            var doc = new jsPDF();
+
+                        //            doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                        //            $('#loaderDiv2').hide();
+                        //            //$("#export-content").html('');
+                        //            //$("#export-content").hide();
+                        //            doc.save("ChapterContent.pdf");
+                        //            $('#export-content').addClass('updateEditor');
+
+                        //        }
+                        //    });
+                        //}
+
+                    }
+
+
+
+                    else {
+
+                    }
+
+
+
+
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { "BookId": id },
+            });
+            //$.get("/Home/SearchBooksByName", { "Text": Text }, function (data) {
+            //    var getResponse = JSON.parse(data);
+
+            //    //if (getResponse.Status == 1) {
+            //    //    $('#msgspan').html("");
+            //    //    return false;
+            //    //} else {
+            //    //    $('#msgspan').html("");
+            //    //}
+            //});
+        }
+    </script>
+
+    <script>
+        function loadMoreData() {
+            var offset = $('#offset').val();
+            if (offset != -1 && $('#tempImage').length == 0) {
+                var html = '<div class="col-md-12" style="text-align:center"><img src="/assets/images/ajax-loadinhgg-big.gif" style="height: 20px;width: 20px;" id="tempImage" /></div>';
+                $('#NotebookDetail').append(html);
+                $.ajax({
+                    type: 'GET',
+                    contentType: "application/json; charset=utf-8",
+                    url: "/Home/NoteBook_Load_By_Next_Prev",
+                    data: { 'offset': offset },
+                    async: true,
+                    global: false,
+                    success: function (data) {
+                        //  console.log(data);
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.Status == "1") {
+                            var count = jsonData.NotebookFormList.length;
+                            if (count > 0) {
+                                var html = "";
+                                for (var i = 0; i < count; i++) {
+                                    var item = jsonData.NotebookFormList[i];
+                                    totalRows = (item["TotalRows"] != null ? parseInt(item["TotalRows"]) : 0);
+                                    var Subject = (item["SubjectName"] != null ? item["SubjectName"] : "");
+                                    var SubjectSubstring = (Subject.length > 15 ? Subject.substr(0, 15) : Subject);
+                                    var SubjectSubstring50 = (Subject.length > 50 ? Subject.substr(0, 50) : Subject);
+                                    var FirstName = (item["FirstName"] != null ? item["FirstName"] : "");
+                                    var LastName = (item["LastName"] != null ? item["LastName"] : "");
+                                    var Student = FirstName + ' ' + LastName;
+                                    var StudentSubstring = (Student.length > 15 ? Student.substr(0, 15) : Student);
+                                    var College = (item["CollegeId"] != null ? item["CollegeId"] : "");
+                                    var CollegeSubstring = (College.length > 15 ? item["CollegeId"].substr(0, 15) : College);
+                                    var Id = (item["NotebookId"] != null ? item["NotebookId"] : 0);
+                                    var SubmitterPic = (item["SubmitterPic"] != null ? item["SubmitterPic"] : "");
+                                    var Innovation_Investment = (item["Innovation_Investment"] != null ? item["Innovation_Investment"] : "");
+
+
+                                    html += '<div class="col-md-3 col-sm-4 col-xs-6 article">';
+                                    html += '<div class="imgdiv" style="cursor:pointer" onclick="window.open(&#39;/Home/Notebook_Pages?BookId=' + Id + '&#39;,&#39;_self&#39;)">';
+                                    html += '<div class="imgagediv"><img src="/Content/images/notebooks.png">';
+                                    html += '</div>';
+                                    html += '<div class="textdiv">';
+                                    html += '<div class="main1">';
+                                    html += '<div class="main2">';
+                                    html += '<div class="inno ' + (Innovation_Investment == 1 ? "Inno_inv_val_1 " : (Innovation_Investment == 2 ? "Inno_inv_val_2" : "Inno_inv_val_0")) + '">I</div>';
+                                    html += '<img src="' + (SubmitterPic.trim().length > 0 ? SubmitterPic : "\Images\6GS4E2B.png") + '" class="img-circle" height="60%" width="10%">';
+                                    html += '<div style="word-break:break-all" title="' + Subject + '">';
+                                    html += '<a href="/Home/Notebook_Pages?BookId=' + Id + '">' + Subject + '</a>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '<div class="list-of-students">';
+                                    html += '<ul>';
+
+                                    html += '<li class="sub-height hide-content" style="word-break:break-all" title="' + Subject + '">Subject: ';
+                                    html += "<span>" + Subject + "</span>";
+                                    html += '</li>';
+                                    html += '<li class="submit-height hide-content" style="word-break:break-all" title="' + Student + '">Creator: ';
+                                    html += '<span>' + Student + '</span>';
+                                    html += '</li>';
+
+                                    //html += '<li style="" class="two_rows" title="' + College + '">Coaching/College/School: ';
+                                    //html += '<span class="hide-content">' + College + '</span>';
+                                    //html += '</li>';
+                                    html += '</ul>';
+                                    html += '</div>';
+                                    html += '<p class="btn-all-main">';
+                                    html += '<input id="NotebookId" name="NotebookId" value="' + Id + '" type="hidden">';
+                                    html += '<a href="/Home/NoteBookDetails?BookId=' + Id + '" class="btn btn-primary all-propety">All Properties</a>';
+                                    //html += '&nbsp; <a href="javascript:;" class="btn btn-success" onclick="Downloadbook(&#39;' + Id + '&#39;,&#39;' + Subject + '&#39;)">Download</a>';
+                                    html += '</p>';
+                                    html += '</div>';
+
+
+                                }
+                                $('#NotebookDetail').append(html);
+
+                                //   equalheight('.main .article');
+                                if (count == 12) {
+                                    $('#offset').val(parseInt(offset) + 1);
+                                }
+                                else {
+                                    $('#offset').val(-1);
+                                }
+                            }
+                            else {
+                                $('#offset').val(-1);
+                            }
+                        }
+                        else {
+                            $('#offset').val(-1);
+                        }
+                    },
+                    error: function () {
+                        $('#tempImage').parent().remove();
+                    },
+                    complete: function () {
+                        $('#tempImage').parent().remove();
+                    },
+                    failure: function () {
+                        $('#tempImage').parent().remove();
+                    }
+                });
+            }
+        }
+    </script>
+}

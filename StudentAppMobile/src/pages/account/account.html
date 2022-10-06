@@ -1,0 +1,95 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+
+
+
+    <div class="mainWrapper account">
+      <div *ngFor="let curdata of currencydata">
+        <div class="wallet">
+          <h2>Creator's account</h2>
+          <h2>My wallet :<span>{{curdata.currency_symbole}}</span>&nbsp;<span>{{wallet}}</span></h2>
+          <div class="m-t-20">
+            <a href="#" class="btn-wallet" (click)="Transfer()">Transfer to my bank account</a>
+          </div>
+          <div class="separator"></div>
+        </div><!--End of wallet-->
+        <div class="wallet wallet-account">
+          <h2>Paypal Email</h2>
+          <h2 class="m-b-20">{{PaypalEmail}}</h2>
+          <div class="m-t-20 clearfix">
+            <a href="#" class="btn-wallet" (click)="paypalemail()">change</a>
+          </div>
+        </div>
+        <div class="numberClick">
+          <h3 margin-bottom>Number of clicks <span>[{{ClickCount}}]</span></h3>
+          <h3 margin-bottom>Amount<span>[{{wallet}}]</span>&nbsp;<span>{{curdata.currency_symbole}}</span></h3>
+          <h6>You are getting <span>[1]</span>&nbsp;<span>{{curdata.currency_symbole}}</span> For every click</h6>
+        </div>
+      </div>
+      
+      <button ion-button color="{{show==false?'dark':light}}" (click)="Notebook()">Notebook Pages</button>
+      <button ion-button color="{{show==true?'dark':light}}" (click)="Request()">My Request</button>
+
+      <div class="table-responsive" *ngIf="show==false">
+        <table>
+          <tbody>
+            <tr>
+              <!--<th>S.No.</th>-->
+              <th>Click Date</th>
+              <th>Click Time</th>
+              <th>Clicked By</th>
+              <th>Amount Per Click</th>
+              <th>Clicked On</th>
+            </tr>
+
+            <tr *ngFor="let notebookinfo of PageList">
+
+
+              <td>{{notebookinfo.ClickDate}}</td>
+              <td>{{notebookinfo.ClickTime}}</td>
+              <td>{{notebookinfo.Name}}</td>
+              <td>{{notebookinfo.UnitPrice}}</td>
+              <td>{{notebookinfo.ClickedOn}}</td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-responsive" *ngIf="show==true">
+        <table>
+          <tbody>
+            <tr>
+              <!--<th>S.No.</th>-->
+              <th>Paypal Email</th>
+              <th>Amount Requested(USD)</th>
+              <th>Requested Date</th>
+              <th>Status</th>
+            </tr>
+
+            <tr *ngFor="let payment of paymentlist">
+
+
+              <td>{{payment.EmailId}}</td>
+              <td>{{payment.AmountRequested}}</td>
+              <td>{{payment.RequestDate}}</td>
+              <td>{{payment.Status}}</td>
+
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--End of BigMainWrapper-->
+
+  </div>
+
+</ion-content>

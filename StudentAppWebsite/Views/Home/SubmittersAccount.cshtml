@@ -1,0 +1,238 @@
+﻿@model StudentAppWebsite.Models.AdvertisementModels
+@{
+    ViewBag.Title = "SubmittersAccount";
+}
+<style>
+    .modal-dialog {
+        width: 470px;
+    }
+
+    label {
+        font-weight: 600;
+        font-size: 15px;
+        color: #393939;
+    }
+
+    .row {
+        margin-bottom: 4px;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Submitters Account</h3>
+
+                    <div style="float: right">
+                        My Wallet: @ViewBag.AmountPending
+                    </div>
+                </div>
+
+                <div>
+
+
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab">Payment</a></li>
+                        <li role="presentation"><a href="#requests" aria-controls="requests" role="tab" data-toggle="tab">My Requests</a></li>
+
+                    </ul>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tab-content" style="padding: 9px 0px !important;">
+                            <div role="tabpanel" class="tab-pane active" id="payment">
+                                <div class="panel-body">
+                                    <div class="col-md-offset-4 col-md-5 responsive-div">
+                                        <div class="div-2">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-sm-8 col-xs-7">
+                                                            <label>Number of clicks</label>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-5">
+                                                            <label>[@Model.ClicksCount]</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-5 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-5 col-sm-5 col-xs-7">
+                                                            <label>Amount</label>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-5">
+                                                            <label>[@ViewBag.AmountPending]</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-sm-8 col-xs-7">
+                                                            <label>Total Amount</label>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-5">
+                                                            <label>[<span id="totalAmount">@ViewBag.AmountPending</span>]</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                                            <a href="javascript:;" class="btn btn-primary totl-btn" onclick="return CheckAmount()">Transfer to my bank account</a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="requests">
+                                <div class="panel-body">
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        $("#example-2").dataTable({
+                            aLengthMenu: [
+                                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                            ]
+                        });
+                    });
+                </script>
+
+                <div class="table-responsive" @*data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true"*@>
+
+                    <table id="example-2" class="table table-small-font table-bordered table-striped">
+                        <thead>
+                            <tr>
+
+                            
+                                <th>Amount Requested</th>
+                                <th>Name on account</th>
+                                <th>Account Number</th>
+                                <th>IFSC Code</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model.PaymentList.Count > 0)
+                            {
+                                for (int i = 0; i < Model.PaymentList.Count;i++ )
+                                {
+                                <tr>                                  
+                                    <td>@Model.PaymentList[i].AmountRequested</td>
+                                    <td>@Model.PaymentList[i].AccountHolderName</td>
+                                    <td>@StudentAppWebsite.Controllers.HomeController.Decode(Model.PaymentList[i].AccountNumber)</td>
+                                    <td>@StudentAppWebsite.Controllers.HomeController.Decode(Model.PaymentList[i].IFSCCode)</td>
+                                    <td>
+                                      @(Model.PaymentList[i].Status==0 || Model.PaymentList[i].Status==1?"Pending":(Model.PaymentList[i].Status==2?"Technical Issue":"Payment Transfered"))
+                                    </td>
+
+                                </tr>
+                                }
+                            }
+                            
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("SavePaymentRequest", "Home", FormMethod.Post, new { @id = "profileForm" }))
+{
+    <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="avatar-form" action="Update_Picture" enctype="multipart/form-data" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="avatar-modal-label">Enter Account Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                      <div class="form-group">
+                                        <label>Account Holder Name</label>
+                                        @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.AccountHolderName)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.HiddenFor(m => m.adcreationId)
+                                        @Html.HiddenFor(m => m.AmountRequested)
+                                        @Html.HiddenFor(m=>m.ClicksCount)
+                                        <label>Account Number</label>
+                                        @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.AccountNumber)
+                                    </div>
+                                    <div class="form-group">
+
+
+                                        <label>IFSC Code</label>
+                                        @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.IFSCCode)
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Submit" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+}
+<a href="#avatar-modal" data-toggle="modal" id="openPopup"></a>
+<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    function CheckAmount() {
+
+        if (parseFloat($('#totalAmount').html()) > 0) {
+
+            $('#openPopup').click();
+        }
+        else {
+            alert('You can not request payment for 0 amount');
+            return false;
+        }
+    }
+</script>

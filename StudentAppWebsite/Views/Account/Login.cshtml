@@ -1,0 +1,614 @@
+﻿@model StudentAppWebsite.Models.SubmitterRegistration
+@{
+    ViewBag.Title = "Facebook_register";
+    Layout = null;
+}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>notetor.com</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive-website.css" rel="stylesheet" />
+    <link href="~/assets/css/xenon-core.css" rel="stylesheet" />
+    <link href="~/Content/css/hover.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.2.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/jquery.maskedinput.min.js"></script>
+    <link href="~/assets/css/datepicker.css" rel="stylesheet" />
+    <style>
+body {
+	font-family: arial;
+	background: -webkit-linear-gradient(white, #D3D8E8) !important; /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(white, #D3D8E8) !important; /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(white, #D3D8E8)!important; /* For Firefox 3.6 to 15 */
+	background: linear-gradient(white, #D3D8E8) !important; /* Standard syntax */
+	height: auto;
+}
+</style>
+    </head>
+    <body>
+    <section class="navigation">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-offset-1 col-md-10">
+            <nav class="login-style">
+              <div class="navbar-header">
+               @* <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>*@
+                <a class="navbar-brand" href="/Home/Home">
+                <p class="logo"> <img src="/content/images/logo.png" class="img-responsive"> </p>
+                </a> </div>
+             @* <div class="collapse navbar-collapse my-login" id="bs-example-navbar-collapse-1">*@
+                <ul class="nav navbar-nav navbar-right my-login">
+                  @using (Html.BeginForm("SubmitterLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "regstrationForm" }))
+                  {
+                  <div class="col-md-5 col-sm-5 col-xs-5">
+                    <div class="form-group">
+                      <label>Email or Phone</label>
+                      <input type="text" name="UserName" id="UserPhoneEmail" class="form-control" />
+                      <div id="error_username" class="text-danger"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-5 col-sm-5 col-xs-5">
+                    <div class="form-group">
+                      <label>Password</label>
+                      @Html.PasswordFor(m => m.LoginPassword, new { @class = "form-control" })
+                      <div id="error_password" class="text-danger">@Html.ValidationMessageFor(m => m.LoginPassword)</div>
+                      <div class="forget-pass"><a href="/Account/ForgotPassword">Forgotten Password?</a></div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-sm-2 col-xs-2">
+                    <button type="submit" class="btn btn-default login-btn-facebook btn-block">log in</button>
+                  </div>
+                  }
+                </ul>
+              
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="contentaria-division">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-7 col-sm-5">
+            <div class="row">
+              <div class="col-md-offset-2 col-md-10">
+                <h2 class="quote">Making  Students life Easier by providing online learning</h2>
+                <img src="~/Content/images/note.png" /> </div>
+            </div>
+          </div>
+          @using (Html.BeginForm("SubmitterRegistration", "Account", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" }))
+          {
+          <div class="col-md-5 col-sm-6 col-xs-10  res-chan">
+              <div class="res-changes">
+            <h1>Create an account</h1>
+           
+            <div class="adj clearfix">
+              <div class="form-1st">
+                <div class="form-group">
+                  <label class="sr-only">First name</label>
+                  @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                  <div class="text-danger">@Html.ValidationMessageFor(model => model.FirstName)</div>
+                </div>
+              </div>
+              <div class="form-2nd">
+                <div class="form-group">
+                  <label class="sr-only">Last name</label>
+                  @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                  <div class="text-danger">@Html.ValidationMessageFor(model => model.LastName)</div>
+                </div>
+              </div>
+            </div>
+            <div class="adj clearfix">
+              <div class="form-group"> @*
+                <label class="sr-only">Email address</label>
+                *@
+                @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control", placeholder = "Email" })
+                <div class="text-danger">@Html.ValidationMessageFor(model => model.EmailID)</div>
+                <span id="msgspan" style="color: #A94442"></span> </div>
+              <label style="width: 100%;font-weight: bold;text-align: center;">OR</label>
+            </div>
+            <div class="adj clearfix">
+              <div class="form-1st">
+                <div class="form-group">
+                  <label class="sr-only">Mobile number</label>
+                  @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control", placeholder = "Mobile Number", @id = "VerifyphoneNo" })
+                  <div class="text-danger">@Html.ValidationMessageFor(model => model.MobileNumber)</div>
+                  <span id="msgspanPhone" style="color: #A94442"></span> <span class="otp-style"><a href="javascript:;" id="SendOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Send OTP </a></span> </div>
+              </div>
+              <div class="form-2nd">
+                <div class="form-group">
+                  <label class="sr-only">OTP</label>
+                  <input type="text" class="form-control" placeholder="OTP" id="otp">
+                  @*@Html.TextBoxFor(model => model.OTP, new { @class = "form-control", placeholder = "OTP", @id = "otp" })*@
+                  <input type="hidden" id="hdnRequest" value="" />
+                  <p id="msgspan1" style="color: red;"></p>
+                  <span class="otp-style"><a href="javascript:;" id="VerifyOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Verify OTP</a></span> </div>
+              </div>
+            </div>
+            <div class="adj clearfix">
+              <div class="form-1st">
+                <div class="form-group">
+                  <label class="sr-only">Password</label>
+                  @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                  <div class="text-danger">@Html.ValidationMessageFor(model => model.Password)</div>
+                </div>
+              </div>
+              <div class="form-2nd">
+                <div class="form-group">
+                  <label class="sr-only">Confirm password</label>
+                  @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                  <div class="text-danger">@Html.ValidationMessageFor(model => model.ConfirmPassword)</div>
+                </div>
+              </div>
+            </div>
+            <div class="adj clearfix">
+              <div class="form-1st">
+                <div class="form-group">
+                  <label class="birthday">Birthday</label>
+                  <div> @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", placeholder = "Date of birth" })
+                    <div class="text-danger">@Html.ValidationMessageFor(model => model.DOB)</div>
+                    <span id="msgdob" style="color: #A94442"></span> </div>
+                </div>
+              </div>
+              <div class="form-2nd">
+                <div class="form-group">
+                  <div  class="male-female">
+                    <label class="radio-inline"> @Html.RadioButtonFor(model => model.Gender, "Female", new { @checked = "checked" })
+                      
+                      Female </label>
+                    <label class="radio-inline"> @Html.RadioButtonFor(model => model.Gender, "Male")
+                      Male </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="adj clearfix">
+              <div class="form-group">
+                <label class="sr-only">Name Of (Coaching/College/School)</label>
+                @Html.DropDownListFor(model => model.CollegeID, new SelectList(Model.InstituteModelList, "ID", "InstituteName"), "Name Of (Coaching/College/School)", new { @class = "form-control" })
+                <div class="text-danger">@Html.ValidationMessageFor(model => model.CollegeID)</div>
+              </div>
+            </div>
+            <div class="adj clearfix">
+              <div class="form-group">
+                <label class="birthday">Profile Picture</label>
+                @Html.HiddenFor(model => model.Picture)
+                <input type="file" id="ProfilePicture" name="ProfilePicture" required style="height: auto; padding: 3px 4px;" />
+                <span id="errormsg" style="color: red;display:block;"></span> </div>
+            </div>
+                <div class="adj clearfix">
+            <div class="form1">
+              <div class="form-group">
+                <label class="sr-only">Country</label>
+                @Html.DropDownListFor(model => model.Country, new SelectList(Model.Countrylist, "ID", "CountryName"), "--Select Country--", new { @class = "all-select address", placeholder = "Country" })
+                <div class="text-danger">@Html.ValidationMessageFor(model => model.Country)</div>
+              </div>
+            </div>
+            <div class="form2">
+              <div class="form-group">
+                <label class="sr-only">state</label>
+                @Html.DropDownListFor(model => model.state, new SelectList(Model.statelist, "ID", "StateName"), "--Select State--", new { @class = "all-select address", placeholder = "State" })
+                <div class="text-danger">@Html.ValidationMessageFor(model => model.state)</div>
+              </div>
+            </div>
+            <div class="form3">
+              <div class="form-group">
+                <label class="sr-only">City</label>
+                @Html.DropDownListFor(model => model.City, new SelectList(Model.citylist, "ID", "CityName"), "--Select City--", new { @class = "all-select address", placeholder = "City" })
+                <div class="text-danger">@Html.ValidationMessageFor(model => model.City)</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn-account" value="Create account" id="btnSubmit" />
+          </div>
+        </div></div>
+     
+      } </div>
+    </div>
+    </div>
+    </body>
+    </html>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Plugin/mathscribe/jscurry-0.4.0.min.js"></script>
+    <script src="~/Plugin/mathscribe/jqmath-0.4.3.js"></script>
+    <script src="~/Scripts/Calculator.js"></script>
+    <script src="~/Content/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/js/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/js/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/Content/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+    <link href="~/Content/js/datatables/yadcf/jquery.dataTables.yadcf.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $('#UserPhoneEmail').on('blur', function () {
+            if ($(this).val().length == 0) {
+                $('#error_username').html('Email or Phone is required');
+            }
+            else {
+                $('#error_username').html('');
+                var email = $('#UserPhoneEmail').val();
+                var patternEmail = ".+\\@@.+\\..+";
+                var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+                var valid = email.match(patternEmail);
+                if (valid == null) {
+
+                    valid = patternPhone.test(email);
+                    if (valid == null || valid == false) {
+                        $('#error_username').html('Enter valid Email or Phone');
+                    }
+                    else {
+
+                    }
+                }
+                else {
+
+                }
+            }
+
+
+
+
+
+        });
+        $('.btn-block').click(function () {
+            if ($('#UserPhoneEmail').val().length == 0) {
+                $('#error_username').html('Email or Phone is required');
+                return false;
+            }
+            else {
+                $('#error_username').html('');
+                var email = $('#UserPhoneEmail').val();
+                var patternEmail = ".+\\@@.+\\..+";
+                var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+                var valid = email.match(patternEmail);
+                if (valid == null) {
+
+                    valid = patternPhone.test(email);
+                    if (valid == null || valid == false) {
+                        $('#error_username').html('Enter valid Email or Phone');
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else {
+                    return true;
+                }
+
+            }
+        });
+        $('#btnSubmit').click(function () {
+
+            if ($('#ProfilePicture').val().length == 0) {
+
+                $('#errormsg').html('Picture is required');
+                return false;
+            }
+            else {
+                $('#errormsg').html('');
+
+            }
+            if ($('#EmailID').val().length == 0 && $('#VerifyphoneNo').val().length == 0) {
+
+                $('#msgspan').html('Email or Mobile number is required');
+                return false;
+
+            }
+            else {
+                $('#msgspan').html('');
+
+            }
+            if ($('#VerifyphoneNo').val().length > 0) {
+                return checkPost();
+            }
+        });
+
+        $("#EmailID").on("blur", function () {
+
+            if ($(this).val() != "") {
+                CheckMail($('#EmailID').val());
+            }
+        });
+
+        $('#VerifyphoneNo').on("blur", function () {
+            if ($(this).val() != "") {
+                CheckMobile($(this).val());
+            }
+        });
+
+        function CheckMail(email) {
+            $.get("/Account/CheckEmailExist", { "Email": email }, function (data) {
+                var getResponse = JSON.parse(data);
+
+                if (getResponse.Status == 1) {
+                    $('#msgspan').html("Email Already exists please choose another");
+                    return false;
+                } else {
+                    $('#msgspan').html("");
+                }
+            });
+        }
+
+        function CheckMobile(mobile) {
+            $.get("/Account/CheckMobileExist", { "Mobile": mobile }, function (data) {
+                var getResponse = JSON.parse(data);
+
+                if (getResponse.Status == 1) {
+                    $('#msgspanPhone').html("Mobile Nnumber Already exists please choose another");
+                    return false;
+                } else {
+                    $('#msgspanPhone').html("");
+                }
+            });
+        }
+
+        function checkPost() {
+            var phoneNo = $('#VerifyphoneNo').val();
+            var verifyMobileNo = $('#VerifyOTP').text();
+            var messageCount = $('#msgspan').text();
+
+            if (verifyMobileNo != 'Verified' && phoneNo.length > 0) {
+                $('#msgspan1').html("Please Verify Your OTP");
+                return false;
+            }
+            else if (messageCount.length > 0) {
+
+                return false;
+
+
+            }
+            else {
+                $('#msgspan1').html('');
+                return true;
+            }
+        }
+
+
+        $('#ProfilePicture').on("change", function () {
+
+            previewFile();
+            $('#errormsg').html('');
+        });
+        function previewFile() {
+            //  var preview = document.querySelector('#StreamIconImage');
+
+            var file = document.querySelector('#ProfilePicture').files[0];
+
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                //  preview.src = reader.result;
+                // alert($('#Picture').val(reader.result));
+                $('#Picture').val(reader.result);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+
+        }
+
+        $('#Country').on("change", function () {
+
+            StateBind();
+        });
+
+        $('#state').on("change", function () {
+
+            CityBind();
+        });
+
+        $('#City').on("change", function () {
+
+            InstituteBind();
+        });
+
+
+
+        //$('#state').change(
+
+
+        //);
+</script>
+    <script>
+        function StateBind() {
+            var CountryID = $('#Country').val();
+            if (CountryID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/StateLoad",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg && msg.statelist.length > 0) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "<option>--Select State--</option>";
+                            $.each(msg.statelist, function (key, value) {
+                                console.log(value.Id);
+                                options += "<option value=" + value.ID + ">" + value.StateName + "</option>";
+                            });
+                            $('#state').html(options);
+                            $('#state').on("change", function () {
+
+                                CityBind($(this).val());
+                            });
+                            $('#state option').eq(1).attr("selected", "selected");
+                            $('#state').trigger('change');
+                        }
+                        else {
+                            var options = "<option>--Select State--</option>";
+                            $('#state').html(options);
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'CountryID': CountryID },
+                });
+            } else {
+                $('#state').html("<option value>--Select State--</option>");
+            }
+        }
+
+
+        function CityBind() {
+            var StateID = $('#state').val();
+            if (StateID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/CityLoad",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg && msg.citylist.length > 0) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "<option>--Select City--</option>";
+                            $.each(msg.citylist, function (key, value) {
+                                console.log(value.Id);
+                                options += "<option value=" + value.ID + ">" + value.CityName + "</option>";
+                            });
+                            $('#City').html(options);
+                        }
+                        else {
+                            $('#City').html("<option value>--Select City--</option>");
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'StateID': StateID },
+                });
+            } else {
+                $('#City').html("<option value>--Select City--</option>");
+            }
+        }
+
+        function InstituteBind() {
+
+            var CityID = $('#City').val();
+
+            if (CityID != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/InstituteLoadByCity",
+                    dataType: "json",
+                    async: false,
+                    timeout: 3000,
+                    success: function (msg) {
+                        console.log(msg);
+                        if (msg && msg.InstituteModelList.length > 0) {
+                            //var options = "<option value='0'>Select</option>";
+                            var options = "<option>--Select Institute--</option>";
+                            $.each(msg.InstituteModelList, function (key, value) {
+                                console.log(value.Id);
+                                options += "<option value=" + value.Id + ">" + value.InstituteName + "</option>";
+                            });
+                            $('#CollegeID').html(options);
+                        }
+                        else {
+                            $('#CollegeID').html("<option value>--Select Institute--</option>");
+                        }
+                    },
+                    failure: function (msg) {
+                        console.log(msg);
+
+                    },
+                    data: { 'CityId': CityID },
+                });
+            } else {
+                $('#City').html("<option value>--Select City--</option>");
+            }
+        }
+
+        $('#SendOTP').on('click', function () {
+            debugger;
+            var messageBody = "Verification";
+            $.ajax({
+                url: "/Account/SendOTP",
+                type: "GET",
+                dataType: "xml",
+                contentType: "xml",
+                data: { mobileNumber: $('#VerifyphoneNo').val(), messageBody: messageBody },
+                success: function (xml) {
+                    $(xml).find('verify_response').each(function () {
+
+                        var sTitle = $(this).find('request_id').text();
+                        $("#hdnRequest").val(sTitle);
+
+
+                    });
+
+
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+
+                }
+            });
+        });
+
+        $('#VerifyOTP').on('click', function () {
+            debugger;
+            var OTP = $('#otp').val();
+            if (OTP.length > 0) {
+                $('#msgspan1').html('');
+
+            }
+            else {
+                $('#msgspan1').html("Please Enter OTP");
+                return false;
+            }
+            $.ajax({
+                url: "/Account/VerifyPhone",
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                data: { OTP: OTP, requestId: $('#hdnRequest').val() },
+                success: function (data) {
+                    if (data.status != 0) {
+                        $('#msgspan1').html("Please Enter Valid OTP");
+                    }
+                    else if (data == null) {
+                        $('#msgspan1').html("Please Enter Valid OTP");
+                    }
+                    else {
+                        $('#msgspan1').html('');
+                        var verifyotp = $('#VerifyOTP').text();
+                        if (verifyotp.length > 0) {
+                            $('#VerifyOTP').text('Verified');
+                        }
+                    }
+
+
+                },
+                error: function () { }
+            });
+        });
+
+</script>
+    <script>
+        $(document).ready(function () {
+            $('#DOB').mask("99/99/9999", { placeholder: "DD/MM/YYYY" })
+            $('#DOB').datepicker({
+                format: "dd/mm/yyyy"
+            });
+        });
+</script>
+    

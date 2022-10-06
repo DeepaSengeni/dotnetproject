@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Update Cover Picture
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        Close
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cover">
+
+  <!--<input type="hidden" name="hdnImageData" id="screendata" value="dd">-->
+  <input type="file" name="image" accept="image/*" (change)="changeListener($event)" #fileInp>
+  <!--<button type="button" class="add-nb-btn" id="screen" onclick="takeScreenShot('capture','screendata')">Take</button>-->
+  <button type="button" (click)="change()" style="background: linear-gradient(#4aaaee, #0072d1);color: #fff; text-decoration: none; padding: 10px;font-size: 14px;font-weight: 500;margin-top: 20px;">Upload</button>
+  <button type="button" (click)="dismiss()" style="background: linear-gradient(#4aaaee, #0072d1);color: #fff; text-decoration: none; padding: 10px;font-size: 14px;font-weight: 500;margin-top: 20px;">Cancel</button>
+  <div id="capture" style="padding:10px; height:auto;">
+    <img src="{{playerImg}}" />
+  </div>
+</ion-content>

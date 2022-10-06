@@ -1,0 +1,136 @@
+﻿@model StudentAppWebsite.Models.QuestionModel
+
+@using System.Linq;
+@{
+    int count = Model.FriendRequests.Count;
+    int[] CurrentUserfriendIds = new int[count];
+    int[] CurrentUserFriendRequestIds = new int[count];
+    string[] friendStatus = new string[count];
+    if (Model.FriendRequests.Count > 0)
+    {
+
+
+        int i = 0;
+        foreach (var item in Model.FriendRequests)
+        {
+
+            CurrentUserfriendIds[i] = ((item.id) > 0) ? Convert.ToInt32(item.id) : 0;
+            CurrentUserFriendRequestIds[i] = ((item.FriendRequestId) > 0) ? Convert.ToInt32(item.FriendRequestId) : 0;
+            friendStatus[i] = (!String.IsNullOrEmpty(item.Status) ? (item.Status).ToString() : "");
+            i++;
+        }
+    }
+    TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+
+
+}
+
+@foreach (var replyanswer in Model.ReplyAnswersList.ToList())
+{
+    <div style="padding-left: 60px; padding-top: 10px;">
+        <div class="row edrcls sp-cm" style="margin-top: 0px;">
+            <div class="col-md-12 all-que-wrap clearfix">
+                <div class="prf-new">
+                    <a href="/User/UserProfile?Id=@replyanswer.UserId">
+                        <div class="profile-photo">
+                            <div class="arrowbox1"><span>@replyanswer.FirstName&nbsp @replyanswer.LastName </span></div>
+                            <img src="@replyanswer.AnswerImage" class="prf_small img-responsive">
+                        </div>
+                        <div style="width: 14px;margin-left: -20px; display:@(Model.UserId == Convert.ToInt32(Session["UserId"]) ? "inline-block" : "inline-block")">
+                            <img src="@((replyanswer.IsOnline == 1) ? "/Images/online.png" : "/Images/offline.png")">
+                        </div>
+                        <div class="profile-name">
+                            <span>@replyanswer.FirstName&nbsp @replyanswer.LastName</span>
+                        </div>
+
+                    </a>
+                </div>
+
+                <div class="question-main" style="width: 247px;">
+                    <h3 class="ques @(replyanswer.Id)ans">@Html.Raw(replyanswer.Answer)</h3>
+
+                    @* <div class="like_textarea txtarea" name="page_content" contenteditable></div>
+                        <input type="hidden">*@
+
+                </div>
+
+                <div class="prf-base col-md-12">
+                    <span><i class="fa fa-calendar"></i>@(replyanswer.ModifiedDate != null ? TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(replyanswer.ModifiedDate, System.Globalization.CultureInfo.CurrentUICulture), tzi) : TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(replyanswer.CreatedDate, System.Globalization.CultureInfo.CurrentUICulture), tzi))</span>
+                </div>
+                <div class="dropdown editbtn edit-div3" style="visibility:@(replyanswer.UserId == Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                    <button class="dropdown-toggle edit-btn" type="button" data-toggle="dropdown" onclick="bindAnswer('@replyanswer.Id','@Model.QuestionId')">
+                        <i class="fa fa-pencil"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;" data-id="@replyanswer.Id" class="EditAnswer">Edit</a></li>
+                        <li><a href="javascript:;" data-id="@replyanswer.Id" class="delete" onclick="DeleteAnswer()">Delete</a></li>
+                    </ul>
+                </div>
+                <div class="inner-main col-md-12">
+                    <div class="btn-all">
+
+                        <a href="javascript:;" class="replyanswer" data-id="@replyanswer.Id" data-name="@replyanswer.QuestionId">
+                            <i class="fa fa-reply" aria-hidden="true"></i>
+                            Answer
+                        </a>
+
+
+                        @*<a href="javascript:;" class="reply" data-id="@answer.Id" style="cursor: not-allowed; pointer-events: none;" ><i class="fa fa-reply" aria-hidden="true"></i>
+                            Answered</a>*@
+
+                        @{
+                            var index3 = Array.IndexOf(CurrentUserfriendIds, replyanswer.UserId);
+                            if (index3 > -1)
+                            {
+                                var status = friendStatus[index3];
+                                var friendRequestId = CurrentUserFriendRequestIds[index3];
+                                if (status == "1")
+                                {
+                                    <a href="javascript:;" class="friend" data-id="@replyanswer.Id" data-questionerId="@replyanswer.UserId" style="visibility:@(replyanswer.UserId == Convert.ToInt32(Session["UserId"]) ? "hidden" : "Visible")">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        friend
+                                    </a>
+                                }
+                                else
+                                {
+                                    if (status == "2")
+                                    {
+                                        <a href="javascript:;" class="friend" data-id="@replyanswer.Id" data-questionerId="@replyanswer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(replyanswer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <span>Add to friend list</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="javascript:;" class="friend" data-id="@replyanswer.Id" data-questionerId="@replyanswer.UserId" style="visibility:@(replyanswer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <span>Friend request sent</span>
+                                        </a>
+                                    }
+
+                                }
+
+                            }
+                            else
+                            {
+                                <a href="javascript:;" class="friend" data-id="@replyanswer.Id" data-questionerId="@replyanswer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(replyanswer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>Add to friend list</span>
+                                </a>
+                            }
+
+                        }
+
+                        @*<a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")"><i class="fa fa-user" aria-hidden="true"></i>
+                            Add friend</a>*@
+                        @*<a href="javascript:;" class="delete" data-id="@item.Id" style="@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "padding: 5px;" : "padding:5px; pointer-events:none")" ><i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Delete</a>*@
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+ }

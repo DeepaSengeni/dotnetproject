@@ -1,0 +1,180 @@
+﻿<style>
+    .arrow_box
+    {
+        position: relative;
+    }
+
+        .arrow_box:after, .arrow_box:before
+        {
+            bottom: 100%;
+            left: 0%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            top: -44px;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after
+        {
+            border-bottom-color: #004293;
+            border-width: 22px;
+            margin-left: 0px;
+        }
+
+        .arrow_box:before
+        {
+            border-bottom-color: #004293;
+            border-width: 22px;
+            margin-left: 0px;
+        }
+
+    .pop
+    {
+        top: 105%;
+        left: 2px;
+    }
+
+    .top-button
+    {
+        padding: 3px 3px;
+    }
+
+    .category
+    {
+        min-height: 0px;
+    }
+</style>
+
+<div class="EditorDiv">
+    <input type="hidden" id="hdnUserID" name="userID" value="@Model.UserId" />
+    <input type="hidden" id="hdnPageID" name="pageID" value="@Model.PageId" />
+    <input type="hidden" id="hdnQuestionID" name="question" value="@Model.Id" />
+    <input type="hidden" id="hdnBookID" name="BookID" value="@Model.BookId" />
+    <input type="hidden"  id="hdnEditQuestion" name="Editques" value="@Model.EditQuestion" />
+    <textarea style="display: none" name="data" id="data"></textarea>
+    <div id="question" style="display: none">
+    </div>
+
+    <div class="control" contenteditable="true" id="editor"></div>
+    <i class="fa fa-keyboard-o keboard-btn" id="editable" style="cursor: pointer; margin-top: 17px;" aria-hidden="true"></i>
+
+    <div class="pop">
+        <div class="arrow_box"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-area1">
+                    <a href="javascript:;" class="top-button pull-left" onclick="return defaultScientific_KeyBoard();">Scientific Keyboard</a>
+                    <a href="javascript:;" class="top-button pull-left" onclick="gotoSpecialSymbols();">Special symbols</a>
+                    <a href="javascript:;" class="top-button pull-left" onclick="return gotoQWETY();">Qwerty Keyboard</a>
+
+                </div>
+                @*<span data-attr="82" class="KeyboardKey"><a href="javascript:;"  class="button" onclick="return defaultScientific_KeyBoard();">X</a></span> *@
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn-area2 clearfix">
+                <div class="col-md-12" id="keyboadArea">
+
+                    <span data-attr="1" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img1.PNG" /></a>
+                    </span>
+                    <span data-attr="2" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img2.PNG" /></a>
+                    </span>
+                    <span data-attr="3" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img3.PNG" /></a>
+                    </span>
+                    <span data-attr="4" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img4.PNG" /></a>
+                    </span>
+                    <span data-attr="5" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img5.PNG" /></a>
+                    </span>
+                    <span data-attr="6" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img6.PNG" /></a>
+                    </span>
+                    <span data-attr="7" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img7.PNG" /></a>
+                    </span>
+                    <span data-attr="8" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img8.PNG" /></a>
+                    </span>
+                    <span data-attr="9" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img9.PNG" /></a>
+                    </span>
+                    <span data-attr="10" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img10.PNG" /></a>
+                    </span>
+                    <span data-attr="11" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img11.PNG" /></a>
+                    </span>
+                    <span data-attr="12" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img12.PNG" /></a>
+                    </span>
+                    <span data-attr="80" data-text="∪" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img13.PNG" /></a>
+                    </span>
+                    <span data-attr="80" data-text="∩" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img14.PNG" /></a>
+                    </span>
+                    <span data-attr="15" class="KeyboardKey">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/img15.PNG" /></a>
+                    </span>
+                    @* <a href="#" class="buttonqk"><img src="/KeyboardIcons/images/img16.PNG" /></a>
+                         <a href="#" class="buttonsk"><img src="/KeyboardIcons/images/img17.PNG" /></a>*@
+                </div>
+                <table class="ruled prec-form-char" style="display: none;">
+                    <tr>
+                        <td>
+                            <textarea id="powerTextbox">\html'&lt;div contenteditable="true" class="textbox text"&gt;x&lt;/div&gt;'</textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <textarea id="mathSrc1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox"&gt;&lt;/div&gt;'</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="mathTgt1"></div>
+                        </td>
+                    </tr>
+                </table>
+                <div style="float: right; position: absolute; bottom: -12px; right: 8px;">
+                    <span class="KeyboardKey" data-attr="80" data-text="&nbsp;">
+                        <a href="javascript:;" class="button">
+                            <img src="/KeyboardIcons/images/space.PNG" /></a>
+                    </span>
+                    <span class="KeyboardKey">
+                        <a href="javascript:;" class="button" onclick="backspaceFunction()">
+                            <img src="/KeyboardIcons/images/querty keyboard/cross.PNG" /></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="float: right;">
+        <button type="submit" class="btn btn-primary " style="margin-top: 10px;" id="submitQuestion" onclick="GetData()">Post</button>
+        <button type="button" class="btn btn-default " style="margin-top: 10px;" id="cancel">Back</button>
+    </div>
+
+
+</div>

@@ -1,0 +1,66 @@
+﻿@model StudentAppWebsite.Models.QuestionModel
+@{
+    ViewBag.Title = "AddQuestion";
+    Layout = null;
+   
+     
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <style type="text/css">
+        .editor {
+            width: 250px;
+            max-height: 200px;           
+            height: 200px;
+            overflow-y: auto;
+            margin: 0 auto;
+        }
+
+            .editor table {
+                margin: 0px auto;
+                text-align: center;
+            }
+    </style>
+</head>
+<body>
+
+    <div id="main">
+        <div id="editor" class="editor">
+            @if (Model.QuestionsList != null)
+            {
+                if (Model.QuestionsList.Count > 0)
+                {
+                    foreach (var itme in Model.QuestionsList)
+                    {
+                <math class="ma-block">@itme.QuestionTitle</math>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <script src="~/Plugin/jquery/2.1.1/jquery.js"></script>
+    <script src="~/Plugin/mathscribe/jscurry-0.4.0.min.js"></script>
+    <script src="~/Plugin/mathscribe/jqmath-0.4.3.js"></script>
+    <script src="~/Scripts/Index.js"></script>
+    <script>M.MathPlayer = false; M.trustHtml = true;</script>
+    <script>
+        $(function () {
+            M.trustHtml = true;
+        });
+    </script>
+    <script language="javascript" type="text/javascript">
+        window.onload = function umtauschen() {
+            document.body.innerHTML = document.body.innerHTML
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!--<div class="mainHeader">
+  <ion-navbar class="nav-bar-main">
+   <ion-buttons>
+      <button ion-button menuToggle end style="width: 100%;">
+        <ion-icon class="nav-bar-icon" name="menu"></ion-icon>
+        <ion-title style="float:right;">
+
+          <span class="user-btn-span" margin-right>{{username}}</span>
+          <img src="{{url}}{{profileimage}}" alt="" style="width: 35px;height: 35px;" class="user-btn-img">
+
+        </ion-title>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <div class="mainHeaderIcon"><span class="fa fa-bars fa-2x pull-left" aria-hidden="true"></span> </div>
+  <div class="header-wrap">
+    <div class="container">
+      <div class="logo-wrap textCenter"> <img src="assets/images/logo.png" alt="Notetor Logo"> </div>
+      <div class="search-wrap signUp">
+        <form>
+          <div class="control-wrap textCenter home-create-wrap">
+            <button ion-button color="light" class="home-create-btn" round type="button" (click)="openAddPage()">
+              <ion-icon class="home-create-icon" name="ios-navigate-outline"></ion-icon> Create Notebook
+            </button>
+          </div>
+          <div class="control-wrap">
+        
+            <div class="search">
+              <input type="text" class="form-control input-sm"  placeholder="Find a Friend..." id="searchinput" />
+              <button type="button" class="btn btn-primary btn-sm" (click)="Findfriend()"> <ion-icon name="search" class="searchicon"></ion-icon></button>
+            </div>
+          </div>
+          <ion-grid>
+            <ion-row text-center>
+              <ion-col>
+                <button ion-button clear (click)="openNotificationModal()">
+                  <ion-icon name="notifications" class="home-btn-icon"></ion-icon>
+                  <ion-badge *ngIf="isReadNotification" class="badge-style">{{notificationsCount}} </ion-badge>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button clear (click)="openNotificationFriendrequests()">
+                  <ion-icon name="people" class="home-btn-icon"></ion-icon>
+                  <ion-badge *ngIf="isReadNotificationfriendrequest" class="badge-style">{{friendRequestCount}} </ion-badge>
+                </button>
+                
+              </ion-col>
+              <ion-col>
+                <button ion-button clear (click)="openNotificationData()">
+                  <ion-icon name="flag" class="home-btn-icon"></ion-icon>
+                  <ion-badge *ngIf="isReadNotificationinvite" class="badge-style">{{dataCount}} </ion-badge>
+                </button>
+              </ion-col>            
+            </ion-row>
+          </ion-grid>
+        </form>
+       
+      </div>
+    </div>
+  </div>
+
+</div>-->
+
+
+
+
+<div >
+  <div class="mainHeader">
+    <ion-navbar class="nav-bar-main">
+      <ion-buttons>
+        <button ion-button menuToggle end >
+          <ion-icon class="nav-bar-icon" name="menu"></ion-icon>
+        </button>
+        </ion-buttons>
+        </ion-navbar>
+        <div class="header-wrap textCenter">
+          <div class="container">
+            <div class="logo-wrap"> <img src="assets/images/logo.png" alt="Notetor Logo"></div>
+            <div class="btn-wrap">
+              <button (click)="openAddPage()"> <ion-icon class="home-create-icon" name="ios-navigate-outline"></ion-icon> Create Notebook </button>
+            </div>
+            <div class="search-wrap">
+              <form>
+                <div class="control-wrap">
+                  <input class="control" type="text" id="searchinput" name="search" style="color: black;" placeholder="Find a Friend...">
+                  <ion-icon name="search" class="searchicon" (click)="Findfriend()"></ion-icon>
+                </div>
+              </form>
+            </div>
+            <div class="user-deatils-wrap">
+              <div class="navbar">
+                <button ion-button clear (click)="openNotificationModal()">
+                  <ion-icon name="notifications" class="home-btn-icon"></ion-icon>
+                  <ion-badge *ngIf="isReadNotification" class="badge-style">{{notificationsCount}} </ion-badge>
+                </button>
+                <button ion-button clear (click)="openNotificationFriendrequests()">
+                  <ion-icon name="people" class="home-btn-icon"></ion-icon>
+                  <ion-badge *ngIf="isReadNotificationfriendrequest" class="badge-style">{{friendRequestCount}} </ion-badge>
+                </button>
+                <button ion-button clear (click)="openNotificationData()">
+                  <ion-icon name="flag" class="home-btn-icon"></ion-icon>
+                  <ion-badge *ngIf="isReadNotificationinvite" class="badge-style">{{dataCount}} </ion-badge>
+                </button>
+                <div class="header-user-img">
+                  <span><img src="{{url}}{{profileimage}}" alt=""></span>
+                  <span>{{username}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+﻿@foreach (var item in Model.DownloadedDataList)
+{
+    if (item.Ishtml == true)
+    {
+        <img src="@item.PageImage" />
+
+    }
+    else{
+    @Html.Raw(item.PageImage)
+    }
+}

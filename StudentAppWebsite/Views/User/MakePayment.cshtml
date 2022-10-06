@@ -1,0 +1,167 @@
+﻿@model StudentAppWebsite.Models.MakePaymentModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/Scripts/jquery-1.7.1.min.js"></script>
+<script src="/Scripts/jquery.validate.min.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<style>
+    .signupform {
+        padding-top: 30px;
+    }
+
+    .panel-default > .panel-heading {
+        color: #FFF !important;
+        background-color: #004293 !important;
+        border-color: #004293 !important;
+        font-size: 18px;
+        padding: 8px 15px;
+    }
+
+    .panel-default {
+        border: 1px solid #004293;
+    }
+
+    .panel {
+        padding: 0px;
+    }
+
+        .panel .panel-body {
+            padding: 15px;
+        }
+
+    .or {
+        text-align: center;
+        font-size: 23px;
+        padding-bottom: 25px;
+        color: rgb(47, 48, 48);
+        text-transform: uppercase;
+    }
+</style>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+else if (TempData["ErrorMessage"] != null)
+{
+     
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@using (Html.BeginForm("MakePayment", "User", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" }))
+{ 
+    
+    <div class="container-fluid signupform">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Payment</h3>
+
+                        @*<div class="panel-options">
+                            <a href="#" data-toggle="panel">
+                                <span class="collapse-icon">&ndash;</span>
+                                <span class="expand-icon">+</span>
+                            </a>
+                            <a href="#" data-toggle="remove">&times;
+                            </a>
+                        </div>*@
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal " style="margin-top: 20px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Total Amount</label>
+                                            <div class="col-sm-8">
+                                                <label class="control-label" id="amountPaidLbl">&#8377; @ViewBag.TotalAmount</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Frist Name</label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.FristName, new { @class = "form-control", placeholder = "Card Number" })
+
+                                                <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.FristName)</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Card Number</label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.CreditCardNumber, new { @class = "form-control", placeholder = "Card Number" })
+
+                                                <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.CreditCardNumber)</div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Expiry Month</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(model => model.Month, new SelectList(Model.Monthlist, "ID", "MonthName"), new { @class = "form-control" })
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label"></label>
+                                            <div class="col-sm-8">
+                                                 <label class="control-label" id="PaidLbl">&nbsp;&nbsp;</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Last Name</label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Teacher Name" })
+                                                <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.LastName)</div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label class="col-sm-4 control-label">CVV</label>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(model => model.CVV, new { @class = "form-control", placeholder = "CVV" })
+                                            <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.CVV)</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Expiry Year</label>
+
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(model => model.Year, new SelectList(Model.Yearlist, "ID", "YearName"), new { @class = "form-control" })
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-sm-offset-4 col-sm-5">
+                                            <input type="submit" class="btn btn-primary" id="btnSubmit" value="Payment" />
+
+
+                                        </div>
+                                    </div>
+
+                                    </div>
+
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

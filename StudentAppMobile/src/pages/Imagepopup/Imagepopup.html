@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Image Upload
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="Closemodel()">
+        Close
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+ 
+  <input type="hidden" name="hdnImageData" id="screendata" value="dd">
+  <input type="file" name="image" accept="image/*" (change)="changeListener($event)" #fileInp>
+   <button type="button" class="add-nb-btn" id="screen" onclick="takeScreenShot2('capture','screendata')">OK</button>
+   <button type="button" id="saveImageBtn2" (click)="change()" style="opacity:0"></button>
+  <!--<button type="button" id="saveImageBtn2" (click)="change()">OK</button>-->
+  <div id="capture" style="height:auto;">
+    <img src="{{playerImg}}" />
+  </div>
+</ion-content>

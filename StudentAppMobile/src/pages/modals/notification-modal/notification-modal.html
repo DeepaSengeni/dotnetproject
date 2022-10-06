@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="notifications"></ion-icon>
+      Notifications
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<div [innerHtml]="notificationsHtml"></div>-->
+
+  <!--<ion-list>
+    <ion-item *ngFor="let item of items">
+
+      <div (click)="HomeIndex(item.PageId,item.BookId)">
+        <div *ngIf="item.Question == null && item.Answer == null">
+          <ion-avatar item-start>
+            <img src="{{url}}{{item.QuestionerImage}}">
+          </ion-avatar>
+          <div>
+            <h2 style="white-space: normal;"><span>{{item.BookSubmitter}}</span><span> added 1 new page in </span><span>{{item.BookName}}</span></h2>
+          </div>
+          <p style="float:right"><ion-icon name="chatbubbles"></ion-icon> {{item.createdon}}</p>
+        </div>
+        <div *ngIf="item.Question != null || item.Answer != null">
+          <ion-grid>
+            <ion-row>
+              <ion-col width-20>
+                <ion-avatar item-start>
+                  <img src="{{url}}{{item.QuestionerImage}}">
+                </ion-avatar>
+              </ion-col>
+              <ion-col width-80>
+                <div><span *ngIf="item.QuestionerName != null">{{item.QuestionerName}} :</span><span *ngIf="item.Answer == null">Commented on</span><span *ngIf="item.Answer != null">Answered on</span></div>
+                <div><span *ngIf="item.BookName != null">{{item.BookName}}</span><span> created by </span></div>
+                <div><span *ngIf="item.BookSubmitter != null">{{item.BookSubmitter}} </span><span> :-  </span><span *ngIf="item.Answer == null"><span *ngIf="item.Question != null"><span [innerHTML]="item.Question"></span></span></span><span *ngIf="item.Answer != null"> {{item.Answer}} </span>
+                </div>
+                <p><ion-icon name="chatbubbles"></ion-icon> {{item.createdon}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>-->
+
+  <div *ngFor="let item of items">
+    <div (click)="HomeIndex(item.PageId,item.BookId)">
+
+      <div class="panel-body" *ngIf="item.Question == null && item.Answer == null">
+        <div class="user-notification">
+          <div>
+            <img src="{{url}}{{item.QuestionerImage}}">
+          </div>
+          <div>
+            <p><span>{{item.BookSubmitter}}</span><span> added 1 new page in </span><span>{{item.BookName}}</span></p>
+            <p>  <ion-icon name="chatbubbles"></ion-icon> {{item.createdon}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body" *ngIf="item.Question != null || item.Answer != null">
+        <div class="user-notification">
+          <div>
+            <img src="{{url}}{{item.QuestionerImage}}">
+          </div>
+          <div>
+            <p><span *ngIf="item.QuestionerName != null">{{item.QuestionerName}} :</span><span *ngIf="item.Answer == null">Commented on</span><span *ngIf="item.Answer != null">Answered on</span></p>
+            <p><span *ngIf="item.BookName != null">{{item.BookName}}</span><span> created by </span></p>
+            <p><span *ngIf="item.BookSubmitter != null">{{item.BookSubmitter}} </span><span *ngIf="item.Answer == null"><span *ngIf="item.Question != null"><span [innerHTML]="item.Question"></span></span></span><span *ngIf="item.Answer != null"> {{item.Answer}} </span></p>
+            <p><ion-icon name="chatbubbles"></ion-icon> {{item.createdon}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</ion-content>
+
+

@@ -1,0 +1,130 @@
+﻿
+@model StudentAppWebsite.Models.ManageProfile
+
+@{
+    ViewBag.Title = "Creator's Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ 
+
+
+<div class="container-fluid">
+
+
+    <div class="col-md-12 center-block-new" id="ProfileDiv">
+        <div class="panel panel-default">
+            <div class="panel-heading">Creator's Profile</div>
+            <div class="panel-body">
+
+                <div class="col-lg-3">
+                    <img src="@Model.profile.ProfileImage" alt="No image found." />
+                </div>
+                <div class="col-lg-9">
+                    <div class="form-group clearfix">
+                        <label class="col-lg-4">Student Name</label>
+                        <div class="col-lg-7">@Model.profile.StudentName</div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-lg-4">City</label>
+                        <div class="col-lg-7">@Model.profile.CityName</div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-lg-4">State</label>
+                        <div class="col-lg-7">@Model.profile.StateName</div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-lg-4">Country</label>
+                        <div class="col-lg-7">@Model.profile.CountryName</div>
+                    </div>
+                    @*<div class="form-group clearfix">
+                        <label class="col-lg-5">Mobile Number</label>
+                        <div class="col-lg-7">@Model.profile.MobileNumber</div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-lg-5">Email</label>
+                        <div class="col-lg-7">@Model.profile.EmailId</div>
+                    </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Listing of notebooks*@
+    <div class="col-lg-12 center-block-new" id="DetailDiv">
+        <div class="panel panel-default">
+            <div class="panel-heading">List Of Notebooks</div>
+            <div class="panel-body">
+                <script type="text/javascript">
+                    jQuery(document).ready(function () {
+                        $("#example-4").dataTable({
+                            aLengthMenu: [
+                                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                            ]
+                        });
+                    });
+                </script>
+
+                <div class="table-responsive">
+
+                    <table id="example-4" class="table table-small-font table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>SNo.</th>
+
+                                <th>Subject</th>
+                                <th>Teacher</th>
+                                <th>Coaching</th>
+                                <th>Type</th>
+                                <th>Pages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Model.lstNotebooks != null && Model.lstNotebooks.Count > 0)
+                            {
+                                var count = 1;
+                                foreach (var item in Model.lstNotebooks)
+                                {
+                                <tr>
+                                    <td>@count</td>
+
+                                    <td><a href="/Home/Notebook_Pages?BookId=@item.Id">@item.SubjectId</a></td>
+                                    <td>@item.TeachersName</td>
+                                    <td>@item.CollegeId</td>
+                                    <td>@item.BookType</td>
+                                    <td>@item.TotalPages</td>
+                                </tr>
+                                    count += 1;
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+  @*  $(document).ready(function () {
+
+        if (parseInt('@Session["Role"]') == 2) {
+            $('#DetailDiv').show();
+        }
+        else {
+            $('#DetailDiv').hide();
+
+        }
+
+    });*@
+
+
+</script>
+

@@ -1,0 +1,143 @@
+﻿@using System.Text.RegularExpressions;
+@model StudentAppWebsite.Models.NotebookForm
+
+@{
+    Layout = null;
+
+}
+<script>
+    var file = @Html.Raw(Json.Encode(Model.postedFile));
+    console.log(file);
+    var input = document.querySelector('#video-upload');
+    var url = "https://sandbox.api.video/upload?token=toCnqi3reopBw9E5Q0a7Ha0";
+    var chunkCounter = 0;
+    var chunkSize = 6000000;
+    var videoId = "";
+    var playerUrl = "";
+    var videofullyupload = false;
+
+    /* function updateProgress(oEvent) {
+        if (oEvent.lengthComputable) {
+            var percentComplete = Math.round(oEvent.loaded / oEvent.total * 100);
+            var file = input.files[0];
+            var numberofChunks = Math.ceil(file.size / chunkSize);
+            var totalPercentComplete = Math.round((chunkCounter - 1) / numberofChunks * 100 + percentComplete / numberofChunks);
+            // document.getElementById("chunk-information").innerHTML = "Chunk # " + chunkCounter + " is " + percentComplete + "% uploaded. Total uploaded: " + totalPercentComplete + "%";
+
+            totalPercentComplete = totalPercentComplete + '%';
+
+            $("#chunk-information").progressbar({
+                value: totalPercentComplete,
+            }).children('.ui-progressbar-value').html(totalPercentComplete).css("display", "block").css("width", totalPercentComplete).css("text-align", "center");
+            $("#chunk-information").css({ 'background': 'LightYellow' });
+        } else {
+            console.log("not computable");
+            // Unable to compute progress information since the total size is unknown
+        }
+    } */
+
+    function uploadChunk(chunkForm, start, chunkEnd) {
+        var oReq = new XMLHttpRequest();
+        // oReq.upload.addEventListener("progress", updateProgress);
+        oReq.open("POST", url, true);
+        var blobEnd = chunkEnd - 1;
+        // var file = input.files[0];
+
+        var contentRange = "bytes " + start + "-" + blobEnd + "/" + file.size;
+        oReq.setRequestHeader("Content-Range", contentRange);
+        console.log("Content-Range", contentRange);
+
+        oReq.onload = function (oEvent) {
+            // Uploaded.
+            // console.log("uploaded chunk");
+            // console.log("oReq.response", oReq.response);
+            var resp = JSON.parse(oReq.response)
+            videoId = resp.videoId;
+            // console.log("videoId", videoId);
+            // console.log(resp.assets);
+            //now we have the video ID - loop through and add the remaining chunks
+            //we start one chunk in, as we have uploaded the first one.
+            //next chunk starts at + chunkSize from start
+            start += chunkSize;
+            //if start is smaller than file size - we have more to still upload
+            if (start < file.size) {
+                //create the new chunk
+                createChunk(videoId, start);
+            } 
+
+            /* else {
+                //the video is fully uploaded. there will now be a url in the response
+                // playerUrl = resp.assets.player;
+                // console.log("all uploaded! Watch here: ", playerUrl);
+
+                console.log(resp);
+                playerUrl = resp.assets.mp4;
+
+                tempVideoHtml = "<div class='videoContainer'>";
+                tempVideoHtml += "<div style='text-align: center;'>";
+                tempVideoHtml += "<video id='myVideo' controls style='width:100%' src=" + playerUrl + " >";
+                tempVideoHtml += "Your browser does not support HTML5 video.";
+                tempVideoHtml += "</video></div></div>";
+                // tempVideoHtml += "<div id='myVideo' style='width:100%;height:100%;'></div>";
+                // tempVideoHtml += "</div></div>";
+
+                checkstatusandplayvideo(resp, tempVideoHtml);
+
+                // $("#editorDiv").html('');
+                // $('#MsgDiv').addClass('alert alert-success').html('Uploaded Successfully! This video is being processed and will be available in a moment.');
+
+                // document.getElementById("chunk-information").innerHTML = "all uploaded! Watch the video <a href=\'" + playerUrl + "\' target=\'_blank\'>here</a>";
+            } */
+
+        };
+        oReq.send(chunkForm);
+    }
+
+    function createChunk(videoId, start, end) {
+        chunkCounter++;
+        console.log("created chunk: ", chunkCounter);
+        // var file = input.files[0];
+        var filename = file.name;
+        chunkEnd = Math.min(start + chunkSize, file.size);
+        const chunk = file.slice(start, chunkEnd);
+        console.log("i created a chunk of video" + start + "-" + chunkEnd + "minus 1	");
+        const chunkForm = new FormData();
+        if (videoId != undefined && videoId.length > 0) {
+            //we have a videoId
+            chunkForm.append('videoId', videoId);
+            console.log("added videoId");
+
+        }
+        chunkForm.append('file', chunk, filename);
+        console.log("added file");
+
+
+        //created the chunk, now upload iit
+        uploadChunk(chunkForm, start, chunkEnd);
+    }
+
+    function saveVideoFileV2() {
+        // var file = input.files[0];
+        //get the file name to name the file.  If we do not name the file, the upload will be called 'blob'
+        var filename = file.name;
+        var numberofChunks = Math.ceil(file.size / chunkSize);
+        // document.getElementById("chunk-information").innerHTML = "There will be " + numberofChunks + " chunks uploaded."
+        var start = 0;
+        var chunkEnd = start + chunkSize;
+        //upload the first chunk to get the videoId
+        createChunk(videoId, start); 
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        saveVideoFileV2();
+    });
+</script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="/Scripts/bililiteRange.js"></script>
+<script src="/Scripts/jquery.sendkeys.js"></script>
+<script src="~/Content/js/videouploader.js" defer></script>
+<script src="~/Content/js/videoplayersdk.js" defer></script>
+
+

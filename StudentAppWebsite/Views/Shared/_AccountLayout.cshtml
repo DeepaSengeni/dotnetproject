@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>notetor.com</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive-website.css" rel="stylesheet" />
+    <link href="~/Content/css/hover.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.2.min.js"></script>
+    <style type="text/css">
+        .login-signup li a:last-child {
+            margin-left: 10px;
+        }
+
+        .panel-default > .panel-heading {
+            padding: 12px;
+        }
+    </style>
+
+</head>
+<body>
+    <section class="navigation">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav>
+                        <div class="navbar-header">
+                            @*  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>*@
+                            <a class="navbar-brand" href="/Home/Home">
+                                <p class="logo">
+
+                                    <img src="/content/images/logo.png" class="img-responsive">
+                                </p>
+                            </a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right login-signup">
+                            @if (Session["UserId"] != null)
+                            {
+                                if (Session["Role"] != null && Convert.ToInt32(Session["Role"]) == 2)
+                                {
+
+                                    <li class="submitli">
+
+                                        <a href="/User/NotebookForm" style="padding: 9px 8px;margin-top:8px;"
+                                           class="btn btn-success submit-note-btn">
+                                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                            Create Notebook
+                                        </a>
+                                    </li>
+                                }
+                                <li class="dropdown">
+                                    <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @*<div style="margin-top: 4px; float: left;" id="notifications">
+                                                <i class="fa fa-bell" aria-hidden="true" style="color: #fff;"></i>
+                                                <span id="notificationCount" class="notification"></span>
+                                                <div class="" aria-labelledby="" id="dropDownNotification">
+                                                </div>
+                                            </div>*@
+
+                                        <div style="margin-top: 4px; float: left;">
+                                            <img src="@(!string.IsNullOrEmpty(Convert.ToString(Session["ProfileImage"])) ? Convert.ToString(Session["ProfileImage"]) : "/Content/no-image-available.png")" class="img-circle img-inline userpic-32" width="28">
+                                        </div>
+                                        <div style="margin-top: 12px; float: right;">
+                                            <span style="color: #fff; cursor: pointer;">
+                                                @Session["UserName"]
+                                        </span>
+                                        <span class="caret" style="color: #fff; cursor: pointer;"></span>
+                                    </div>
+                                </div>
+                                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                    <li class="last">
+                                        <a href="/User/UserProfile">
+                                            <i class="fa fa-user"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li class="last">
+                                        <a href="/User/FriendList">
+                                            <i class="fa fa-users" aria-hidden="true"></i>
+
+                                            Friends
+
+                                        </a>
+                                    </li>
+                                    @*<li class="last">
+                                            <a href="/Home/Home">
+                                                <i class="fa fa-book" aria-hidden="true"></i>
+
+                                                Notebook list
+
+                                            </a>
+                                        </li>*@
+
+                                <li class="last">
+                                    <a href="/User/UserProfile?tab=notebook">
+                                        <i class="fa fa-book"></i>  Notebook List
+                                    </a>
+                                </li>
+                                    <li class="last">
+                                        <a href="/user/adcreation">
+                                            <i class="fa fa-comments" aria-hidden="true"></i>
+
+                                            Create Ad
+
+                                        </a>
+                                    </li>
+
+                                    @*   <li class="last">
+                                            <a href="/User/NotificationList">
+                                               <i class="fa fa-bell" aria-hidden="true"></i>
+
+                                                Notification
+                                                 <span id="notificationCount" class="notification">  </span>
+                                            </a>
+                                        </li>*@
+                                    <li class="last">
+                                        <a href="/Account/">
+                                            <i class="fa-lock"></i>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                        }
+                        else
+                        {
+                            <li class="loginli">
+                                <a href="/Account/SubmitterRegistration" class="hvr-shutter-out-vertical" style="/*background: #1e99f3;*/ background:transparent; border:1px solid #fff;padding: 6px 20px; margin-top: 6px;">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    Log In
+                                </a>
+                            </li>
+                            <li class="signupli">
+                                <a href="/Account/SubmitterRegistration" class="hvr-shutter-out-vertical" style="/*background: #feab03;*/ background:transparent; border:1px solid #fff;padding: 6px 20px; margin-top: 6px;">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    Sign Up
+                                </a>
+                            </li>
+
+                            <li class="submitli">
+
+                                <a href="/User/NotebookForm" style="padding: 9px 8px;margin-top: 8px;"
+                                   class="btn btn-success submit-note-btn ">
+                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    Create Notebook
+                                </a>
+                            </li>
+
+                        }
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content login-section clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+</body>
+<script src="~/Content/js/bootstrap.min.js"></script>
+
+
+
+</html>

@@ -1,0 +1,973 @@
+﻿@model StudentAppWebsite.Models.NotebookForm
+@using System.Globalization;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/Scripts/jquery-1.7.1.min.js"></script>
+<script src="/Scripts/jquery.validate.min.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<style>
+    /*.signupform
+     {
+         padding-top: 50px;
+     }*/
+
+    .errorspan {
+        color: red;
+    }
+
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+
+    .form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+        margin-left: 10px;
+    }
+    /** {
+         box-sizing: border-box;
+     }
+
+     body {
+         font: 16px Arial;
+     }
+
+     .autocomplete {
+         position: relative;
+    }
+
+     input {
+         border: 1px solid transparent;
+         padding: 10px;
+         font-size: 16px;
+     }
+
+         input[type=text] {
+              width: 100%;
+         }
+
+         input[type=submit] {
+             color: #fff;
+             cursor: pointer;
+         }
+
+     .autocomplete-items {
+         position: absolute;
+         border: 1px solid #d4d4d4;
+         border-bottom: none;
+         border-top: none;
+         z-index: 99;
+         top: 100%;
+         left: 0;
+         right: 0;
+     }
+
+         .autocomplete-items div {
+             padding: 10px;
+             cursor: pointer;
+             background-color: #fff;
+             border-bottom: 1px solid #d4d4d4;
+         }
+
+             .autocomplete-items div:hover {
+                 background-color: #e9e9e9;
+             }
+
+     .autocomplete-active {
+         background-color: DodgerBlue !important;
+         color: #ffffff;
+     }*/
+
+</style>
+
+
+@using (Html.BeginForm("NotebookForm", "User", FormMethod.Post))
+{
+
+    <div class="container-fluid signupform">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Notebook Form</h3>
+
+                        @*<div class="panel-options">
+                                <a href="#" data-toggle="panel">
+                                    <span class="collapse-icon">&ndash;</span>
+                                    <span class="expand-icon">+</span>
+                                </a>
+                                <a href="#" data-toggle="remove">&times;
+                                </a>
+                            </div>*@
+                    </div>
+                    <div class="panel-body">
+
+
+
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                        }
+                        else if (TempData["ErrorMessage"] != null)
+                        {
+
+                            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                        }
+
+                        <div class="form-horizontal ">
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+
+                                    @*<div class="form-group" id="strmdivi" style="display:none">
+                                        <label class="col-sm-4 col-xs-12 control-label">Subject Stream</label>
+                                        <div class="col-sm-6 col-xs-9" id="SubjectDiv">
+                                            @Html.DropDownListFor(model => model.StreamId, (ViewBag.StreamList) as List<SelectListItem>, "Please select stream.", new { @Class = "form-control" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.StreamId)</div>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="form-group" id="subnameh">
+                                        <label class="col-sm-4 col-xs-12 control-label">Subject Name</label>
+                                        <div class="col-sm-6 col-xs-9" id="SubjectDiv">
+                                            @Html.DropDownListFor(model => model.SubjectName, new SelectList(Model.SubjectList, "Id", "SubjectName"), "--Select Subject--", new { @class = "form-control", placeholder = "Subject" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.SubjectName)</div>
+
+                                        </div>
+                                        <div class="col-sm-2 col-xs-3">
+                                            <a href="javascript:void(0);" class="btn btn-primary add-btn" id="Sub_name">Add New</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group " id="cancel" style="display:none">
+                                        <label class="col-sm-4 col-xs-12 control-label">Subject Name</label>
+                                        <div class="col-sm-6 col-xs-9" id="SubjectDivis">
+                                            @*<input type="hidden" value="" data-url="" id="inputhidden" />
+                                                <input id="myInput" type="text" class="form-control" name="subnametxt">*@
+                                            @Html.TextBoxFor(model => model.subnametxt, new { @class = "form-control", placeholder = "Subject" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.subnametxt)</div>
+                                        </div>
+                                        <div class="col-sm-2 col-xs-3">
+                                            <a href="#" class="btn btn-primary add-btn" id="Sub_name_cancel">Cancel</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label">Date</label>
+                                        <div class="col-sm-6 col-xs-9">
+                                            @Html.TextBoxFor(model => model.CreatedDate, new { @class = "form-control", placeholder = "DD/MM/YYYY" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.CreatedDate)</div>
+
+                                        </div>
+                                    </div>
+
+                                    @*<div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label">Date</label>
+                                            <div class="col-sm-6 col-xs-9">
+                                                @DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)
+                                                @Html.Hidden("dated", DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture))
+                                            </div>
+                                        </div>*@
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label">Do you want monetary advantages? </label>
+                                        <div class="col-sm-6 col-xs-9">
+                                            <div class="custom-custom">
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        @if (Model.MonetoryAdvantages == 0 || Model.MonetoryAdvantages == 1)
+                                                        {
+                                                            <input type="radio" name="monetaryAdvantages" value="1" checked />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" name="monetaryAdvantages" value="1" />
+                                                        }
+                                                        Yes
+                                                    </label>
+                                                </div>
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        @if (Model.MonetoryAdvantages == 2)
+                                                        {
+                                                            <input type="radio" name="monetaryAdvantages" value="2" checked />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" name="monetaryAdvantages" value="2" />
+                                                        }
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                 
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label"></label>
+                                        <div class="col-sm-8 col-xs-9">
+                                            <div class="custom-custom">
+                                                <fieldset style="margin: -12px -5px 5px -19px;padding-bottom: 10px;border: 1px solid silver;">
+                                                    <legend style="font-size:18px;">Optional</legend>
+                                                    <div class="inside" style="    margin-left: 7px;">
+                                                        <div class="radio-inline">
+                                                            <label>
+                                                                <input type="radio" name="Innovation_Investment" value="0" checked />Basic
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio-inline">
+                                                            <label>
+                                                                @if (Model.Innovation_Investment == 0 || Model.Innovation_Investment == 1)
+                                                                {
+                                                                    <input type="radio" name="Innovation_Investment" value="1" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="radio" name="Innovation_Investment" value="1" />
+                                                                }
+                                                                Innovation
+                                                            </label>
+                                                        </div>
+                                                        <div class="radio-inline">
+                                                            <label>
+                                                                @if (Model.Innovation_Investment == 2)
+                                                                {
+                                                                    <input type="radio" name="Innovation_Investment" value="2" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="radio" name="Innovation_Investment" value="2" />
+                                                                }
+                                                                Investment
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-xs-12 control-label"></label>
+                                        <div class="col-sm-6 col-xs-9">
+                                            <div class="custom-custom">
+
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        @if (Model.Visible_Hidden == 0 || Model.Visible_Hidden == 1)
+                                                        {
+                                                            <input type="radio" name="Visible_Hidden" value="1" checked />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" name="Visible_Hidden" value="1" checked />
+                                                        }
+                                                        Visible(Visible to All)
+                                                    </label>
+                                                </div>
+                                                <div class="radio-inline">
+                                                    <label>
+                                                        @if (Model.Visible_Hidden == 2)
+                                                        {
+                                                            <input type="radio" name="Visible_Hidden" value="2" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="radio" name="Visible_Hidden" value="2" />
+                                                        }
+                                                        Hidden(Visible to you only)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    @*                                <div class="form-group">
+                                            <label class="col-sm-4 control-label" >Type</label>
+                                            <div class="col-sm-7">
+                                                @Html.TextBoxFor(model => model.Type, new { @class = "form-control", placeholder = "Type" })
+                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.Type)</div>
+
+                                            </div>
+                                        </div>*@
+
+
+                                    @*<div class="form-group" id="cardHolderNamediv">
+                                            <label class="col-sm-4 col-xs-12 control-label">CardHolder Name</label>
+                                            <div class="col-sm-7 col-xs-10">
+                                                @Html.TextBoxFor(model => model.CardHolderName, new { @class = "form-control", placeholder = "Card Holder Name" })
+                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.CardHolderName)</div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="cardNumberdiv">
+                                            <label class="col-sm-4 col-xs-12 control-label">Card Number</label>
+                                            <div class="col-sm-7 col-xs-10">
+                                                @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control", placeholder = "Card Number" })
+                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.CardNumber)</div>
+
+                                            </div>
+                                        </div>
+                                         <div class="form-group" id="cvvdiv">
+                                            <label class="col-sm-4 col-xs-12 control-label">CVV</label>
+                                            <div class="col-sm-7 col-xs-10">
+                                                @Html.PasswordFor(model => model.CVV, new { @class = "form-control", placeholder = "CVV Number" })
+                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.CVV)</div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" id="expiryDatediv">
+                                            <label class="col-sm-4 col-xs-12 control-label">Expiration Date</label>
+                                            <div class="col-sm-7 col-xs-10">
+
+
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-6">  @Html.DropDownListFor(model => model.ExpiryMonth, ViewBag.ExpMonthList as List<SelectListItem>, new { @class = "form-control" })
+                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.ExpiryMonth)</div>
+
+                                                    </div>
+                                                    <div class="col-sm-6 col-xs-6"> @Html.DropDownListFor(model => model.ExpiryYear, ViewBag.ExpYearList as List<SelectListItem>, new { @class = "form-control" })
+                                                <div class="text-danger">@Html.ValidationMessageFor(model => model.ExpiryYear)</div>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+
+                                            </div>
+                                        </div>*@
+                                    <div class="form-group">
+
+                                        <div class="col-sm-offset-4 col-sm-5">
+
+                                            <input type="submit" class="btn btn-primary" id="btnSubmit" value="Submit" onclick="return getData()" />
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+
+
+                                    @Html.HiddenFor(m => m.BookId)
+
+                                    <div class="form-group" style="display:none;">
+                                        <label class="col-sm-4 col-xs-12 control-label">Category</label>
+                                        <div class="col-sm-6 col-xs-9" id="CategoryDiv">
+                                            @Html.DropDownListFor(model => model.CategoryName, new SelectList(Model.CategoryList, "Id", "CategoryName"), "--Select Category--", new { @class = "form-control", placeholder = "Category" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.CategoryName)</div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-group" style="display:none;">
+                                        <label class="col-sm-4 col-xs-12 control-label">Stream</label>
+                                        <div class="col-sm-6 col-xs-9" id="StreamDiv">
+                                            @Html.DropDownListFor(model => model.StreamName, new SelectList(Model.StreamList, "Id", "StreamName"), "--Select Stream--", new { @class = "form-control", placeholder = "Stream" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.StreamName)</div>
+
+                                        </div>
+                                        <div class="col-sm-2 col-xs-3">
+                                            <a href="javascript:void(0);" class="btn btn-primary add-btn" id="Stream_Name">Add New</a>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="form-group" style="display:none;">
+                                        <label class="col-sm-4 col-xs-12 control-label">Name Of (Coaching/ College/ School)</label>
+                                        <div class="col-sm-6 col-xs-9" id="InstituteDiv">
+                                            @Html.DropDownListFor(model => model.InstituteName, new SelectList(Model.InstituteList, "Id", "InstituteName"), "--Select Institute--", new { @class = "form-control", placeholder = "City" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.InstituteName)</div>
+
+                                        </div>
+                                        <div class="col-sm-2 col-xs-3">
+                                            <a href="javascript:void(0);" class="btn btn-primary add-btn" id="Institute_name">Add New</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+<script src="~/Content/js/moment.min.js"></script>
+
+<script src="~/Content/js/combodate.js"></script>
+
+<script src="~/Plugin/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<link href="~/Plugin/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+<script src="~/Content/js/jquery.maskedinput.min.js"></script>
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+
+        $('#ExpirationDate').combodate({
+            minYear: 2016,
+            maxYear: 2033,
+            minuteStep: 10,
+           @* value:'@Model.ExpirationDate'*@
+           });
+        $('#ExpirationDate').combodate('setValue', '@Model.ExpirationDate');
+
+        $('.Streams').on("change", function () {
+            InstituteBind();
+            SearchBooksByCatInsStrSub();
+
+
+        });
+        $(document).on('blur', '#Cat_other', function () {
+            checkCategoryExistence();
+        });
+        $(document).on('blur', '#Strm_other', function () {
+            checkStreamExistence();
+        });
+        $(document).on('blur', '#Ins_other', function () {
+            checkInstituteExistence();
+        });
+        $(document).on('blur', '#Sub_other', function () {
+            checkSubjectExistence();
+        });
+
+
+
+        $('#CreatedDate').datepicker({ autoclose: true, format: 'dd/mm/yyyy' });
+        $('#ExpirationDate').datepicker({ autoclose: true });
+        $('#CreatedDate').mask("99/99/9999");
+
+
+        //$('#chtr_name').click(function () {
+
+        //    $('#ChapterDiv').append('<input type="Text" class="form-control Chapter"  style="margin-top:12px" id="Chap_other" name="Chap_other"/>')
+
+
+        //});
+
+
+        $('#Sub_name').click(function () {
+
+            $('#cancel').show();
+            $('#subnameh').hide();
+           
+
+            //if ($('.subject').length == 0) {
+
+            //    $('#SubjectDiv').append('<input type="Text" Placeholder="Other" class="form-control subject" style="margin-top:12px"  required="required" id="Sub_other" name="Sub_other" maxlength="40" />')
+
+            //}
+
+            //var Othersval = $("#SubjectName option[value='other']").length
+
+            //if (Othersval == 0) {
+            //    $('#SubjectName').append('<option value="other" selected="selected">Other</option>');
+            //}
+        })
+        $('#Sub_name_cancel').click(function () {
+            $('#cancel').hide();
+            $('#subnameh').show();
+            $('#strmdivi').hide();
+        })
+
+
+        $('#Institute_name').click(function () {
+
+            if ($('.Institute').length == 0) {
+                $('#InstituteDiv').append('<input type="Text" Placeholder="Other" class="form-control Institute" style="margin-top:12px"  required="required" id="Ins_other" name="Ins_other" />')
+            }
+
+            var Othersval = $("#InstituteName option[value='other']").length
+
+            if (Othersval == 0) {
+                $('#InstituteName').append('<option value="other" selected="selected">Other</option>');
+            }
+        })
+
+        $('#Category_name').click(function () {
+
+            if ($('.Category').length == 0) {
+                $('#CategoryDiv').append('<input type="Text" Placeholder="Other" class="form-control Category" style="margin-top:12px"  required="required" id="Cat_other" name="Cat_other" maxlength="40"/>')
+            }
+
+            var Othersval = $("#CategoryName option[value='other']").length
+
+            if (Othersval == 0) {
+                $('#CategoryName').append('<option value="other" selected="selected">Other</option>');
+                $('#StreamName').html('<option value="0">Select</option>');
+                $('#InstituteName').html('<option value="0">--Select--</option>');
+                $('#SubjectName').html('<option value="0">--Select--</option>');
+            }
+        })
+        $('#Stream_Name').click(function () {
+
+            if ($('.Stream').length == 0) {
+                $('#StreamDiv').append('<input type="Text" Placeholder="Other" class="form-control Stream" style="margin-top:12px"  required="required" id="Strm_other" name="Strm_other" maxlength="40"/>')
+            }
+            var Othersval = $("#StreamName option[value='other']").length
+
+            if (Othersval == 0) {
+                $('#StreamName').append('<option value="other" selected="selected">Other</option>');
+                $('#InstituteName').html('<option value="0">--Select--</option>');
+                $('#SubjectName').html('<option value="0">--Select--</option>');
+            }
+
+        })
+
+
+        $('#SubjectName').on("change", function () {
+    
+            $('#subnametxt').val($("#SubjectName option:selected").text());
+
+            if ($("#SubjectName").val() != 'other') {
+                $("#SubjectName option[value='other']").remove();
+
+            }
+            Subject();
+        })
+
+        $('#InstituteName').on("change", function () {
+
+            if ($("#InstituteName").val() != 'other') {
+                $("#InstituteName option[value='other']").remove();
+
+            }
+            Institute();
+        })
+        $('#StreamName').on("change", function () {
+            if ($("#StreamName").val() != 'other') {
+                $("#StreamName option[value='other']").remove();
+
+            }
+            Stream();
+        })
+        $('#CategoryName').on("change", function () {
+            if ($("#CategoryName").val() != 'other') {
+                $("#CategoryName option[value='other']").remove();
+                StreamBind($(this).val());
+            }
+
+            Category();
+        })
+
+        $('form').submit(function () {
+            var Stream = true;
+            var Institute = true;
+            var Category = true;
+            var Subject = true;
+
+            if ($('#SubjectName').val() == 'other') {
+                Subject = $('#Sub_other').val() == "" ? false : true;
+                if (!Subject) {
+                    if (!$('#SubjectDiv .errorspan').length > 0)
+                        $('#SubjectDiv').append('<span class="errorspan"> Subject Name is required.</span>')
+                }
+                else
+                    $('#SubjectDiv .errorspan').remove();
+            }
+
+            if ($('#InstituteName').val() == 'other') {
+                Institute = $('#Ins_other').val() == "" ? false : true;
+                if (!Institute) {
+                    if (!$('#InstituteDiv .errorspan').length > 0)
+                        $('#InstituteDiv').append('<span class="errorspan"> Institute Name is required.</span>')
+                }
+                else
+                    $('#InstituteDiv .errorspan').remove();
+            }
+
+            if ($('#StreamName').val() == 'other') {
+                Stream = $('#Strm_other').val() == "" ? false : true;
+                if (!Stream) {
+                    if (!$('#StreamDiv .errorspan').length > 0)
+                        $('#StreamDiv').append('<span class="errorspan"> Stream is required.</span>')
+                }
+                else
+                    $('#StreamDiv .errorspan').remove();
+            }
+
+            if ($('#CategoryName').val() == 'other') {
+                Category = $('#Cat_other').val() == "" ? false : true;
+                if (!Category) {
+                    if (!$('#CategoryDiv .errorspan').length > 0)
+                        $('#CategoryDiv').append('<span class="errorspan"> Category is required.</span>')
+                }
+                else
+                    $('#CategoryDiv .errorspan').remove();
+
+            }
+
+            if (Institute && Stream && Category)
+                return true
+            else
+                return false
+        });
+
+    });
+    function Subject() {
+        var Subjects = $('#SubjectName').val();
+
+        if (Subjects.length > 0) {
+            $("#SubjectDiv .subject").remove();
+
+        }
+
+
+    }
+
+
+
+
+    function Institute() {
+        var Institutes = $('#InstituteName').val();
+
+        if (Institutes.length > 0) {
+            $("#InstituteDiv .Institute").remove();
+        }
+
+
+    }
+
+    function Category() {
+        var Categories = $('#CategoryName').val();
+
+        if (Categories.length > 0) {
+            $("#CategoryDiv .Category").remove();
+        }
+
+
+    }
+
+    function Stream() {
+        var Streams = $('#StreamName').val();
+
+        if (Streams.length > 0) {
+            $("#StreamDiv .Stream").remove();
+        }
+
+
+    }
+
+
+    function getData() {
+
+        $('form').validate();
+        //if ($('.subject').length > 0) {
+
+
+        //    $('#sbjName').val($('.subject').val());
+        //}
+        //else {
+        //    $('#sbjName').val($('#SubjectName').val());
+        //}
+
+        //var ChapterMain = $('#ChapterName').val();
+        //var Result = '';
+        //$('.Chapter').each(function () {
+
+        //    if ($(this).val().length>0)
+        //        Result += $(this).val() + ',';
+
+        //});
+
+        //$('#ChapterName').val(Result + ChapterMain);
+
+    }
+
+    function ToggelmonetaryAdvantages(Action) {
+        if (Action == "h") {
+            $('#cardHolderNamediv').hide();
+            $('#cardNumberdiv').hide();
+            $('#expiryDatediv').hide();
+            $('#cvvdiv').hide();
+
+        }
+        if (Action == "s") {
+            $('#cardHolderNamediv').show();
+            $('#cardNumberdiv').show();
+            $('#expiryDatediv').show();
+            $('#cvvdiv').show();
+
+        }
+    }
+
+    function StreamBind(Category) {
+        var CategoryID = Category;
+        if (CategoryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Home/StreamsLoadByCategoryId",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg.HomeList.length > 0) {
+                        var options = "<option value=''>--Select Stream--</option>";
+
+                        $.each(msg.HomeList, function (key, value) {
+
+                            //options += '<div class="radio"> <label><input id="Stream" class="Streams" type="radio" value="' + value.Id + '" name="Stream"  />' + value.StreamName + '</label></div>';
+                            options += "<option value=" + value.Id + ">" + value.StreamName + "</option>";
+
+                        });
+
+                        $('#StreamName').html(options);
+                        $('#StreamName').on("change", function () {
+
+                            InstituteBind();
+                        });
+
+                    }
+                    else {
+
+                        $('#StreamName').html('<option value="">--Select Stream--</option>');
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CategoryID': CategoryID },
+            });
+        } else {
+            $('#Category').html("<option value>Select</option>");
+        }
+    }
+
+    function InstituteBind() {
+        var StreamId = $('#StreamName').val();
+        if (StreamId != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Home/InstitutesLoadByStreamID",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg.instituteNewList.length > 0) {
+                        var Instituteoptions = "<option value=''>--Select--</option>";
+
+
+                        $.each(msg.instituteNewList, function (key, value) {
+                            console.log(value.Id);
+                            //Instituteoptions += '<div class="radio"> <label><input id="Institute" class="Institute" type="radio" value="' + value.Id + '" name="Institute"  />' + value.InstituteName + '</label></div>';
+                            Instituteoptions += "<option value=" + value.Id + ">" + value.InstituteName + "</option>";
+                        });
+
+
+
+                        $('#InstituteName').html(Instituteoptions);
+
+                    }
+                    else {
+                        $('#InstituteName').html("<option value=''>--Select--</option>");
+
+                    }
+
+                    if (msg.SubjectsList.length > 0) {
+                        var Subjectsoptions = "<option value=''>--Select--</option>";
+                        $.each(msg.SubjectsList, function (key, value) {
+                            console.log(value.Id);
+                            // Subjectsoptions += '<div class="Checkbox"> <label><input id="Subject" class="Subject" type="checkbox" value="' + value.Id + '" name="Subject"  /> ' + value.SubjectName + '</label></div>';
+                            Subjectsoptions += "<option value=" + value.Id + ">" + value.SubjectName + "</option>";
+                        });
+
+                        $('#SubjectName').html(Subjectsoptions);
+
+                    }
+                    else {
+
+                        $('#SubjectName').html("<option value=''>--Select--</option>");
+                    }
+
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'StreamId': StreamId },
+            });
+        }
+    }
+
+</script>
+
+
+@*<script>
+        $(document).ready(function () {
+            var date = '@Model.ExpirationDate';
+            date=date.split(' ')[0];
+           // alert(date);
+            $('#ExpirationDate').combodate({
+                minYear: 2016,
+                maxYear: 2033,
+                minuteStep: 10,
+                //value: date
+            });
+            $('#ExpirationDate').combodate('setValue', date)
+        });
+    </script>*@
+
+
+<script>
+    $(".navbar-toggle").click(function () {
+        $(".collapse").toggle();
+    });
+
+</script>
+@*<script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $('#myInput').on('click', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Home/subjectforautocomplete',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    //var obj = JSON.parse(data);
+                    var Subjectname = [];
+                    for (x in data) {
+                        Subjectname.push(data[x]["SubjectName"]);
+                    }
+                    autocomplete(document.getElementById("myInput"), Subjectname);
+                    //console.log(Subjectname);
+                },
+                error: function (data) { },
+                complete: function (data) { }
+                //$(data).each(function (i, item) {
+                //    $('#CurrencyCod').append(item.SubjectName);
+                //});
+            },
+            )
+        });
+
+
+
+
+
+    </script>*@  

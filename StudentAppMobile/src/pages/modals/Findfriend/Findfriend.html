@@ -1,0 +1,15 @@
+
+<ion-content class="sample-modal-page">
+  <h1>Find Friend</h1>
+  <ion-icon name="close" style="float:right;font-size:40px;    margin-top: -50px;" (click)="dismiss()"></ion-icon>
+  <div *ngFor="let item of l">
+    <div class="container" (click)="openProfile(item.id)">
+      <img src="{{url}}{{item.ProfileImage}}" alt="Avatar" style="width:100%;border:4px solid #fff">
+      <div class="content">
+        <h4>{{item.FirstName}}{{item.LastName}}</h4>
+        <p>{{item.CountryName}}</p><p>{{item.StateName}}</p><p>{{item.CityName}}</p>
+      </div>
+      <button *ngIf="item.id!=userID" (click)="Dynamicclick(item.show,item.id,item.friendreqid)" class="{{item.cssclass}}">{{item.show}}</button>
+    </div>
+  </div>
+</ion-content>

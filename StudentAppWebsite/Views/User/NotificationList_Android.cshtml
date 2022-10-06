@@ -1,0 +1,81 @@
+﻿@model  List<StudentAppWebsite.Models.InvitationModel>
+@{
+    ViewBag.Title = "NotificationList_Android";
+}
+
+<style>
+    .user-notification {
+        background: rgb(254, 241, 233) none repeat scroll 0% 0%;
+        padding: 9px 10px;
+        margin-bottom: 8px !important;
+        border: 1px solid rgb(252, 228, 219);
+        color: rgb(102, 101, 101);
+        text-transform: capitalize;
+    }
+
+    user-notification > i {
+        background: rgb(251, 157, 106);
+        color: #fff;
+        padding: 5px 10px;
+        margin: 0px 12px;
+    }
+</style>
+<div class="container-fluid">
+
+    @using (Html.BeginForm("NotificationList", "User", FormMethod.Get))
+    {
+        <div class="row">
+
+            <div class="col-md-12" style="margin-top: 30px;">
+                <div class="panel panel-default">
+                   @* <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bell" aria-hidden="true"></i>
+                            Notifications</h3>
+
+
+                    </div>*@
+                    <div class="panel-body">
+                        <div id="notoficationContainer">
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                <div class="user-notification">
+
+                                    <a href="/Home/Index?PageId=@item.PageId"  class="clearfix" style="color:rgb(71, 71, 71) !important;">
+                                        <div class="col-md-1 notificationLi"  data-id="@item.NotificationId">
+                                            <img src=" @item.QuestionerImage" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;">
+                                        </div>
+                                        <div class="col-md-11" style="text-align: justify; padding-top: 12px;">
+                                            @(item.QuestionerName == null ? "" : item.QuestionerName) :  @(item.Answer == null ? "Commented on " : "Answered On ")
+                                            @(item.BookName == null ? "" : item.BookName)
+                                            submitted by  @(item.BookSubmitter == null ? "" : item.BookSubmitter)
+                                            :-  @Html.Raw(item.Question)
+                                            <br />
+                                            <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp@(item.CreatedDate == null ? "" : item.CreatedDate)
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+    <script>
+        $(document).ready(function () {
+            updateIsRead('notificationLi');
+        });
+
+       
+
+    </script>
+

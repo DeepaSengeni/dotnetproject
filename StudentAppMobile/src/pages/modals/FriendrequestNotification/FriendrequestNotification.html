@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="people"></ion-icon>
+      Friend Requests
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<div [innerHtml]="notificationsHtml"></div>-->
+
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <div *ngIf=" item.Status == 0||item.Status==null">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <input type="hidden" id="recordfound" name="recordfound" value="1" />
+                <div class="user-notification">
+                  <div class="active notification-success friendLi clearfix" data-id="{{item.FriendRequestId}}">
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+                      <img src="{{url}}{{item.InviterImage}}" class="img-circle img-inline userpic-32">
+                    </div>
+                    <div style="white-space: normal;">{{item.Inviter == null ? "" : item.Inviter}} has send you a friend request<br />{{item.CreatedDate == null ? "" : item.CreatedDate}}</div>
+                  </div>
+                  <div style="text-align: right">
+                    <a id="" class="btn btn-primary Accept" (click)="UpdateNotificationStatus(item.FriendRequestId,1,1)">Accept</a>
+                    <a id="" class="btn btn-warning Reject" (click)="UpdateNotificationStatus(item.FriendRequestId,2,1)">Deny</a>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf=" item.Status == 1">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <input type="hidden" id="recordfound" name="recordfound" value="1" />
+                <div class="user-notification">
+                  <div class="active notification-success friendLi clearfix" data-id="{{item.FriendRequestId}}">
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+                      <img src="{{url}}{{item.InviterImage}}" class="img-circle img-inline userpic-32">
+                    </div>
+                    <div style="white-space: normal;">
+                      {{item.Inviter == null ? "" : item.Inviter}} and you are now friends.
+                      <br />
+                      {{item.CreatedDate == null ? "" : item.CreatedDate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf=" item.Status == 2">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <input type="hidden" id="recordfound" name="recordfound" value="1" />
+                <div class="user-notification">
+                  <div class="active notification-success friendLi clearfix" data-id="{{item.FriendRequestId}}">
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+                      <img src="{{url}}{{item.InviterImage}}" class="img-circle img-inline userpic-32">
+                    </div>
+                    <div style="white-space: normal;">
+                      You have rejected the request of {{item.Inviter == null ? "" : item.Inviter}}
+                      <br />
+                      {{item.CreatedDate == null ? "" : item.CreatedDate}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+

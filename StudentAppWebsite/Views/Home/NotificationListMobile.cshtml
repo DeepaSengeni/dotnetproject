@@ -1,0 +1,629 @@
+﻿@model  List<StudentAppWebsite.Models.InvitationModel>
+@{
+    ViewBag.Title = "NotificationList";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive-website.css" rel="stylesheet" />
+    <link href="~/assets/css/xenon-core.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.2.min.js"></script>
+    <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script>
+    var isIE = false;
+
+    if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+        isIE = true;
+    }
+
+    if (isIE) {
+        $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+
+
+        });
+    }
+    else if ($.browser.mozilla == true) {
+
+    }
+    else {
+        $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+            //location.reload(false);
+
+        });
+    }
+    </script>
+
+
+    <style>
+        .notification-msg {
+            color: #3F3D3D;
+            text-transform: capitalize;
+            font-weight: 400 !important;
+        }
+
+        .notification-success {
+            border-bottom: 1px solid #cfdff8;
+            padding: 8px 0px;
+        }
+
+        .login-signup li a:last-child {
+            margin-left: 10px;
+        }
+
+        #dLabel .img-circle {
+            width: 38px;
+            float: left;
+            margin: 0px 8px;
+            background: #fff;
+        }
+
+        .dropdown-menu {
+            margin-top: 18px !important;
+        }
+
+        .dataTables_wrapper .table thead > tr .sorting, .dataTables_wrapper .table thead > tr .sorting_asc, .dataTables_wrapper .table thead > tr .sorting_desc {
+            background: #004293;
+            color: #fff;
+        }
+
+        .dataTables_filter {
+            float: right;
+        }
+
+        .pagination {
+            float: right;
+        }
+
+            .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+                background-color: #474747;
+                border-color: #282829;
+            }
+
+            .pagination > li > a, .pagination > li > span {
+                color: #666;
+            }
+
+        .table.table-bordered > tbody > tr > td {
+            border-color: #D6E7FC;
+        }
+
+       
+
+        .notification {
+            width: 23px;
+            height: 23px;
+            background: #004293;
+            border-radius: 50%;
+            padding: 0;
+            line-height: 23px;
+            background: #f87f09;
+            display: inline-block;
+            text-align: center;
+            color: #FFF;
+        }
+
+        /*#dropDownNotification {
+            position: absolute;
+            z-index: 9999;
+            left: -57px;
+            padding: 10px 4px;
+        }*/
+
+        .opened {
+            background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .notifications li a {
+            position: relative;
+            display: block;
+            padding: 6px 5px;
+            color: #686868;
+            border-bottom: 1px solid #efecec;
+            top: 1px;
+        }
+
+        .dropdown-menu-list li a i {
+        }
+
+        .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+            background: none;
+        }
+
+        .navigation .nav > li > a:hover, .nav > li > a:focus {
+            background: none;
+        }
+
+        .small {
+            display: block;
+        }
+
+        .badge.badge-purple {
+            background-color: #f9aa09;
+        }
+
+        .badge {
+            position: absolute;
+            font-size: 9px;
+            line-height: 13px;
+            top: 3px;
+            right: 2px;
+        }
+
+        .dropdown-menu {
+            padding: 0px;
+        }
+
+        .login-signup li a:last-child {
+            margin-left: 0px;
+        }
+
+        .notification-btn {
+            padding: 2px 10px;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+
+
+        .login-signup li a i {
+            padding-top: 3px;
+        }
+
+        .invitation:after {
+            position: absolute;
+            right: 0;
+            top: -20px;
+            width: 0;
+            height: 0;
+            content: '';
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-bottom: 20px solid #037EF6;
+        }
+
+          .user-notification {
+        background: rgb(254, 241, 233) none repeat scroll 0% 0%;
+        padding: 9px 10px;
+        margin-bottom: 8px !important;
+        border: 1px solid rgb(252, 228, 219);
+        color: rgb(102, 101, 101);
+        text-transform: capitalize;
+    }
+
+    user-notification > i {
+        background: rgb(251, 157, 106);
+        color: #fff;
+        padding: 5px 10px;
+        margin: 0px 12px;
+    }
+
+    </style>
+
+
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="col-md-12">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+        </div>
+
+
+        @using (Html.BeginForm("NotificationList", "User", FormMethod.Get))
+        {
+            <div class="row">
+
+                <div class="col-md-12" style="margin-top: 30px;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                               
+
+                            </h3>
+
+
+                        </div>
+                        <div class="panel-body">
+                            <div id="notoficationContainer">
+                                @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                            <div class="user-notification">
+
+                                <a href="/Home/Index?PageId=@item.PageId" class="clearfix" style="color:rgb(71, 71, 71) !important;">
+                                    <div class="col-md-1 notificationLi" data-id="@item.NotificationId">
+                                        <img src=" @item.QuestionerImage " class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;">
+                                    </div>
+                                    <div class="col-md-11" style="text-align: justify; padding-top: 12px;">
+                                        @(item.QuestionerName == null ? "" : item.QuestionerName) :  @(item.Answer == null ? "Commented on " : "Answered On ")
+                                        @(item.BookName == null ? "" : item.BookName)
+                                        submitted by  @(item.BookSubmitter == null ? "" : item.BookSubmitter)
+                                        :-  @Html.Raw(item.Question)
+                                        <br />
+                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp@(item.CreatedDate == null ? "" : item.CreatedDate)
+
+                                    </div>
+                                </a>
+
+                            </div>
+                                }
+                            }
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+    <script>
+        $(document).ready(function () {
+          @*  var xml = '';
+            if ('@Model' != null && '@Model.Count' > 0) {
+                var count = ' @Model.Count';
+                pContent = ('@Html.Raw(Json.Encode((Model)))');
+                var JsonData = JSON.parse(pContent);
+                xml += "<root>";
+                for (i = 0; i < count; i++) {
+                    xml += "<InvitationList>";
+                    xml += "<Id>" + JsonData[parseInt(i)].InvitationListId + "</Id>";
+                    xml += "</InvitationList>";
+                }
+                xml += "</root>";
+            }*@
+
+            //UpdateIsRead(xml);
+            updateIsRead('notificationLi');
+        });
+
+        //function UpdateIsRead(xml) {
+
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: '/User/InvitationListId_IsRead_Update',
+        //        data: '{ "XML" : "' + xml + '"}',
+        //        contentType: 'application/json; charset=utf-8',
+        //        dataType: 'json',
+        //        success: function (data) { },
+        //        error: function () { },
+        //        complete: function () { }
+        //    })
+        //}
+
+        //$('.Accept').click(function () {
+
+        //    $('#NotificationMsg').html('and you are now friend');
+        //    $(this).hide();
+        //    $('.Reject').hide();
+        //});
+        //$('.Reject').click(function () {
+
+        //    $('#NotificationMsg').html("'s friend request rejected.");
+        //    $(this).hide();
+        //    $('.Accept').hide();
+        //});
+
+    </script>
+
+</body>
+</html>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Plugin/mathscribe/jscurry-0.4.0.min.js"></script>
+<script src="~/Plugin/mathscribe/jqmath-0.4.3.js"></script>
+<script src="~/Scripts/Calculator.js"></script>
+
+<script src="~/Content/js/jquery.slimscroll.min.js"></script>
+<script src="~/Content/js/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/datatables/dataTables.bootstrap.js"></script>
+
+
+<script src="~/Content/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<link href="~/Content/js/datatables/yadcf/jquery.dataTables.yadcf.css" rel="stylesheet" />
+
+<script>M.MathPlayer = false; M.trustHtml = true;</script>
+<script>
+    $(function () {
+        M.trustHtml = true;
+    });
+</script>
+
+<script>
+    $(document).ajaxComplete(function (event, xhr, settings) {
+
+    });
+    $(document).ready(function () {
+        //$("#dropDownNotification").hide();
+        $('#InviteCount').hide();
+        $('#FriendCount').hide();
+        $('#NotificateCount').hide();
+        showNotifications();
+        window.setInterval(function () {
+            showNotifications();
+        }, 8000);
+
+        //$(" #notifications ").hover(function () {
+        //    $("#dropDownNotification").show();
+        //}, function () {
+        //    $(".opened").hide();
+        //});
+    });
+
+    function updateIsRead(type) {
+        var xml = '';
+        var XML = false;
+        if (!XML) {
+            xml = "<root>";
+            $("." + type + "").each(function () {
+                ILId = $(this).attr('data-Id');
+                xml += "<InvitationList>";
+                xml += "<Id>" + (ILId == null ? '0' : ILId) + "</Id>";
+                xml += "</InvitationList>";
+            });
+            xml += "</root>";
+            XML = true;
+            $.ajax({
+                type: 'POST',
+                url: '/User/Invitation_FriendRequest_Notification_List_IsRead_Update',
+                data: '{ "XML" : "' + xml + '","Type":"' + type + '"}',      //data: '{ "XML" : "' + xml + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) { },
+                error: function () { },
+                complete: function () { }
+            })
+        }
+    }
+
+    function showNotifications() {
+
+
+            //location.reload(false);
+
+
+        $.ajax({
+            url: '/Home/NotificationsCount',
+            type: 'Get',
+            data: {},
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var jsonData = JSON.parse(data);
+                if (jsonData.Status == 1) {
+
+                    // FriendsRequests Showing Starts Here
+                    if (jsonData.friendRequests.length == 0 || jsonData.friendRequests[0].UnreadNotifications == 0) //
+                    {
+                        $('#FriendCount').hide();
+                        $('#FriendCount').removeClass('badge badge-purple friendCount');
+                        $('#FriendCount').html('');
+                        $('.friendCountP').html('no');
+                    }
+                    else {
+                        $('#FriendCount').show();
+                        $('#FriendCount').addClass('badge badge-purple friendCount');
+                        $('.friendCount,.friendCountP').html(jsonData.friendRequests[0].UnreadNotifications);
+                    }
+                    var element = '';
+
+                    var count = jsonData.friendRequests.length;
+                    for (var i = 0; i < count; i++) {
+                        if (jsonData.friendRequests[i].Status == 1)
+                            element += '<li class="active notification-success friendLi clearfix"><a href="javascript:;" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + jsonData.friendRequests[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;"></div> <div class="col-md-10" style="text-align: justify;">' + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + ' and you are now friends.</div>';
+
+                        else if (jsonData.friendRequests[i].Status == 2)
+                            element += '<li class="active notification-success friendLi clearfix"><a href="javascript:;" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + jsonData.friendRequests[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;"></div><div class="col-md-10" style="text-align: justify;">You have rejected the request of ' + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + '.</div>';
+
+                        else if (jsonData.friendRequests[i].Status == 3)
+                            element += '<li class="active notification-success friendLi clearfix"><a href="javascript:;" class="notification-msg clearfix"> <div class="col-md-2"> <img src="' + jsonData.friendRequests[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;"></div><div class="col-md-10" style="text-align: justify;">You have blocked ' + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + '.</div>';
+
+                        else
+                            element += '<li class="active notification-success friendLi clearfix" data-Id="' + jsonData.friendRequests[i].FriendRequestId + '"><div class="col-md-2"><img src="'
+                                + jsonData.friendRequests[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;"> </div><div class="col-md-10" style="text-align: justify;">'
+                                + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + ' has send you a friend request <br/>'
+                                + (jsonData.friendRequests[i].CreatedDate == null ? ' ' : jsonData.friendRequests[i].CreatedDate) + '</div><span  style="display:block;float:right;margin-right: 10px;"><input type="button"class="notification-btn btn btn-primary" value="Accept" data-NotificationId="'
+                                + jsonData.friendRequests[i].FriendRequestId + '" onclick="UpdateNotificationStatus(this,1,1,\'layout\')"/><input class="notification-btn btn btn-warning" type="button" value="Reject" data-NotificationId="'
+                                + jsonData.friendRequests[i].FriendRequestId + '" onclick="UpdateNotificationStatus(this,2,1,\'layout\')"/></span>';
+                        //,&#39;' + jsonData.friendRequests[i].InviterImage + '&#39;,&#39;' + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + '&#39;
+                        //,&#39;' + jsonData.friendRequests[i].InviterImage + '&#39;,&#39;' + (jsonData.friendRequests[i].Inviter == null ? '' : jsonData.friendRequests[i].Inviter) + '&#39;
+                    }
+                    $('.friendarequests').html(element);
+
+                    // FriendsRequests Showing Ends Here
+
+
+                    // Notifications Showing Starts Here
+                    if (jsonData.notifications.length == 0 || jsonData.notifications[0].UnreadNotifications == 0) //
+                    {
+                        $('#NotificateCount').hide();
+                        $('#NotificateCount').removeClass('badge badge-purple notificationCount');
+                        $('#NotificateCount').html('');
+                        $('.notificationCountP').html('no');
+                    }
+                    else {
+                        $('#NotificateCount').show();
+                        $('#NotificateCount').addClass('badge badge-purple notificationCount');
+                        $('.notificationCount,.notificationCountP').html(jsonData.notifications[0].UnreadNotifications);
+                    }
+
+
+                    var element = '';
+                    var count = jsonData.notifications.length;
+                    for (var i = 0; i < count; i++) {
+                        element += '<li class="active notification-success notificationLi clearfix" data-Id="' + jsonData.notifications[i].NotificationId + '"><a href="/Home/Index?PageId=' + jsonData.notifications[i].PageId + '" class="notification-msg clearfix"><div class="col-md-2"> <img src="'
+                            + jsonData.notifications[i].QuestionerImage + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"> </div><div class="col-md-10" style="text-align: justify;">'
+                            + (jsonData.notifications[i].QuestionerName == null ? '' : jsonData.notifications[i].QuestionerName) + ':' + (jsonData.notifications[i].Answer == null ? 'Commented ' : 'Answered ') + '  on '
+                            + (jsonData.notifications[i].BookName == null ? '' : jsonData.notifications[i].BookName) + ' submitted by ' + (jsonData.notifications[i].BookSubmitter == null ? '' : jsonData.notifications[i].BookSubmitter) + ' :- "'
+                            + (jsonData.notifications[i].Answer == null ? (jsonData.notifications[i].Question == null ? "" : jsonData.notifications[i].Question) : jsonData.notifications[i].Answer) + '" <br/> <i class="fa fa-comment-o" aria-hidden="true"></i> ' + (jsonData.notifications[i].CreatedDate == null ? '' : jsonData.notifications[i].CreatedDate) + '</div>';
+
+                    }
+                    $('.notifications').html(element);
+
+                    // Notifications Showing Ends Here
+
+
+                    // Invitation Showing Starts Here
+
+                    if (jsonData.data.length == 0 || jsonData.data[0].UnreadNotifications == 0) //
+                    {
+                        $('#InviteCount').hide();
+                        $('#InviteCount').removeClass('badge badge-purple invitationCount');
+                        $('#InviteCount').html('');
+                        $('.invitationCountP').html('no');
+                    }
+                    else {
+                        $('#InviteCount').show();
+                        $('#InviteCount').addClass('badge badge-purple invitationCount');
+                        $('.invitationCount,.invitationCountP').html(jsonData.data[0].UnreadNotifications);
+                    }
+
+
+                    var element = '';
+
+                    var count = jsonData.data.length;
+                    for (var i = 0; i < count; i++) {
+
+                        if (jsonData.data[i].Status == 1)
+                            element += '<li class="active notification-success invitationLi clearfix"><a href="/Home/Index?PageId=' + jsonData.data[i].PageId + '" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + jsonData.data[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div> <div class="col-md-10" style="text-align: justify;"> You have accepted ' + (jsonData.data[i].Inviter == null ? '' : jsonData.data[i].Inviter) + '\'s invitation for the discussion over ' + (jsonData.data[i].BookName == null ? '' : jsonData.data[i].BookName) + ' submitted by ' + jsonData.data[i].BookSubmitter + ' <br/> <i class="fa fa-user" aria-hidden="true"></i> ' + (jsonData.data[i].DateAccepted == null ? '' : jsonData.data[i].DateAccepted) + '</div>';
+
+                        else if (jsonData.data[i].Status == 2)
+                            element += '<li class="active notification-success invitationLi clearfix"><a href="javascript:;" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + jsonData.data[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div> <div class="col-md-10" style="text-align: justify;"> You have rejected ' + (jsonData.data[i].Inviter == null ? '' : jsonData.data[i].Inviter) + '\'s invitation for the discussion over ' + (jsonData.data[i].BookName == null ? '' : jsonData.data[i].BookName) + ' submitted by ' + jsonData.data[i].BookSubmitter + ' <br/> <i class="fa fa-user" aria-hidden="true"></i> ' + (jsonData.data[i].DateRejected == null ? '' : jsonData.data[i].DateRejected) + '</div>';
+
+                        else if (jsonData.data[i].Status == 3)
+                            element += '<li class="active notification-success invitationLi clearfix"><a href="javascript:;" class="notification-msg clearfix"> <div class="col-md-2"> <img src="' + jsonData.data[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div><div class="col-md-10" style="text-align: justify;">You have blocked ' + (jsonData.data[i].Inviter == null ? '' : jsonData.data[i].Inviter) + '.</div>';
+
+                        else
+                            element += '<li class="active notification-success invitationLi clearfix" data-id="' + jsonData.data[i].InvitationListId + '"><a href="javascript:;" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + jsonData.data[i].InviterImage + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"> </div><div class="col-md-10" style="text-align: justify;">' + (jsonData.data[i].Inviter == null ? '' : jsonData.data[i].Inviter) + ' invites you for the discussion over ' + (jsonData.data[i].BookName == null ? '' : jsonData.data[i].BookName) + ' submitted by ' + jsonData.data[i].BookSubmitter + ' <br/> <i class="fa fa-user" aria-hidden="true"></i> ' + (jsonData.data[i].CreatedDate == null ? '' : jsonData.data[i].CreatedDate) + '</div><span  style="display:block;float:right;margin-right: 10px;"><input type="button"class="notification-btn btn btn-primary" value="Accept" data-NotificationId="' +
+                                        jsonData.data[i].InvitationListId + '" onclick="UpdateNotificationStatus(this,1,2,\'layout\')"/><input class="notification-btn btn btn-warning" type="button" value="Deny" data-NotificationId="' +
+                                        jsonData.data[i].InvitationListId + '" onclick="UpdateNotificationStatus(this,2,2,\'layout\')"/></span>';
+                        //,&#39;' + jsonData.data[i].InviterImage + '&#39;,&#39;' + (jsonData.data[i].Inviter == null ? '' : jsonData.data[i].Inviter) + '&#39;
+                        //,&#39;' + jsonData.data[i].InviterImage + '&#39;,&#39;' + (jsonData.data[i].Inviter == null ? '' : jsonData.data[i].Inviter) + '&#39;
+                    }
+                    $('.invitations').html(element);
+
+                    // Invitation Showing Ends Here
+
+
+                }
+                else {
+                    $('#NotificateCount').removeClass('badge badge-purple notificationCount');
+                    $('#NotificateCount').html('');
+                    $('.notificationCountP').html('no');
+                    $('#InviteCount').removeClass('badge badge-purple invitationCount');
+                    $('#InviteCount').html('');
+                    $('.invitationCountP').html('no');
+                    $('#FriendCount').removeClass('badge badge-purple invitationCount');
+                    $('#FriendCount').html('');
+                    $('.friendCountP').html('no');
+
+                }
+
+                var isIE = false;
+
+                if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+                    isIE = true;
+
+                }
+
+                if (isIE) {
+                    $('script').each(function () {
+
+                        if (this.src.split('?') === '//cdn.mathjax.org/mathjax/latest/MathJax.js') {
+
+                            $(this).remove();
+                        }
+                    });
+                    window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                    $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                        //location.reload(false);
+
+                    });
+                }
+                else if ($.browser.mozilla == true) {
+
+                }
+                else {
+                    $('script').each(function () {
+
+                        if (this.src.split('?') === '//cdn.mathjax.org/mathjax/latest/MathJax.js') {
+
+                            $(this).remove();
+                        }
+                    });
+                    window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                    $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                        //location.reload(false);
+
+                    });
+                }
+
+            },
+            error: function () { },
+            complete: function () { }
+        })
+
+    }
+
+
+
+
+    function UpdateNotificationStatus(obj, status, Type,from) { //, image, name
+
+        var Id = $(obj).attr('data-NotificationId');
+        //alert();
+        $.ajax({
+            type: 'POST',
+            url: '/User/InvitationList_UpdateStatus',
+            data: '{ "Id" : "' + Id + '","status":"' + status + '","type":"' + Type + '"}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) {
+                var jsonData = JSON.parse(data);
+                if (jsonData.Status == 1) {
+                    showNotifications();
+                    //if (status == 1)
+                    //    showNotifications();
+                    //    // $('li[data-Id="' + Id + '"]').html('<a href="javascript:;" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + image + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div> <div class="col-md-10" style="text-align: justify;">' + name + ' and you are now friends.</div>');
+                    //else
+                    //    showNotifications();
+                    //    //$('li[data-Id="' + Id + '"]').html('<a href="javascript:;" class="notification-msg clearfix"><div class="col-md-2"> <img src="' + image + '" class="img-circle img-inline userpic-32" style="width:35px;margin-top: 10px;"></div><div class="col-md-10" style="text-align: justify;">You have rejected the request of ' + name + '.</div>');
+                }
+            },
+            error: function () { },
+            complete: function () {
+                if (from == "Page")
+                    window.location.reload();
+            }
+        })
+    }
+
+
+
+</script>
+
+

@@ -1,0 +1,116 @@
+﻿@model StudentAppWebsite.Models.QuestionModel
+
+
+@{
+    Layout = null;
+}
+<link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/content/css/style.css" rel="stylesheet" type="text/css">
+<link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+<link href="~/Content/css/responsive-website.css" rel="stylesheet" />
+<link href="~/assets/css/xenon-core.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.11.2.min.js"></script>
+<link href="~/Content/css/responsive-androide.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    .content2
+    {
+        position: relative;
+        top: 13px;
+        left: 0;
+    }
+</style>
+@*<input type="hidden" id="hdnUserId" name="UserId"/>
+<input type="hidden" id="hdnPageId" name="PageId" />
+<input type="hidden" id="hdnQuestionId" name="QuestionId"/>*@
+<div id="main">
+    <div class="main-inner">
+        <div class="content2" style="display: none" id="DivEditor">
+            <div class="col-md-4">
+                @using (Html.BeginForm("SaveQuestion", "Home", new { }, FormMethod.Post, new { @id = "questionForm" }))
+                {
+                    { Html.RenderAction("_Editor_Android", new { userId = ViewBag.UserId, pageId = ViewBag.PageId, question = ViewBag.QuestionId}); }
+                }
+            </div>
+            <div class="col-md-8"></div>
+
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Plugin/mathscribe/jscurry-0.4.0.min.js"></script>
+<script src="~/Plugin/mathscribe/jqmath-0.4.3.js"></script>
+<script src="~/Scripts/Calculator.js"></script>
+
+<script src="~/Content/js/jquery.slimscroll.min.js"></script>
+<script src="~/Content/js/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/datatables/dataTables.bootstrap.js"></script>
+
+
+<script src="~/Content/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<link href="~/Content/js/datatables/yadcf/jquery.dataTables.yadcf.css" rel="stylesheet" />
+
+<script>M.MathPlayer = false; M.trustHtml = true;</script>
+<script>
+    $(function () {
+        M.trustHtml = true;
+    });
+</script>
+
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="/Scripts/bililiteRange.js"></script>
+<script src="/Scripts/jquery.sendkeys.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#editor').html('@Model.QuestionTitle');
+
+    });
+
+
+    $(function () {
+
+
+
+        //  alert($('#hdnEditQuestion').val());
+        $('#questionForm').ajaxForm({
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+
+                window.location.href = "/Home/Index_android?UserId=@ViewBag.UserId&PageId=@ViewBag.PageId"
+            },
+            error: function () {
+
+            },
+            complete: function (xhr) {
+
+
+
+            }
+        });
+
+    });
+        function backspaceFunction() {
+            if ($("#editor").text().length == 0) {
+                $('#editor').empty();
+            }
+            $("#editor").sendkeys("{backspace}");
+        }
+
+        $(document).ready(function () {
+            $('#DivEditor').show();
+            $('.navigation').remove();
+            Calculator.init();
+            Calculator.initKeyboard();
+            Calculator.attachEvent();
+            $(".pop").show();
+        });
+
+
+</script>

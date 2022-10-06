@@ -1,0 +1,820 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 16px;
+        color: inherit;
+    }
+
+    .panel-default > .panel-heading {
+        color: #333;
+        background-color: #eee;
+    }
+
+    .panel-heading {
+        padding: 10px 15px;
+    }
+
+    .panel-default {
+        border-color: #ddd;
+    }
+
+    .panel {
+        margin: 0px;
+        background-color: #fff;
+        border: none;
+        border-radius: 0px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 0px 10px;
+    }
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #ddd;
+    }
+
+    .panel-body {
+        border-top: 0px;
+        padding: 15px;
+    }
+
+    .panel .panel-body {
+        padding: 0;
+        color: #626262;
+        padding: 0px 5px;
+    }
+
+    .panel .panel-heading > .panel-title > a {
+        color: #000;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .panel-group .panel .panel-heading + .panel-collapse .panel-body {
+        border-top: none;
+        margin-top: 0px;
+    }
+
+    .panel .panel-heading {
+        padding-bottom: 0px;
+        border-bottom: none;
+        margin-bottom: 7px !important;
+        color: #000 !important;
+    }
+
+    .panel-group .panel {
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #616565;
+    }
+
+    .answ {
+        line-height: 32px;
+        color: #616565;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 faq-page">
+            <h2 style="text-align: center;">FAQ's</h2>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Q.1 What is Goal?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <p>Educated, Healthy and wealthy world.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Q. 2 How can i 'Create an account' ?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <p class="answ">
+                                If you open Notetor.com/NotetorApp in Web browser/Phone/Tablet/device then 'Create an account' form will appear. Fill your first name, last name, email id and mobile number in given text box then click 'Send OTP'. OTP will come to your mobile in message box. Type this OTP in next textbox then click Verify OTP. OTP will verify then a green check sign will appear next.
+                                Fill password for this website/App then fill confirm password.
+                                Choose 'Birthday' from calender. Select 'Gender' (Male/Female). Choose 'Profile pic' through 'Browse'.
+                                Choose country, state, city from given dropdown list then click 'Create account' button in green color. Now your account will create and you will enter into homepage.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Q.3 What are the benefits for user?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+
+                            <p>
+                                1. Users can discuss, share, invite, read, revise, get notification, get invitation, send invitation, get messages, send messages over notebook pages.
+                            </p>
+                            <p>
+                                2. Users can create their own notebook as creator.
+                            </p>
+                            <p>
+                                3. Users can create learning bridge among each other for more education, information, knowledge, health and wealth.
+                            </p>
+                            <p>
+                                4. Users can praise, appreciate, solve problem of each other .
+                            </p>
+                            <p>
+                                5. Remove burden of bags from your shoulder.
+                            </p>
+                            <p>
+                                6. Users can create notebook for solution, cure and remedies about problem and decease.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                Q. 4 How can we get good health?
+
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            <p>
+                                1. We will get good health by reading notebooks created by Doctors, coach, sportsman about cure, prescription, and remedies.
+                            </p>
+                            <p>
+                                2. We will get good health by creating notebook about asking questions and answering about good health over notebook pages.
+                            </p>
+                            <p>
+                                3. Notetor works as doctor - patients interface.
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFive">
+                        <h4 class="panel-title">
+                            <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                Q.5 What are the benefits for students?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+                        <div class="panel-body">
+
+
+                            <p>1. Revisions of Notebook in waiting queue, spare time, journey.</p>
+                            <p>
+                                2. Global Analysis by teachers, parents, & friends.
+                            </p>
+                            <p>
+                                3. Created Notebooks can be archived for future recall as soft copy.
+
+                            </p>
+                            <p>4.  Online virtual class for asking question & Answers over any Notebook created by you or your friends as joint study.</p>
+                            <p>
+                                5.  A medium to keep you engage on Education Network.
+                            </p>
+                            <p>
+                                6. Students can invite their friends through Invitation & Message.
+                            </p>
+                            <p>7. A students can write any type of scientific equation, in textbox by using scientific keyboard.</p>
+                            <p>
+                                8.Revisions through notifications and Invitation.
+                            </p>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSix">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                Q.6 What are the benefits for Notebook Creator?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">
+                        <div class="panel-body">
+                            <p>
+                                1. Notebook creator can start a virtual class by creating Notebook for asking questions and answers.
+
+                            </p>
+                            <p>
+                                2. Notebook creators can increase their communication Network with educated friends.
+
+                            </p>
+
+                            <p>
+                                3. Notebook creator can clear their Tutorial issues with teacher, parents, & friends.
+
+                            </p>
+
+                            <p>
+                                4. Notebook creators can revise, discuss, share their Notes with their communication network through Notification, Invitations and friend request.
+
+
+                            </p>
+                            <p>
+                                5. Creators can open themself globally for attracting New friends of same interests.
+
+
+                            </p>
+                            <p>
+                                7. Notebook creator can turn their tutorial knowledge into monetary advantages.
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSeven">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                        Q.7 How can I add new entry in fields like Stream, Name of(Coaching/College/School), Subject exists in Notebook form?
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">
+                <div class="panel-body">
+                    You can add new entries in three fields exist in notebook form by following below:
+                    <p>1. Press ‘Add New’ button exist in Notebook Form.</p>
+                    <p>2. Fill your desired entry in textbox appeared below.</p>
+                    <p>3. Again press same ‘Add New’ button.</p>
+                    <p>4. Your entry has been added to desired field, so you can Carry on filling the Notebook form.</p>
+
+                </div>
+            </div>
+        </div>*@
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSevenOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSevenOne" aria-expanded="true" aria-controls="collapseSevenOne">
+                                Q.7 What are the benefits for Notebook reader?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSevenOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSevenOne">
+                        <div class="panel-body">
+                            <p>
+                                1. Reader can read, revise, discuss, share, invite, get message, over notebook pages by teacher, Parents & friends.
+
+                            </p>
+                            <p>
+                                2. Readers can increase their friend network with educated friends of same interests.
+                            </p>
+                            <p>
+                                3. How much you will revise & discuss that much you will grasp over Topic.
+
+                            </p>
+                            <p>
+                                4. Readers will get notifications & invitations about question & answer over Topic.
+                            </p>
+                            <p>
+                                5. How much you revise your notes that much you will score in exams.
+
+                            </p>
+                            <p>
+                                6. Readers can study with other friends by creating a learning bridge.
+
+                            </p>
+                            <p>
+                                7. Readers & creators can discuss over topic in groups as a virtual class.
+
+                            </p>
+                            <p>
+                                8. Students will get scientific equations also through notifications.
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingEight">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                Q.8 How can i create my own Notebook?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEight" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEight">
+                        <div class="panel-body">
+                            <p class="answ">
+                                You can create your Notebook by clicking "Create Notebook" button appearing in top blue header. Thenafter a Notebook form will appear for subject name, date, monetary advantage, innovation, investment, visible and hidden. 'Subject name' is any specific name chosen by you to appear on notebook cover. 'Date' is a calender for chosing any date of this notebook's creation. 'Monetary advantage' button is for getting money into your account. Choose 'Innovation' radio button if you are going to innovate inside notebook(it will appear as green circle at right top corner of notebook cover in homepage after notebook creation) or choose 'Investment' if you are going to create notebook about investment inside notebook(it will appear as orange circle at bottom right corner of notebook cover in homepage after notebook creation) . Radio button 'none' indicates that neither it is about innovation nor investment. Choose 'visible' if you want this notebook to let visible to other users. Choose 'Hidden' for hiding this notebook from other users.Fill notebook form then submit. After you submitted notebook successfully you can use 'Add page as image', 'Add page as video', 'Add page as text', 'Add page as audio' for adding image/video /text/audio into your notebook page.
+
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingnine">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsenine" aria-expanded="true" aria-controls="collapsenine">
+                                Q.9 What is "Do you want monetary advantages" field in "Notebook Form"?
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsenine" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingnine">
+                        <div class="panel-body">
+                            <p>
+                                1. Along with education, knowledge, information, health & learning from each other. User who is creating Notebook can earn money by choosing 'Yes'
+
+
+                            </p>
+                            <p>
+                                2. If you don't want monetary advantage then choose 'No'.
+
+
+                            </p>
+                            <p>
+                                3. If you want to see your money after adding any page in notebook and getting clicks over notebook pages by your friends, relatives then click "Creator's Account" at the top right corner of 'Profile name' drop down list in header.
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingten">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseten" aria-expanded="true" aria-controls="collapseten">
+                                Q.10 How can i 'Ask Qusetion', 'Invite', 'Send Message' 'Call', 'Like' 'view' 'share' 'Answer' and 'Add to friend list' over Notebook page ?
+
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseten" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingten">
+                        <div class="panel-body">
+                            <p>
+                                1. You can 'Ask Question' after opening any notebook page for asking any type of question (simple word or scientific equation).
+
+
+                            </p>
+                            <p>
+                                2. You can 'Invite' your friends, relatives, doctors teacher's added to your friend list, relatives, teachers, doctors.
+
+
+                            </p>
+                            <p>
+                                3. You can 'Send message' to your friends after clicking green 'Send Message' button over notebook page then enter mobile number(s) thenafter click 'Send' button.
+
+
+                            </p>
+                            <p>
+                                4. You can 'call' your friends, relatives, teachers and doctors.
+
+
+
+                            </p>
+                            <p>
+                                5. You can 'Like' any notebook page after opening any notebook created by you or others.
+
+                            </p>
+                            <p>
+                                6. 'view' indicates number of times a notebook page seen by users over notebook page.
+
+
+                            </p>
+                            <p>
+                                7. You can 'Answer' any questions asked by your friend after clicking 'Answer' appearing just below any post.
+
+                            </p>
+                            <p>
+                                8. You can use 'Add to friend list' for adding your friend, relative, teacher, doctor into your friend list.
+
+
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingeleven">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseeleven" aria-expanded="true" aria-controls="collapseeleven">
+                                Q.11 What are the benefits for advertiser?
+
+
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseeleven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingeleven">
+                        <div class="panel-body">
+                            <p class="answ">
+                                An advertiser can advertise its Product/Service to sell. Advertising Product (like - Shoes, Jeans, Shirts, Tees, Wallet, Trouser, Sunglasses, sweats, Toys, any e-commerce product etc) must be of high quality and at reasonable price.
+
+                                Advertising services (like - Coaching, College, schools, consultancies, employment services etc) must concern to students study rather than any Religions or political Advertisements.
+
+                            </p>
+                            <p>
+                                1. An advertiser can sell its product services on this learning Network Globally.
+
+
+
+
+                            </p>
+                            <p>
+                                2. Any E-Commerce website can advertise its product to sell globally.
+
+
+
+                            </p>
+                            <p>
+                                3. You can 'Send message' to your friends after clicking green 'Send Message' button over notebook page then enter mobile number(s) thenafter click 'Send' button.
+
+
+                            </p>
+                            <p>
+                                4. You can 'call' your friends, relatives, teachers and doctors.
+
+
+
+                            </p>
+                            <p>
+                                5. You can 'Like' any notebook page after opening any notebook created by you or others.
+
+                            </p>
+                            <p>
+                                6. 'view' indicates number of times a notebook page seen by users over notebook page.
+
+
+                            </p>
+                            <p>
+                                7. You can 'Answer' any questions asked by your friend after clicking 'Answer' appearing just below any post.
+
+                            </p>
+                            <p>
+                                8. You can use 'Add to friend list' for adding your friend, relative, teacher, doctor into your friend list.
+
+
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingtweleve">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsetweleve" aria-expanded="true" aria-controls="collapsetweleve">
+                                Q.12 How can i 'Create Advertisement?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapsetweleve" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingtweleve">
+                        <div class="panel-body">
+                            <p class="answ">
+                                You can create advertisement after clicking ' Create ad' appearing in drop down list just below profile name in header. Click 'Create ad' then you will find 'Ad Creation Form'.fill this form. Add Image by choosing 'single pic', 'multiple pic', 'audio clip', 'video clip' through browse. Write in textbox for 'description Headline for add', 'Feature', 'Discription'. Fill email address inside 'Advertiser's email id. Put mobile number inside Advertiser's mobile number. Fill amount inside' Price of Product/service'. Fill website name inside 'Website/URL address. Now the next form is' Target user information '. Here Choose desired country from dropdown list of ' country' where you want to publish your ad. In the same way Choose 'state' and 'city' where you want to publish your advertisement.
+                                'Start date' is when you want your advertisement start to appear. 'End date' is when you want your advertisement to end.
+                                'Check availability ' is for checking availability of space for advertisement during chosen date interval.
+                                ' Amount per day ' is showing amount to be paid by you for displaying advertisement in every page of notebook. Number of days is showing total number of days for which you are going to display your advertisement. Total amount is the amount which you are going to pay for displaying this advertisement. Click 'Place order' button for placing order. After clicking 'Place order' button you will get 'Billing' form. Fill all required information about billing in 'Billing' form. Submit billing form. Thenafter transaction will take place. Now your advertisement will start to display inside every page of notebook of chosen city, state, country by you.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading13">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse13" aria-expanded="true" aria-controls="collapse13">
+                                Q.13 Contact details?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse13" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading13">
+                        <div class="panel-body">
+                            <p>Operational address- 14/13 Civil Line, Kanpur, Uttar Pradesh, India. Pin- 208001</p>
+                            <p>(Phone number- 8787056761) </p>
+                            <p>(Email- notetor.com@gmail.com)</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading14">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
+                                Q.14 Terms & Condition?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse14" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading14">
+                        <div class="panel-body">
+                            <p>
+                                Notetor builds services & technologies that makes people educated, healthy and wealthy and grow businesses around the world.
+                                We don't charge you to use Notetor covered by these Terms. Instead, businesses and organisations pay us to show you ads for their products and services. By using our services, you agree that we can show you ads if you select 'Do you want monetary advantages ? ' as 'Yes'.
+                                We don't sell your personal data to advertisers, and we don't share information that directly identifies you (such as your name, email address or other contact information) with advertisers. Advertisers can tell us things such as the kind of audience that they want to see their ads, and we show those ads to people who may be interested. We provide advertisers with reports about the performance of their ads that help them understand how people are interacting with their content.
+                            </p>
+                            <p>
+                                1. The services we provide
+                                Our mission is to give people education, health ,wealth and grow businesses around the world. So we provide services described below to you:
+                            </p>
+                            <p>
+                                (I). Users can discuss, share, invite, read, revise, get notification, get invitation, send invitation, get messages, send messages over notebook pages.
+                            </p>
+                            <p> (II). Users can create their own notebook as creator.</p>
+                            <p>
+                                (III). Users can create learning bridge among each other for more education, information, knowledge, health and wealth.
+                            </p>
+                            <p> (IV). Users can praise, appreciate, solve problem of each other .</p>
+                            <p> (V). Remove burden of bags from your shoulder. </p>
+                            <p> (VI). Users can create notebook for solution, cure and remedies about problem and decease. </p>
+                            <p> 2. Your commitments to Notetor and our community </p>
+                            <p>
+                                We provide these services to you and others to help advance our mission. In exchange, we need you to make the following commitments:
+                            </p>
+                            <p> (I). Who can use Notetor:- </p>
+                            <p>
+                                use the same name that you use in everyday life, provide accurate information about yourself, create only one account (your own) and use your timeline for personal purposes, and
+                                not share your password, not give access to your Notetor account to others or transfer your account to anyone else (without our permission).
+                            </p>
+                            <p> (II). We try to make Notetor broadly available to everyone, but you cannot use Notetor if: </p>
+                            <p> (A). You are a convicted sex offender. </p>
+                            <p> (B). We've previously disabled your account for violations of our Terms or Policies. </p>
+                            <p>
+                                (C). You are prohibited from receiving our products, services or software under applicable laws.
+                            </p>
+                            <p> (III). What you can share and do on Notetor </p>
+                            <p>
+                                We want people to use Notetor to make world educated healthy and wealthy and to share content that is important to them, but not at the expense of the safety and well-being of others or the integrity of our community. You therefore agree not to engage in the conduct described below (or to facilitate or support others in doing so):
+                            </p>
+                            <p> (IV). You may not use Notetor to do or share anything:- </p>
+                            <p>
+                                (A). That violates these Terms, our Community Standards and other terms and policies that apply to your use of our Products.
+                            </p>
+                            <p> (B). That is unlawful, misleading, discriminatory or fraudulent. </p>
+                            <p>
+                                (C). That infringes or violates someone else's rights, including their intellectual property rights.
+                            </p>
+                            <p>
+                                (D). You may not upload viruses or malicious code, or do anything that could disable, overburden or impair the proper working or appearance of our Products.
+                            </p>
+                            <p>
+                                (E). You may not access or collect data from our Products using automated means (without our prior permission) or attempt to access data that you do not have permission to access.
+                            </p>
+                            <p> (F). We can remove or restrict access to content that is in violation of these provisions. </p>
+                            <p>
+                                (G). If we remove content that you have shared in violation of our Community Standards, we'll let you know and explain any options you have to request another review, unless you seriously or repeatedly violate these Terms or if doing so may expose us or others to legal liability; harm our community of users; compromise or interfere with the integrity or operation of any of our services, systems or Products; where we are restricted due to technical limitations; or where we are prohibited from doing so for legal reasons.
+                            </p>
+                            <p>
+                                (H). To help support our community, we encourage you to report content or conduct that you believe violates your rights (including intellectual property rights) or our terms and policies.
+                            </p>
+                            <p>
+                                (i). We also can remove or restrict access to your content, services or information if we determine that doing so is reasonably necessary to avoid or mitigate adverse legal or regulatory impacts to Notetor.
+                            </p>
+                            <p> (V). The permissions you give us:-</p>
+                            <p> (A). We need certain permissions from you to provide our services: </p>
+                            <p>
+                                Permission to use content that you create and share: Some content that you share or upload, such as notebook/text/photos/audio/videos, may be protected by intellectual property laws.
+                            </p>
+                            <p>
+                                (B). You own the intellectual property rights (things such as copyright or trademarks) in any such content that you create and share on Notetor. Nothing in these Terms takes away the rights you have to your own content. You are free to share your content with anyone else, wherever you want.
+                            </p>
+                            <p>
+                                (C). Specifically, when you share, post or upload content that is covered by intellectual property rights on or in connection with our Products, you grant us a non-exclusive, transferable, sub-licensable, royalty-free and worldwide licence to host, use, distribute, modify, run, copy, publicly perform or display, translate and create derivative works of your content (consistent with your privacy and application settings). This means, for example, that if you share a photo on Notetor, you give us permission to store, copy and share it with others (again, consistent with your settings) such as service providers that support our service. This licence will end when your content is deleted from our systems.
+                            </p>
+                            <p>
+                                (D). You can delete content individually or all at once by deleting your account. Learn more about how to delete your account. You can download a copy of your data at any time before deleting your account.
+                            </p>
+                            <p>
+                                (V). When you delete content, it's no longer visible to other users; however, it may continue to exist elsewhere on our systems where:
+                            </p>
+                            <p>
+                                (A). Immediate deletion is not possible due to technical limitations (in which case, your content will be deleted within a maximum of 90 days from when you delete it);
+                                your content has been used by others in accordance with this licence and they have not deleted it (in which case, this licence will continue to apply until that content is deleted); or
+                            </p>
+                            <p>
+                                (B). Where immediate deletion would restrict our ability to:
+                                investigate or identify illegal activity or breaches of our Terms and Policies (for example, to identify or investigate misuse of our Products or systems);
+                                comply with a legal obligation, such as the preservation of evidence; or
+                                comply with a request of a judicial or administrative authority, law enforcement or a government agency; in which case, the content will be retained for no longer than is necessary for the purposes for which it has been retained (the exact duration will vary on a case-by-case basis).
+                                In each of the above cases, this licence will continue until the content has been fully deleted.
+                            </p>
+                            <p> 3. Limits on using our intellectual property </p>
+                            <p>
+                                If you use content covered by intellectual property rights that we have and make available in our Products (for example, design, images, videos or technology that we provide, which you add to content that you create or share on Notetor), we retain all rights to that content (but not yours). You can only use our Patent, copyrights or trademarks (or any similar marks) as expressly permitted by our Brand Usage Guidelines or with our prior written permission. You must obtain our written permission (or permission under an open-source licence) to modify, create derivative works of, decompile or otherwise attempt to extract source code from us.
+                            </p>
+                            <p> 4. Additional provisions </p>
+                            <p> (I). Updating our Terms </p>
+                            <p>
+                                We work constantly to improve our services and develop new features to make our Products better for you and our community. As a result, we may need to update these Terms from time to time to accurately reflect our services and practices. We will only make changes if the provisions are no longer appropriate or if they are incomplete, and only if the changes are reasonable and take due account of your interests.
+                                We will notify you (for example, by email or through our Products) at least 30 days before we make changes to these Terms and give you an opportunity to review them before they go into effect, unless changes are required by law. Once any updated Terms are in effect, you will be bound by them if you continue to use our Products.
+                                We hope that you will continue using our services, but if you do not agree to our updated Terms and no longer want to be a part of the Notetor community, you can delete your account at any time.
+                            </p>
+                            <p> (II). Account suspension or termination </p>
+                            <p>
+                                We want Notetor to be a place where people feel welcome and safe to express themselves and share their thoughts and ideas.
+                                If we determine that you have clearly, seriously or repeatedly breached our Terms or Policies, including in particular our Community Standards, we may suspend or permanently disable access to your account. We may also suspend or disable your account if you repeatedly infringe other people's intellectual property rights or where we are required to do so for legal reasons.
+                                Where we take such action, we'll let you know and explain any options you have to request a review, unless doing so may expose us or others to legal liability; harm our community of users; compromise or interfere with the integrity or operation of any of our services, systems or Products; or where we are restricted due to technical limitations; or where we are prohibited from doing so for legal reasons.
+                                You can learn more about what you can do if your account has been disabled and how to contact us if you think that we have disabled your account by mistake.
+                                If you delete or we disable your account, these Terms shall terminate as an agreement between you and us.
+                            </p>
+                            <p> (III). Limits on liability </p>
+                            <p>
+                                We work hard to provide the best services we can and to specify clear guidelines for everyone who uses them. Our Products, however, are provided "as is", and we make no guarantees that they will always be safe, secure or error-free, or that they will function without disruptions, delays or imperfections. To the extent permitted by law, we also DISCLAIM ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. We do not control or direct what people and others do or say, and we are not responsible for their actions or conduct (whether online or offline) or any content that they share (including offensive, inappropriate, obscene, unlawful and other objectionable content).
+                                We cannot predict when issues may arise with our Products. Accordingly, our liability shall be limited to the fullest extent permitted by applicable law, and under no circumstances will we be liable to you for any lost profits, revenues, information or data, or consequential, special, indirect, exemplary, punitive or incidental damages arising out of or related to these Terms or the Notetor services, even if we have been advised of the possibility of such damages.
+                            </p>
+                            <p> (IV). Disputes </p>
+                            <p>
+                                We try to provide clear rules so that we can limit or hopefully avoid disputes between you and us. If a dispute does arise, however, it's useful to know upfront where it can be resolved and what laws will apply.
+                                If you are a consumer, the laws of the country in which you reside will apply to any claim, cause of action or dispute that you have against us that arises out of or relates to these Terms or the Notetor services, and you may resolve your claim in any competent court in that country that has jurisdiction over the claim. In all other cases, you agree that the claim must be resolved exclusively in the India. District Court for the Kanpur District of Uttar Pradesh or a state court located in Allahabad city. You also agree that you submit to the personal jurisdiction of either of these courts for the purpose of litigating any such claim, and that the laws of the State of Uttar Pradesh will govern these Terms and any claim, without regard to conflict of law provisions.
+                                We always appreciate your feedback and other suggestions about our products and services. But you should know that we may use them without any restriction or obligation to compensate you, and we are under no obligation to keep them confidential.
+                                We reserve all rights not expressly granted to you.
+                            </p>
+
+                            <p>
+                                Date of last revision: 15th April 2022
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading15">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse15" aria-expanded="true" aria-controls="collapse15">
+                                Q.15 About Us?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse15" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading15">
+                        <div class="panel-body">
+                            <p>
+                                Our Goal is to empower every person by providing them education, health, wealth and helping every business grow in the world.
+                                Notetor is a website which allows users to Create notebooks, ask questions, answer, invite, send messages, discuss, like, share notebook pages, learn with colleagues, friends, teachers, doctors or people they know or they don’t know.
+                                Word Notetor derived from first four characters of Notebooks and last three characters of Innovators. It's design and method invented by Furkan Khan and suvrat Dwivedi.And it developed by hashir faizy and Hemant Kumar. We are determined to make people educated, healthy, wealthy and grow businesses around the world.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading16">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse16" aria-expanded="true" aria-controls="collapse16">
+                                Q.16 Privacy Policies?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse16" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading16">
+                        <div class="panel-body">
+                            <p>
+                                Information associated with your account will be kept until your account is deleted, unless we no longer need the data to provide our services. You can delete your account any time. When you delete your account, we delete things you have Added, such as your profile pic, your name, emailID, country, state, city.
+                            </p>
+                            <p> How do you chose who can see my Notebook and Notebook pages:- </p>
+                            <p> 1. Only you can add pages inside your notebook </p>
+                            <p>
+                                2. You will get notification if any user post any questions over your notebook page.
+                            </p>
+                            <p>
+                                3. You will get notification if any user post any answer over your notebook page.
+                            </p>
+                            <p>
+                                4. If you accidentally share a post, you can always edit or delete it.
+                            </p>
+                            <p> 5. You can delete your whole Notebook in one chance. </p>
+                            <p> 6. You can edit or delete your notebook pages. </p>
+                            <p> 7. No any other users can delete your notebook or notebook pages. </p>
+                            <p> 8. Your any friend can see all your friends in friend list. </p>
+                            <p> 9. Anyone can see questions and answers posted on your notebook page. </p>
+                            <p>
+                                10. To add friend in your friends list, click right menu button next to friend then click on send friend request.
+                            </p>
+                            <p>
+                                11. Any user can see your notebook pages to get information about education health and wealth.
+                            </p>
+                            <p> Can other people see my list of friends when they visit my profile :- </p>
+                            <p> 1. Remember that your friends each control who can see their friends. </p>
+                            <p>
+                                2. If you’re friends with someone, you’ll be on their friend list and it’s up to that friend who sees their list.
+                            </p>
+                            <p> Who can see your questions and answers:- </p>
+                            <p>
+                                1. Anyone who can see a certain post will also be able to see any reactions or comments people have made on it, including if you’ve reacted or commented.
+                            </p>
+                            <p>
+                                2. If you commented on the photo, even when the audience was set to Friends, your comment would become public, too.
+                            </p>
+                            <p> How can I stop someone who is bothering you:- </p>
+                            <p>
+                                1. To stop someone from bothering you, you can either unfriend them. Anyone you unfriend or block will not be notified.
+                            </p>
+                            <p>
+                                2. Blocking someone means you won’t be friends anymore and they won’t be able to.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading17">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse17" aria-expanded="true" aria-controls="collapse17">
+                                Q.17 Refund & Cancellation Policies?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse17" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading17">
+                        <div class="panel-body">
+                            <p> FOR ADVERTISERS:- </p>
+                            <p> 
+                                Our decisions about refunds are made on a case-by-case basis and depend on the facts and circumstances of the particular issue. We'll notify you if we decide to give a refund. All refunds are made at our sole discretion and without admission of liability. When understanding the types of refunds, remember that:
+                            </p>
+                            <p> Ad performance: - </p>
+                            <p> 
+                                We are unable to guarantee in every instance that your ad will reach its intended target or achieve the outcome you select. We don't give refunds for poor ad performance or return on investment.
+                            </p>
+                            <p> Ads services availability: - </p>
+                            <p> 
+                                Our Ads Status page provides advertisers with information about disruptions to our ads services and issues impacting Ads Manager. We don't automatically give refunds when ad services are unavailable or disrupted. We may consider issuing a refund on a case-by-case basis where we determine that ad delivery has been significantly impacted, at a substantial rate and over a significant period, by an unplanned interruption to our ad services caused by a system bug. A system bug is a technical issue on our platform.
+                            <p>
+                            <p> 
+                                The following information about system bug issues isn't intended to be comprehensive:
+                                Disruptions to insights or reporting: -
+                                We don't typically give refunds for issues with insights or reporting, such as inaccurate or missing data caused by system bugs.
+                                Blocked spend and under delivery: We don't give refunds for the inability to create new ads, view results, optimize delivery or where there has been under-delivery of existing ads due to a system bug. We don't refund for blocked creation of ads.
+                                Over delivery and overspend: We may consider issuing a refund where a system bug results in overspend due to the wrong bid being used or the budget set in Ads Manager being exceeded.
+                            </p>
+                            <p> Interface outages and failed API calls: </p>
+                            <p> 
+                                We won't consider refunds for the inability to create right ads. We won't refund where system bugs, affecting interfaces, display in an obvious way that advertisers can see and correct for.
+                            </p>
+                            <p> Ad rendering issues: </p>
+                            <p> 
+                                Ad rendering issues caused by system bugs may include problems with image display and video functionality. We don't refund where the ad delivers consistently as shown in the ad preview.
+                            </p>
+                            <p> Seller Performance and Accountability Policies Overview: - </p>
+
+                            <p> 
+                                These policies provide guidance for how sellers using onsite checkout on Notetor commerce surfaces should fulfil and dispatch orders. These policies also help sellers understand what type of support is expected after a buyer has made a purchase on Notetor, and how to communicate with buyers in case they request a refund or something doesn't go as planned.
+                            </p>
+                            <p> 
+                                All sellers must comply with these policies, as well as the Community Standards and Commerce Product Merchant Agreement.
+                            </p>
+                            <p> 
+                                Failure to comply with these policies may lead to various consequences, including but not limited to account restrictions, cancellation of orders, ranking changes, removal of the product or refunds at a loss to the seller. Notetor reserves the right to issue refunds where required by applicable law. Decisions on buyers claims are governed by these policies and the Purchase Protection Policies, and are made in Notetor's sole discretion.
+                            </p>
+                            <p> 
+                                For the purposes of this policy, where specified, an individual seller refers to someone selling through a personal profile.
+                            </p>
+                            <p> Selling with on-site checkout :- </p>
+
+                            <p> 
+                                Sellers must provide accurate delivery and handling windows for all products, services and orders. Sellers must provide valid tracking information for all orders and orders must be received by the buyer within the delivery window (handling time + shipping time) listed by the seller in the product description page.
+                            </p>
+                            <p>    
+                                If an individual seller has not fulfilled an order within seven days from the date of the purchase, that order will be automatically cancelled by Notetor, And buyer must email to notetorbuyersclaim@gmail.com to resolve the matter or get refund.
+                            </p>
+                            <p> 
+                                If you ship products, you must meet performance standards for order fulfilment, including order tracking, dispatch and delivery.
+                            </p>
+                            <p> 
+                                All refunds are made at our sole discretion and without admission of liability. Advertisers can notify Notetor about refunds at notetoradmanager@gmail.com. Notetor Ad Manager will reply you directly about refunds. If you don't hear from us, we're not giving a refund.
+                            </p>    
+                            <p> 
+                                It usually takes at least one month to get a refund. If you've paid by credit card, you may expect a refund in a shorter period. We issue credits to the payment method on the account where possible. Where this isn't possible, we may issue refunds in the form of NotetorAd credits in Creator's Account.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

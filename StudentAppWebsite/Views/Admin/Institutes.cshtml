@@ -1,0 +1,100 @@
+﻿@model   StudentAppWebsite.Models.Institute
+@{
+    ViewBag.Title = "Institutes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Institutes", "Admin", FormMethod.Get))
+{
+     <div class="row">
+        <div class="col-md-12">
+    <div class="pull-right">
+                    <a href="/Admin/EditInstitute" class="btn btn-warning"> <i class="fa fa-plus" aria-hidden="true"></i>
+ Add More</a>
+                </div> </div> </div>
+  <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Institute</h3>
+
+                    <div class="panel-options">
+                        <a href="#" data-toggle="panel">
+                            <span class="collapse-icon">&ndash;</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">&times;
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $("#example-4").dataTable({
+                                aLengthMenu: [
+                                    [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                                ]
+                            });
+                        });
+                    </script>
+
+                    <div class="table-responsive">
+                
+                <table id="example-4" class="table table-small-font table-bordered table-striped">
+                    <thead>
+                        <tr>
+                        @*<th>Logo</th>*@
+                        <th>Institute Name</th>
+                        <th>Streams</th>
+                        <th>Address</th>
+                        <th>Contact No</th>
+                        <th>Email</th>
+                        <th>Website</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                        </thead>
+                    <tbody>
+
+                        @if (Model.InstituteList.Count > 0)
+                        {
+                            foreach (var item in Model.InstituteList)
+                            {
+                            <tr>
+                                @*<td>
+                                    <img src="@item.InstituteLogo" height="50" width="50" />
+
+                                </td>*@
+                                <td>@item.InstituteName</td>
+                                <td>@item.StreamName</td>
+                                <td>@item.Address</td>
+                                <td>
+                                    @item.ContactNo
+                                </td>
+                                <td>@item.Email</td>
+                                <td>@item.Website</td>
+                                <td>@(item.Status ? "Active" : "Inactive")</td>
+                                <td><a href="/Admin/EditInstitute/@item.Id">Edit</a> | <a href="/Admin/UpdateInstituteStatusById/@item.Id">@(item.Status == false ? "Activate" : "De-Activate")</a></td>
+
+
+                            </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9">
+                                    <div class="alert alert-danger">No Records Found</div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div> </div>
+        </div>
+    </div>
+}

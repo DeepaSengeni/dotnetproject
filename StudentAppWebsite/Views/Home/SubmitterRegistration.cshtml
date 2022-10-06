@@ -1,0 +1,929 @@
+﻿@model StudentAppWebsite.Models.SubmitterRegistration
+@{
+    ViewBag.Title = "Facebook_register";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>notetor.com</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Scripts/PhoneCountrySync/css/intlTelInput.css" rel="stylesheet" />
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive-website.css" rel="stylesheet" />
+    <link href="~/assets/css/xenon-core.css" rel="stylesheet" />
+    <link href="~/Content/css/hover.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.2.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/jquery.maskedinput.min.js"></script>
+    <link href="~/assets/css/datepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/PhoneCountrySync/js/intlTelInput.js"></script>
+    <script src="~/Scripts/PhoneCountrySync/js/utils.js"></script>
+
+    <style>
+
+        .navbar-right {
+            float: right !important;
+            width: 55%;
+        }
+
+        #address {
+            width: 310%;
+        }
+    </style>
+</head>
+<body>
+    <section class="navigation">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="login-style">
+                        <div class="navbar-header">
+                            @*<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>*@
+                            <a class="navbar-brand" href="/Home/Home">
+                                @*<p class="logo">
+                                        <img src="/content/images/logo.png" class="img-responsive">
+                                    </p>*@
+                                <p class="logo">
+                                    <img src="~/Content/images/circle-logo.png" class="img-responsive logo-design icon-logo"/ style="width:auto;box-shadow: 0px 0px 3px 2px #FFF;border-radius: 50%;">
+                                    <img src="/content/images/logo.png" class="img-responsive logo-design textlogo">
+                                </p>
+                            </a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right my-login">
+                            @using (Html.BeginForm("SubmitterLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "regstrationForm" }))
+                            {
+                                <div class="pc-view">
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                            <label>Email or Phone</label>
+                                            <input type="text" name="UserName" id="UserPhoneEmail" class="form-control" />
+                                            <div id="error_username" class="text-danger">@TempData["EmailError"]</div>
+                                        </div>
+                                        <div class="form-group" style="display: block;">
+                                            <label style="font-size: 12px;">Keep me logged in &nbsp;&nbsp;</label>
+                                            @Html.CheckBoxFor(m => m.Rememberme);
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" name="LoginPassword" id="LoginPassword" class="form-control" />
+                                            <div id="error_password" class="text-danger">@TempData["PasswordError"]</div>
+                                        </div>
+                                        <div class="form-group" style="display: block;">
+
+                                            <div class="forget-pass"><a href="/Account/ForgotPassword">Forgotten Password?</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 ">
+                                        <button type="submit" class="btn btn-default login-btn-fb btn-block" style="margin-bottom: 0px !important;">log in</button>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 ">
+                                        <a href="/Home/FAQ" class="btn btn-warning" style="margin-top: 26px; padding: 1px 15px;">FAQ</a>
+                                    </div>
+                                </div>
+                            }
+                            @using (Html.BeginForm("SubmitterLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "regstrationForm" }))
+                            {
+                                <div class="mobile-view">
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Email or Phone</label>
+                                            <input type="text" name="UserName1" id="UserPhoneEmail1" class="form-control" />
+                                            <div id="error_username1" class="text-danger">@TempData["EmailError"]</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" name="LoginPassword1" id="LoginPassword1" class="form-control" />
+                                            <div id="error_password1" class="text-danger">@TempData["PasswordError"]</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <button type="submit" class="btn btn-default login-btn-fb btn-block1" style="margin-bottom: 0px !important;">log in</button>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label style="font-size: 11px;">Keep me logged in &nbsp;&nbsp;</label>
+                                            @Html.CheckBoxFor(m => m.Rememberme);
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group" style="margin-top: 5px;">
+                                            <div class="forget-pass"><a href="/Account/ForgotPassword">Forgotten Password?</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <a href="/Home/FAQ" class="btn btn-warning faaq" style="margin-top: 5px; padding: 1px 15px;">FAQ</a>
+                                    </div>
+                                </div>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="contentaria-division">
+        <div class="container-fluid">
+            <div class="row">
+                @*<div class="col-md-7 col-sm-5">
+                      <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                          <h2 class="quote">Making  Students life Easier by providing online learning</h2>
+                          <img src="~/Content/images/note.png" /> </div>
+                      </div>
+                    </div>*@
+                @using (Html.BeginForm("SubmitterRegistration", "Account", FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" }))
+                {
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 col-sm-8 col-xs-12  off-margin res-chan">
+                        <div class="res-changes">
+                            <h1>Create an account</h1>
+                            <div class="adj clearfix">
+                                <div class="form-1st">
+                                    <div class="form-group">
+                                        <label class="sr-only">First name</label>
+                                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                        <div class="text-danger" id="msgSpanF">@Html.ValidationMessageFor(model => model.FirstName)</div>
+                                    </div>
+                                </div>
+                                <div class="form-2nd">
+                                    <div class="form-group">
+                                        <label class="sr-only">Last name</label>
+                                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                        <div class="text-danger" id="msgSpanL">@Html.ValidationMessageFor(model => model.LastName)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="adj clearfix">
+                                <div class="form-group">
+                                    @*
+                                        <label class="sr-only">Email address</label>
+                                    *@
+                                    @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control", placeholder = "Email" })
+                                    <div class="text-danger">@Html.ValidationMessageFor(model => model.EmailID)</div>
+                                    <span id="msgspan" style="color: #A94442"></span>
+                                </div>
+                                @* <label style="width: 100%; font-weight: bold; text-align: center;">OR</label>*@
+                            </div>
+                            <div class="adj clearfix">
+                                <div class="form-1st">
+                                    <div class="form-group">
+                                        <label class="sr-only">Mobile number</label>
+                                        @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control", placeholder = "Mobile Number", @id = "VerifyphoneNo" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.MobileNumber)</div>
+                                        <div id="phoneerror" style="display: none" class="text-danger"></div>
+                                        <span id="msgspanPhone" style="color: #A94442"></span><span class="otp-style"><a href="javascript:;" id="SendOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Send OTP </a></span>
+                                        @Html.HiddenFor(model => model.ISD_Code, new { @id = "isdCode" })
+                                    </div>
+                                </div>
+                                <div class="form-2nd">
+                                    <div class="form-group">
+                                        <label class="sr-only">OTP</label>
+                                        <div style="display: inherit;position: relative;">
+                                            <input placeholder="OTP" id="otp" class="form-control" type="text">
+                                            <i id="checkVerified" class="fa fa-check" style="display:none;color: green;position: absolute;right: 0;top: 12px;right: -18px;"></i>
+                                        </div>
+                                        <input type="hidden" id="hdnRequest" value="" />
+                                        <p id="msgspan1" style="color: red;"></p>
+                                        <span class="otp-style"><a href="javascript:;" id="VerifyOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Verify OTP</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="adj clearfix">
+                                <div class="form-1st">
+                                    <div class="form-group">
+                                        <label class="sr-only">Password</label>
+                                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                                        <div class="text-danger" id="msgSpanP">@Html.ValidationMessageFor(model => model.Password)</div>
+                                    </div>
+                                </div>
+                                <div class="form-2nd">
+                                    <div class="form-group">
+                                        <label class="sr-only">Confirm password</label>
+                                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.ConfirmPassword)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="adj clearfix">
+                                <div class="form-1st">
+                                    <div class="form-group">
+                                        <label class="birthday">Birthday</label>
+                                        <div>
+                                            @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", placeholder = "DD/MM/YYYY" })
+                                            <div class="text-danger">@Html.ValidationMessageFor(model => model.DOB)</div>
+                                            <span id="msgdob" style="color: #A94442"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-2nd">
+                                    <div class="form-group">
+                                        <div class="male-female">
+                                            <label class="radio-inline">
+                                                @Html.RadioButtonFor(model => model.Gender, "Female", new { @checked = "checked" })
+                                                Female
+                                            </label>
+                                            <label class="radio-inline">
+                                                @Html.RadioButtonFor(model => model.Gender, "Male")
+                                                Male
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="adj clearfix">
+                                    <div class="form-group">
+                                        <label class="sr-only">Name Of (Coaching/College/School)</label>
+                                        @Html.DropDownListFor(model => model.CollegeID, new SelectList(Model.InstituteModelList, "ID", "InstituteName"), "Name Of (Coaching/College/School)", new { @class = "form-control" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.CollegeID)</div>
+                                    </div>
+                                </div>*@
+                            <div class="adj clearfix">
+                                <div class="form-group">
+                                    <label class="birthday">Profile Picture</label>
+                                    @Html.HiddenFor(model => model.Picture)
+                                    <input type="file" id="ProfilePicture" name="ProfilePicture" required style="height: auto; padding: 3px 4px;" />
+                                    <span id="errormsg" style="color: red; display: block;"></span>
+                                </div>
+                            </div>
+                            <div class="adj clearfix">
+                                <div class="form1" style="display:none">
+                                    <div class="form-group">
+                                        <label class="sr-only">Country</label>
+                                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Address", @id = "address" })
+                                        @*<input type="text" id="address" class="form-control" style="width: 310%;" />*@
+                                    </div>
+                                </div>
+                                <table style="display:none">
+                                    <tr>
+                                        <td class="label">Street address</td>
+                                        <td class="slimField"><input class="field" id="street_number" /></td>
+                                        <td class="wideField" colspan="2"><input class="field" id="route" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">City</td>
+                                        <td class="wideField" colspan="3"><input class="field" id="locality" name="cityname" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">State</td>
+                                        <td class="slimField"><input class="field" id="administrative_area_level_1" name="statename" /></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Zip code</td>
+                                        <td class="wideField"><input class="field" id="postal_code" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Country</td>
+                                        <td class="wideField" colspan="3"><input class="field" id="country" name="countryname" /></td>
+                                    </tr>
+                                </table>
+                                <div class="adj form1">
+                                    <div class=" form-group">
+                                        <label class="sr-only">Country</label>
+                                        @Html.DropDownListFor(model => model.Country, new SelectList(Model.Countrylist, "ID", "CountryName"), "--Select Country--", new { @class = "all-select address", placeholder = "Country" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.Country)</div>
+                                    </div>
+                                </div>
+                                <div class="form2">
+                                    <div class="form-group">
+                                        <label class="sr-only">state</label>
+                                        @Html.DropDownListFor(model => model.state, new SelectList(Model.statelist, "ID", "StateName"), "--Select State--", new { @class = "all-select address", placeholder = "State" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.state)</div>
+                                    </div>
+                                </div>
+                                <div class="form3">
+                                    <div class="form-group">
+                                        <label class="sr-only">City</label>
+                                        @Html.DropDownListFor(model => model.City, new SelectList(Model.citylist, "ID", "CityName"), "--Select City--", new { @class = "all-select address", placeholder = "City" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.City)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group clearfix">
+                                <div class="col-md-4 col-md-offset-1 col-xs-12">
+                                    <input type="submit" class="btn-account" value="Create account" id="btnSubmit" onclick="return checkPost()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Plugin/mathscribe/jscurry-0.4.0.min.js"></script>
+<script src="~/Plugin/mathscribe/jqmath-0.4.3.js"></script>
+<script src="~/Scripts/Calculator.js"></script>
+<script src="~/Content/js/jquery.slimscroll.min.js"></script>
+<script src="~/Content/js/datatables/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Content/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<link href="~/Content/js/datatables/yadcf/jquery.dataTables.yadcf.css" rel="stylesheet" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC-kow6z2nA8oyn24wQw1Yw6H6CjYqswT0&libraries=places&language=en-AU"></script>
+<script>
+    var autocomplete = new google.maps.places.Autocomplete($("#address")[0], {});
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'long_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        console.log(place);
+        console.log(place.address_components);
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            console.log(addressType);
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+                console.log(val);
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    $('#UserPhoneEmail').on('blur', function () {
+        if ($(this).val().length == 0) {
+            $('#error_username').html('Email or Phone is required');
+        }
+        else {
+            $('#error_username').html('');
+            var email = $('#UserPhoneEmail').val();
+            var patternEmail = new RegExp(/^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/);
+            var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+            var valid = patternEmail.test(email);//.match(patternEmail);
+
+            if (!valid) {
+
+                valid = patternPhone.test(email);
+                if (valid == null || valid == false) {
+                    $('#error_username').html('Enter valid Email or Phone');
+                }
+                else {
+
+                }
+            }
+            else {
+
+            }
+        }
+
+
+
+
+
+    });
+    $('#UserPhoneEmail1').on('blur', function () {
+        if ($(this).val().length == 0) {
+            $('#error_username1').html('Email or Phone is required');
+        }
+        else {
+            $('#error_username1').html('');
+            var email = $('#UserPhoneEmail1').val();
+            var patternEmail = new RegExp(/^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/);
+            var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+            var valid = patternEmail.test(email);//.match(patternEmail);
+
+            if (!valid) {
+
+                valid = patternPhone.test(email);
+                if (valid == null || valid == false) {
+                    $('#error_username1').html('Enter valid Email or Phone');
+                }
+                else {
+
+                }
+            }
+            else {
+
+            }
+        }
+
+
+
+
+
+    });
+
+    $('#VerifyphoneNo').on('blur', function () {
+        return validatePhoneNo();
+    });
+
+
+    $('.btn-block').click(function () {
+
+        if ($('#UserPhoneEmail').val().length == 0) {
+            $('#error_username').html('Email or Phone is required');
+            return false;
+        }
+        else if ($('#LoginPassword').val().length == 0) {
+            $('#error_password').html('Password is required');
+            return false;
+        }
+        else {
+            $('#error_username').html('');
+            var email = $('#UserPhoneEmail').val();
+            var patternEmail = ".+\\@@.+\\..+";
+            var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+            var valid = email.match(patternEmail);
+            if (valid == null) {
+
+                valid = patternPhone.test(email);
+                if (valid == null || valid == false) {
+                    $('#error_username').html('Enter valid Email or Phone');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+
+        }
+
+    });
+
+    $('.btn-block1').click(function () {
+
+        if ($('#UserPhoneEmail1').val().length == 0) {
+            $('#error_username1').html('Email or Phone is required');
+            return false;
+        }
+        else if ($('#LoginPassword1').val().length == 0) {
+            $('#error_password1').html('Password is required');
+            return false;
+        }
+        else {
+            $('#error_username1').html('');
+            var email = $('#UserPhoneEmail1').val();
+            var patternEmail = ".+\\@@.+\\..+";
+            var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+            var valid = email.match(patternEmail);
+            if (valid == null) {
+
+                valid = patternPhone.test(email);
+                if (valid == null || valid == false) {
+                    $('#error_username1').html('Enter valid Email or Phone');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            else {
+                return true;
+            }
+
+        }
+
+    });
+    $('#btnSubmit').click(function () {
+
+        if ($('#ProfilePicture').val().length == 0) {
+
+            $('#errormsg').html('Picture is required');
+            return false;
+        }
+        else {
+            $('#errormsg').html('');
+
+        }
+        //if ($('#EmailID').val().length == 0 && $('#VerifyphoneNo').val().length == 0) {
+
+        //    $('#msgspan').html('Email or Mobile number is required');
+        //    return false;
+
+        //}
+        //else {
+        //    $('#msgspan').html('');
+
+        //}
+        if ($('#VerifyphoneNo').val().length > 0) {
+            return validatePhoneNo();
+            return checkPost();
+        }
+    });
+
+    $("#EmailID").on("blur", function () {
+
+        if ($(this).val() != "") {
+            CheckMail($('#EmailID').val());
+        }
+    });
+
+    $('#VerifyphoneNo').on("blur", function () {
+        if ($(this).val() != "") {
+            CheckMobile($(this).val());
+        }
+    });
+    $('#VerifyphoneNo').keyup(function () {
+        $('#msgspanPhone').html('');
+    });
+
+    $('#otp').keyup(function () {
+        $('#msgspan1').html('');
+    });
+
+
+    function validatePhoneNo() {
+        var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+        var phoneNo = $('#VerifyphoneNo').val();
+        var valid = phoneNo.match(patternPhone)
+        if (valid == null) {
+            $('#phoneerror').html('Enter valid mobile number').show().fadeOut(10000);
+            return false;
+        }
+    }
+
+    function CheckMail(email) {
+        $.get("/Account/CheckEmailExist", { "Email": email }, function (data) {
+            var getResponse = JSON.parse(data);
+
+            if (getResponse.Status == 1) {
+                $('#msgspan').html("Email already exists please choose another");
+                return false;
+            } else {
+                $('#msgspan').html("");
+            }
+        });
+    }
+
+    function CheckMobile(mobile) {
+        $.get("/Account/CheckMobileExist", { "Mobile": mobile }, function (data) {
+            var getResponse = JSON.parse(data);
+
+            if (getResponse.Status == 1) {
+                $('#msgspanPhone').html("Mobile number already exists please choose another");
+                return false;
+            } else {
+                $('#msgspanPhone').html("");
+            }
+        });
+    }
+
+    function setISD() {
+        var code = $(".selected-flag").attr("title");      
+        if (code) {
+            var codeArr = code.split(":");           
+            if (codeArr) {                     
+                $('#isdCode').val(codeArr[1]);
+            }
+        }
+    }
+
+    function checkPost() {
+        setISD();
+        var phoneNo = $('#VerifyphoneNo').val();
+        var verifyMobileNo = $('#VerifyOTP').text();
+        var messageCount = $('#msgspan').text();
+
+        if (verifyMobileNo != 'Verified' && phoneNo.length > 0) {
+            $('#msgspan1').html("Please Verify Your OTP");
+            return false;
+        }
+        else if (messageCount.length > 0) {
+
+            return false;
+
+
+        }
+        else {
+            $('#msgspan1').html('');
+            return true;
+        }
+    }
+
+
+    $('#ProfilePicture').on("change", function () {
+
+        previewFile();
+        $('#errormsg').html('');
+    });
+    function previewFile() {
+        //  var preview = document.querySelector('#StreamIconImage');
+
+        var file = document.querySelector('#ProfilePicture').files[0];
+
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            //  preview.src = reader.result;
+            // alert($('#Picture').val(reader.result));
+            $('#Picture').val(reader.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+    }
+
+    $('#Country').on("change", function () {
+        StateBind();
+    });
+
+    $('#state').on("change", function () {
+
+        CityBind();
+    });
+
+    $('#City').on("change", function () {
+
+        InstituteBind();
+    });
+
+
+
+    //$('#state').change(
+
+
+    //);
+</script>
+<script>
+    function StateBind() {
+        var CountryID = $('#Country').val();
+        if (CountryID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/StateLoad",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.statelist.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option>--Select State--</option>";
+                        $.each(msg.statelist, function (key, value) {
+                            console.log(value.Id);
+                            options += "<option value=" + value.ID + ">" + value.StateName + "</option>";
+                        });
+                        $('#state').html(options);
+                        $('#state').on("change", function () {
+
+                            CityBind($(this).val());
+                        });
+                        $('#state option').eq(1).attr("selected", "selected");
+                        $('#state').trigger('change');
+                    }
+                    else {
+                        var options = "<option>--Select State--</option>";
+                        $('#state').html(options);
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CountryID': CountryID },
+            });
+        } else {
+            $('#state').html("<option value>--Select State--</option>");
+        }
+    }
+
+
+    function CityBind() {
+        var StateID = $('#state').val();
+        if (StateID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/CityLoad",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.citylist.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option>--Select City--</option>";
+                        $.each(msg.citylist, function (key, value) {
+                            console.log(value.Id);
+                            options += "<option value=" + value.ID + ">" + value.CityName + "</option>";
+                        });
+                        $('#City').html(options);
+                    }
+                    else {
+                        $('#City').html("<option value>--Select City--</option>");
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'StateID': StateID },
+            });
+        } else {
+            $('#City').html("<option value>--Select City--</option>");
+        }
+    }
+
+    function InstituteBind() {
+
+        var CityID = $('#City').val();
+
+        if (CityID != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Account/InstituteLoadByCity",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg && msg.InstituteModelList.length > 0) {
+                        //var options = "<option value='0'>Select</option>";
+                        var options = "<option>--Select Institute--</option>";
+                        $.each(msg.InstituteModelList, function (key, value) {
+                            console.log(value.Id);
+                            options += "<option value=" + value.Id + ">" + value.InstituteName + "</option>";
+                        });
+                        $('#CollegeID').html(options);
+                    }
+                    else {
+                        $('#CollegeID').html("<option value>--Select Institute--</option>");
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+
+                },
+                data: { 'CityId': CityID },
+            });
+        } else {
+            $('#City').html("<option value>--Select City--</option>");
+        }
+    }
+
+    $('#SendOTP').on('click', function () {
+        var messageBody = "Verification";
+        var Code = $(".selected-flag").attr("title");
+        Code = Code.split(":");
+
+        $.ajax({
+            url: "/Account/SendOTP",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            data: { mobileNumber: Code[1] + $('#VerifyphoneNo').val(), messageBody: messageBody },
+            success: function (data) {
+
+                if (data != null) {
+                    $('#SendOTP').html('Resend OTP');
+                }
+                else {
+
+                }
+
+
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+
+            },
+            complete: function (data) {
+
+            }
+        });
+
+    });
+
+    $('#VerifyOTP').on('click', function () {
+        var OTP = $('#otp').val();
+        if (OTP.length > 0) {
+            $('#msgspan1').html('');
+
+        }
+        else {
+            $('#msgspan1').html("Please Enter OTP");
+            return false;
+        }
+        $.ajax({
+            url: "/Account/VerifyPhone",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            data: { OTP: OTP, requestId: $('#hdnRequest').val() },
+            success: function (data) {
+                if (data == "0") {
+                    $('#msgspan1').html("Please Enter Valid OTP");
+                }
+                else if (data == null) {
+                    $('#msgspan1').html("Please Enter Valid OTP");
+                }
+                else {
+                    $('#msgspan1').html('');
+                    var verifyotp = $('#VerifyOTP').text();
+                    if (verifyotp.length > 0) {
+                        $('#VerifyOTP').text('Verified');
+                        document.getElementById('checkVerified').style.display = "block";
+                    }
+                    else {
+                        document.getElementById('checkVerified').style.display = "none";
+                    }
+                }
+
+
+            },
+            error: function () { }
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#DOB').mask("99/99/9999");
+        $('#DOB').datepicker({
+            format: "dd/mm/yyyy"
+        });
+    });
+</script>
+
+<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+<script>
+    function getLocation() {
+        alert(geoplugin_city());
+        alert(geoplugin_region());
+        alert(geoplugin_countryName());
+    }
+
+    $(document).ready(function () {
+        $('input').on('focusout', function () {
+            var str = $(this).val();
+            $(this).val($.trim(str));
+        });
+        var country = geoplugin_countryName();
+        var state = geoplugin_region();
+        var city = geoplugin_city();
+
+        $('[name=Country] option').filter(function () {
+            var ddCountry = $(this).text();
+            return (ddCountry.toLowerCase() == country.toLowerCase());
+        }).prop('selected', true);
+
+        StateBind();
+        $('[name=state] option').filter(function () {
+            var ddstate = $(this).text();
+            return (ddstate.toLowerCase() == state.toLowerCase());
+        }).prop('selected', true);
+        setTimeout(function () {
+            $('[name=state] option').filter(function () {
+                var ddstate = $(this).text();
+                return (ddstate.toLowerCase() == state.toLowerCase());
+            }).prop('selected', true);
+        }, 1000);
+
+        CityBind();
+        $('[name=City] option').filter(function () {
+            var ddcity = $(this).text();
+            return (ddcity.toLowerCase() == city.toLowerCase());
+        }).prop('selected', true);
+        setTimeout(function () {
+            $('[name=City] option').filter(function () {
+                var ddcity = $(this).text();
+                return (ddcity.toLowerCase() == city.toLowerCase());
+            }).prop('selected', true);
+        }, 1500);
+
+    });
+</script>
+<script>
+    var input = document.querySelector("#VerifyphoneNo");
+    window.intlTelInput(input, {
+        utilsScript: "PhoneCountrySync/js/utils.js",
+        initialCountry: "auto",
+        geoIpLookup: function(success, failure) {
+            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                success(countryCode);
+            });
+        },
+    });
+</script>

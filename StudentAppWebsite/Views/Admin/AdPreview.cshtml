@@ -1,0 +1,268 @@
+﻿@{
+    ViewBag.Title = "AdPreview";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .sponser label {
+        float: left;
+        margin-bottom: 0px;
+        font-size: 22px;
+        color: rgb(17, 116, 245);
+        font-family: arial;
+    }
+
+    .ad-div {
+        float: left;
+        display: inline-block;
+        background: #D7D7D7;
+        height: auto !important;
+        margin: 6px 2px;
+        padding: 5px 20px;
+    }
+
+        .ad-div a {
+            color: #5C5C5C;
+        }
+
+    .add-div {
+        border: 1px solid rgb(108, 105, 105);
+        height: auto;
+        background: rgb(231, 231, 231) none repeat scroll 0% 0%;
+        position: relative;
+    }
+
+    .fadein {
+        position: relative;
+        width: 300px;
+        padding-bottom: 10px;
+    }
+
+    #adDiv {
+        border-top: 0px;
+        padding: 0px 20px;
+    }
+
+    .close-icn {
+        color: rgb(62, 62, 62);
+        border: 1px solid rgb(126, 125, 125);
+        background: rgb(227, 227, 227) none repeat scroll 0% 0%;
+        padding: 1px 5px !important;
+        position: absolute;
+        top: -8px;
+    }
+
+    .res2 {
+        margin-top: 16px;
+    }
+
+    .panel .panel-heading {
+      
+        margin-bottom: 0px !important;
+    }
+    .fadein img
+    {max-width:100%;
+        }
+</style>
+
+<div id="adDiv">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ad Preview</h3>
+
+
+                    </div>
+                    <div class="panel-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-md-12 add-div">
+
+
+                <div id="sponDetailDiv" class="clearfix">
+                    <div class="col-md-5">
+                        <div class="sponser">
+                            <label>Sponsored By <span id="studentNameSpan"></span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div>
+                            <div class="ad-div">
+                                <a href="javascript:;">Create Ad</a>
+                            </div>
+                            <div class="ad-div">
+                                <a id="editAnchor" href="javascript:;">Edit</a>
+                            </div>
+                            <div class="ad-div">
+                                <a href="javascript:;" id="">Remove</a>
+                            </div>
+                            <div class="ad-div">
+                                <a href="javascript:;" id="">Submitters Account</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="javascript:;" onclick="hideAd();" class="close-pos"><i class="fa fa-times close-icn" aria-hidden="true"></i>
+
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row res">
+                    <div class="col-md-5 col-sm-7 col-xs-12">
+
+                        <div id="SlideshowImages" class="fadein">
+                        </div>
+                        <div id="videoDiv">
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-sm-5 col-xs-12 res2" style="font-size: 16px;word-wrap:break-word;">
+                        <label class="res-lbl" id="headlineLbl" style="display: block;"></label>
+
+                        <label class="res-lbl" id="descriptionLbl" style="display: block;"></label>
+
+                        <label class="res-lbl" id="urlLbl" style="display: block;"></label>
+
+                        <label class="res-lbl" style="display: block;">Price <span id="priceSpan"></span></label>
+
+                        <label class="res-lbl" style="display: block;">Mobile Number <span id="MobileNumberSpan"></span></label>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        AdLoadByBookId('@ViewBag.Id')
+    });
+    function AdLoadByBookId(bookId) {
+        if (bookId != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Ad_LoadBy_BookId",
+                dataType: "json",
+                async: false,
+                timeout: 3000,
+                success: function (msg) {
+
+                    console.log(msg);
+                    var category = '';
+                    var html = '';
+
+                    if (msg != null && msg.CategoryList.length > 0) {
+                        if ('@ViewBag.LogedInUserRole' == '1' || msg.CategoryList[0].UserId == '@ViewBag.LogedInUserId') {
+                            $('#editAnchor').removeAttr('href');
+                            $('#editAnchor').attr('href', '/User/adcreation?adId=' + msg.CategoryList[0].adcreationId + '&PageId=' +@ViewBag.PageId +'&BookId=' + @ViewBag.Book + '')
+                            $('#removeAnchor').attr('data-id', msg.CategoryList[0].adcreationId);
+                            $('#submitterAccount').attr('href', '/Home/SubmittersAccount?AdId=' + msg.CategoryList[0].adcreationId);
+                        }
+                        else {
+                            $('#editAnchor').parent().remove();
+                            $('#removeAnchor').parent().remove();
+                            $('#submitterAccount').parent().remove();
+                        }
+
+                        $('#studentNameSpan').text(msg.CategoryList[0].StudentName);
+                        $('#headlineLbl').text(msg.CategoryList[0].Headline);
+                        $('#descriptionLbl').text(msg.CategoryList[0].Description);
+                        //$('#urlLbl').text(msg.CategoryList[0].UrlAddress);
+                        $('#priceSpan').text(msg.CategoryList[0].Price);
+                        $('#MobileNumberSpan').text(msg.CategoryList[0].MobileNumber);
+                        $.each(msg.CategoryList, function (key, value) {
+                            if (msg.CategoryList[0].Type == 3) {
+                                html = "<iframe  src='" + value.FileUploaded + "' frameborder='0' allowfullscreen></iframe>";
+                            }
+                            else {
+                                html += "<img src='" + value.FileUploaded + "'>";
+                            }
+                        });
+
+                        if (msg.CategoryList[0].Type == 2) {
+                            $('#videoDiv').hide();
+                            $('#SlideshowImages').append(html);
+                            $('.fadein img:gt(0)').hide();
+                            setInterval(function () {
+                                $('.fadein :first-child').fadeOut()
+                                   .next('img').fadeIn()
+                                   .end().appendTo('.fadein');
+                            },
+                              7000);
+                            setInterval(function () {
+                                $('#SlideshowImages > div:first')
+                                  .fadeOut(2000)
+                                  .next()
+                                  .fadeIn(2000)
+                                  .end()
+                                  .appendTo('#SlideshowImages');
+                            }, 2000);
+                        }
+                        else if (msg.CategoryList[0].Type == 1) {
+                            $('#videoDiv').hide();
+                            $('#SlideshowImages').append(html);
+                        }
+                        else if (msg.CategoryList[0].Type == 3) {
+                            $('#SlideshowImages').hide();
+                            $('#videoDiv').append(html);
+                        }
+                        $('.res').css('cursor', 'pointer');
+                        $('#studentNameSpan').css('cursor', 'pointer');
+                        $('.res').click(function () {
+                            //$.ajax({
+                            //    type: "POST",
+                            //    url: "/Home/updateClickCount",
+                            //    dataType: "json",
+                            //    async: false,
+                            //    timeout: 3000,
+                            //    success: function (data) {
+                            //        var address = msg.CategoryList[0].UrlAddress;
+                            //        if (address && !address.match(/^http([s]?):\/\/.*/)) {
+                            //            //window.location.href = 'http://' + val;
+                            //            address = 'http://' + address;
+                            //        }
+                            //        else {
+                            //            //window.location.href = val;
+                            //            address = address;
+                            //        }
+                            //        window.location = address;
+                            //    },
+                            //    data: { 'AdId': msg.CategoryList[0].adcreationId, 'userId': msg.CategoryList[0].UserId },
+                            //});
+
+                        });
+                        $('#studentNameSpan').click(function () {
+                            window.location = "/User/UserProfile?tab=profile&Id=" + msg.CategoryList[0].UserId + "";
+                        });
+                    }
+                    else {
+                        $('#SlideshowImages').append("<img src='/Content/Uploads/Ads/15/0cc57_Lighthouse.jpg'  alt=''>");
+                        $('#adDiv').hide();
+                        $(".updateEditor").css("max-height", "485px");
+                        $(".updateEditor").css("min-height", "485px");
+                        $(".updateEditor").css("height", "485px");
+                        $("#questionsDiv").css("max-height", "536px");
+                        //$('#videoDiv').hide();
+                        //$('#SlideshowImages').hide();
+                    }
+                },
+                failure: function (msg) {
+                    console.log(msg);
+                },
+                data: { 'bookId': bookId },
+            });
+        } else {
+            // $('#adDiv').hide();
+            //$('#SlideshowImages').hide();
+        }
+    }
+</script>

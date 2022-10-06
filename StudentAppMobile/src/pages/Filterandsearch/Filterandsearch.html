@@ -1,0 +1,87 @@
+
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+
+    <!--End of mainHeader-->
+    <div class="mainWrapper">
+
+      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      <!--<ion-item>
+        <ion-input type="text" placeholder="Creator , Subject"></ion-input>
+        <button clear item-right><ion-icon name="search" class="btnsearch"></ion-icon></button>
+      </ion-item>-->
+      <ion-item>
+        <ion-label>Country</ion-label>
+        <ion-select [(ngModel)]="CountryId" (ionChange)="countrySelected()">
+          <ion-option selected value="0">Select All</ion-option>
+          <ion-option *ngFor="let item of CountryList" value="{{ item['ID'] }}">{{ item['CountryName'] }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>State</ion-label>
+        <ion-select [(ngModel)]="StateId" (ionChange)="stateSelected()">
+          <ion-option selected value="0">Select All</ion-option>
+          <ion-option *ngFor="let state of StateList" value="{{ state['ID'] }}" >{{ state['StateName'] }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>City</ion-label>
+        <ion-select [(ngModel)]="CityId" (ionChange)="citySelected()">
+          <ion-option selected value="0">Select All</ion-option>
+          <ion-option *ngFor="let city of CityList" value="{{ city['ID'] }}">{{ city['CityName'] }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Subject</ion-label>
+        <ion-select multiple="true" okText="filter" [(ngModel)]="SubjectId" (ionChange)="sujectSelected()">
+          <ion-option *ngFor="let subject of SubjectList"  value="{{subject.Id}}" >{{subject.SubjectName}}</ion-option>
+
+        </ion-select>
+      </ion-item>
+
+      <div class="BigMainWrapper">
+        <div class="home-note-slice" padding no-margin>
+          <div padding class="textCenter">
+            <div class="notbookMain" *ngFor="let books of bookLists">
+              <div class="notebookpagedetails" (click)="notebookdetail(books.Id)">
+                <img src="assets/images/notebooks.png" />
+                <div class="textdiv">
+                  <div class="main1">
+                    <div class="main2">
+                      <img src="{{url}}{{books.SubmitterPic}}">
+                    </div>
+                    <div class="main3">{{books.SubjectId}}</div>
+                    <div class="{{(books.Innovation_Investment==1)?'Inno_inv_val_1':(books.Innovation_Investment==2)?'Inno_inv_val_2':'Inno_inv_val_0'}}">I</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="creatorName">
+                <span class="subjectdetails"> Subject:</span> <span class="creat-name-sp"> {{books.SubjectId}} </span>
+                <hr />
+                <span class="subjectdetails"> Creator:</span> <span margin-vertical> {{books.StudentName}} </span>
+                <div class="creatorbutton">
+                  <button ion-button class="btn-wallet" (click)="home(books.Id)"> All Properties</button>
+                </div>
+              </div>
+              <div class="clearfix" margin-bottom></div>
+            </div>
+
+
+            <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+              <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+            </ion-infinite-scroll>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

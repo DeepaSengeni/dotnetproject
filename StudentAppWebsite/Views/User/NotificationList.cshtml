@@ -1,0 +1,185 @@
+﻿@model  List<StudentAppWebsite.Models.InvitationModel>
+@{
+    ViewBag.Title = "NotificationList";
+}
+
+<style>
+    .user-notification {
+        background: rgb(222, 235, 255) none repeat scroll 0% 0%;
+        padding: 9px 10px;
+        margin-bottom: 8px !important;
+        border: 1px solid rgb(206, 222, 254);
+        text-transform: capitalize;
+    }
+
+
+
+
+    user-notification > i {
+        background: rgb(251, 157, 106);
+        color: #fff;
+        padding: 5px 10px;
+        margin: 0px 12px;
+    }
+
+
+    /*.user-notification:nth-last-child(-n+2) {
+        background: rgb(251, 233, 238) none repeat scroll 0% 0%;
+        border: 1px solid rgb(251, 213, 208);
+    }*/
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        $("#example-4").dataTable({
+            aLengthMenu: [
+                [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+            ],
+            ordering: false
+        });
+        $('#example-4_wrapper').find('.row').eq(0).hide();
+    });
+</script>
+<div class="social-div">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                }
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                }
+            </div>
+        </div>
+
+        @using (Html.BeginForm("NotificationList", "User", FormMethod.Get))
+        {
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                                Notifications
+                            </h3>
+
+
+                        </div>
+                        <div class="panel-body">
+                            <div id="notoficationContainer">
+                                <table id="example-4" class="table table-small-font table-bordered table-striped">
+                                    <thead style="display:none">
+                                        <tr>
+                                            <th>Notifications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.Count > 0)
+                                        {
+                                            foreach (var item in Model)
+                                            {
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="user-notification">
+
+                                                            <a href="/Home/Index?PageId=@item.PageId&BookId=@item.BookId" class="clearfix" style="color:rgb(71, 71, 71) !important;">
+                                                                <div class="col-md-1 col-sm-1 col-xs-3 notificationLi" data-id="@item.NotificationId">
+                                                                    <img src="@item.QuestionerImage" class="img-circle img-inline userpic-32">
+                                                                </div>
+                                                                @if (item.Question == null && item.Answer == null)
+                                                                {
+                                                                    <div class="col-md-11 col-sm-11 col-xs-9" style="text-align: left;">
+                                                                        @(item.BookSubmitter == null ? "" : item.BookSubmitter) added 1 new page in
+                                                                        @(item.BookName == null ? "" : item.BookName)
+
+                                                                        <br />
+                                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp@(item.createdon == null ? "" : item.createdon)
+
+                                                                    </div>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-md-11 col-sm-11 col-xs-9" style="text-align: left;">
+                                                                        @(item.QuestionerName == null ? "" : item.QuestionerName) :  @(item.Answer == null ? "Commented on " : "Answered On ")
+                                                                        @(item.BookName == null ? "" : item.BookName)
+                                                                        created by  @(item.BookSubmitter == null ? "" : item.BookSubmitter)
+                                                                        :-  @Html.Raw(item.Question)
+                                                                        <br />
+                                                                        <i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp@(item.CreatedDate == null ? "" : item.CreatedDate)
+
+                                                                    </div>
+                                                                }
+                                                            </a>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        @*  var xml = '';
+            if ('@Model' != null && '@Model.Count' > 0) {
+                var count = ' @Model.Count';
+                pContent = ('@Html.Raw(Json.Encode((Model)))');
+                var JsonData = JSON.parse(pContent);
+                xml += "<root>";
+                for (i = 0; i < count; i++) {
+                    xml += "<InvitationList>";
+                    xml += "<Id>" + JsonData[parseInt(i)].InvitationListId + "</Id>";
+                    xml += "</InvitationList>";
+                }
+                xml += "</root>";
+            }*@
+
+        //UpdateIsRead(xml);
+        updateIsRead('notificationLi');
+    });
+
+    //function UpdateIsRead(xml) {
+
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: '/User/InvitationListId_IsRead_Update',
+    //        data: '{ "XML" : "' + xml + '"}',
+    //        contentType: 'application/json; charset=utf-8',
+    //        dataType: 'json',
+    //        success: function (data) { },
+    //        error: function () { },
+    //        complete: function () { }
+    //    })
+    //}
+
+    //$('.Accept').click(function () {
+
+    //    $('#NotificationMsg').html('and you are now friend');
+    //    $(this).hide();
+    //    $('.Reject').hide();
+    //});
+    //$('.Reject').click(function () {
+
+    //    $('#NotificationMsg').html("'s friend request rejected.");
+    //    $(this).hide();
+    //    $('.Accept').hide();
+    //});
+
+</script>

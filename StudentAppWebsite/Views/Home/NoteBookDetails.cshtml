@@ -1,0 +1,405 @@
+﻿@model StudentAppWebsite.Models.NotebookForm
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .Inno_inv_val_1 {
+        height: 25px;
+        width: 25px;
+        border-radius: 50px;
+        background-color: #008000;
+        font-weight: bold;
+        padding-top: 1px;
+        padding-left: 11px;
+        left: 20px;
+        top: 35px;
+        position: absolute;
+        font-size: 15px;
+        color: black;
+        margin-left: 80%;
+        color: #f5f5f5;
+    }
+
+    .Inno_inv_val_2 {
+        height: 25px;
+        width: 25px;
+        padding-left: 11px;
+        font-weight: bold;
+        padding-top: 1px;
+        border-radius: 50px;
+        background-color: #ffa500;
+        color: #fffbfb !important;
+        font-size: 15px;
+        left: 180px;
+        top: 310px;
+        position: absolute;
+        color: black;
+    }
+
+    @@media screen and (min-width: 768px) and (max-width: 840px) {
+        .Inno_inv_val_1 {
+            background-color: #008000;
+            left: 9px;
+            position: absolute;
+            top: 25px;
+            height: 25px;
+            width: 25px;
+            padding-left: 8px;
+            padding-top: 1px;
+        }
+    }
+
+    @@media screen and (min-width: 320px) and (max-width: 400px) {
+        .Inno_inv_val_1 {
+            background-color: #008000;
+            left: 22px;
+            position: absolute;
+            top: 42px;
+            height: 25px;
+            width: 25px;
+            padding-left: 11px;
+            padding-top: 1px;
+        }
+    }
+
+    @@media screen and (min-width: 320px) and (max-width: 400px) {
+        .Inno_inv_val_2 {
+            height: 25px;
+            width: 25px;
+            padding-left: 11px;
+            font-weight: bold;
+            padding-top: 1px;
+            border-radius: 50px;
+            background-color: #ffa500;
+            color: #fffbfb !important;
+            font-size: 15px;
+            left: 222px;
+            top: 390px;
+            position: absolute;
+            color: black;
+        }
+    }
+
+
+    .Inno_inv_val_0 {
+        display: none;
+    }
+
+    
+</style>
+
+<link href="~/Content/css/star-rating.css" rel="stylesheet" />
+<script src="~/Content/js/star-rating.js"></script>
+
+<div class="container-fluid">
+    <div class="center-block-new" id="ProfileDiv">
+        <div class="panel panel-default">
+            <div class="panel-heading">All Properties</div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                            @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                        }
+                        else if (TempData["ErrorMessage"] != null)
+                        {
+     
+                            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                        }
+                        </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+
+                    		<div class="imgdiv" style="cursor:pointer" onclick="window.open('/Home/Notebook_Pages?BookId=@Model.BookId','_self')">
+                                            <div class="imgagediv">
+                                               
+                                                    <img src="/Content/images/notebooks.png">
+                                            </div>
+                                            <div class="textdiv">
+                                                <div class="main1">
+                                                    <div class="res-main">
+                                                        @* <div class="@((Model.Innovation_Investment==1)?"Inno_inv_val_1":(Model.Innovation_Investment==2)?"Inno_inv_val_2":"Inno_inv_val_0")">I</div> *@
+                                                     
+                                                        <div class="img-content" title="@Model.SubjectName" style="word-break: break-all; position: relative; top: -14%;">
+                                                            <img src="@Model.SubmitterPic" class="img-circle img-responsive" style=" position: relative !important; top: 0 !important;">
+                                                            <a href="/Home/Notebook_Pages?BookId=@Model.BookId" style="color: #fff; font-size: 18px; display: block !important;">  @(Model.SubjectName)
+                                                            </a>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                   @* <div class="imgdiv">
+                                            <div class="div-img">
+                                                 <a href="/Home/Notebook_Pages?BookId=@Model.BookId">  <img src="~/Content/images/notebooks.png" /></a>
+                                            </div>
+                                            <div class="img-content"  title="@Model.SubjectName"><a href="/Home/Notebook_Pages?BookId=@Model.BookId" style="color:#fff;font-size:18px;">  @(!string.IsNullOrEmpty(Model.SubjectName) && Model.SubjectName.Length > 15 ? Model.SubjectName.Substring(0, 15) : Model.SubjectName)</a></div>
+                                        </div>*@
+                    @*<p class="index_book" title="@Model.SubjectName">@(!string.IsNullOrEmpty(Model.SubjectName) && Model.SubjectName.Length > 15 ? Model.SubjectName.Substring(0, 15) : Model.SubjectName)</p>*@
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12" style="margin-top: 30px;">
+
+                    <input type="hidden" id="hdnUserID" value="@Model.UserId" />
+
+                    @{ string[] chapterdata = null;
+                       var chapterName = Model.ChapterName;
+                       if (chapterName != null)
+                       {
+                           chapterdata = chapterName.Split(',');
+                       }     
+                               
+                        @*<div class="form-group clearfix">
+                            <label class="col-lg-5 ">Chapter Name:</label>
+                            <div class="col-lg-7">@(chapterdata != null ? chapterdata[0] : string.Empty)</div>
+                        </div>*@
+                                
+                        <div class="form-group clearfix">
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 ">Subject Name:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.SubjectName</div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 ">Creator:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.StudentName</div>
+                        </div>
+                        
+                                
+                       @* <div class="form-group clearfix">
+                            <label class="col-lg-5 ">Teacher Name:</label>
+                            <div class="col-lg-7">@Model.TeachereName</div>
+                        </div>*@
+                        <div class="form-group clearfix" style="display:none;">
+                              <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 pc-show">Name of Coaching/ College/ School:</label>
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 mobile-show">Name of Coaching/College<br>/School:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.CollegeId</div>
+                        </div>
+                       
+                        <div class="form-group clearfix" style="display:none;">
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Stream:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.StreamName</div>
+                        </div>
+                         <div class="form-group clearfix" style="display:none;">
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Category:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.CategoryName</div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Date:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.StartDate</div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Pages:</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.Total_Number_of_Pages</div>
+                        </div>
+                        
+                       @* <div class="form-group clearfix">
+                            <label class="col-lg-5 ">Type:</label>
+                            <div class="col-lg-7">@Model.Type</div>
+                        </div>*@
+                              
+                                @*<li>Chapter Name: <span></span></li> 
+                                <li>Subject Name: <span></span></li>
+                                <li>Student Name: <span>@Model.StudentName</span></li>
+                                <li>Teacher Name: <span>@Model.TeachereName</span></li>
+                                <li>Name of Coaching/College/School: <span>@Model.CollegeId</span></li>
+                                <li>Stream: <span>@Model.StreamName</span></li>
+                                <li>Date: <span>@Model.StartDate</span></li>
+                                <li>Pages: <span>@Model.TotalPages</span></li>
+                                <li>Type: <span>@Model.Type</span></li>*@
+                        
+@*<div class="form-group clearfix">
+                            <label class="col-lg-5 "></label>
+                            <div class="col-lg-7">
+                                <div id="RatingDiv" onclick="SaveRating()">
+                                   
+                                    <label style="opacity: 0">@Model.Rate  </label>
+                                    <input type="text"  value="@Model.Rate" class="rating rating10" id="Rating" />
+                                </div>
+                            </div>
+                        </div>*@
+                        
+                    }
+
+                   
+                         <div class="col-md-12 all-prop-btn">
+                    <a href="/User/UserProfile?Id=@Model.UserId" class="btn btn-primary all-propety" >Creator's Profile</a>
+                    <a href="javascript:;"  class="btn btn-success" onclick="Downloadbook('@ViewBag.BookId','@Model.SubjectName')">Download</a>
+                    
+                    @if (Convert.ToString(Model.UserId) == Convert.ToString(Session["UserId"]))
+                    {
+                        <a href="/User/NotebookForm?bookId=@Model.BookId"   class="btn btn-primary all-propety" >Edit</a>
+                        <a href="/User/Delete_NotebookForm?bookId=@Model.BookId" class="btn btn-primary all-propety" onclick="return confirm('Are you sure?')" >Delete</a>
+                    }
+
+  </div> 
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+<div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: rgba(225,225,225,0.5); text-align: center; display: none;" id="loaderDiv2">
+
+
+
+    <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+        <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
+
+
+    </div>
+</div>
+<div id="export-content" style="font-size: 18px;">
+    @if (Model.IsHtml != true)
+    {
+        <img src="@Model.PageImage"/>
+    }
+    else
+    {
+        @Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))
+    }
+</div>
+<script src="~/Scripts/html2canvas.js"></script>
+<script src="~/JsPDF/jspdf.js"></script>
+<script src="~/JsPDF/plugins/addimage.js"></script>
+<script src="~/Scripts/FileSaver.js"></script>
+<script>
+    function SaveRating()//RatingId
+    {
+        var BookId = '@ViewBag.BookId';
+        var Rate = $('#RatingDiv .rating-active .rating-gly-star #Rating').val();
+        var UserId = $('#hdnUserID').val();
+        //console.log(RatingId);
+        $.ajax({
+            type: "POST",
+            url: "/Home/UpdateRating",
+            dataType: "json",
+            async: false,
+            timeout: 3000,
+            success: function (msg) {
+                console.log(msg);
+                if (msg) {
+
+
+
+                }
+                else {
+
+                }
+            },
+            failure: function (msg) {
+                console.log(msg);
+
+            },
+            data: { 'Rate': Rate, 'BookId': BookId, 'RatingId': RatingId, 'UserId': UserId },
+        });
+
+    }
+
+
+    function Downloadbook(id, SubjectName) {
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/Downloadbook",
+            dataType: "json",
+            async: false,
+            timeout: 3000,
+            success: function (data) {
+                //console.log(data);
+
+                if (data != null && data.length > 0) {
+                    var html = "";
+                    $.each(data, function (i, item) {
+                        if (item["IsHtml"] == true || item["IsHtml"] == 'true') {
+                            html += item["PageImage"];
+                        }
+                        else {
+                            html += "<img src='" + item["PageImage"] + "' />";
+                        }
+                    });
+                    console.log(html);
+                    var ExportData = "<Center>" + html + "</Center>";
+
+
+                    $("#export-content").html(ExportData);
+                    $('#loaderDiv2').show();
+                    //if ($.browser.mozilla == true) {
+                    window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                    $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                        $('#export-content').removeClass('updateEditor');
+                        $('#export-content').removeClass('notebookEditor');
+                        $('#export-content').css('background-color', 'white');
+
+                        setTimeout(function () {
+
+                            html2canvas($('#export-content'), {
+                                onrendered: function (canvas) {
+                                    var img = canvas.toDataURL('image/jpeg');
+                                    var doc = new jsPDF();
+                                    doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                                    $('#loaderDiv2').hide();
+                                    //$("#export-content").html('');
+                                    $("#export-content").hide();
+
+                                    doc.save(SubjectName + ".pdf");
+
+                                    location.reload(true);
+                                }
+                            });
+                        }, 500);
+                    });
+
+
+                    //}
+                    //else {
+                    //    $('#export-content').removeClass('updateEditor');
+                    //    $('#export-content').removeClass('notebookEditor');
+                    //    $('#export-content').css('background-color', 'white');
+
+                    //    html2canvas($('#export-content'), {
+                    //        onrendered: function (canvas) {
+                    //            var img = canvas.toDataURL('image/jpeg');
+
+                    //            var doc = new jsPDF();
+
+                    //            doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                    //            $('#loaderDiv2').hide();
+                    //            //$("#export-content").html('');
+                    //            //$("#export-content").hide();
+                    //            doc.save("ChapterContent.pdf");
+                    //            $('#export-content').addClass('updateEditor');
+
+                    //        }
+                    //    });
+                    //}
+
+                }
+
+
+
+                else {
+
+                }
+
+
+
+
+            },
+            failure: function (msg) {
+                console.log(msg);
+
+            },
+            data: { "BookId": id },
+        });
+
+    }
+</script>

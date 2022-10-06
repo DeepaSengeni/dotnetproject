@@ -1,0 +1,119 @@
+﻿@model StudentAppWebsite.Models.Categories
+@{
+    ViewBag.Title = "Manage Category Pricing";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style> 
+        .groupOfTexbox {
+            
+        }
+    </style>
+<div class="container-fluid signupform">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Manage Pricing</h3>
+                </div>
+                <div class="panel-body">
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $("#example-3").dataTable({
+                                aLengthMenu: [
+                                    [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                                ]
+                            });
+                        });
+                    </script>
+                    <div class="table-responsive">
+                        <table id="example-3" class="table table-small-font table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Price</th> 
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model.CategoryList != null && Model.CategoryList.Count > 0)
+                                {
+                                    foreach (var item in Model.CategoryList)
+                                    {
+                                    <tr>
+                                        <td>@item.CategoryName</td>
+                                        <td><label id="lblPrice_@item.Id">@(item.Price!=0?Convert.ToString(item.Price):"")</label><input id="txtPrice_@item.Id" type="text" class="form-control groupOfTexbox" style="display:none;"/></td> 
+                                        <td><a href="javascript:;" onclick="activeEditMode(this)">Edit</a></td>
+                                         
+                                    </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="alert alert-danger">No Records Found</div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () { 
+
+        $('.groupOfTexbox').keypress(function (event) {
+            return isNumber(event, this)
+        });
+
+        // THE SCRIPT THAT CHECKS IF THE KEY PRESSED IS A NUMERIC OR DECIMAL VALUE.
+        function isNumber(evt, element) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode != 46 || $(element).val().indexOf('.') != -1))
+                return false;
+            return true;
+        }
+    });
+
+    function activeEditMode(obj)
+    { 
+        // Get the second td
+        var periodEnd = $(obj).closest('tr').children('td:eq(1)').find('label').attr('id');
+
+        var id = periodEnd.split('_')[1]; 
+
+        if ($(obj).text() == 'Edit') {
+            $('#' + periodEnd).css('display', 'none');
+            $('#txtPrice_' + id).css('display', 'block');
+            $('#txtPrice_' + id).focus();
+            $('#txtPrice_' + id).val($('#' + periodEnd).text());
+            $(obj).text('Update');
+        }
+        else {
+            if ($('#txtPrice_' + id).val().trim() != '') {
+                $.get("/Admin/Catergory_InsertUpdate", { "categoryId": id, "price": $('#txtPrice_' + id).val() }, function (data) {
+                    var getResponse = JSON.parse(data);
+
+                    if (getResponse.Status == 1) { 
+                        location.reload(); 
+                    } else {
+                        return false;
+                    }
+                });
+            }
+            else {
+                alert("Please fill some price.");
+                $('#txtPrice_' + id).focus();
+            }
+        }  
+    } 
+</script>

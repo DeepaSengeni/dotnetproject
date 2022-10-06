@@ -1,0 +1,65 @@
+<ion-header>
+
+</ion-header>
+
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <div class="profile">
+          <div class="card" *ngFor="let Userdata of datalistdata">
+            <div class="profileImg">
+              <div style="height: 240px;overflow: hidden;object-fit: cover;">
+                <ion-icon name="camera" style="cursor:pointer;position: absolute;    font-size: 28px; right: 10px; bottom: 5px;" *ngIf="userid == id" (click)="updatecoverimg()"></ion-icon><img src="{{url}}{{coverimage}}" alt="cover" style="width:100%">
+              </div>
+              <div class="userImg">
+                <ion-icon name="camera" style="cursor:pointer;position: absolute; bottom: 5px; right: 5px;" *ngIf="userid == id" (click)="changeimg()"></ion-icon><img class="img-thumbnail" style="height: 80px;width: 80px;border: 1px solid;background: #fff;" src="{{url}}{{profileimage}}" alt="John">
+              </div>
+            </div>
+            <div class="profile-title">
+              <h2>{{Userdata.FirstName}} {{Userdata.LastName}}</h2>
+              <p class="title" *ngIf="userid == id" (click)="profileEdit(Userdata.Id)"><i class="fa fa-pencil"></i> Edit profile</p>
+              <button type="button" *ngIf="userid != id" style="padding: 7px;border-radius: 4px; position: absolute;right: 10px;bottom: 15px;cursor:pointer" (click)="Dynamic(usershow,Userdata.Id,friendrequestId)">{{usershow}}</button>
+           </div>
+          </div>
+        </div>
+
+        <div class="bookProperties profilE ">
+          <h2><a href="javascript:void(0);" style="text-decoration:none" >NoteBooks</a></h2>
+        </div>
+        <div *ngIf="Empty==true"><span style="margin:30%">No Books Found</span></div>
+        
+        <div class="mainWrapper" id="profile" *ngIf="Empty==false">
+          <hr />
+          <div class="table-responsive">
+            <table>
+              <tbody>
+                <tr>
+                  <!--<th>S.No.</th>-->
+                  <th>SubjectName</th>
+                  <th>Page(s)</th>
+                  <th>CreationDate</th>
+                </tr>
+
+                <tr *ngFor="let notebookinfo of bookLists" (click)="BookDetails(notebookinfo.Id)">
+
+
+                  <td>{{notebookinfo.SubjectName}}</td>
+                  <td>{{notebookinfo.TotalPages}}</td>
+                  <td>{{notebookinfo.CreatedDate}}</td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+

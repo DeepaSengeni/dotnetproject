@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "AdPaymentDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        AdLoadByBookId('@ViewBag.Id')
+    });
+    function AdLoadByBookId(bookId) {
+        if (bookId != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/getpaymentDetails_ByadID",
+                dataType: "json",
+                timeout: 3000,
+                success: function (msg) {
+
+                    console.log(msg);
+                    var category = '';
+                    var html = '';
+
+                },
+                failure: function (msg) {
+                    console.log(msg);
+                },
+                data: { 'bookId': bookId },
+            });
+        }
+    }
+</script>

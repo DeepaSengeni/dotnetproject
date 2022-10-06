@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .panel .panel-heading {
+    padding: 20px 30px;
+}
+    .panel-footer {
+    padding: 10px 30px;
+    font-size: 15px;
+}
+    .fa-5x {
+    font-size: 55px;
+}
+    .huge {
+    font-size: 46px;
+}
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Dashboard 
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i>Dashboard
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <div class="panel panel-primary" id="totalSubmitter">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="totalSubmitterCount">26</div>
+                        <div>Total Users</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/Admin/Submitter">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <div class="panel panel-primary" id="activeSubmitter">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="activeSubmitterCount">12</div>
+                        <div>Active Users</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/Admin/Submitter?status=true">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+@*    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary" id="totalReader">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="totalReaderCount">124</div>
+                        <div>Total Readers</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/Admin/Reader">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary" id="activeReader">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="activeReaderCount">13</div>
+                        <div>Active Readers</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/Admin/Reader?status=true">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>*@
+
+</div>
+
+
+@*<div class="" style="margin-top:55px">
+      
+        <div class="col-lg-12 center-block-new ">
+            <div class="panel panel-default">
+
+                <div class="panel-heading" >Dashboard</div>
+                <div class="panel-body">
+                   
+                       <div class="col-lg-3">
+                        <div class="icon-box" id="totalSubmitter" >
+                            <div class="icon-inner">
+                           <div class="icon-main">
+                               <i class="fa fa-users fa-5x"></i> 
+                           </div>
+
+                                 <div class="icon-content">
+                               <span id="totalSubmitterCount" class="number"></span>
+                               <span class="tread">Total Submitter</span>
+                            </div>
+                            </div>
+                            <div class="view-new">
+                                <a href="javascript:;">
+                                <span>View Details</span>
+                                <i class="fa fa-arrow-circle-right"></i>
+                               </a>
+                            </div>
+                        </div>
+                    </div>
+                   
+                     <div class="col-lg-3">
+                        <div class="icon-box" id="activeSubmitter" >
+                            <div class="icon-inner">
+                           <div class="icon-main">
+                               <i class="fa fa-users fa-5x"></i> 
+                           </div>
+
+                                 <div class="icon-content">
+                               <span id="activeSubmitterCount" class="number"></span>
+                               <span class="tread">Active Submitter</span>
+                            </div>
+                            </div>
+                            <div class="view-new">
+                                <a href="javascript:;">
+                                <span>View Details</span>
+                                <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="icon-box" id="totalReader" >
+                            <div class="icon-inner">
+                           <div class="icon-main">
+                               <i class="fa fa-users fa-5x"></i> 
+                           </div>
+
+                                 <div class="icon-content">
+                               <span id="totalReaderCount" class="number"></span>
+                               <span class="tread">Total Reader</span>
+                            </div>
+                            </div>
+                            <div class="view-new">
+                                <a href="javascript:;">
+                                <span>View Details</span>
+                                <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-lg-3">
+                        <div class="icon-box" id="activeReader" >
+                            <div class="icon-inner">
+                           <div class="icon-main">
+                               <i class="fa fa-users fa-5x"></i> 
+                           </div>
+
+                                 <div class="icon-content">
+                               <span id="activeReaderCount" class="number"></span>
+                               <span class="tread">Active Reader</span>
+                            </div>
+                            </div>
+                            <div class="view-new">
+                                <a href="javascript:;">
+                                <span>View Details</span>
+                                <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                   
+
+                </div>
+            </div>
+        </div>*@
+
+<script>
+    $(document).ready(function () {
+        count();
+    });
+    function count() {
+        $.ajax({
+            url: '/Admin/Submitter_Reader_Count',
+            data: {},
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var jsonData = JSON.parse(data);
+                if (jsonData.Status == 1) {
+                    $('#totalSubmitterCount').html(jsonData.data[0].UsersTotalCount);
+                    $('#activeSubmitterCount').html(jsonData.data[0].UsersActiveCount);
+                    //$('#totalReaderCount').html(jsonData.data[0].ReaderTotalCount);
+                    //$('#activeReaderCount').html(jsonData.data[0].ReaderActiveCount);
+                }
+
+            },
+            error: function () { },
+            complete: function () { }
+        })
+    }
+</script>

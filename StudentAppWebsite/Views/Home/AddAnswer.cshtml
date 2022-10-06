@@ -1,0 +1,288 @@
+﻿@model StudentAppWebsite.Models.AnswerModel
+@{
+
+    Layout = null;
+
+
+}
+
+<center><span id="messagespan" style="font-size: large; color: green;"></span></center>
+<div id="main">
+    <center><input type="button" value="Save" class="KeyboardKey" style="height: auto; width: auto; padding: 3px;" onclick="GetData();"></center>
+    <div class="editor">
+
+        <div id="editor" style="width: auto;">
+
+            @* @if (Model.AnswersList != null)
+                {
+                    if (Model.AnswersList.Count > 0)
+                    {
+                        foreach (var itme in Model.AnswersList)
+                        {
+                    <math class="ma-block" display="block">@itme.Answer</math>
+                        }
+                    }
+                }*@
+
+        </div>
+    </div>
+    <input type="hidden" id="hdnUserID" value="@Model.UserId" />
+    <input type="hidden" id="hdnAnsID" value="@Model.Id" />
+    <input type="hidden" id="hdnQuestionID" value="@Model.QuestionId" />
+    <div style="margin-top: 20px;">
+        <div id="keyboadArea">
+        </div>
+        <div id="leftSideMenu">
+        </div>
+        <div id="rightSideMenu">
+        </div>
+        <table class="ruled prec-form-char" style="display: none;">
+            <tr>
+                <td>
+                    <textarea id="powerTextbox">\html'&lt;input type="text" size=1 style=height:18px; font-size:11px;>'</textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <textarea id="mathSrc1" style="height: 10px;">\html'&lt;input type="text" size=1>'</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="mathTgt1"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<meta charset="utf-8" />
+<link href="~/Plugin/mathscribe/jqmath-0.4.3.css" rel="stylesheet" />
+<style type="text/css">
+    .editor {
+        width: 250px;
+        max-height: 200px;
+        border: solid;
+        height: 200px;
+        overflow-y: auto;
+        margin: 0 auto;
+    }
+
+    #keyboadArea {
+        disply: inline-block;
+    }
+
+
+
+    .KeyboardRow {
+    }
+
+    .KeyboardKey {
+        display: inline-block;
+        border: 1px solid #dcdcdc;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #0b6af9;
+        background: #0377f9;
+        color: #fff;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-block;
+        font-family: arial;
+        font-size: 16px;
+        font-style: normal;
+        height: 90;
+        width: 114px;
+        text-decoration: none;
+        text-align: center;
+        column-count: 3;
+    }
+
+
+        .KeyboardKey:hover {
+            background: #0377f9;
+        }
+
+        .KeyboardKey:active {
+            position: relative;
+            top: 1px;
+        }
+
+    .KeyboardRow .active {
+        -moz-box-shadow: inset 0px 1px 0px 0px #9fc5f2;
+        -webkit-box-shadow: inset 0px 1px 0px 0px #9fc5f2;
+        box-shadow: inset 0px 1px 0px 0px #9fc5f2;
+        background: #0377f9;
+        border: 1px solid #2358a1;
+        display: inline-block;
+        text-shadow: 1px 1px 0px #07294a;
+        color: #ffffff;
+    }
+
+        .KeyboardRow .active:hover {
+            background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #043078), color-stop(1, #0c57a8) );
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#043078', endColorstr='#0c57a8');
+            background-color: #043078;
+        }
+
+
+    #leftSideMenu {
+        display: inline-block;
+    }
+
+        #leftSideMenu > span {
+            display: inline-block;
+            border: 1px solid #dcdcdc;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #0b6af9;
+            background: #0377f9;
+            color: #fff;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-block;
+            font-family: arial;
+            font-size: 16px;
+            font-style: normal;
+            height: 97px;
+            width: 114px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+    #rightSideMenu {
+    }
+
+        #rightSideMenu > span {
+            display: inline-block;
+            border: 1px solid #dcdcdc;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #0b6af9;
+            background: #0377f9;
+            color: #fff;
+            font-size: 16px;
+            column-count: 3;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-block;
+            font-family: arial;
+            font-style: normal;
+            height: 90px;
+            width: 114px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+    .integrationClass {
+        float: right;
+        clear: both;
+    }
+
+    .ma-block {
+        margin-top: 5px;
+    }
+
+    .editor table {
+        margin: 0px auto;
+        text-align: center;
+    }
+
+
+
+    /*.editor table .fm-radicand mrow
+    {
+        border-top: 1px solid #000;
+        padding-top: 6px;
+        margin-left: 0px;
+    }*/
+</style>
+
+<!-- <script src="Scripts/html2canvas.js"></script>-->
+<script src="~/Plugin/jquery/2.1.1/jquery.js"></script>
+<script src="~/Plugin/mathscribe/jscurry-0.4.0.min.js"></script>
+<script src="~/Plugin/mathscribe/jqmath-0.4.3.js"></script>
+<script src="~/Scripts/Index.js"></script>
+<script>M.MathPlayer = false; M.trustHtml = true;</script>
+<script>
+    $(function () {
+        M.trustHtml = true;
+    });
+</script>
+<script>
+
+    var datahtml = "";
+    $(document).ready(function () {
+        Index.init();
+        Index.initKeyboard();
+        Index.attachEvent();
+    });
+
+    function GetData() {
+        ExportBoxtoLabel();
+        // GetImage();
+
+        $("#editor .ma-block").each(function () {
+            //datahtml = datahtml + $(this).html();
+            datahtml = $(this).html();
+            SaveData();
+        });
+
+    }
+
+    function SaveData() {
+        var userID = $('#hdnUserID').val();
+        var answerID = $('#hdnAnsID').val();
+        var questionID = $('#hdnQuestionID').val();
+        var vps = escape(datahtml);
+        if (datahtml != '') {
+            $.ajax({
+                type: 'POST',
+                url: '/Home/AddAnswer',
+                data: '{ "userID" : "' + userID + '","questionID":"' + questionID + '","data":"' + vps + '","answerID":"' + answerID + '" }',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        $('#messagespan').html('Answer Saved successfuly!!');
+                        $('#main').hide();
+                    }
+                    else {
+                        $('#messagespan').html('error in request please try again later');
+                        $('#main').show();
+                    };
+                }
+            });
+        }
+
+    }
+</script>
+
+
+<script type="text/javascript">
+    function ExportBoxtoLabel() {
+        $('#editor').find('input[type=text]').each(function () {
+            $(this).replaceWith($(this).val());
+        });
+    }
+</script>
+
+
+<script language="javascript" type="text/javascript">
+    window.onload = function umtauschen() {
+        document.body.innerHTML = document.body.innerHTML
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>');
+
+    }
+</script>

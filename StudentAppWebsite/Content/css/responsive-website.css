@@ -1,0 +1,3612 @@
+﻿.mobile-view {
+    display: none;
+}
+
+.pc-view {
+    display: block;
+}
+
+@media only screen and (min-width:1024px) and (max-width:1282px) {
+    .btn-fnt16 {
+        font-size: 14px;
+    }
+
+    .adj .form-1st {
+        width: 48%;
+        float: left;
+    }
+
+    .adj .form-2nd {
+        width: 48%;
+        float: left;
+        margin-left: 8px;
+    }
+
+    .adj .form1 {
+        width: 31%;
+        float: left;
+    }
+
+    .adj .form2 {
+        width: 31%;
+        float: left;
+        margin-left: 8px;
+    }
+
+    .address {
+        width: 100%;
+    }
+
+    .adj .form3 {
+        width: 31%;
+        float: left;
+        margin-left: 8px;
+    }
+
+    .all-btn .btn-primary {
+        width: 96px !important;
+    }
+
+    .all-btn .btn {
+        padding: 5px 0px !important;
+    }
+
+    .btn-area2 {
+        min-height: 145px;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .btn-group-vertical {
+        width: 50% !important;
+    }
+
+    #list1 {
+        width: 277px !important;
+    }
+
+    #list2 {
+        width: 377px !important;
+    }
+
+    .btn-group-vertical .btn {
+        margin-left: 0px !important;
+    }
+
+    #msg_txt {
+        padding: 5px 12px;
+    }
+
+    .pop {
+    }
+
+    .top-button {
+        padding: 3px 5px !important;
+    }
+
+    .all-btn .btn {
+        padding: 5px 16px !important;
+    }
+
+    .all-btn {
+    }
+
+        .all-btn .sm-btn {
+            margin-top: 0px !important;
+        }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .all-new-btn .btn {
+        padding: 5px 10px;
+        width: 118px;
+    }
+
+    .add-btn {
+        /*width: 38px;*/
+    }
+}
+
+@media only screen and (min-width:1136px) and (max-width:1334px) {
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        min-width: auto;
+        padding: 3px 8px;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        min-width: auto;
+        padding: 3px 8px;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: 128px;
+    }
+
+
+
+    .spcl img {
+        width: 31px;
+        padding: 2px 0px;
+    }
+
+    .docs-buttons .btn-group .btn {
+        padding: 4px 10px;
+    }
+
+    .fadein {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (min-width:1024px) and (max-width:1136px) {
+    .docs-buttons .btn-group .btn {
+        padding: 4px 10px;
+    }
+
+    #ToolsModal .btn {
+        padding: 4px 8px !important;
+    }
+
+    #submit_head {
+        padding: 4px 8px !important;
+    }
+
+    #close {
+        padding: 4px 8px !important;
+    }
+
+    #submit_Chapter {
+        padding: 4px 8px !important;
+    }
+
+    #closeChapter {
+        padding: 4px 8px !important;
+    }
+
+    #ImageClose {
+        padding: 4px 8px !important;
+    }
+
+    #list2 {
+        width: 330px !important;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        min-width: auto;
+        padding: 3px 10px;
+    }
+
+    .spcl img {
+        width: 34px;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: 113px;
+    }
+
+    .top-button {
+        padding: 3px 9px !important;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        min-width: auto;
+        padding: 3px 10px;
+    }
+}
+
+@media only screen and (min-width:990px) and (max-width:1280px) {
+
+    .contentaria-division h1 {
+        margin-top: 0px;
+    }
+
+    .res-changes {
+        margin-top: 15px;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        min-width: auto;
+        padding: 3px 10px;
+    }
+
+    .list-of-students {
+        padding-left: 28px;
+    }
+
+    .all-btn .btn-primary {
+        width: 115px;
+    }
+}
+
+@media only screen and (max-width:1024px) {
+    .top-button {
+        padding: 3px 0px !important;
+        width: 32%;
+    }
+
+    /*.frnd-list-profile {
+        width: 200px !important;
+        height: 130px !important;
+        max-width: 100%;
+    }*/
+
+    .notebookEditor {
+        height: 100%;
+        max-height: 100%;
+        min-height: 830px !important;
+    }
+
+    .popx .top-button {
+        padding: 3px 10px !important;
+        width: auto;
+    }
+
+    .addbk {
+        height: 100% !important;
+    }
+
+    .childEditor {
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 772px !important;
+    }
+
+    .adj {
+        width: 80%;
+    }
+
+        .adj .form-1st {
+            width: 48%;
+            float: left;
+        }
+
+        .adj .form-2nd {
+            width: 48%;
+            float: left;
+            margin-left: 8px;
+        }
+
+        .adj .form1 {
+            width: 31%;
+            float: left;
+        }
+
+        .adj .form2 {
+            width: 31%;
+            float: left;
+            margin-left: 8px;
+        }
+
+    .address {
+        width: 100%;
+    }
+
+    .adj .form3 {
+        width: 31%;
+        float: left;
+        margin-left: 8px;
+    }
+
+    #ProfileDiv .btn {
+        padding: 4px 10px;
+    }
+
+    #btnSubmit {
+        padding: 4px 8px !important;
+    }
+
+    #submit_head {
+        padding: 4px 8px !important;
+    }
+
+    #close {
+        padding: 4px 8px !important;
+    }
+
+    #submit_Chapter {
+        padding: 4px 8px !important;
+    }
+
+    #closeChapter {
+        padding: 4px 8px !important;
+    }
+
+    #ImageClose {
+        padding: 4px 8px !important;
+    }
+
+    #ToolsModal .btn {
+        padding: 4px 8px !important;
+    }
+
+    .pop {
+        top: 97%;
+    }
+
+
+    .docs-buttons .btn-group .btn {
+        padding: 4px 10px;
+    }
+
+
+
+
+    .btn-area2 {
+        min-height: 182px;
+    }
+
+    .spcl img {
+        width: 34px;
+    }
+}
+
+@media only screen and (min-width:992px) and (max-width:1055px) {
+    .btn-all-main {
+        margin-left: 0px;
+    }
+
+    .logo {
+        width: 268px;
+    }
+
+    #btnSubmit {
+        padding: 4px 8px !important;
+    }
+
+    .fadein {
+        width: 100% !important;
+    }
+
+    #list2 {
+        width: 290px !important;
+    }
+
+    .all-new-btn .btn-primary {
+        width: 15%;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: 96px;
+        font-size: 14px;
+    }
+
+    .list-of-students {
+        padding-left: 21px;
+    }
+
+
+
+    #NotebookDetail .col-md-3, #NotebookDetail .col-md-4, #NotebookDetailNew .col-md-3 {
+        min-height: 480px;
+    }
+
+    .top-button {
+        padding: 3px 1px;
+    }
+
+    .imgpos2 {
+        top: 65px;
+    }
+
+    .imgpos {
+        top: 65px;
+    }
+
+    .btn {
+        padding: 5px 2px;
+    }
+    /*.all-propety {
+        width: 100%;
+    }*/
+
+    .download {
+        width: 100%;
+    }
+
+    .detail ul {
+        margin-bottom: 15px;
+    }
+
+    .detail {
+        min-height: 474px;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .index_book {
+        min-height: 165px;
+        padding-top: 70px;
+    }
+
+    .add-btn {
+        width: 38px;
+    }
+}
+
+@media only screen and (min-width:801px) and (max-width:1200px) {
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        width: auto;
+        font-size: 13px;
+        min-width: initial;
+        padding: 3px 9px !important;
+    }
+
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        width: auto;
+        font-size: 13px;
+        min-width: initial;
+        padding: 3px 9px !important;
+    }
+}
+
+
+
+
+@media only screen and (max-width:600px) {
+
+    .main-inner {
+        display: inherit;
+    }
+}
+
+
+
+@media only screen and (max-width:768px) {
+
+    .two_rows .hide-content {
+        width: auto;
+        line-height: 10px;
+        white-space: normal;
+        display: initial;
+    }
+}
+
+
+
+
+
+@media only screen and (min-width:320px) and (max-width:1053px) {
+    .page-slide-btn .btn {
+        padding: 4px 8px !important;
+    }
+
+    .popx {
+        height: auto;
+    }
+
+    .user-notification .btn {
+        padding: 4px 12px;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:800px) {
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        width: 100%;
+        font-size: 13px;
+        min-width: auto;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        width: 100%;
+        font-size: 13px;
+        min-width: auto;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:992px) {
+    .search-bx {
+        padding: 10px 0 10px 0px;
+    }
+
+    .login-style .login-btn-fb {
+        margin-bottom: 0;
+        margin-top: 26px;
+    }
+
+
+    .popx .qwerty img {
+        width: 100% !important;
+    }
+
+
+
+    .navigation .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 6px 5px !important;
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 174px !important;
+    }
+
+    #dLabel .img-circle {
+        width: 30px !important;
+        margin: 0px 8px;
+        height: 30px !important;
+        background: #fff;
+    }
+
+    .btn-group-vertical {
+        margin-right: 160px;
+    }
+
+
+
+    #ask, #invite, #sendmsg {
+        min-width: 72px;
+        font-size: 14px;
+        padding: 4px 10px;
+    }
+
+    .contentaria-division h1 {
+        margin-top: 0px;
+    }
+
+    .off-margin {
+        margin-left: 16.66666667%;
+    }
+
+    .adj {
+        width: 100%;
+        padding: 0px 20px;
+    }
+
+    .btn-account {
+        margin-left: 4px;
+    }
+
+    .res-changes {
+        margin-top: 15px;
+    }
+
+    .responsive-div {
+        width: 67% !important;
+        margin: 0 auto;
+    }
+
+    .page-slide-btn {
+        top: 66%;
+    }
+
+    .cls {
+        float: right;
+    }
+
+    .add-btn {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width:320px) and (max-width:767px) {
+
+    .login-style .login-btn-fb {
+        margin-top: 27px;
+    }
+
+    .layout-find-frnd-btnmobile {
+        display: block;
+    }
+
+    .navbar-nav .open .dropdown-menu {
+        margin-top: 51px !important;
+    }
+
+    .login-tab *::after {
+        left: 53px;
+    }
+
+    #ProfileDiv .panel {
+        padding: 20px 0px;
+    }
+
+    #ProfileDiv .btn {
+        padding: 4px 10px;
+    }
+
+    .adj {
+        width: 100%;
+    }
+
+        .adj .form-1st {
+            width: 49%;
+            float: left;
+        }
+
+        .adj .form-2nd {
+            width: 49%;
+            float: left;
+            margin-left: 8px;
+        }
+
+        .adj .form1 {
+            width: 32%;
+            float: left;
+        }
+
+        .adj .form2 {
+            width: 32%;
+            float: left;
+            margin-left: 8px;
+        }
+
+        .adj .form3 {
+            width: 32%;
+            float: left;
+            margin-left: 8px;
+        }
+
+
+    .popx {
+        width: 90%;
+        position: fixed;
+        right: 16px;
+        z-index: 9999;
+    }
+
+    .myclass-clear {
+        display: block;
+    }
+
+    .page-slide-btn {
+        top: 80%;
+    }
+
+    .all-new-btn .btn-primary {
+        width: 49%;
+    }
+
+    .all-new-btn .nav.nav-tabs > li.active > a {
+        padding: 8px 10px;
+    }
+
+    all-new-btn .nav.nav-tabs > li > a {
+        padding: 8px 10px;
+    }
+
+    .childEditor {
+        padding: 0px;
+    }
+}
+
+@media only screen and (min-width:500px) and (max-width:767px) {
+    #ProfileDiv .col-md-3 {
+        width: 40%;
+    }
+
+    .res-main img {
+        top: 22px !important;
+    }
+
+    .responsive-div {
+        width: 66% !important;
+        margin: 0 auto;
+    }
+
+    #ProfileDiv .col-md-9 {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width:482px) and (max-width:767px) {
+    .user-notification .col-xs-3 {
+        width: 14%;
+    }
+
+    .popx {
+        width: 460px;
+    }
+
+    .top-button {
+        padding: 3px 0px;
+        width: auto !important;
+    }
+
+    .pop {
+        width: 450px !important;
+    }
+
+    .user-notification .col-xs-9 {
+        width: 86%;
+    }
+
+    .res .col-xs-12 {
+        width: 45% !important;
+        float: left;
+    }
+
+    .ntbk .col-xs-12 {
+        width: 50%;
+    }
+
+    .resp .col-md-4 {
+        width: 50%;
+        float: left;
+    }
+
+
+
+
+
+
+
+    .res .res2 {
+        width: 50% !important;
+        float: right;
+    }
+
+
+    .qwerty img {
+        width: 100% !important;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: 115px !important;
+        font-size: 15px !important;
+        padding: 6px 10px !important;
+    }
+}
+
+@media only screen and (min-width:320px) and (max-width:1024px) {
+    .imageContainer img {
+        width: 100%;
+    }
+
+    .question-main {
+        margin-bottom: 14px;
+        display: inline-block;
+        width: 77%;
+        padding: 0px 10px;
+    }
+
+    .contentaria-division {
+        background: url(/Content/images/login-background.jpg);
+        height: 1000px;
+    }
+
+    #msg_txt {
+        padding: 5px 7px;
+    }
+
+    .img-content a {
+        font-size: 15px !important;
+    }
+
+    .ad-div {
+        padding: 4px 14px !important;
+    }
+}
+
+@media only screen and (max-width:992px) {
+
+    .search-bx {
+        margin-top: 4px;
+        margin-bottom: -18px;
+    }
+
+    .list-of-students {
+        padding-left: 23px;
+    }
+
+    .pop {
+        width: 100%;
+    }
+
+    .qwerty .button {
+        padding: 5px 2px;
+    }
+
+
+    .radio-inline {
+        color: #1d2129;
+        font-size: 16px;
+    }
+
+
+    .edit-div {
+        position: relative;
+        top: -67px;
+        right: 0px;
+        width: 45px;
+        float: right;
+    }
+
+    .notebookEditor {
+        height: 100%;
+        max-height: 100%;
+        min-height: 830px !important;
+    }
+
+    .addbk {
+        height: 100% !important;
+    }
+
+    .childEditor {
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 772px !important;
+    }
+
+
+    .totl-btn {
+        padding: 5px 14px !important;
+    }
+
+    .pop {
+        /*width: 100%;*/
+        top: 96%;
+    }
+
+    #list1 {
+        width: 262px !important;
+    }
+
+    #list2 {
+        width: 279px !important;
+    }
+
+
+    .all-new-btn .btn-primary {
+        width: 16%;
+    }
+
+    .btn-all-main {
+        margin-left: 0px;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        padding: 3px 0px;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+    }
+
+    #NotebookDetail .col-md-3, #NotebookDetail .col-md-4, #NotebookDetailNew .col-md-3 {
+        min-height: 474px;
+    }
+
+    .all-btn .btn {
+        text-align: center;
+    }
+
+    .all-btn .sm-btn {
+        margin: 2px !important;
+    }
+
+    .btn-group-vertical {
+        width: 20% !important;
+    }
+
+        .btn-group-vertical .btn {
+            margin-left: 0px !important;
+        }
+
+    .btn-area2 {
+        min-height: 182px;
+    }
+
+    .top-button {
+        padding: 3px 5px !important;
+        width: auto;
+    }
+
+    .imgpos2 {
+        top: 100px;
+    }
+
+    .imgpos {
+        top: 100px;
+    }
+
+    .btn {
+        padding: 5px 4px;
+    }
+    /*.all-propety {
+        width: 100%;
+    }*/
+
+    .download {
+        width: 100%;
+    }
+
+    .detail ul {
+        margin-bottom: 15px;
+    }
+
+    .detail {
+        min-height: initial;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+}
+
+@media only screen and (max-width:991px) {
+    #list1 {
+        width: 100% !important;
+    }
+
+    #list2 {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width:960px) {
+    /*.qwerty img {
+        width: 30px;
+        padding: 4px 0px;
+    }*/
+
+    .qwerty img {
+        width: 32px;
+    }
+
+    .qwerty .button {
+        padding: 6px 0px;
+    }
+
+    .btn-area2 {
+        min-height: 155px;
+    }
+
+    /*.spcl img {
+        width: 37px;
+    }*/
+}
+
+@media only screen and (min-width:801px) and (max-width:900px) {
+
+    .pop {
+        width: 100% !important;
+    }
+
+    .btn-area2 {
+        min-height: 180px !important;
+    }
+
+    .qwerty img {
+        width: 30px;
+    }
+
+    .qwerty .button {
+        padding: 6px 0px;
+    }
+
+    .top-button {
+        padding: 3px 8px !important;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width:800px) {
+    .all-new-btn .btn-primary {
+        width: 22%;
+    }
+
+    .btn-all-main {
+        margin-left: 22px;
+    }
+
+    .pop {
+        width: auto;
+    }
+
+
+    .loader-last {
+        position: fixed;
+        left: 39% !important;
+        top: 40%;
+        height: 80px;
+        width: 80px;
+        z-index: 6;
+    }
+
+    .qwerty img {
+        width: 29px;
+    }
+
+    .qwerty .button {
+        padding: 6px 0px;
+    }
+
+    .quote {
+        text-align: center;
+    }
+
+    .adj .form-2nd {
+        width: 48%;
+        float: left;
+        margin-left: 13px;
+    }
+
+    .contentaria-division img {
+        width: 75%;
+        max-width: 100%;
+    }
+
+    .adj {
+        width: 100%;
+    }
+
+    .res-chan {
+        float: left;
+    }
+
+    #notoficationContainer .pagination > li > a, .pagination > li > span {
+        padding: 5px 8px;
+        margin-left: 0px;
+    }
+
+    #notoficationContainer .pagination {
+        margin: 0px 0px;
+    }
+
+    #example-4_wrapper .pagination > li > a, .pagination > li > span {
+        padding: 5px 8px;
+        margin-left: 0px;
+    }
+
+    #example-4_wrapper .pagination {
+        margin: 0px 0px;
+    }
+
+
+
+    /*.qwerty img {
+        width: 23px;
+        padding: 8px 0px;
+    }
+
+    .spcl img {
+        width: 33px;
+    }*/
+
+    .pop {
+        position: relative;
+        height: auto !important;
+        top: -6px !important;
+        left: 0px !important;
+    }
+
+    .ad-div {
+        padding: 4px 14px !important;
+    }
+
+
+    .logo {
+        width: auto;
+        margin-top: 6px !important;
+        margin-left: 0px;
+    }
+
+    #editable {
+        margin-left: 16px;
+    }
+
+    .content {
+        position: relative;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+    }
+
+    .arrow_box {
+        position: relative;
+    }
+
+        .arrow_box:after, .arrow_box:before {
+            bottom: 100%;
+            left: 0%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            top: -44px;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after {
+            border-bottom-color: #004293;
+            border-width: 22px;
+            margin-left: 0px;
+        }
+
+        .arrow_box:before {
+            border-bottom-color: #004293;
+            border-width: 22px;
+            margin-left: 0px;
+        }
+
+    .top-button {
+        padding: 3px 0px;
+        width: auto;
+    }
+
+    .btn-area2 {
+        min-height: 180px;
+    }
+}
+
+
+
+@media only screen and (min-width:992px) and (max-width:1127px) {
+
+    .find-frnd-btnpc {
+        width: 200px;
+    }
+}
+
+
+
+/*new css*/
+@media only screen and (min-width:768px) and (max-width:992px) {
+
+
+
+    .navbar-brand {
+        display: inline-block;
+        float: none !important;
+        padding: 0px;
+        height: 100%;
+    }
+
+    .navbar-brand {
+        padding: 0 !important;
+    }
+
+    .logo {
+        width: auto !important;
+    }
+
+    .submitli {
+        width: 100%;
+        display: block !important;
+        margin-bottom: 5px;
+    }
+
+    .navigation .navbar-right {
+        float: none !important;
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .find-frnd-btnpc {
+        display: none;
+    }
+
+    .logo {
+        margin-top: 6px !important;
+        margin-left: 0px;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 0px !important;
+    }
+
+
+    .navbar-right {
+        float: left !important;
+        width: 100% !important;
+    }
+
+
+    .login-signup {
+        text-align: center;
+    }
+
+
+        .login-signup > li {
+            position: relative;
+            display: inline-block !important;
+            vertical-align: top;
+            float: none;
+        }
+
+    .nav > li > a.submit-note-btn {
+        display: inline-block !important;
+    }
+
+    .layout-find-frnd-btnmobile {
+        display: block;
+        margin-right: 20px;
+        width: 250px;
+    }
+
+    .navbar-header {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+}
+
+
+
+@media only screen and (min-width:511px) and (max-width:767px) {
+
+    .layout-find-frnd-btnmobile {
+        width: 215px;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+}
+
+
+
+
+@media only screen and (min-width:992px) and (max-width:1070px) {
+
+
+    .textlogo {
+        width: 204px;
+        top: 6px;
+        position: relative;
+        left: 4px;
+    }
+}
+
+
+
+
+
+
+@media only screen and (min-width:767px) and (max-width:768px) {
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        width: 100%;
+        min-width: auto;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .mobile-back {
+        background: #fff;
+        width: 185px;
+        margin-left: 5px;
+        margin-right: 6px;
+    }
+
+    .login-signup .btn-success {
+        margin-top: 0px;
+    }
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width:767px) and (max-width:1200px) {
+    .navbar-right {
+        float: left !important;
+        width: auto !important;
+    }
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 0px;
+    }
+
+    .login-signup .btn-success {
+        padding: 5px 4px !important;
+    }
+
+    .navbar-brand {
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width:768px) {
+    .search-bx {
+    background: #fff;
+    overflow: hidden;
+    padding: 10px 0 10px 120px;
+}
+.filter-menu {
+    position: absolute;
+    left: 6px;
+}
+.filter-menu .btn{
+    width: 116px;
+}
+
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 0px !important;
+    }
+
+    #timelineBackground {
+        height: 300px;
+        position: relative;
+    }
+
+    .img-bg {
+        height: auto;
+        width: 100%;
+        max-height: auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .bgSave {
+        position: absolute;
+        margin-top: 0px;
+        margin-left: 0px;
+        z-index: 99;
+        right: 5px !important;
+        bottom: 10px;
+    }
+
+
+    .img-bg img {
+        margin-top: 0px !important;
+    }
+
+    .pop {
+        width: auto;
+    }
+
+    .btn-all-main {
+        text-align: left;
+    }
+
+    .res-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    .popx .top-button {
+        padding: 3px 10px !important;
+        width: auto !important;
+    }
+
+    .btn-breadcrumb {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .mobile-back-pc {
+        display: block !important;
+    }
+
+    .display-pc {
+        display: none;
+    }
+
+    .display-mobile {
+        display: block;
+    }
+
+    .find-frnd-btnmobile {
+        display: block;
+    }
+
+    .find-frnd-btnpc {
+        display: none;
+    }
+
+    .mobile-back {
+        background: #fff;
+    }
+
+    .layout-find-frnd-btnmobile {
+        display: block;
+    }
+
+    .textcenter {
+        text-align: center;
+    }
+
+    .m-book-detail {
+        margin-top: 25px;
+    }
+
+    .navbar-nav .open .dropdown-menu > li > a {
+        padding: 8px 10px;
+    }
+
+    .login-signup li a:last-child {
+        margin-left: 15px;
+    }
+
+    .m-photo-caption {
+        position: absolute;
+        top: 0;
+        left: 6px;
+    }
+
+    .badge {
+        top: 0px !important;
+        font-size: 8px;
+        line-height: 8px;
+    }
+
+    .login-style .navbar-nav.navbar-right:last-child {
+        margin: 0px !important;
+    }
+
+    .navbar-brand {
+        padding: 0 !important;
+    }
+
+    .profile-pic {
+        margin: -70px 15px;
+        height: 180px;
+        border: 5px solid #fff;
+        width: 100%;
+    }
+
+    .login-style .navbar-brand {
+        float: none;
+        padding: 13px 15px;
+    }
+
+    .login-signup {
+        text-align: center;
+    }
+
+    .navbar-brand {
+        display: inline-block;
+        float: none !important;
+        padding: 0px;
+        height: 100%;
+    }
+
+    .navbar-header {
+        text-align: center;
+    }
+
+    #ToolsModal .btn {
+        padding: 4px 8px !important;
+    }
+
+    .fadein {
+        width: 100% !important;
+    }
+
+    .res-lbl {
+        float: none !important;
+        text-align: left;
+        display: block;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: auto;
+        font-size: 14px;
+        padding: 4px 13px;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        padding: 3px 8px;
+        min-width: auto;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        padding: 3px 8px;
+        min-width: auto;
+    }
+
+    .all-new-btn .btn-primary {
+        width: 26%;
+    }
+
+    .ad-div {
+        padding: 4px 12px !important;
+    }
+
+    .img-content a {
+        font-size: 15px !important;
+    }
+
+    .index_book {
+        min-height: 176px;
+        padding-top: 75px;
+    }
+
+    .arrow_box {
+        position: relative;
+    }
+
+        .arrow_box:after, .arrow_box:before {
+            bottom: 100%;
+            left: 0%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            top: -44px;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after {
+            border-bottom-color: #004293;
+            border-width: 22px;
+            margin-left: 0px;
+        }
+
+        .arrow_box:before {
+            border-bottom-color: #004293;
+            border-width: 22px;
+            margin-left: 0px;
+        }
+
+    .category {
+        min-height: 0px;
+    }
+
+    .pop {
+        position: relative;
+        height: auto !important;
+        top: -6px !important;
+        left: 0px !important;
+    }
+
+    #editable {
+        margin-left: 16px;
+    }
+
+    .content {
+        position: relative;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+    }
+
+    .btn-area2 {
+        min-height: 180px;
+    }
+
+    #submitQuestion {
+        margin-top: 5px !important;
+    }
+
+    #cancel {
+        margin-top: 5px !important;
+    }
+
+
+
+    .imgpos {
+        left: 4px;
+    }
+
+    .imgpos2 {
+        right: 4px;
+    }
+
+    #submitInvite {
+        margin-top: 10px;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .sm-btn {
+        margin-top: 6px !important;
+        margin-bottom: 0px !important;
+        width: 48%;
+    }
+
+    .detail ul {
+        margin-bottom: 15px;
+    }
+
+    .detail {
+        min-height: 475px;
+    }
+
+    .btn + .btn {
+        margin-left: 0px;
+    }
+}
+
+
+
+
+
+@media only screen and (max-width:400px) {
+
+
+    .input-width {
+        width: 55%;
+    }
+
+
+        .input-width .form-control {
+            font-size: 11px !important;
+            padding: 3px !important;
+        }
+}
+
+
+
+
+@media only screen and (min-width:320px) and (max-width:767px) {
+    .u-frnd {
+        width: 150px;
+        cursor: pointer;
+    }
+
+
+
+    .navbar-right {
+        float: left !important;
+        width: 100% !important;
+    }
+
+    .login-signup > li {
+        position: relative;
+        display: inline-block !important;
+        vertical-align: top;
+        margin-left: 16px;
+    }
+
+    .resp .img-res-style:first-child {
+        padding-left: 0px !important;
+    }
+
+    .main2 img {
+        position: absolute;
+        top: 70px;
+        left: 29%;
+    }
+
+    .btn-group-vertical {
+        float: none !important;
+    }
+
+    .vertical-btn-style {
+        text-align: center;
+    }
+
+    .notebookEditor {
+        height: 100%;
+        max-height: 100%;
+        min-height: 830px !important;
+    }
+
+    .contentaria-division h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .contentaria-division img {
+        width: 60%;
+        max-width: 100%;
+        text-align: center;
+        margin-left: 15%;
+    }
+
+    .res-changes {
+        float: none;
+    }
+
+    .adj {
+        width: 100%;
+        padding: 0px 20px;
+    }
+
+    .res-chan {
+        float: none;
+    }
+
+    .addbk {
+        height: 100% !important;
+    }
+
+    .childEditor {
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 772px !important;
+    }
+
+    #example-4_wrapper .pagination > li > a, .pagination > li > span {
+        padding: 5px 5px;
+        margin-left: 0px;
+    }
+
+    .secondRow .col-xs-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    #example-4_wrapper .pagination {
+        margin: 0px;
+        float: none;
+        text-align: center;
+    }
+
+    #notoficationContainer .col-xs-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    #notoficationContainer .pagination {
+        margin: 0px;
+        float: none;
+        text-align: center;
+    }
+
+        #notoficationContainer .pagination > li > a, .pagination > li > span {
+            padding: 5px 5px;
+            margin-left: 0px;
+        }
+
+    #ask, #invite, #sendmsg {
+        min-width: 92px;
+        font-size: 12px !important;
+        padding: 5px 2px;
+    }
+
+    .add-icn-res {
+        width: auto;
+    }
+
+    .qwerty img {
+        padding: 0px !important;
+    }
+
+    .notebook {
+        padding: 0px;
+        margin-bottom: 20px;
+    }
+
+        .notebook a img {
+            width: 100%;
+        }
+
+
+
+    .login-signup > li > a {
+        padding: 10px 8px !important;
+    }
+
+    .navbar-nav .open .dropdown-menu {
+        margin-top: 44px !important;
+        position: absolute;
+        top: 0;
+        background: #fff;
+        z-index: 99999999 !important;
+        left: 0px;
+    }
+
+    .notification-list-div {
+        width: 215px;
+        max-height: 236px;
+        overflow: auto;
+    }
+
+    .invitation::after {
+        position: absolute;
+        left: 0px;
+    }
+
+    .navbar-collapse.in {
+        overflow-y: initial;
+    }
+}
+
+@media only screen and (min-width:320px) and (max-width:510px) {
+    .login-signup > li.loginli, li.signupli, li.submitli {
+        width: 100% !important;
+        margin: 0px !important;
+    }
+
+    .login-signup > li:nth-child(2) {
+        display: block !important;
+        width: 250px;
+        margin: 0 auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .resp .img-res-style:first-child {
+        padding-left: 0px !important;
+    }
+
+    fieldset {
+        margin-bottom: 18px;
+        margin-top: 0px;
+    }
+
+    .low-res .dropdown-menu > li > a {
+        padding: 5px 0px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .res-main img {
+        position: absolute;
+        top: 50px !important;
+    }
+    /*#btnSubmit {
+        width: 100%;
+    }*/
+
+    .list-of-students {
+        padding-left: 12px;
+    }
+
+    /*#NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        width: 100%;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        width: 100%;
+    }*/
+
+    .btn-all-main {
+        margin-left: 10px;
+        margin-top: 25px;
+    }
+
+    #NotebookDetailNew .col-md-3, #NotebookDetailNew .col-md-4 {
+        padding: 0px 5px;
+        background: #fff;
+        margin-top: 20px;
+    }
+
+    #NotebookDetail .col-md-3, #NotebookDetail .col-md-4, #NotebookDetailNew .col-md-3 {
+        padding: 0px 5px;
+        background: #fff;
+        margin-top: 20px;
+        min-height: 100%;
+    }
+
+    .adj .form-1st {
+        width: 100%;
+        float: left;
+    }
+
+
+
+    .adj .form-2nd {
+        width: 100%;
+        float: left;
+        margin-left: 0px;
+    }
+
+    .male-female {
+        margin-top: 0px;
+    }
+
+    .adj .form1 {
+        width: 100%;
+        float: left;
+    }
+
+    .adj .form2 {
+        width: 100%;
+        float: left;
+        margin-left: 0px;
+    }
+
+    .adj .form3 {
+        width: 100%;
+        float: left;
+        margin-left: 0px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*android css*/
+@media only screen and (max-width:700px) {
+
+    .textcenter {
+        text-align: center;
+    }
+
+    .mobile-show {
+        display: block;
+    }
+
+    .pc-show {
+        display: none;
+    }
+
+    .panel .panel-heading {
+        padding-bottom: 3px !important;
+        border-bottom: 2px solid #CECECE !important;
+        font-size: 18px !important;
+        margin-bottom: 15px !important;
+        color: #004293 !important;
+    }
+
+    .login-signup {
+        text-align: center;
+    }
+
+    .navigation .nav > li > a {
+        padding: 0px 10px;
+        margin-bottom: 2px;
+        margin-top: 0px;
+    }
+
+    .submitli a .btn {
+        padding: 8px 18px !important;
+    }
+
+    .login-signup li a i {
+        font-size: 12px;
+    }
+
+    .res-changes h1 {
+        font-size: 19px !important;
+    }
+
+    .birthday {
+        font-size: 15px;
+    }
+
+    #btnSubmit {
+        font-size: 16px;
+    }
+
+    .otp-style a {
+        font-size: 13px;
+        margin-top: 3px;
+    }
+
+
+    /*.login-style .login-btn-fb {
+    margin-top: 6px;
+    margin-bottom: 0;
+}*/
+
+    .dropdown-menu {
+        width: auto !important;
+    }
+
+        .dropdown-menu.login-tab {
+            width: auto !important;
+        }
+
+    .chptrttl {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .submit-note-btn {
+        display: inline-block !important;
+        padding: 12px 10px !important;
+        margin-bottom: 10px;
+    }
+
+    .login-tab *::after {
+        position: absolute;
+        right: 9px;
+        top: -9px;
+        width: 0;
+        height: 0;
+        content: '';
+        border-left: 5px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 9px solid #fff !important;
+    }
+
+    .panel .panel-heading > .panel-title {
+        font-size: 19px !important;
+    }
+
+    legend {
+        font-size: 17px;
+    }
+
+    fieldset {
+        margin-top: 0;
+    }
+
+    .dropdown-menu.frnd {
+        width: auto !important;
+        padding: 0px 5px;
+    }
+
+    .inner-div-res .panel, #frndlist .panel {
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width:460px) and (max-width:480px) {
+    .arrow_box:after, .arrow_box:before {
+        position: absolute;
+        top: 256px !important;
+    }
+
+    .pop {
+        position: absolute;
+        top: -150% !important;
+        z-index: 999;
+    }
+
+    .control {
+        height: auto;
+        overflow: auto;
+        max-height: 130px;
+        min-height: 120px !important;
+    }
+}
+
+@media only screen and (min-width:451px) and (max-width:600px) {
+    #searchbox_keyboard {
+        left: 10px !important;
+    }
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 13px !important;
+    }
+}
+
+@media only screen and (max-width:480px) {
+    .ad-responsive {
+        margin-top: 200px;
+    }
+
+    .navbar-nav {
+        margin: 10px 0px;
+    }
+    /*android css*/
+    .mobile-style {
+        padding: 0px !important;
+    }
+
+    #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        width: 100%;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        width: 100%;
+    }
+
+    .navbar-right {
+        float: left !important;
+        width: 100%;
+    }
+
+    .login-btn-fb {
+        width: 100%;
+    }
+
+    .faaq {
+        width: 100%;
+    }
+
+    .mobile-view {
+        display: block;
+    }
+
+    .pc-view {
+        display: none;
+    }
+
+    .top-button {
+        padding: 3px 0px;
+        width: 87px;
+    }
+
+    .navbar-brand {
+        float: none;
+    }
+
+    .spcl img {
+        width: 30px;
+    }
+
+    .container-fluid.signupform .form-horizontal .control-label {
+        text-align: left;
+        font-size: 13px;
+    }
+
+    .faq-page h2 {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .faq-page .panel .panel-heading > .panel-title > a {
+        font-size: 13px;
+    }
+
+    #regstrationForm .login-btn-fb {
+        margin-top: 15px;
+    }
+
+    .all-btn .btn {
+        font-size: 13px;
+        padding: 5px 18px !important;
+    }
+
+    .all-new-btn .btn {
+        font-size: 13px;
+    }
+
+    ul.nav-tabs li a {
+        font-size: 13px !important;
+    }
+
+    .chptrttl {
+        padding-top: 12px;
+    }
+
+    .short {
+        height: 265px !important;
+        margin-top: 20px !important;
+        margin-bottom: 325px !important;
+        max-height: 536px !important;
+    }
+
+    .editbtn .dropdown-menu {
+        width: 83px !important;
+    }
+
+
+    .imgagediv img {
+        width: 100%;
+    }
+
+    .notebookEditor {
+        height: 100%;
+        max-height: 100%;
+    }
+
+    .contentaria-division {
+        height: auto;
+    }
+
+    #notoficationContainer .col-xs-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+
+
+    .navbar-brand {
+        padding: 0px 0px 0px 0px !important;
+    }
+
+    #notoficationContainer .pagination {
+        margin: 0px;
+        float: none;
+        text-align: center;
+    }
+
+        #notoficationContainer .pagination > li > a, .pagination > li > span {
+            padding: 5px 5px;
+            margin-left: 0px;
+        }
+
+    #example-4_wrapper .pagination > li > a, .pagination > li > span {
+        padding: 5px 5px;
+        margin-left: 0px;
+    }
+
+    .secondRow .col-xs-6 {
+        width: 100% !important;
+        text-align: center;
+    }
+
+    #example-4_wrapper .pagination {
+        margin: 0px;
+        float: none;
+        text-align: center;
+    }
+
+    .edit-div {
+        position: relative;
+        right: 0;
+        width: 45px;
+        float: right;
+    }
+
+    dataTables_wrapper #NotebookDetail .btn-primary, #NotebookDetailNew .btn-primary {
+        width: 100%;
+    }
+
+    .ad-div {
+        width: 100%;
+        margin: 2px 0px !important;
+    }
+
+    #NotebookDetail .btn-success, #NotebookDetailNew .btn-success {
+        width: 100%;
+    }
+
+    .social-div .panel .panel-heading > .panel-title {
+        font-size: 22px;
+    }
+
+    /*.btn-all-main {
+        position: relative;
+        left: 0px;
+    }*/
+
+    .article {
+        width: 100% !important;
+    }
+
+    .ad-div {
+        padding: 4px 15px !important;
+    }
+
+    .fadein {
+        position: relative;
+        width: 100% !important;
+        padding-bottom: 10px;
+    }
+
+    .btn-group-vertical {
+        width: 30% !important;
+    }
+
+    #list1 {
+        width: 100% !important;
+    }
+
+    #list2 {
+        width: 100% !important;
+    }
+
+    .btn-group-vertical .btn {
+        margin-left: 0px !important;
+    }
+
+
+    .login-signup > li {
+        position: relative;
+        display: inline-block !important;
+        vertical-align: top;
+    }
+
+        .login-signup > li > a {
+            padding: 10px 6px !important;
+        }
+
+    .notification-list-div {
+        width: 204px;
+        max-height: 221px;
+        overflow: auto;
+    }
+
+    .invitation::after {
+        position: absolute;
+        left: 0px;
+    }
+
+    .navbar-collapse.in {
+        overflow-y: initial;
+    }
+
+    .content {
+        position: relative;
+    }
+
+    /*.arrow_box {
+        position: relative;
+    }*/
+
+    /*.arrow_box:after, .arrow_box:before {
+            bottom: 100%;
+            left: 0%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            top: 265px;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after {
+            border-top-color: #004293;
+            border-width: 18px;
+            margin-left: 0px;
+        }
+
+        .arrow_box:before {
+            border-top-color: #004293;
+            border-width: 18px;
+            margin-left: 0px;
+        }*/
+
+    .category {
+        min-height: 0px;
+    }
+
+    #editable {
+        margin-left: 16px;
+    }
+
+    .pop {
+        position: absolute;
+        top: 180px !important;
+        z-index: 999;
+        width: auto !important;
+    }
+
+    .content {
+        position: relative;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+    }
+
+    .btn-area2 {
+        min-height: 180px;
+    }
+
+    #submitQuestion {
+        margin-top: 5px !important;
+        margin-right: 5px;
+    }
+
+    #cancel {
+        margin-top: 5px !important;
+    }
+
+    .imgpos {
+        left: 4px;
+    }
+
+    .imgpos2 {
+        right: 4px;
+    }
+
+    #submitInvite {
+        margin-top: 10px;
+    }
+
+    .sm-btn {
+        width: 100%;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .sm-btn {
+        margin-top: 6px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .all-new-btn .btn-primary {
+        width: 42%;
+    }
+}
+
+@media only screen and (min-width:435px) and (max-width:600px) {
+    .profile-page .nav.nav-tabs > li {
+        margin-top: 3px;
+    }
+
+    #timelineNav .nav-tabs {
+        text-align: left;
+        margin-top: 52px;
+        padding-left: 0;
+    }
+
+    .profile-info {
+        margin-top: 78px;
+    }
+
+    .textcenter {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:1024px) {
+    .navigation .navbar-right {
+        /*float: right !important;*/
+        width: 100%;
+    }
+
+
+
+    .my-login {
+        float: right !important;
+        width: 60%;
+    }
+
+    .login-style .navbar-brand {
+        float: left;
+        padding: 13px 0px;
+    }
+
+    .navigation .navbar-nav.navbar-right:last-child {
+        /*margin-right: 15px;*/
+    }
+
+    .navigation .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 10px 9px;
+    }
+}
+
+@media only screen and (min-width:430px) and (max-width:480px) {
+    #regstrationForm .login-btn-fb {
+        margin-top: 25px;
+    }
+
+    .popx .top-button {
+        padding: 3px 10px !important;
+        width: auto !important;
+    }
+}
+
+@media only screen and (min-width:300px) and (max-width:430px) {
+    .profile-page .nav.nav-tabs > li {
+        margin-top: 3px;
+    }
+
+    .popx .top-button {
+        padding: 3px 10px !important;
+        width: 87px !important;
+    }
+
+    .all-prop-btn .btn {
+        width: 100%;
+        margin-bottom: 5px !important;
+    }
+
+    .textcenter {
+        text-align: center;
+    }
+
+    .avatar-upload input {
+        display: block;
+        margin-left: 0px;
+    }
+
+    .my-cls-res {
+        width: 48% !important;
+    }
+
+        .my-cls-res .forget-pass {
+            margin-top: 4px;
+            float: right;
+        }
+
+
+
+    .profile-info {
+        margin-top: 70px;
+        text-align: center;
+    }
+
+    .user-style-div {
+        color: #666;
+        font-size: 13px;
+    }
+
+    .login-style .col-md-5, .col-md-2 {
+        width: 100%;
+    }
+
+    .login-style .form-control {
+        height: 29px;
+    }
+
+    .login-style .login-btn-facebook {
+        padding: 5px 10px;
+    }
+}
+
+@media only screen and (min-width:300px) and (max-width:430px) {
+    .layout-find-frnd-btnmobile {
+        width: 100%;
+        margin: 0 auto;
+        display: block !important;
+    }
+}
+
+@media only screen and (max-width:320px) {
+    .ad-div {
+        margin: 2px 2px !important;
+        width: 100%;
+    }
+
+    .ui-keyboard-button {
+        height: auto !important;
+        min-width: auto !important;
+        margin: 2px 1px !important;
+        cursor: pointer;
+        overflow: hidden;
+        line-height: 2em;
+        -moz-user-focus: ignore;
+        padding: 0px 4px !important;
+    }
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 12px !important;
+    }
+
+    .btn-breadcrumb .btn {
+        margin-bottom: 2px !important;
+    }
+
+    .imgagediv img {
+        width: 100%;
+    }
+
+    .div-2 {
+        padding: 20px 10px;
+    }
+
+
+    .login-text > span {
+        display: block;
+    }
+
+    .class-right {
+        float: left !important;
+    }
+
+    .fadein {
+        position: relative;
+        width: 100% !important;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    .profile-page .nav .nav-tabs > li {
+        width: 100% !important;
+        margin-top: 3px;
+    }
+
+    .content {
+        position: relative;
+    }
+
+    /*.arrow_box {
+        position: relative;
+    }
+
+        .arrow_box:after, .arrow_box:before {
+            bottom: 100%;
+            left: 0%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            top: 272px;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after {
+            border-top-color: #004293;
+            border-width: 18px;
+            margin-left: 0px;
+        }
+
+        .arrow_box:before {
+            border-top-color: #004293;
+            border-width: 18px;
+            margin-left: 0px;
+        }*/
+
+    .edit-div {
+        position: relative;
+        float: right;
+        right: 0;
+    }
+
+    .top-button {
+        padding: 3px 3px;
+    }
+
+    .category {
+        min-height: 0px;
+    }
+
+    .pop {
+        position: absolute;
+        top: -165% !important;
+        z-index: 999;
+    }
+
+    #editable {
+        margin-left: 16px;
+    }
+
+    .content {
+        position: relative;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+    }
+
+    .btn-area2 {
+        min-height: 180px;
+    }
+
+    #submitQuestion {
+        margin-top: 5px !important;
+    }
+
+    #cancel {
+        margin-top: 5px !important;
+    }
+
+
+
+    .top-button {
+        padding: 3px 3px;
+        width: 30%;
+    }
+
+
+
+    #submitInvite {
+        margin-top: 10px;
+    }
+
+    .sm-btn {
+        width: 100%;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .sm-btn {
+        margin-top: 6px !important;
+        margin-bottom: 0px !important;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: 100%;
+        border-radius: 22px !important;
+        font-size: 13px;
+        margin-bottom: 0px !important;
+    }
+
+    .logo {
+        width: 217px;
+        margin-top: 6px !important;
+        margin-left: 0px !important;
+    }
+}
+
+
+
+
+
+@media only screen and (max-width:450px) {
+    #timelineTitle {
+        color: #181818;
+        font-size: 18px;
+        width: 80%;
+        margin-top: 33px;
+        position: absolute;
+        margin-left: 19px;
+        font-weight: bold;
+        text-rendering: optimizelegibility;
+        text-shadow: none;
+        z-index: 999;
+        text-transform: capitalize;
+    }
+
+    .paddng .panel {
+        padding: 20px 0px !important;
+    }
+
+    .ui-keyboard-button {
+        height: auto !important;
+        min-width: auto !important;
+        margin: 2px 1px !important;
+        cursor: pointer;
+        overflow: hidden;
+        line-height: 2em;
+        -moz-user-focus: ignore;
+        padding: 0px 4px !important;
+    }
+
+
+
+    .m-book-detail ul li span.m-head {
+        word-wrap: break-word;
+        max-width: 100%;
+    }
+
+    .contentaria-division h1 {
+        font-size: 27px;
+    }
+
+    .user-style-div {
+        color: #666;
+    }
+
+    .submitli {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .edit-profil {
+        color: rgb(50, 50, 50);
+        font-weight: 400;
+    }
+
+        .edit-profil:hover, .edit-profil:focus, .edit-profil:active {
+            color: rgb(50, 50, 50);
+            font-weight: 400;
+        }
+
+    #timelineNav .nav-tabs {
+        text-align: left;
+        margin-top: 106px;
+        padding-left: 0;
+    }
+
+    .timelineUploadBG {
+        right: 2px;
+    }
+}
+
+
+
+@media only screen and (min-width:401px) and (max-width:450px) {
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-size: 15px !important;
+    }
+}
+
+
+@media only screen and (max-width:319px) {
+    .u-frnd {
+        width: 104px !important;
+        cursor: pointer;
+    }
+
+    .frnd-list-profile {
+        width: 200px;
+        height: 80px !important;
+    }
+
+    .name-div {
+        margin-top: 0px !important;
+    }
+
+    .panel {
+        padding: 20px 0px !important;
+    }
+
+    .prev {
+        width: 40px !important;
+    }
+
+    .next {
+        width: 40px !important;
+    }
+
+    .btn {
+        width: 100%;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+}
+
+
+@media only screen and (max-width:360px) {
+    .paddng {
+        padding: 0px;
+    }
+
+    .dropdown-menu.login-tab {
+        width: auto !important;
+    }
+
+    .pop {
+        width: 100% !important;
+    }
+
+    .qwerty img {
+        width: 24px;
+        padding: 0px !important;
+    }
+
+    .qwerty .button {
+        padding: 6px 0px;
+    }
+
+    .btn-area2 {
+        margin: 12px 6px;
+    }
+
+    .contentaria-division h1 {
+        font-size: 27px;
+    }
+
+    #timelineProfilePic {
+        width: 117px;
+        height: 121px;
+        border: 1px solid #666666;
+        background-color: #ffffff;
+        position: absolute;
+        margin-top: -98px;
+        margin-left: 11px;
+        z-index: 1000;
+    }
+
+    .right-crop-btn {
+        right: 4px !important;
+    }
+
+    .imgagediv img {
+        width: 100%;
+    }
+
+    .login-signup > li {
+        margin-right: 3px;
+    }
+
+
+
+    .paddng .panel {
+        padding: 20px 0px;
+    }
+
+    .ad-div {
+        margin: 2px 2px !important;
+        width: 100%;
+    }
+
+
+
+    .login-text > span {
+        display: block;
+    }
+
+    .class-right {
+        float: left !important;
+    }
+
+    .all-new-btn .btn-primary {
+        width: 48%;
+    }
+
+    .fadein {
+        position: relative;
+        width: 100% !important;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    #ask, #invite, #sendmsg {
+        min-width: 90px;
+        border-radius: 22px !important;
+        font-size: 14px;
+    }
+
+    /*.qwerty img {
+        width: 23px !important;
+    }*/
+
+    .content {
+        position: relative;
+    }
+
+    /*.arrow_box {
+        position: relative;
+    }
+
+        .arrow_box:after, .arrow_box:before {
+            bottom: 100%;
+            left: 0%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            top: 270px;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after {
+            border-top-color: #004293;
+            border-width: 18px;
+            margin-left: 0px;
+        }
+
+        .arrow_box:before {
+            border-top-color: #004293;
+            border-width: 18px;
+            margin-left: 0px;
+        }*/
+
+    .top-button {
+        padding: 5px 3px !important;
+        margin: 2px 0px;
+    }
+
+    .category {
+        min-height: 0px;
+    }
+
+    .pop {
+        position: absolute;
+        top: 180px !important;
+        z-index: 999;
+    }
+
+    .edit-div {
+        position: relative;
+        float: right;
+        right: 0;
+        top: -43px;
+    }
+
+    #editable {
+        margin-left: 16px;
+    }
+
+    .content {
+        position: relative;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+    }
+
+    .btn-area2 {
+        min-height: 180px;
+    }
+
+    #submitQuestion {
+        margin-top: 5px !important;
+        margin-right: 5px;
+    }
+
+    #cancel {
+        margin-top: 5px !important;
+    }
+
+
+    .top-button {
+        padding: 3px 0px;
+    }
+
+    .imgpos {
+        left: 10px;
+        top: 125px !important;
+    }
+
+    .imgpos2 {
+        right: 10px;
+        top: 125px !important;
+    }
+
+    #submitInvite {
+        margin-top: 10px;
+    }
+
+    .sm-btn {
+        width: 100%;
+    }
+
+    .btn + .btn {
+        margin-left: 0px !important;
+    }
+
+    .sm-btn {
+        margin-top: 6px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .short {
+        height: 226px !important;
+        margin-top: 20px !important;
+        margin-bottom: 365px !important;
+    }
+
+    .profile-page .nav.nav-tabs > li {
+        width: auto !important;
+        margin-top: 3px;
+    }
+
+        .profile-page .nav.nav-tabs > li > a {
+            margin: 0px;
+            padding: 1px 7px;
+            font-size: 15px;
+        }
+
+    .sm-btn {
+        width: 48%;
+        display: inline-block !important;
+    }
+}
+
+@media only screen and (min-width:200px) and (max-width:319px) {
+    .login-signup > li {
+        position: relative;
+        display: inline-block !important;
+        vertical-align: top;
+    }
+
+    .mobile-back {
+        margin: 0px;
+        margin-top: 5px;
+    }
+
+    .all-new-btn .btn {
+        width: 90% !important;
+    }
+
+    .popx .top-button {
+        width: 75px !important;
+    }
+
+    .popx {
+        width: auto;
+        bottom: 4px;
+        right: 4px;
+        padding: 0px 3px;
+    }
+
+    .all-new-btn .btn {
+        width: 90% !important;
+    }
+
+    .pop {
+        position: absolute;
+        top: -138% !important;
+        z-index: 999;
+    }
+
+    .login-signup > li {
+        margin-right: 0px;
+    }
+
+    .pop {
+        width: auto;
+    }
+
+    .paddng fieldset {
+        padding: 20px 6px;
+    }
+
+    .video-clip {
+        display: block;
+    }
+
+    .qwerty img {
+        width: 21px;
+        padding: 0px !important;
+    }
+
+    .resp .col-xs-5, .resp .col-xs-7 {
+        width: auto !important;
+    }
+
+    .res-xs {
+        margin-left: 25px;
+    }
+
+    .btn-group-vertical {
+        float: none !important;
+    }
+
+    .vertical-btn-style {
+        text-align: center;
+    }
+
+    .notebookEditor {
+        height: 100%;
+        max-height: 100%;
+        min-height: 830px !important;
+    }
+
+    .contentaria-division h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .contentaria-division img {
+        width: 60%;
+        max-width: 100%;
+        text-align: center;
+        margin-left: 15%;
+    }
+
+    .res-changes {
+        float: none;
+    }
+
+    .adj {
+        width: 100%;
+        padding: 0px 20px;
+    }
+
+    .res-chan {
+        float: none;
+    }
+
+    .addbk {
+        height: 100% !important;
+    }
+
+    .childEditor {
+        height: 100% !important;
+        max-height: 100% !important;
+        min-height: 772px !important;
+    }
+
+    #example-4_wrapper .pagination > li > a, .pagination > li > span {
+        padding: 5px 5px;
+        margin-left: 0px;
+    }
+
+    .secondRow .col-xs-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    #example-4_wrapper .pagination {
+        margin: 0px;
+        float: none;
+        text-align: center;
+    }
+
+    #notoficationContainer .col-xs-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    #notoficationContainer .pagination {
+        margin: 0px;
+        float: none;
+        text-align: center;
+    }
+
+        #notoficationContainer .pagination > li > a, .pagination > li > span {
+            padding: 5px 5px;
+            margin-left: 0px;
+        }
+
+    #ask, #invite, #sendmsg {
+        min-width: 92px;
+        font-size: 12px !important;
+        padding: 5px 1px 3px;
+    }
+
+    .add-icn-res {
+        width: auto;
+    }
+
+    .qwerty img {
+        padding: 4px 0px !important;
+    }
+
+    .notebook {
+        padding: 0px;
+        margin-bottom: 20px;
+    }
+
+        .notebook a img {
+            width: 100%;
+        }
+
+
+
+    .spcl img {
+        width: 100%;
+    }
+
+    .login-signup > li > a {
+        padding: 10px 4px !important;
+    }
+
+    .dropdown-menu.login-tab {
+        width: auto !important;
+    }
+
+    .navbar-nav .open .dropdown-menu {
+        margin-top: 51px !important;
+        position: absolute;
+        top: 0;
+        background: #fff;
+        z-index: 99999999 !important;
+        left: 0px;
+    }
+
+    .notification-list-div {
+        width: 176px;
+        max-height: 236px;
+        overflow: auto;
+    }
+
+    .invitation::after {
+        position: absolute;
+        left: 0px;
+    }
+
+    .navbar-collapse.in {
+        overflow-y: initial;
+    }
+
+    .submitli {
+        width: 88% !important;
+        margin: 0 auto;
+    }
+}
+
+
+
+@media only screen and (max-width:480px) {
+
+    .ad-main-large {
+        display: none;
+    }
+
+
+    .main-ad-block-mobile {
+        display: block;
+        padding: 0px 23px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+}
+
+
+@media only screen and (max-width:299px) {
+    .qwerty img {
+        width: 20px !important;
+    }
+
+    .sp img {
+        width: 42px;
+        height: 28px;
+    }
+}
+
+@media only screen and (max-width:594px) {
+
+    #fontfamilySelect, #fontsizeSelect {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width:560px) and (max-width:767px) {
+    .resp .img-res-style {
+        /*width: 60% !important;
+        float: left;*/
+    }
+
+
+
+    .resp .cont-res-style1 {
+        width: 38% !important;
+        float: left;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media only screen and (min-width:590px) and (max-width:767px) {
+    .low-res .divideclas {
+        width: 50% !important;
+    }
+
+    .dropdown-menu.frnd {
+        width: auto !important;
+        padding: 0px 0px;
+    }
+
+    .my-width {
+        width: 60%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width:580px) and (max-width:767px) {
+
+    .name-div {
+        margin-right: 30px !important;
+    }
+}
+
+@media only screen and (min-width:480px) and (max-width:590px) {
+    .frnd-btn {
+        position: absolute;
+        right: 100px;
+    }
+}
+
+@media only screen and (min-width:501px) and (max-width:767px) {
+
+    .cont-res-style2 {
+        width: auto !important;
+        display: block;
+    }
+
+    .submitli {
+        width: 100%;
+        display: block !important;
+        margin-bottom: 5px;
+    }
+
+    .nav > li > a.submit-note-btn {
+        display: inline-block !important;
+    }
+
+    .mobile-back-pc {
+        margin-right: 5px;
+    }
+}
+
+
+
+@media only screen and (max-width:550px) {
+    .m-menu {
+        display: block;
+    }
+}
+
+
+@media only screen and (min-width:501px) and (max-width:560px) {
+
+    style2 {
+        width: auto;
+        display: block;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media only screen and (min-width:481px) and (max-width:560px) {
+    .ad-div {
+        padding: 4px 8px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media only screen and (min-width:331px) and (max-width:500px) {
+    .low-res .main-res {
+        width: 50% !important;
+    }
+
+    .dropdown-menu.frnd {
+        width: auto !important;
+        padding: 0px 5px !important;
+    }
+
+    .cont-res-style2 {
+        width: 100% !important;
+        display: block;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .dropdown {
+        margin-top: 0px !important;
+    }
+
+    .resp .col-md-4 {
+        width: 100% !important;
+        float: left;
+    }
+}
+
+@media only screen and (min-width:370px) and (max-width:490px) {
+
+    .radio-main {
+        margin-left: 7px;
+    }
+
+    .qwerty img {
+        width: 27px;
+        padding: 0px !important;
+    }
+}
+
+@media only screen and (max-width:330px) {
+    .cont-res-style2 {
+        width: auto !important;
+        display: block;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .qwerty img {
+        width: 23px;
+        padding: 0px !important;
+    }
+
+    .qwerty .button {
+        padding: 6px 0px;
+    }
+
+
+
+    .low-res .main-res {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width:370px) {
+
+
+
+
+    .radio-main {
+        margin-left: 0;
+    }
+
+        .radio-main .radio-inline:last-child {
+            margin-top: 0;
+            margin-left: -19px !important;
+            display: block;
+        }
+}
+
+@media only screen and (min-width:361px) and (max-width:400px) {
+    .qwerty img {
+        width: 26px;
+    }
+
+    .qwerty .button {
+        padding: 6px 0px;
+    }
+
+    #searchbox_keyboard {
+        width: 95%;
+    }
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 14px !important;
+    }
+
+    .ui-keyboard-button {
+        padding: 0px 5px;
+    }
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 12px !important;
+    }
+}
+
+
+@media only screen and (min-width:360px) and (max-width:400px) {
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-size: 15px !important;
+    }
+}
+
+
+@media only screen and (min-width:300px) and (max-width:360px) {
+
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 12px !important;
+    }
+}
+
+
+@media only screen and (min-width:300px) and (max-width:390px) {
+
+    .font-collection a {
+        padding: 7px 8px !important;
+    }
+
+    .myCollection a {
+        padding: 7px 8px !important;
+    }
+
+
+
+    .textlogo {
+        width: 178px;
+        position: relative;
+        top: 10px;
+        left: 5px;
+    }
+
+    .icon-logo {
+        width: 31px !important;
+        top: 5px;
+        position: relative;
+    }
+}
+
+
+@media only screen and (min-width:200px) and (max-width:299px) {
+
+    .textlogo {
+        width: 148px;
+        position: relative;
+        top: 10px;
+        left: 5px;
+    }
+
+    .icon-logo {
+        width: 31px !important;
+        top: 5px;
+        position: relative;
+    }
+}
+
+@media only screen and (min-width:801x) and (max-width:1070px) {
+
+    .textlogo {
+        width: 130px;
+        position: relative;
+        top: 10px;
+        left: 5px;
+    }
+
+    .icon-logo {
+        width: 27px !important;
+        top: 5px;
+        position: relative;
+    }
+
+    .logo {
+        width: 157px !important;
+    }
+}
+
+
+
+
+
+
+
+#fontfamilySelect {
+    margin-bottom: 4px;
+}
+
+
+#fontfamilySelect, #fontsizeSelect {
+    border: 1px solid #ccc;
+}
+
+.font-collection {
+    margin-bottom: 5px;
+}
+
+.myCollection {
+    margin-bottom: 5px;
+}

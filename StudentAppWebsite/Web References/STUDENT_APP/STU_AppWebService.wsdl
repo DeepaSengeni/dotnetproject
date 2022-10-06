@@ -1,0 +1,4237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Answers_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuestionId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="Answer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AnswerImage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Answers_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Answers_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Answers_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Answers_LoadBy_UserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Answers_LoadBy_UserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Answers_LoadBy_QuestionId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="QuestionId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Answers_LoadBy_QuestionIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Answers_Delete_By_Id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Answers_Delete_By_IdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_Load_AllFriends">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsersInfo_Load_AllFriendsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InvitationList_UpdateStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestStatus" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="type" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InvitationList_UpdateStatusResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Books_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="BookTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CoverPageImage" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BackPageImage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExamStreamId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EntranceExamId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="StudentName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TeachersName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TotalPages" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="BookType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SubjectId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ChapterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Books_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Books_LoadAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Books_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Books_LoadBy_Id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Books_LoadBy_IdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Books_LoadBy_UserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Books_LoadBy_UserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Books_LoadBy_Filter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StateId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StreamId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EntranceExamId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SubjectId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ChapterId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Books_LoadBy_FilterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Books_Delete_By_Id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Books_Delete_By_IdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="NoteBooks_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ChapterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubjectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TeachersName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CollegeName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StreamName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="BookType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CardHolderName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CardNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExpiryDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NoteBooks_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BooksRating_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="BookId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rate" type="s:float" />
+            <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BooksRating_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BooksRating_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="BooksRating_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BooksRating_LoadBy_BookId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BookId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BooksRating_LoadBy_BookIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BooksRating_LoadBy_UserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BooksRating_LoadBy_UserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Countries_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Countries_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="States_LoadBy_CountryId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CountryId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="States_LoadBy_CountryIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Cities_LoadBy_StateId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="StateId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Cities_LoadBy_StateIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EntranceExam_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="EntranceExam_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExamStream_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExamStream_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Subjects_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Subjects_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Streams_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Streams_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Chapters_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Chapters_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Colleges_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Colleges_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Categories_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Categories_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Topics_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="Topics_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Masters_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Masters_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Subjects_LoadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Subjects_LoadByIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Subjects_LoadByStreamId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Subjects_LoadByStreamIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Chapter_LoadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Chapter_LoadByIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Institute_LoadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="streamId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="categoryId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Institute_LoadByIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Stream_LoadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Stream_LoadByIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="StreamsLoadByCategoryID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StreamsLoadByCategoryIDResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Category_LoadById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Category_LoadByIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InvitationList_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InvitedUserId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InvitationList_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InvitationList_LoadBy_UserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InvitationList_LoadBy_UserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Pages_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="BookId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="PageImage" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PageTitle" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DisplayOrder" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ChapterName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Pages_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Pages_LoadBy_BookId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="BookId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Pages_LoadBy_BookIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Pages_LoadBy_Id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Pages_LoadBy_IdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Questions_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageId" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuestionTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QuestionImage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Questions_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Questions_LoadBy_PageId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PageId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Questions_LoadBy_PageIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Questions_LoadBy_Id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Questions_LoadBy_IdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_InsertUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserRole" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="StudentName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ProfileImage" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TeachersName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ChapterId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SubjectId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CollegeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TopicId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EntranceExamId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExamStreamId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StreamId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CategoryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CountryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StateId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CityId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="NoteBooksFrontCoverImage" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ATMNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NameOnATMCard" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MobileNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EmailId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsActive" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsersInfo_InsertUpdateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_ForgotPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmailId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PasswordResetToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsersInfo_ForgotPasswordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_ResetPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PasswordResetToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsersInfo_ResetPasswordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_LoadBy_Id">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsersInfo_LoadBy_IdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_LoadAll">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_LoadAllResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UsersInfo_Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EmailId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UsersInfo_LoginResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="NotificationByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NotificationByUserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetLoginStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetLoginStatusResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SearchBooksByUsertext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBooksByUsertextResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SearchBookByCatStrInsSub">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CategoryID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StreamID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="InstituteID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubjectID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PageNo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchBookByCatStrInsSubResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Message_LoadByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Message_LoadByUserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FriendList_LoadByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FriendList_LoadByUserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="FriendRequestByUserId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="limit" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FriendRequestByUserIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveFriendById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveFriendByIdResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Answers_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Answers_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="Answers_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:Answers_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Answers_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Answers_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_UserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Answers_LoadBy_UserId" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_UserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Answers_LoadBy_UserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_QuestionIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Answers_LoadBy_QuestionId" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_QuestionIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Answers_LoadBy_QuestionIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Answers_Delete_By_IdSoapIn">
+    <wsdl:part name="parameters" element="tns:Answers_Delete_By_Id" />
+  </wsdl:message>
+  <wsdl:message name="Answers_Delete_By_IdSoapOut">
+    <wsdl:part name="parameters" element="tns:Answers_Delete_By_IdResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_Load_AllFriendsSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_Load_AllFriends" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_Load_AllFriendsSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_Load_AllFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_UpdateStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:InvitationList_UpdateStatus" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_UpdateStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:InvitationList_UpdateStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="Books_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Books_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="Books_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:Books_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Books_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Books_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_IdSoapIn">
+    <wsdl:part name="parameters" element="tns:Books_LoadBy_Id" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_IdSoapOut">
+    <wsdl:part name="parameters" element="tns:Books_LoadBy_IdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_UserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Books_LoadBy_UserId" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_UserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Books_LoadBy_UserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_FilterSoapIn">
+    <wsdl:part name="parameters" element="tns:Books_LoadBy_Filter" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_FilterSoapOut">
+    <wsdl:part name="parameters" element="tns:Books_LoadBy_FilterResponse" />
+  </wsdl:message>
+  <wsdl:message name="Books_Delete_By_IdSoapIn">
+    <wsdl:part name="parameters" element="tns:Books_Delete_By_Id" />
+  </wsdl:message>
+  <wsdl:message name="Books_Delete_By_IdSoapOut">
+    <wsdl:part name="parameters" element="tns:Books_Delete_By_IdResponse" />
+  </wsdl:message>
+  <wsdl:message name="NoteBooks_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:NoteBooks_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="NoteBooks_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:NoteBooks_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:BooksRating_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:BooksRating_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:BooksRating_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:BooksRating_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_BookIdSoapIn">
+    <wsdl:part name="parameters" element="tns:BooksRating_LoadBy_BookId" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_BookIdSoapOut">
+    <wsdl:part name="parameters" element="tns:BooksRating_LoadBy_BookIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_UserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:BooksRating_LoadBy_UserId" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_UserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:BooksRating_LoadBy_UserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Countries_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Countries_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Countries_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Countries_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="States_LoadBy_CountryIdSoapIn">
+    <wsdl:part name="parameters" element="tns:States_LoadBy_CountryId" />
+  </wsdl:message>
+  <wsdl:message name="States_LoadBy_CountryIdSoapOut">
+    <wsdl:part name="parameters" element="tns:States_LoadBy_CountryIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Cities_LoadBy_StateIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Cities_LoadBy_StateId" />
+  </wsdl:message>
+  <wsdl:message name="Cities_LoadBy_StateIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Cities_LoadBy_StateIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="EntranceExam_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:EntranceExam_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="EntranceExam_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:EntranceExam_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExamStream_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:ExamStream_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="ExamStream_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:ExamStream_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Subjects_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Subjects_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Streams_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Streams_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Streams_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Streams_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Chapters_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Chapters_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Chapters_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Chapters_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Colleges_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Colleges_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Colleges_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Colleges_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Categories_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Categories_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Categories_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Categories_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Topics_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Topics_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="Topics_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Topics_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Masters_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Masters_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="Masters_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:Masters_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Subjects_LoadById" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Subjects_LoadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByStreamIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Subjects_LoadByStreamId" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByStreamIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Subjects_LoadByStreamIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Chapter_LoadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Chapter_LoadById" />
+  </wsdl:message>
+  <wsdl:message name="Chapter_LoadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Chapter_LoadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Institute_LoadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Institute_LoadById" />
+  </wsdl:message>
+  <wsdl:message name="Institute_LoadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Institute_LoadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Stream_LoadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Stream_LoadById" />
+  </wsdl:message>
+  <wsdl:message name="Stream_LoadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Stream_LoadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="StreamsLoadByCategoryIDSoapIn">
+    <wsdl:part name="parameters" element="tns:StreamsLoadByCategoryID" />
+  </wsdl:message>
+  <wsdl:message name="StreamsLoadByCategoryIDSoapOut">
+    <wsdl:part name="parameters" element="tns:StreamsLoadByCategoryIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Category_LoadByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Category_LoadById" />
+  </wsdl:message>
+  <wsdl:message name="Category_LoadByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Category_LoadByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:InvitationList_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:InvitationList_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_LoadBy_UserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:InvitationList_LoadBy_UserId" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_LoadBy_UserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:InvitationList_LoadBy_UserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Pages_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Pages_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="Pages_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:Pages_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_BookIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Pages_LoadBy_BookId" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_BookIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Pages_LoadBy_BookIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_IdSoapIn">
+    <wsdl:part name="parameters" element="tns:Pages_LoadBy_Id" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_IdSoapOut">
+    <wsdl:part name="parameters" element="tns:Pages_LoadBy_IdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Questions_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Questions_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="Questions_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:Questions_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_PageIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Questions_LoadBy_PageId" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_PageIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Questions_LoadBy_PageIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_IdSoapIn">
+    <wsdl:part name="parameters" element="tns:Questions_LoadBy_Id" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_IdSoapOut">
+    <wsdl:part name="parameters" element="tns:Questions_LoadBy_IdResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_InsertUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_InsertUpdate" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_InsertUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_InsertUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ForgotPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_ForgotPassword" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ForgotPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_ForgotPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ResetPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_ResetPassword" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ResetPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_ResetPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoadBy_IdSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_LoadBy_Id" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoadBy_IdSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_LoadBy_IdResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoadAllSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_LoadAll" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoadAllSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_LoadAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:UsersInfo_Login" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:UsersInfo_LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="NotificationByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:NotificationByUserId" />
+  </wsdl:message>
+  <wsdl:message name="NotificationByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:NotificationByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetLoginStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:SetLoginStatus" />
+  </wsdl:message>
+  <wsdl:message name="SetLoginStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:SetLoginStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchBooksByUsertextSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchBooksByUsertext" />
+  </wsdl:message>
+  <wsdl:message name="SearchBooksByUsertextSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchBooksByUsertextResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchBookByCatStrInsSubSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchBookByCatStrInsSub" />
+  </wsdl:message>
+  <wsdl:message name="SearchBookByCatStrInsSubSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchBookByCatStrInsSubResponse" />
+  </wsdl:message>
+  <wsdl:message name="Message_LoadByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:Message_LoadByUserId" />
+  </wsdl:message>
+  <wsdl:message name="Message_LoadByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:Message_LoadByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="FriendList_LoadByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:FriendList_LoadByUserId" />
+  </wsdl:message>
+  <wsdl:message name="FriendList_LoadByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:FriendList_LoadByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="FriendRequestByUserIdSoapIn">
+    <wsdl:part name="parameters" element="tns:FriendRequestByUserId" />
+  </wsdl:message>
+  <wsdl:message name="FriendRequestByUserIdSoapOut">
+    <wsdl:part name="parameters" element="tns:FriendRequestByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFriendByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveFriendById" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFriendByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveFriendByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="Answers_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="QuestionId" type="s:string" />
+    <wsdl:part name="Answer" type="s:string" />
+    <wsdl:part name="AnswerImage" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_InsertUpdateHttpGetOut" />
+  <wsdl:message name="Answers_LoadAllHttpGetIn" />
+  <wsdl:message name="Answers_LoadAllHttpGetOut" />
+  <wsdl:message name="Answers_LoadBy_UserIdHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_UserIdHttpGetOut" />
+  <wsdl:message name="Answers_LoadBy_QuestionIdHttpGetIn">
+    <wsdl:part name="QuestionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_QuestionIdHttpGetOut" />
+  <wsdl:message name="Answers_Delete_By_IdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_Delete_By_IdHttpGetOut" />
+  <wsdl:message name="UsersInfo_Load_AllFriendsHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_Load_AllFriendsHttpGetOut" />
+  <wsdl:message name="InvitationList_UpdateStatusHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="requestStatus" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_UpdateStatusHttpGetOut" />
+  <wsdl:message name="Books_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="BookTitle" type="s:string" />
+    <wsdl:part name="CoverPageImage" type="s:string" />
+    <wsdl:part name="BackPageImage" type="s:string" />
+    <wsdl:part name="ExamStreamId" type="s:string" />
+    <wsdl:part name="EntranceExamId" type="s:string" />
+    <wsdl:part name="StudentName" type="s:string" />
+    <wsdl:part name="TeachersName" type="s:string" />
+    <wsdl:part name="TotalPages" type="s:string" />
+    <wsdl:part name="BookType" type="s:string" />
+    <wsdl:part name="SubjectId" type="s:string" />
+    <wsdl:part name="ChapterId" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_InsertUpdateHttpGetOut" />
+  <wsdl:message name="Books_LoadAllHttpGetIn">
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadAllHttpGetOut" />
+  <wsdl:message name="Books_LoadBy_IdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_IdHttpGetOut" />
+  <wsdl:message name="Books_LoadBy_UserIdHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_UserIdHttpGetOut" />
+  <wsdl:message name="Books_LoadBy_FilterHttpGetIn">
+    <wsdl:part name="CountryId" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="StreamId" type="s:string" />
+    <wsdl:part name="EntranceExamId" type="s:string" />
+    <wsdl:part name="SubjectId" type="s:string" />
+    <wsdl:part name="ChapterId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_FilterHttpGetOut" />
+  <wsdl:message name="Books_Delete_By_IdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_Delete_By_IdHttpGetOut" />
+  <wsdl:message name="NoteBooks_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="ChapterName" type="s:string" />
+    <wsdl:part name="SubjectName" type="s:string" />
+    <wsdl:part name="TeachersName" type="s:string" />
+    <wsdl:part name="CollegeName" type="s:string" />
+    <wsdl:part name="CategoryName" type="s:string" />
+    <wsdl:part name="StreamName" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="BookType" type="s:string" />
+    <wsdl:part name="CardHolderName" type="s:string" />
+    <wsdl:part name="CardNumber" type="s:string" />
+    <wsdl:part name="ExpiryDate" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NoteBooks_InsertUpdateHttpGetOut" />
+  <wsdl:message name="BooksRating_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="BookId" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="Rate" type="s:string" />
+    <wsdl:part name="Comment" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_InsertUpdateHttpGetOut" />
+  <wsdl:message name="BooksRating_LoadAllHttpGetIn" />
+  <wsdl:message name="BooksRating_LoadAllHttpGetOut" />
+  <wsdl:message name="BooksRating_LoadBy_BookIdHttpGetIn">
+    <wsdl:part name="BookId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_BookIdHttpGetOut" />
+  <wsdl:message name="BooksRating_LoadBy_UserIdHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_UserIdHttpGetOut" />
+  <wsdl:message name="Countries_LoadAllHttpGetIn" />
+  <wsdl:message name="Countries_LoadAllHttpGetOut" />
+  <wsdl:message name="States_LoadBy_CountryIdHttpGetIn">
+    <wsdl:part name="CountryId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="States_LoadBy_CountryIdHttpGetOut" />
+  <wsdl:message name="Cities_LoadBy_StateIdHttpGetIn">
+    <wsdl:part name="StateId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Cities_LoadBy_StateIdHttpGetOut" />
+  <wsdl:message name="EntranceExam_LoadAllHttpGetIn" />
+  <wsdl:message name="EntranceExam_LoadAllHttpGetOut" />
+  <wsdl:message name="ExamStream_LoadAllHttpGetIn" />
+  <wsdl:message name="ExamStream_LoadAllHttpGetOut" />
+  <wsdl:message name="Subjects_LoadAllHttpGetIn" />
+  <wsdl:message name="Subjects_LoadAllHttpGetOut" />
+  <wsdl:message name="Streams_LoadAllHttpGetIn" />
+  <wsdl:message name="Streams_LoadAllHttpGetOut" />
+  <wsdl:message name="Chapters_LoadAllHttpGetIn" />
+  <wsdl:message name="Chapters_LoadAllHttpGetOut" />
+  <wsdl:message name="Colleges_LoadAllHttpGetIn" />
+  <wsdl:message name="Colleges_LoadAllHttpGetOut" />
+  <wsdl:message name="Categories_LoadAllHttpGetIn" />
+  <wsdl:message name="Categories_LoadAllHttpGetOut" />
+  <wsdl:message name="Topics_LoadAllHttpGetIn" />
+  <wsdl:message name="Topics_LoadAllHttpGetOut" />
+  <wsdl:message name="Masters_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="Name" type="s:string" />
+    <wsdl:part name="Type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Masters_InsertUpdateHttpGetOut" />
+  <wsdl:message name="Subjects_LoadByIdHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByIdHttpGetOut" />
+  <wsdl:message name="Subjects_LoadByStreamIdHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByStreamIdHttpGetOut" />
+  <wsdl:message name="Chapter_LoadByIdHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Chapter_LoadByIdHttpGetOut" />
+  <wsdl:message name="Institute_LoadByIdHttpGetIn">
+    <wsdl:part name="streamId" type="s:string" />
+    <wsdl:part name="categoryId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Institute_LoadByIdHttpGetOut" />
+  <wsdl:message name="Stream_LoadByIdHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Stream_LoadByIdHttpGetOut" />
+  <wsdl:message name="StreamsLoadByCategoryIDHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StreamsLoadByCategoryIDHttpGetOut" />
+  <wsdl:message name="Category_LoadByIdHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Category_LoadByIdHttpGetOut" />
+  <wsdl:message name="InvitationList_InsertUpdateHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="InvitedUserId" type="s:string" />
+    <wsdl:part name="pageId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_InsertUpdateHttpGetOut" />
+  <wsdl:message name="InvitationList_LoadBy_UserIdHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_LoadBy_UserIdHttpGetOut" />
+  <wsdl:message name="Pages_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="BookId" type="s:string" />
+    <wsdl:part name="PageImage" type="s:string" />
+    <wsdl:part name="PageTitle" type="s:string" />
+    <wsdl:part name="DisplayOrder" type="s:string" />
+    <wsdl:part name="ChapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Pages_InsertUpdateHttpGetOut" />
+  <wsdl:message name="Pages_LoadBy_BookIdHttpGetIn">
+    <wsdl:part name="BookId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_BookIdHttpGetOut" />
+  <wsdl:message name="Pages_LoadBy_IdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_IdHttpGetOut" />
+  <wsdl:message name="Questions_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="PageId" type="s:string" />
+    <wsdl:part name="QuestionTitle" type="s:string" />
+    <wsdl:part name="QuestionImage" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Questions_InsertUpdateHttpGetOut" />
+  <wsdl:message name="Questions_LoadBy_PageIdHttpGetIn">
+    <wsdl:part name="PageId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_PageIdHttpGetOut" />
+  <wsdl:message name="Questions_LoadBy_IdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_IdHttpGetOut" />
+  <wsdl:message name="UsersInfo_InsertUpdateHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="UserRole" type="s:string" />
+    <wsdl:part name="StudentName" type="s:string" />
+    <wsdl:part name="ProfileImage" type="s:string" />
+    <wsdl:part name="TeachersName" type="s:string" />
+    <wsdl:part name="ChapterId" type="s:string" />
+    <wsdl:part name="SubjectId" type="s:string" />
+    <wsdl:part name="CollegeId" type="s:string" />
+    <wsdl:part name="TopicId" type="s:string" />
+    <wsdl:part name="EntranceExamId" type="s:string" />
+    <wsdl:part name="ExamStreamId" type="s:string" />
+    <wsdl:part name="StreamId" type="s:string" />
+    <wsdl:part name="CategoryId" type="s:string" />
+    <wsdl:part name="CountryId" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="CityId" type="s:string" />
+    <wsdl:part name="NoteBooksFrontCoverImage" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="ATMNumber" type="s:string" />
+    <wsdl:part name="NameOnATMCard" type="s:string" />
+    <wsdl:part name="MobileNumber" type="s:string" />
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="IsActive" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_InsertUpdateHttpGetOut" />
+  <wsdl:message name="UsersInfo_ForgotPasswordHttpGetIn">
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="PasswordResetToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ForgotPasswordHttpGetOut" />
+  <wsdl:message name="UsersInfo_ResetPasswordHttpGetIn">
+    <wsdl:part name="PasswordResetToken" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ResetPasswordHttpGetOut" />
+  <wsdl:message name="UsersInfo_LoadBy_IdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoadBy_IdHttpGetOut" />
+  <wsdl:message name="UsersInfo_LoadAllHttpGetIn" />
+  <wsdl:message name="UsersInfo_LoadAllHttpGetOut" />
+  <wsdl:message name="UsersInfo_LoginHttpGetIn">
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoginHttpGetOut" />
+  <wsdl:message name="NotificationByUserIdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NotificationByUserIdHttpGetOut" />
+  <wsdl:message name="SetLoginStatusHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetLoginStatusHttpGetOut" />
+  <wsdl:message name="SearchBooksByUsertextHttpGetIn">
+    <wsdl:part name="Text" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchBooksByUsertextHttpGetOut" />
+  <wsdl:message name="SearchBookByCatStrInsSubHttpGetIn">
+    <wsdl:part name="CategoryID" type="s:string" />
+    <wsdl:part name="StreamID" type="s:string" />
+    <wsdl:part name="InstituteID" type="s:string" />
+    <wsdl:part name="SubjectID" type="s:string" />
+    <wsdl:part name="PageNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchBookByCatStrInsSubHttpGetOut" />
+  <wsdl:message name="Message_LoadByUserIdHttpGetIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Message_LoadByUserIdHttpGetOut" />
+  <wsdl:message name="FriendList_LoadByUserIdHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FriendList_LoadByUserIdHttpGetOut" />
+  <wsdl:message name="FriendRequestByUserIdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FriendRequestByUserIdHttpGetOut" />
+  <wsdl:message name="RemoveFriendByIdHttpGetIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFriendByIdHttpGetOut" />
+  <wsdl:message name="Answers_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="QuestionId" type="s:string" />
+    <wsdl:part name="Answer" type="s:string" />
+    <wsdl:part name="AnswerImage" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_InsertUpdateHttpPostOut" />
+  <wsdl:message name="Answers_LoadAllHttpPostIn" />
+  <wsdl:message name="Answers_LoadAllHttpPostOut" />
+  <wsdl:message name="Answers_LoadBy_UserIdHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_UserIdHttpPostOut" />
+  <wsdl:message name="Answers_LoadBy_QuestionIdHttpPostIn">
+    <wsdl:part name="QuestionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_LoadBy_QuestionIdHttpPostOut" />
+  <wsdl:message name="Answers_Delete_By_IdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Answers_Delete_By_IdHttpPostOut" />
+  <wsdl:message name="UsersInfo_Load_AllFriendsHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_Load_AllFriendsHttpPostOut" />
+  <wsdl:message name="InvitationList_UpdateStatusHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="requestStatus" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_UpdateStatusHttpPostOut" />
+  <wsdl:message name="Books_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="BookTitle" type="s:string" />
+    <wsdl:part name="CoverPageImage" type="s:string" />
+    <wsdl:part name="BackPageImage" type="s:string" />
+    <wsdl:part name="ExamStreamId" type="s:string" />
+    <wsdl:part name="EntranceExamId" type="s:string" />
+    <wsdl:part name="StudentName" type="s:string" />
+    <wsdl:part name="TeachersName" type="s:string" />
+    <wsdl:part name="TotalPages" type="s:string" />
+    <wsdl:part name="BookType" type="s:string" />
+    <wsdl:part name="SubjectId" type="s:string" />
+    <wsdl:part name="ChapterId" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_InsertUpdateHttpPostOut" />
+  <wsdl:message name="Books_LoadAllHttpPostIn">
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadAllHttpPostOut" />
+  <wsdl:message name="Books_LoadBy_IdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_IdHttpPostOut" />
+  <wsdl:message name="Books_LoadBy_UserIdHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_UserIdHttpPostOut" />
+  <wsdl:message name="Books_LoadBy_FilterHttpPostIn">
+    <wsdl:part name="CountryId" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="StreamId" type="s:string" />
+    <wsdl:part name="EntranceExamId" type="s:string" />
+    <wsdl:part name="SubjectId" type="s:string" />
+    <wsdl:part name="ChapterId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_LoadBy_FilterHttpPostOut" />
+  <wsdl:message name="Books_Delete_By_IdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Books_Delete_By_IdHttpPostOut" />
+  <wsdl:message name="NoteBooks_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="ChapterName" type="s:string" />
+    <wsdl:part name="SubjectName" type="s:string" />
+    <wsdl:part name="TeachersName" type="s:string" />
+    <wsdl:part name="CollegeName" type="s:string" />
+    <wsdl:part name="CategoryName" type="s:string" />
+    <wsdl:part name="StreamName" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="BookType" type="s:string" />
+    <wsdl:part name="CardHolderName" type="s:string" />
+    <wsdl:part name="CardNumber" type="s:string" />
+    <wsdl:part name="ExpiryDate" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NoteBooks_InsertUpdateHttpPostOut" />
+  <wsdl:message name="BooksRating_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="BookId" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="Rate" type="s:string" />
+    <wsdl:part name="Comment" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_InsertUpdateHttpPostOut" />
+  <wsdl:message name="BooksRating_LoadAllHttpPostIn" />
+  <wsdl:message name="BooksRating_LoadAllHttpPostOut" />
+  <wsdl:message name="BooksRating_LoadBy_BookIdHttpPostIn">
+    <wsdl:part name="BookId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_BookIdHttpPostOut" />
+  <wsdl:message name="BooksRating_LoadBy_UserIdHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BooksRating_LoadBy_UserIdHttpPostOut" />
+  <wsdl:message name="Countries_LoadAllHttpPostIn" />
+  <wsdl:message name="Countries_LoadAllHttpPostOut" />
+  <wsdl:message name="States_LoadBy_CountryIdHttpPostIn">
+    <wsdl:part name="CountryId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="States_LoadBy_CountryIdHttpPostOut" />
+  <wsdl:message name="Cities_LoadBy_StateIdHttpPostIn">
+    <wsdl:part name="StateId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Cities_LoadBy_StateIdHttpPostOut" />
+  <wsdl:message name="EntranceExam_LoadAllHttpPostIn" />
+  <wsdl:message name="EntranceExam_LoadAllHttpPostOut" />
+  <wsdl:message name="ExamStream_LoadAllHttpPostIn" />
+  <wsdl:message name="ExamStream_LoadAllHttpPostOut" />
+  <wsdl:message name="Subjects_LoadAllHttpPostIn" />
+  <wsdl:message name="Subjects_LoadAllHttpPostOut" />
+  <wsdl:message name="Streams_LoadAllHttpPostIn" />
+  <wsdl:message name="Streams_LoadAllHttpPostOut" />
+  <wsdl:message name="Chapters_LoadAllHttpPostIn" />
+  <wsdl:message name="Chapters_LoadAllHttpPostOut" />
+  <wsdl:message name="Colleges_LoadAllHttpPostIn" />
+  <wsdl:message name="Colleges_LoadAllHttpPostOut" />
+  <wsdl:message name="Categories_LoadAllHttpPostIn" />
+  <wsdl:message name="Categories_LoadAllHttpPostOut" />
+  <wsdl:message name="Topics_LoadAllHttpPostIn" />
+  <wsdl:message name="Topics_LoadAllHttpPostOut" />
+  <wsdl:message name="Masters_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="Name" type="s:string" />
+    <wsdl:part name="Type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Masters_InsertUpdateHttpPostOut" />
+  <wsdl:message name="Subjects_LoadByIdHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByIdHttpPostOut" />
+  <wsdl:message name="Subjects_LoadByStreamIdHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Subjects_LoadByStreamIdHttpPostOut" />
+  <wsdl:message name="Chapter_LoadByIdHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Chapter_LoadByIdHttpPostOut" />
+  <wsdl:message name="Institute_LoadByIdHttpPostIn">
+    <wsdl:part name="streamId" type="s:string" />
+    <wsdl:part name="categoryId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Institute_LoadByIdHttpPostOut" />
+  <wsdl:message name="Stream_LoadByIdHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Stream_LoadByIdHttpPostOut" />
+  <wsdl:message name="StreamsLoadByCategoryIDHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="StreamsLoadByCategoryIDHttpPostOut" />
+  <wsdl:message name="Category_LoadByIdHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Category_LoadByIdHttpPostOut" />
+  <wsdl:message name="InvitationList_InsertUpdateHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="InvitedUserId" type="s:string" />
+    <wsdl:part name="pageId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_InsertUpdateHttpPostOut" />
+  <wsdl:message name="InvitationList_LoadBy_UserIdHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InvitationList_LoadBy_UserIdHttpPostOut" />
+  <wsdl:message name="Pages_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="BookId" type="s:string" />
+    <wsdl:part name="PageImage" type="s:string" />
+    <wsdl:part name="PageTitle" type="s:string" />
+    <wsdl:part name="DisplayOrder" type="s:string" />
+    <wsdl:part name="ChapterName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Pages_InsertUpdateHttpPostOut" />
+  <wsdl:message name="Pages_LoadBy_BookIdHttpPostIn">
+    <wsdl:part name="BookId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_BookIdHttpPostOut" />
+  <wsdl:message name="Pages_LoadBy_IdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Pages_LoadBy_IdHttpPostOut" />
+  <wsdl:message name="Questions_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="PageId" type="s:string" />
+    <wsdl:part name="QuestionTitle" type="s:string" />
+    <wsdl:part name="QuestionImage" type="s:string" />
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Questions_InsertUpdateHttpPostOut" />
+  <wsdl:message name="Questions_LoadBy_PageIdHttpPostIn">
+    <wsdl:part name="PageId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_PageIdHttpPostOut" />
+  <wsdl:message name="Questions_LoadBy_IdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Questions_LoadBy_IdHttpPostOut" />
+  <wsdl:message name="UsersInfo_InsertUpdateHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="UserRole" type="s:string" />
+    <wsdl:part name="StudentName" type="s:string" />
+    <wsdl:part name="ProfileImage" type="s:string" />
+    <wsdl:part name="TeachersName" type="s:string" />
+    <wsdl:part name="ChapterId" type="s:string" />
+    <wsdl:part name="SubjectId" type="s:string" />
+    <wsdl:part name="CollegeId" type="s:string" />
+    <wsdl:part name="TopicId" type="s:string" />
+    <wsdl:part name="EntranceExamId" type="s:string" />
+    <wsdl:part name="ExamStreamId" type="s:string" />
+    <wsdl:part name="StreamId" type="s:string" />
+    <wsdl:part name="CategoryId" type="s:string" />
+    <wsdl:part name="CountryId" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="CityId" type="s:string" />
+    <wsdl:part name="NoteBooksFrontCoverImage" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="ATMNumber" type="s:string" />
+    <wsdl:part name="NameOnATMCard" type="s:string" />
+    <wsdl:part name="MobileNumber" type="s:string" />
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="IsActive" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_InsertUpdateHttpPostOut" />
+  <wsdl:message name="UsersInfo_ForgotPasswordHttpPostIn">
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="PasswordResetToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ForgotPasswordHttpPostOut" />
+  <wsdl:message name="UsersInfo_ResetPasswordHttpPostIn">
+    <wsdl:part name="PasswordResetToken" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_ResetPasswordHttpPostOut" />
+  <wsdl:message name="UsersInfo_LoadBy_IdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoadBy_IdHttpPostOut" />
+  <wsdl:message name="UsersInfo_LoadAllHttpPostIn" />
+  <wsdl:message name="UsersInfo_LoadAllHttpPostOut" />
+  <wsdl:message name="UsersInfo_LoginHttpPostIn">
+    <wsdl:part name="EmailId" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UsersInfo_LoginHttpPostOut" />
+  <wsdl:message name="NotificationByUserIdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="NotificationByUserIdHttpPostOut" />
+  <wsdl:message name="SetLoginStatusHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetLoginStatusHttpPostOut" />
+  <wsdl:message name="SearchBooksByUsertextHttpPostIn">
+    <wsdl:part name="Text" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchBooksByUsertextHttpPostOut" />
+  <wsdl:message name="SearchBookByCatStrInsSubHttpPostIn">
+    <wsdl:part name="CategoryID" type="s:string" />
+    <wsdl:part name="StreamID" type="s:string" />
+    <wsdl:part name="InstituteID" type="s:string" />
+    <wsdl:part name="SubjectID" type="s:string" />
+    <wsdl:part name="PageNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchBookByCatStrInsSubHttpPostOut" />
+  <wsdl:message name="Message_LoadByUserIdHttpPostIn">
+    <wsdl:part name="UserId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Message_LoadByUserIdHttpPostOut" />
+  <wsdl:message name="FriendList_LoadByUserIdHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FriendList_LoadByUserIdHttpPostOut" />
+  <wsdl:message name="FriendRequestByUserIdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+    <wsdl:part name="offset" type="s:string" />
+    <wsdl:part name="limit" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FriendRequestByUserIdHttpPostOut" />
+  <wsdl:message name="RemoveFriendByIdHttpPostIn">
+    <wsdl:part name="Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveFriendByIdHttpPostOut" />
+  <wsdl:portType name="BooksServiceSoap">
+    <wsdl:operation name="Answers_InsertUpdate">
+      <wsdl:input message="tns:Answers_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:Answers_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <wsdl:input message="tns:Answers_LoadAllSoapIn" />
+      <wsdl:output message="tns:Answers_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <wsdl:input message="tns:Answers_LoadBy_UserIdSoapIn" />
+      <wsdl:output message="tns:Answers_LoadBy_UserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <wsdl:input message="tns:Answers_LoadBy_QuestionIdSoapIn" />
+      <wsdl:output message="tns:Answers_LoadBy_QuestionIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <wsdl:input message="tns:Answers_Delete_By_IdSoapIn" />
+      <wsdl:output message="tns:Answers_Delete_By_IdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <wsdl:input message="tns:UsersInfo_Load_AllFriendsSoapIn" />
+      <wsdl:output message="tns:UsersInfo_Load_AllFriendsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <wsdl:input message="tns:InvitationList_UpdateStatusSoapIn" />
+      <wsdl:output message="tns:InvitationList_UpdateStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <wsdl:input message="tns:Books_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:Books_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <wsdl:input message="tns:Books_LoadAllSoapIn" />
+      <wsdl:output message="tns:Books_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <wsdl:input message="tns:Books_LoadBy_IdSoapIn" />
+      <wsdl:output message="tns:Books_LoadBy_IdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <wsdl:input message="tns:Books_LoadBy_UserIdSoapIn" />
+      <wsdl:output message="tns:Books_LoadBy_UserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <wsdl:input message="tns:Books_LoadBy_FilterSoapIn" />
+      <wsdl:output message="tns:Books_LoadBy_FilterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <wsdl:input message="tns:Books_Delete_By_IdSoapIn" />
+      <wsdl:output message="tns:Books_Delete_By_IdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <wsdl:input message="tns:NoteBooks_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:NoteBooks_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <wsdl:input message="tns:BooksRating_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:BooksRating_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <wsdl:input message="tns:BooksRating_LoadAllSoapIn" />
+      <wsdl:output message="tns:BooksRating_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <wsdl:input message="tns:BooksRating_LoadBy_BookIdSoapIn" />
+      <wsdl:output message="tns:BooksRating_LoadBy_BookIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <wsdl:input message="tns:BooksRating_LoadBy_UserIdSoapIn" />
+      <wsdl:output message="tns:BooksRating_LoadBy_UserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <wsdl:input message="tns:Countries_LoadAllSoapIn" />
+      <wsdl:output message="tns:Countries_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <wsdl:input message="tns:States_LoadBy_CountryIdSoapIn" />
+      <wsdl:output message="tns:States_LoadBy_CountryIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <wsdl:input message="tns:Cities_LoadBy_StateIdSoapIn" />
+      <wsdl:output message="tns:Cities_LoadBy_StateIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <wsdl:input message="tns:EntranceExam_LoadAllSoapIn" />
+      <wsdl:output message="tns:EntranceExam_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <wsdl:input message="tns:ExamStream_LoadAllSoapIn" />
+      <wsdl:output message="tns:ExamStream_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <wsdl:input message="tns:Subjects_LoadAllSoapIn" />
+      <wsdl:output message="tns:Subjects_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <wsdl:input message="tns:Streams_LoadAllSoapIn" />
+      <wsdl:output message="tns:Streams_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <wsdl:input message="tns:Chapters_LoadAllSoapIn" />
+      <wsdl:output message="tns:Chapters_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <wsdl:input message="tns:Colleges_LoadAllSoapIn" />
+      <wsdl:output message="tns:Colleges_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <wsdl:input message="tns:Categories_LoadAllSoapIn" />
+      <wsdl:output message="tns:Categories_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <wsdl:input message="tns:Topics_LoadAllSoapIn" />
+      <wsdl:output message="tns:Topics_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <wsdl:input message="tns:Masters_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:Masters_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <wsdl:input message="tns:Subjects_LoadByIdSoapIn" />
+      <wsdl:output message="tns:Subjects_LoadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <wsdl:input message="tns:Subjects_LoadByStreamIdSoapIn" />
+      <wsdl:output message="tns:Subjects_LoadByStreamIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <wsdl:input message="tns:Chapter_LoadByIdSoapIn" />
+      <wsdl:output message="tns:Chapter_LoadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <wsdl:input message="tns:Institute_LoadByIdSoapIn" />
+      <wsdl:output message="tns:Institute_LoadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <wsdl:input message="tns:Stream_LoadByIdSoapIn" />
+      <wsdl:output message="tns:Stream_LoadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <wsdl:input message="tns:StreamsLoadByCategoryIDSoapIn" />
+      <wsdl:output message="tns:StreamsLoadByCategoryIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <wsdl:input message="tns:Category_LoadByIdSoapIn" />
+      <wsdl:output message="tns:Category_LoadByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <wsdl:input message="tns:InvitationList_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:InvitationList_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <wsdl:input message="tns:InvitationList_LoadBy_UserIdSoapIn" />
+      <wsdl:output message="tns:InvitationList_LoadBy_UserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <wsdl:input message="tns:Pages_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:Pages_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <wsdl:input message="tns:Pages_LoadBy_BookIdSoapIn" />
+      <wsdl:output message="tns:Pages_LoadBy_BookIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <wsdl:input message="tns:Pages_LoadBy_IdSoapIn" />
+      <wsdl:output message="tns:Pages_LoadBy_IdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <wsdl:input message="tns:Questions_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:Questions_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <wsdl:input message="tns:Questions_LoadBy_PageIdSoapIn" />
+      <wsdl:output message="tns:Questions_LoadBy_PageIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <wsdl:input message="tns:Questions_LoadBy_IdSoapIn" />
+      <wsdl:output message="tns:Questions_LoadBy_IdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <wsdl:input message="tns:UsersInfo_InsertUpdateSoapIn" />
+      <wsdl:output message="tns:UsersInfo_InsertUpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <wsdl:input message="tns:UsersInfo_ForgotPasswordSoapIn" />
+      <wsdl:output message="tns:UsersInfo_ForgotPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <wsdl:input message="tns:UsersInfo_ResetPasswordSoapIn" />
+      <wsdl:output message="tns:UsersInfo_ResetPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <wsdl:input message="tns:UsersInfo_LoadBy_IdSoapIn" />
+      <wsdl:output message="tns:UsersInfo_LoadBy_IdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <wsdl:input message="tns:UsersInfo_LoadAllSoapIn" />
+      <wsdl:output message="tns:UsersInfo_LoadAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <wsdl:input message="tns:UsersInfo_LoginSoapIn" />
+      <wsdl:output message="tns:UsersInfo_LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <wsdl:input message="tns:NotificationByUserIdSoapIn" />
+      <wsdl:output message="tns:NotificationByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <wsdl:input message="tns:SetLoginStatusSoapIn" />
+      <wsdl:output message="tns:SetLoginStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <wsdl:input message="tns:SearchBooksByUsertextSoapIn" />
+      <wsdl:output message="tns:SearchBooksByUsertextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <wsdl:input message="tns:SearchBookByCatStrInsSubSoapIn" />
+      <wsdl:output message="tns:SearchBookByCatStrInsSubSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <wsdl:input message="tns:Message_LoadByUserIdSoapIn" />
+      <wsdl:output message="tns:Message_LoadByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <wsdl:input message="tns:FriendList_LoadByUserIdSoapIn" />
+      <wsdl:output message="tns:FriendList_LoadByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <wsdl:input message="tns:FriendRequestByUserIdSoapIn" />
+      <wsdl:output message="tns:FriendRequestByUserIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <wsdl:input message="tns:RemoveFriendByIdSoapIn" />
+      <wsdl:output message="tns:RemoveFriendByIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BooksServiceHttpGet">
+    <wsdl:operation name="Answers_InsertUpdate">
+      <wsdl:input message="tns:Answers_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:Answers_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <wsdl:input message="tns:Answers_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Answers_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <wsdl:input message="tns:Answers_LoadBy_UserIdHttpGetIn" />
+      <wsdl:output message="tns:Answers_LoadBy_UserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <wsdl:input message="tns:Answers_LoadBy_QuestionIdHttpGetIn" />
+      <wsdl:output message="tns:Answers_LoadBy_QuestionIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <wsdl:input message="tns:Answers_Delete_By_IdHttpGetIn" />
+      <wsdl:output message="tns:Answers_Delete_By_IdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <wsdl:input message="tns:UsersInfo_Load_AllFriendsHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_Load_AllFriendsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <wsdl:input message="tns:InvitationList_UpdateStatusHttpGetIn" />
+      <wsdl:output message="tns:InvitationList_UpdateStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <wsdl:input message="tns:Books_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:Books_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <wsdl:input message="tns:Books_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Books_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <wsdl:input message="tns:Books_LoadBy_IdHttpGetIn" />
+      <wsdl:output message="tns:Books_LoadBy_IdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <wsdl:input message="tns:Books_LoadBy_UserIdHttpGetIn" />
+      <wsdl:output message="tns:Books_LoadBy_UserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <wsdl:input message="tns:Books_LoadBy_FilterHttpGetIn" />
+      <wsdl:output message="tns:Books_LoadBy_FilterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <wsdl:input message="tns:Books_Delete_By_IdHttpGetIn" />
+      <wsdl:output message="tns:Books_Delete_By_IdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <wsdl:input message="tns:NoteBooks_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:NoteBooks_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <wsdl:input message="tns:BooksRating_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:BooksRating_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <wsdl:input message="tns:BooksRating_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:BooksRating_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <wsdl:input message="tns:BooksRating_LoadBy_BookIdHttpGetIn" />
+      <wsdl:output message="tns:BooksRating_LoadBy_BookIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <wsdl:input message="tns:BooksRating_LoadBy_UserIdHttpGetIn" />
+      <wsdl:output message="tns:BooksRating_LoadBy_UserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <wsdl:input message="tns:Countries_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Countries_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <wsdl:input message="tns:States_LoadBy_CountryIdHttpGetIn" />
+      <wsdl:output message="tns:States_LoadBy_CountryIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <wsdl:input message="tns:Cities_LoadBy_StateIdHttpGetIn" />
+      <wsdl:output message="tns:Cities_LoadBy_StateIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <wsdl:input message="tns:EntranceExam_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:EntranceExam_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <wsdl:input message="tns:ExamStream_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:ExamStream_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <wsdl:input message="tns:Subjects_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Subjects_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <wsdl:input message="tns:Streams_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Streams_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <wsdl:input message="tns:Chapters_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Chapters_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <wsdl:input message="tns:Colleges_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Colleges_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <wsdl:input message="tns:Categories_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Categories_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <wsdl:input message="tns:Topics_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:Topics_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <wsdl:input message="tns:Masters_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:Masters_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <wsdl:input message="tns:Subjects_LoadByIdHttpGetIn" />
+      <wsdl:output message="tns:Subjects_LoadByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <wsdl:input message="tns:Subjects_LoadByStreamIdHttpGetIn" />
+      <wsdl:output message="tns:Subjects_LoadByStreamIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <wsdl:input message="tns:Chapter_LoadByIdHttpGetIn" />
+      <wsdl:output message="tns:Chapter_LoadByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <wsdl:input message="tns:Institute_LoadByIdHttpGetIn" />
+      <wsdl:output message="tns:Institute_LoadByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <wsdl:input message="tns:Stream_LoadByIdHttpGetIn" />
+      <wsdl:output message="tns:Stream_LoadByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <wsdl:input message="tns:StreamsLoadByCategoryIDHttpGetIn" />
+      <wsdl:output message="tns:StreamsLoadByCategoryIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <wsdl:input message="tns:Category_LoadByIdHttpGetIn" />
+      <wsdl:output message="tns:Category_LoadByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <wsdl:input message="tns:InvitationList_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:InvitationList_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <wsdl:input message="tns:InvitationList_LoadBy_UserIdHttpGetIn" />
+      <wsdl:output message="tns:InvitationList_LoadBy_UserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <wsdl:input message="tns:Pages_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:Pages_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <wsdl:input message="tns:Pages_LoadBy_BookIdHttpGetIn" />
+      <wsdl:output message="tns:Pages_LoadBy_BookIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <wsdl:input message="tns:Pages_LoadBy_IdHttpGetIn" />
+      <wsdl:output message="tns:Pages_LoadBy_IdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <wsdl:input message="tns:Questions_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:Questions_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <wsdl:input message="tns:Questions_LoadBy_PageIdHttpGetIn" />
+      <wsdl:output message="tns:Questions_LoadBy_PageIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <wsdl:input message="tns:Questions_LoadBy_IdHttpGetIn" />
+      <wsdl:output message="tns:Questions_LoadBy_IdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <wsdl:input message="tns:UsersInfo_InsertUpdateHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_InsertUpdateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <wsdl:input message="tns:UsersInfo_ForgotPasswordHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_ForgotPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <wsdl:input message="tns:UsersInfo_ResetPasswordHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_ResetPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <wsdl:input message="tns:UsersInfo_LoadBy_IdHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_LoadBy_IdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <wsdl:input message="tns:UsersInfo_LoadAllHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_LoadAllHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <wsdl:input message="tns:UsersInfo_LoginHttpGetIn" />
+      <wsdl:output message="tns:UsersInfo_LoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <wsdl:input message="tns:NotificationByUserIdHttpGetIn" />
+      <wsdl:output message="tns:NotificationByUserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <wsdl:input message="tns:SetLoginStatusHttpGetIn" />
+      <wsdl:output message="tns:SetLoginStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <wsdl:input message="tns:SearchBooksByUsertextHttpGetIn" />
+      <wsdl:output message="tns:SearchBooksByUsertextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <wsdl:input message="tns:SearchBookByCatStrInsSubHttpGetIn" />
+      <wsdl:output message="tns:SearchBookByCatStrInsSubHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <wsdl:input message="tns:Message_LoadByUserIdHttpGetIn" />
+      <wsdl:output message="tns:Message_LoadByUserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <wsdl:input message="tns:FriendList_LoadByUserIdHttpGetIn" />
+      <wsdl:output message="tns:FriendList_LoadByUserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <wsdl:input message="tns:FriendRequestByUserIdHttpGetIn" />
+      <wsdl:output message="tns:FriendRequestByUserIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <wsdl:input message="tns:RemoveFriendByIdHttpGetIn" />
+      <wsdl:output message="tns:RemoveFriendByIdHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BooksServiceHttpPost">
+    <wsdl:operation name="Answers_InsertUpdate">
+      <wsdl:input message="tns:Answers_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:Answers_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <wsdl:input message="tns:Answers_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Answers_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <wsdl:input message="tns:Answers_LoadBy_UserIdHttpPostIn" />
+      <wsdl:output message="tns:Answers_LoadBy_UserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <wsdl:input message="tns:Answers_LoadBy_QuestionIdHttpPostIn" />
+      <wsdl:output message="tns:Answers_LoadBy_QuestionIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <wsdl:input message="tns:Answers_Delete_By_IdHttpPostIn" />
+      <wsdl:output message="tns:Answers_Delete_By_IdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <wsdl:input message="tns:UsersInfo_Load_AllFriendsHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_Load_AllFriendsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <wsdl:input message="tns:InvitationList_UpdateStatusHttpPostIn" />
+      <wsdl:output message="tns:InvitationList_UpdateStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <wsdl:input message="tns:Books_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:Books_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <wsdl:input message="tns:Books_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Books_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <wsdl:input message="tns:Books_LoadBy_IdHttpPostIn" />
+      <wsdl:output message="tns:Books_LoadBy_IdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <wsdl:input message="tns:Books_LoadBy_UserIdHttpPostIn" />
+      <wsdl:output message="tns:Books_LoadBy_UserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <wsdl:input message="tns:Books_LoadBy_FilterHttpPostIn" />
+      <wsdl:output message="tns:Books_LoadBy_FilterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <wsdl:input message="tns:Books_Delete_By_IdHttpPostIn" />
+      <wsdl:output message="tns:Books_Delete_By_IdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <wsdl:input message="tns:NoteBooks_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:NoteBooks_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <wsdl:input message="tns:BooksRating_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:BooksRating_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <wsdl:input message="tns:BooksRating_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:BooksRating_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <wsdl:input message="tns:BooksRating_LoadBy_BookIdHttpPostIn" />
+      <wsdl:output message="tns:BooksRating_LoadBy_BookIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <wsdl:input message="tns:BooksRating_LoadBy_UserIdHttpPostIn" />
+      <wsdl:output message="tns:BooksRating_LoadBy_UserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <wsdl:input message="tns:Countries_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Countries_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <wsdl:input message="tns:States_LoadBy_CountryIdHttpPostIn" />
+      <wsdl:output message="tns:States_LoadBy_CountryIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <wsdl:input message="tns:Cities_LoadBy_StateIdHttpPostIn" />
+      <wsdl:output message="tns:Cities_LoadBy_StateIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <wsdl:input message="tns:EntranceExam_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:EntranceExam_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <wsdl:input message="tns:ExamStream_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:ExamStream_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <wsdl:input message="tns:Subjects_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Subjects_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <wsdl:input message="tns:Streams_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Streams_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <wsdl:input message="tns:Chapters_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Chapters_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <wsdl:input message="tns:Colleges_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Colleges_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <wsdl:input message="tns:Categories_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Categories_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <wsdl:input message="tns:Topics_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:Topics_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <wsdl:input message="tns:Masters_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:Masters_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <wsdl:input message="tns:Subjects_LoadByIdHttpPostIn" />
+      <wsdl:output message="tns:Subjects_LoadByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <wsdl:input message="tns:Subjects_LoadByStreamIdHttpPostIn" />
+      <wsdl:output message="tns:Subjects_LoadByStreamIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <wsdl:input message="tns:Chapter_LoadByIdHttpPostIn" />
+      <wsdl:output message="tns:Chapter_LoadByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <wsdl:input message="tns:Institute_LoadByIdHttpPostIn" />
+      <wsdl:output message="tns:Institute_LoadByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <wsdl:input message="tns:Stream_LoadByIdHttpPostIn" />
+      <wsdl:output message="tns:Stream_LoadByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <wsdl:input message="tns:StreamsLoadByCategoryIDHttpPostIn" />
+      <wsdl:output message="tns:StreamsLoadByCategoryIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <wsdl:input message="tns:Category_LoadByIdHttpPostIn" />
+      <wsdl:output message="tns:Category_LoadByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <wsdl:input message="tns:InvitationList_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:InvitationList_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <wsdl:input message="tns:InvitationList_LoadBy_UserIdHttpPostIn" />
+      <wsdl:output message="tns:InvitationList_LoadBy_UserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <wsdl:input message="tns:Pages_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:Pages_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <wsdl:input message="tns:Pages_LoadBy_BookIdHttpPostIn" />
+      <wsdl:output message="tns:Pages_LoadBy_BookIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <wsdl:input message="tns:Pages_LoadBy_IdHttpPostIn" />
+      <wsdl:output message="tns:Pages_LoadBy_IdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <wsdl:input message="tns:Questions_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:Questions_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <wsdl:input message="tns:Questions_LoadBy_PageIdHttpPostIn" />
+      <wsdl:output message="tns:Questions_LoadBy_PageIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <wsdl:input message="tns:Questions_LoadBy_IdHttpPostIn" />
+      <wsdl:output message="tns:Questions_LoadBy_IdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <wsdl:input message="tns:UsersInfo_InsertUpdateHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_InsertUpdateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <wsdl:input message="tns:UsersInfo_ForgotPasswordHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_ForgotPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <wsdl:input message="tns:UsersInfo_ResetPasswordHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_ResetPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <wsdl:input message="tns:UsersInfo_LoadBy_IdHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_LoadBy_IdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <wsdl:input message="tns:UsersInfo_LoadAllHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_LoadAllHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <wsdl:input message="tns:UsersInfo_LoginHttpPostIn" />
+      <wsdl:output message="tns:UsersInfo_LoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <wsdl:input message="tns:NotificationByUserIdHttpPostIn" />
+      <wsdl:output message="tns:NotificationByUserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <wsdl:input message="tns:SetLoginStatusHttpPostIn" />
+      <wsdl:output message="tns:SetLoginStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <wsdl:input message="tns:SearchBooksByUsertextHttpPostIn" />
+      <wsdl:output message="tns:SearchBooksByUsertextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <wsdl:input message="tns:SearchBookByCatStrInsSubHttpPostIn" />
+      <wsdl:output message="tns:SearchBookByCatStrInsSubHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <wsdl:input message="tns:Message_LoadByUserIdHttpPostIn" />
+      <wsdl:output message="tns:Message_LoadByUserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <wsdl:input message="tns:FriendList_LoadByUserIdHttpPostIn" />
+      <wsdl:output message="tns:FriendList_LoadByUserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <wsdl:input message="tns:FriendRequestByUserIdHttpPostIn" />
+      <wsdl:output message="tns:FriendRequestByUserIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <wsdl:input message="tns:RemoveFriendByIdHttpPostIn" />
+      <wsdl:output message="tns:RemoveFriendByIdHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BooksServiceSoap" type="tns:BooksServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Answers_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/Answers_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Answers_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <soap:operation soapAction="http://tempuri.org/Answers_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <soap:operation soapAction="http://tempuri.org/Answers_LoadBy_QuestionId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <soap:operation soapAction="http://tempuri.org/Answers_Delete_By_Id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_Load_AllFriends" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <soap:operation soapAction="http://tempuri.org/InvitationList_UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/Books_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Books_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <soap:operation soapAction="http://tempuri.org/Books_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <soap:operation soapAction="http://tempuri.org/Books_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <soap:operation soapAction="http://tempuri.org/Books_LoadBy_Filter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <soap:operation soapAction="http://tempuri.org/Books_Delete_By_Id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/NoteBooks_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/BooksRating_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/BooksRating_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <soap:operation soapAction="http://tempuri.org/BooksRating_LoadBy_BookId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <soap:operation soapAction="http://tempuri.org/BooksRating_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Countries_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <soap:operation soapAction="http://tempuri.org/States_LoadBy_CountryId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <soap:operation soapAction="http://tempuri.org/Cities_LoadBy_StateId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/EntranceExam_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/ExamStream_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Subjects_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Streams_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Chapters_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Colleges_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Categories_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/Topics_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/Masters_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <soap:operation soapAction="http://tempuri.org/Subjects_LoadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <soap:operation soapAction="http://tempuri.org/Subjects_LoadByStreamId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <soap:operation soapAction="http://tempuri.org/Chapter_LoadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <soap:operation soapAction="http://tempuri.org/Institute_LoadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <soap:operation soapAction="http://tempuri.org/Stream_LoadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <soap:operation soapAction="http://tempuri.org/StreamsLoadByCategoryID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <soap:operation soapAction="http://tempuri.org/Category_LoadById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/InvitationList_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <soap:operation soapAction="http://tempuri.org/InvitationList_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/Pages_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <soap:operation soapAction="http://tempuri.org/Pages_LoadBy_BookId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <soap:operation soapAction="http://tempuri.org/Pages_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/Questions_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <soap:operation soapAction="http://tempuri.org/Questions_LoadBy_PageId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <soap:operation soapAction="http://tempuri.org/Questions_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_ForgotPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_ResetPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_LoadAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <soap:operation soapAction="http://tempuri.org/UsersInfo_Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <soap:operation soapAction="http://tempuri.org/NotificationByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <soap:operation soapAction="http://tempuri.org/SetLoginStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <soap:operation soapAction="http://tempuri.org/SearchBooksByUsertext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <soap:operation soapAction="http://tempuri.org/SearchBookByCatStrInsSub" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <soap:operation soapAction="http://tempuri.org/Message_LoadByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <soap:operation soapAction="http://tempuri.org/FriendList_LoadByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <soap:operation soapAction="http://tempuri.org/FriendRequestByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <soap:operation soapAction="http://tempuri.org/RemoveFriendById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BooksServiceSoap12" type="tns:BooksServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Answers_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/Answers_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Answers_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <soap12:operation soapAction="http://tempuri.org/Answers_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <soap12:operation soapAction="http://tempuri.org/Answers_LoadBy_QuestionId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <soap12:operation soapAction="http://tempuri.org/Answers_Delete_By_Id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_Load_AllFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <soap12:operation soapAction="http://tempuri.org/InvitationList_UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/Books_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Books_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <soap12:operation soapAction="http://tempuri.org/Books_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <soap12:operation soapAction="http://tempuri.org/Books_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <soap12:operation soapAction="http://tempuri.org/Books_LoadBy_Filter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <soap12:operation soapAction="http://tempuri.org/Books_Delete_By_Id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/NoteBooks_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/BooksRating_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/BooksRating_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <soap12:operation soapAction="http://tempuri.org/BooksRating_LoadBy_BookId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <soap12:operation soapAction="http://tempuri.org/BooksRating_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Countries_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <soap12:operation soapAction="http://tempuri.org/States_LoadBy_CountryId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <soap12:operation soapAction="http://tempuri.org/Cities_LoadBy_StateId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/EntranceExam_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/ExamStream_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Subjects_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Streams_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Chapters_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Colleges_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Categories_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/Topics_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/Masters_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <soap12:operation soapAction="http://tempuri.org/Subjects_LoadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <soap12:operation soapAction="http://tempuri.org/Subjects_LoadByStreamId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <soap12:operation soapAction="http://tempuri.org/Chapter_LoadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <soap12:operation soapAction="http://tempuri.org/Institute_LoadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <soap12:operation soapAction="http://tempuri.org/Stream_LoadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <soap12:operation soapAction="http://tempuri.org/StreamsLoadByCategoryID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <soap12:operation soapAction="http://tempuri.org/Category_LoadById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/InvitationList_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <soap12:operation soapAction="http://tempuri.org/InvitationList_LoadBy_UserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/Pages_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <soap12:operation soapAction="http://tempuri.org/Pages_LoadBy_BookId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <soap12:operation soapAction="http://tempuri.org/Pages_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/Questions_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <soap12:operation soapAction="http://tempuri.org/Questions_LoadBy_PageId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <soap12:operation soapAction="http://tempuri.org/Questions_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_InsertUpdate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_ForgotPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_ResetPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_LoadBy_Id" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_LoadAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <soap12:operation soapAction="http://tempuri.org/UsersInfo_Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <soap12:operation soapAction="http://tempuri.org/NotificationByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <soap12:operation soapAction="http://tempuri.org/SetLoginStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <soap12:operation soapAction="http://tempuri.org/SearchBooksByUsertext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <soap12:operation soapAction="http://tempuri.org/SearchBookByCatStrInsSub" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <soap12:operation soapAction="http://tempuri.org/Message_LoadByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <soap12:operation soapAction="http://tempuri.org/FriendList_LoadByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <soap12:operation soapAction="http://tempuri.org/FriendRequestByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <soap12:operation soapAction="http://tempuri.org/RemoveFriendById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BooksServiceHttpGet" type="tns:BooksServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Answers_InsertUpdate">
+      <http:operation location="/Answers_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <http:operation location="/Answers_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <http:operation location="/Answers_LoadBy_UserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <http:operation location="/Answers_LoadBy_QuestionId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <http:operation location="/Answers_Delete_By_Id" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <http:operation location="/UsersInfo_Load_AllFriends" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <http:operation location="/InvitationList_UpdateStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <http:operation location="/Books_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <http:operation location="/Books_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <http:operation location="/Books_LoadBy_Id" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <http:operation location="/Books_LoadBy_UserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <http:operation location="/Books_LoadBy_Filter" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <http:operation location="/Books_Delete_By_Id" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <http:operation location="/NoteBooks_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <http:operation location="/BooksRating_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <http:operation location="/BooksRating_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <http:operation location="/BooksRating_LoadBy_BookId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <http:operation location="/BooksRating_LoadBy_UserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <http:operation location="/Countries_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <http:operation location="/States_LoadBy_CountryId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <http:operation location="/Cities_LoadBy_StateId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <http:operation location="/EntranceExam_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <http:operation location="/ExamStream_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <http:operation location="/Subjects_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <http:operation location="/Streams_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <http:operation location="/Chapters_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <http:operation location="/Colleges_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <http:operation location="/Categories_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <http:operation location="/Topics_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <http:operation location="/Masters_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <http:operation location="/Subjects_LoadById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <http:operation location="/Subjects_LoadByStreamId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <http:operation location="/Chapter_LoadById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <http:operation location="/Institute_LoadById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <http:operation location="/Stream_LoadById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <http:operation location="/StreamsLoadByCategoryID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <http:operation location="/Category_LoadById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <http:operation location="/InvitationList_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <http:operation location="/InvitationList_LoadBy_UserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <http:operation location="/Pages_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <http:operation location="/Pages_LoadBy_BookId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <http:operation location="/Pages_LoadBy_Id" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <http:operation location="/Questions_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <http:operation location="/Questions_LoadBy_PageId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <http:operation location="/Questions_LoadBy_Id" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <http:operation location="/UsersInfo_InsertUpdate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <http:operation location="/UsersInfo_ForgotPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <http:operation location="/UsersInfo_ResetPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <http:operation location="/UsersInfo_LoadBy_Id" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <http:operation location="/UsersInfo_LoadAll" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <http:operation location="/UsersInfo_Login" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <http:operation location="/NotificationByUserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <http:operation location="/SetLoginStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <http:operation location="/SearchBooksByUsertext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <http:operation location="/SearchBookByCatStrInsSub" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <http:operation location="/Message_LoadByUserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <http:operation location="/FriendList_LoadByUserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <http:operation location="/FriendRequestByUserId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <http:operation location="/RemoveFriendById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BooksServiceHttpPost" type="tns:BooksServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Answers_InsertUpdate">
+      <http:operation location="/Answers_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadAll">
+      <http:operation location="/Answers_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_UserId">
+      <http:operation location="/Answers_LoadBy_UserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_LoadBy_QuestionId">
+      <http:operation location="/Answers_LoadBy_QuestionId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Answers_Delete_By_Id">
+      <http:operation location="/Answers_Delete_By_Id" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Load_AllFriends">
+      <http:operation location="/UsersInfo_Load_AllFriends" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_UpdateStatus">
+      <http:operation location="/InvitationList_UpdateStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_InsertUpdate">
+      <http:operation location="/Books_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadAll">
+      <http:operation location="/Books_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Id">
+      <http:operation location="/Books_LoadBy_Id" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_UserId">
+      <http:operation location="/Books_LoadBy_UserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_LoadBy_Filter">
+      <http:operation location="/Books_LoadBy_Filter" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Books_Delete_By_Id">
+      <http:operation location="/Books_Delete_By_Id" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="NoteBooks_InsertUpdate">
+      <http:operation location="/NoteBooks_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_InsertUpdate">
+      <http:operation location="/BooksRating_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadAll">
+      <http:operation location="/BooksRating_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_BookId">
+      <http:operation location="/BooksRating_LoadBy_BookId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="BooksRating_LoadBy_UserId">
+      <http:operation location="/BooksRating_LoadBy_UserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Countries_LoadAll">
+      <http:operation location="/Countries_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="States_LoadBy_CountryId">
+      <http:operation location="/States_LoadBy_CountryId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Cities_LoadBy_StateId">
+      <http:operation location="/Cities_LoadBy_StateId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EntranceExam_LoadAll">
+      <http:operation location="/EntranceExam_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="ExamStream_LoadAll">
+      <http:operation location="/ExamStream_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadAll">
+      <http:operation location="/Subjects_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Streams_LoadAll">
+      <http:operation location="/Streams_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Chapters_LoadAll">
+      <http:operation location="/Chapters_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Colleges_LoadAll">
+      <http:operation location="/Colleges_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Categories_LoadAll">
+      <http:operation location="/Categories_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Topics_LoadAll">
+      <http:operation location="/Topics_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Masters_InsertUpdate">
+      <http:operation location="/Masters_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadById">
+      <http:operation location="/Subjects_LoadById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Subjects_LoadByStreamId">
+      <http:operation location="/Subjects_LoadByStreamId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Chapter_LoadById">
+      <http:operation location="/Chapter_LoadById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Institute_LoadById">
+      <http:operation location="/Institute_LoadById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Stream_LoadById">
+      <http:operation location="/Stream_LoadById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="StreamsLoadByCategoryID">
+      <http:operation location="/StreamsLoadByCategoryID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Category_LoadById">
+      <http:operation location="/Category_LoadById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_InsertUpdate">
+      <http:operation location="/InvitationList_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InvitationList_LoadBy_UserId">
+      <http:operation location="/InvitationList_LoadBy_UserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_InsertUpdate">
+      <http:operation location="/Pages_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_BookId">
+      <http:operation location="/Pages_LoadBy_BookId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Pages_LoadBy_Id">
+      <http:operation location="/Pages_LoadBy_Id" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_InsertUpdate">
+      <http:operation location="/Questions_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_PageId">
+      <http:operation location="/Questions_LoadBy_PageId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Questions_LoadBy_Id">
+      <http:operation location="/Questions_LoadBy_Id" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_InsertUpdate">
+      <http:operation location="/UsersInfo_InsertUpdate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ForgotPassword">
+      <http:operation location="/UsersInfo_ForgotPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_ResetPassword">
+      <http:operation location="/UsersInfo_ResetPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadBy_Id">
+      <http:operation location="/UsersInfo_LoadBy_Id" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_LoadAll">
+      <http:operation location="/UsersInfo_LoadAll" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UsersInfo_Login">
+      <http:operation location="/UsersInfo_Login" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="NotificationByUserId">
+      <http:operation location="/NotificationByUserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SetLoginStatus">
+      <http:operation location="/SetLoginStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBooksByUsertext">
+      <http:operation location="/SearchBooksByUsertext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBookByCatStrInsSub">
+      <http:operation location="/SearchBookByCatStrInsSub" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Message_LoadByUserId">
+      <http:operation location="/Message_LoadByUserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FriendList_LoadByUserId">
+      <http:operation location="/FriendList_LoadByUserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="FriendRequestByUserId">
+      <http:operation location="/FriendRequestByUserId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFriendById">
+      <http:operation location="/RemoveFriendById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BooksService">
+    <wsdl:port name="BooksServiceSoap" binding="tns:BooksServiceSoap">
+      <soap:address location="http://studentapp.nextolive.com/WebServices/STU_AppWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BooksServiceSoap12" binding="tns:BooksServiceSoap12">
+      <soap12:address location="http://studentapp.nextolive.com/WebServices/STU_AppWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BooksServiceHttpGet" binding="tns:BooksServiceHttpGet">
+      <http:address location="http://studentapp.nextolive.com/WebServices/STU_AppWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BooksServiceHttpPost" binding="tns:BooksServiceHttpPost">
+      <http:address location="http://studentapp.nextolive.com/WebServices/STU_AppWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

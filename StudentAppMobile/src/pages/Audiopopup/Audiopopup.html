@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Audio Upload
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="Closemodel()">
+        Close
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+
+  <input type="file" class="add-nb-btn" name="image" accept="audio/*" (change)="changeListener($event)">
+  <button type="button"class="add-nb-btn" (click)="Closemodel()">Ok</button>
+
+</ion-content>
+
+

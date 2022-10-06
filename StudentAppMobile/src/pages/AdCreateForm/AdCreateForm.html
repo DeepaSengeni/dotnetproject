@@ -1,0 +1,160 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <!--<button (click)=" GetToken()" >pay</button>-->
+  <div class="main-page-wrapper">
+    <div class="BigMainWrapper">
+      <form [formGroup]="AdForm" (ngSubmit)="CreateAd(AdForm.value)">
+
+        <div class="mainWrapper">
+          <div class="SignUpForm-heading">Ad Creation</div>
+          <ion-item>
+            <ion-label>Upload Type</ion-label>
+
+            <ion-select formControlName="Typepage" [(ngModel)]="pageType" name="pageType" (ionChange)="setPageType()">
+              <ion-option value="SinglePic">Single Pic</ion-option>
+              <ion-option value="MultiplePic">Multiple Pic</ion-option>
+              <ion-option value="AudioFile">Audio Clip</ion-option>
+              <ion-option value="VideoFile">Video Clip</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item *ngIf="pageType=='SinglePic'">
+            <label>Single Pic</label>
+            <input type="file" name="image" accept="image/*" (change)="changeListener($event)">
+            <input type="hidden" formControlName="hdnImage" [ngModel]="hdnImageData">
+          </ion-item>
+
+          <ion-item *ngIf="pageType=='MultiplePic'">
+            <label>Multiple Images</label>
+            <input type="file" name="multiple" accept="image/*" (change)="Multiplefiles($event)" multiple>
+            <input type="hidden" formControlName="hdnImage" [ngModel]="hdnImageData">
+          </ion-item>
+
+          <ion-item *ngIf="pageType=='AudioFile'">
+            <label>AudioFile</label>
+            <input type="file" name="audio" accept="audio/*" (change)="changeListener($event)" multiple>
+            <input type="hidden" formControlName="hdnImage" [ngModel]="hdnImageData">
+          </ion-item>
+
+          <ion-item *ngIf="pageType=='VideoFile'">
+            <label>VideoFile</label>
+            <input type="file" name="video" accept="video/*" (change)="changeListener($event)" multiple>
+            <input type="hidden" formControlName="hdnImage" [ngModel]="hdnImageData">
+          </ion-item>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.headline.valid && AdForm.controls.headline.touched}">
+              <ion-label floating>HeadLine of Ad</ion-label>
+              <ion-input formControlName="headline" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.headline.hasError('required') && AdForm.controls.headline.touched">
+              <p class="error-text">Sorry, HeadLine of Ad is required!</p>
+            </ion-item>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.features.valid && AdForm.controls.features.touched}">
+              <ion-label floating>Features</ion-label>
+              <ion-input formControlName="features" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.features.hasError('required') && AdForm.controls.features.touched">
+              <p class="error-text">Sorry, Features is required!</p>
+            </ion-item>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.description.valid && AdForm.controls.description.touched}">
+              <ion-label floating>Description</ion-label>
+              <ion-input formControlName="description" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.description.hasError('required') && AdForm.controls.description.touched">
+              <p class="error-text">Sorry, Description is required!</p>
+            </ion-item>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.email.valid && AdForm.controls.email.touched}">
+              <ion-label floating>Advertiser's Email Id</ion-label>
+              <ion-input formControlName="email" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.email.hasError('required') && AdForm.controls.email.touched">
+              <p class="error-text">Sorry, Email Id is required!</p>
+            </ion-item>
+            <ion-item class="error" *ngIf="AdForm.controls.email.hasError('isEmailUnique') && AdForm.controls.email.touched">
+              <p class="error-text">Email already exists please choose another</p>
+            </ion-item>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.mobile.valid && AdForm.controls.mobile.touched}">
+              <ion-label floating>Advertiser's Mobile Number</ion-label>
+              <ion-input formControlName="mobile" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.mobile.hasError('required') && AdForm.controls.mobile.touched">
+              <p class="error-text">Sorry, Mobile Number is required!</p>
+            </ion-item>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.product.valid && AdForm.controls.product.touched}">
+              <ion-label floating>Price of Product/Services</ion-label>
+              <ion-input formControlName="product" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.product.hasError('required') && AdForm.controls.product.touched">
+              <p class="error-text">Sorry, Product/Services is required!</p>
+            </ion-item>
+            <ion-item [ngClass]="{'error-border':!AdForm.controls.web.valid && AdForm.controls.web.touched}">
+              <ion-label floating>WebSite/URL Address</ion-label>
+              <ion-input formControlName="web" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="AdForm.controls.web.hasError('required') && AdForm.controls.web.touched">
+              <p class="error-text">Sorry, WebSite/URL Address is required!</p>
+            </ion-item>
+          </ion-list>
+
+        </div>
+
+        <div class="mainWrapper" *ngFor="let curdata of currencydata">
+
+          <div class="SignUpForm-heading">Target user information</div>
+          <ion-item>
+            <ion-label>Country</ion-label>
+            <ion-select formControlName="country" name="country" (ionChange)="countrySelect()">
+              <ion-option selected>Select Country</ion-option>
+              <ion-option (ionSelect)="countrySelected($event)" *ngFor="let item of CountryList" value="{{ item['ID'] }}">{{ item['CountryName'] }}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>State</ion-label>
+            <ion-select formControlName="state" name="state">
+              <ion-option selected>Select State</ion-option>
+              <ion-option (ionSelect)="stateSelected($event)" *ngFor="let item of StateList" value="{{ item['ID'] }}">{{ item['StateName'] }}</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <!--<ion-item>
+            <ion-label>City</ion-label>
+            <ion-select multiple="true" (ionChange)="check1()">
+              <ion-option *ngFor="let o of CityList" [value]="o.ID" (ionSelect)="check2(o.ID,o.Price)">{{o.CityName}} {{o.Price}}.00</ion-option>
+            </ion-select>
+          </ion-item>-->
+          <ion-item>
+            <ion-label>City</ion-label>
+            <ion-select formControlName="city_Id" multiple="true" name="city_Id" [(ngModel)]="city_Id" (ionChange)="cityChecked()">
+              <ion-option *ngFor="let o of CityList" [value]="o.ID">{{o.CityName}} {{o.Price*FinalConvertedAmount}}  {{CurrentUserCountryCurrencySymbol}}</ion-option>
+            </ion-select>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label floating>Start Date</ion-label>
+            <ion-datetime displayFormat="DD/MMM/YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="date" formControlName="startdate" name="startdate" (ionChange)="startdate($event)"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating>End Date</ion-label>
+            <ion-datetime displayFormat="DD/MMM/YYYY" pickerFormat="DD MMM YYYY" formControlName="enddate" name="enddate" (ionChange)="enddate($event)"></ion-datetime>
+          </ion-item>
+          <h6>Amount per Day :<span>{{curdata.currency_symbole}}</span>&nbsp;<span>{{total}} /day</span></h6>
+          <h6>Number of days :<span>{{ans}}</span> </h6>
+          <h6>Total Amount : <span>{{curdata.currency_symbole}}</span>&nbsp;<span>{{totalamount}}</span> </h6>
+
+          <p>{{responsemessage}}</p>
+        </div>
+        <!--<button ion-button type="button" (click)="CheckAvailability()" block>check</button>-->
+        <div class="control-wrap">
+          <button ion-button type="submit" [disabled]="!AdForm.valid" class="btn btn-block btn-success">Place Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

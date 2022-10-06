@@ -1,0 +1,540 @@
+﻿@model StudentAppWebsite.Models.SubmitterRegistration
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid signupform">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Setting</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+else if (TempData["ErrorMessage"] != null)
+{
+
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+@using (Html.BeginForm("DeleteAccount", "User", FormMethod.Post, new { @id = "DeleteForm" }))
+{
+    <div class="form-horizontal " style="    margin-bottom: -20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group" id="subnameh">
+                    <label class="col-sm-4 col-xs-12 control-label">Delete Account</label>
+                    <div class="col-sm-6 col-xs-9" id="SubjectDiv">
+                        <input type="button" value="Delete" id="delete" class="btn btn-warning btn btn-block" />
+                        <input type="hidden" name="deletedvalue" id="deletedvalue" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@using (Html.BeginForm("Setting", "User", FormMethod.Post, new { @id = "settingForm" }))
+{
+    <div class="container-fluid signupform">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+
+
+                        <div class="form-horizontal ">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" id="subnameh">                                      
+                                        <div class="form-group" id="subnameh">
+                                            <label class="col-sm-4 col-xs-12 control-label">Email-Id</label>
+                                            <div class="col-sm-6 col-xs-9" id="SubjectDiv">
+                                                <input type="text" value="@Model.EmailID" class="form-control" disabled />
+                                                <input type="hidden" value="@Model.EmailID" name="emailId" id="emailId" />
+                                            </div>
+                                            <a class="sm-btn invisiblePanel" style="text-decoration:none" href="#myModalAudio" data-toggle="modal" id="AddAudio">Change</a>
+                                        </div>
+                                        <div class="form-group " id="cancel">
+                                            <label class="col-sm-4 col-xs-12 control-label">Set New Password</label>
+                                            <div class="col-sm-6 col-xs-9" id="SubjectDivis" style="margin: 8px;">
+                                                <a class="sm-btn invisiblePanel" style="text-decoration:none" href="#myModalPassword" data-toggle="modal" id="password">Change Password</a>
+                                                <input type="hidden" value="@Model.Password" name="hiddenpassword" id="hiddenpassword" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label">Change Mobile No.</label>
+                                            <div class="col-sm-3 col-xs-9">
+                                                <input type="tel" id="phonenumber" value="@Model.MobileNumber" name="MobileNumber" class="form-control" />
+                                                <span id="msgspanPhone" style="color: #A94442"></span><span class="otp-style"><a href="javascript:;" id="CSendOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Send OTP </a></span>                                            
+                                                <input type="hidden" id="isdCode" name="isdCode" />
+                                            </div>
+                                            <div class="col-sm-3 col-xs-9">
+                                                <label class="sr-only">OTP</label>
+                                                <div style="display: inherit;position: relative;">
+                                                    <input placeholder="OTP" id="otp" class="form-control" type="text">
+                                                    <i id="checkVerified" class="fa fa-check" style="display:none;color: green;position: absolute;right: 0;top: 12px;right: -18px;"></i>
+                                                </div>
+                                                <input type="hidden" id="hdnRequest" value="" />
+                                                <p id="msgspan1" style="color: red;"></p>
+                                                <span class="otp-style"><a href="javascript:;" id="CVerifyOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Verify OTP</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 col-xs-12 control-label">Use the Same</label>
+                                            <div class="col-sm-6 col-xs-9">
+                                                <input type="checkbox" id="same" checked value="" name="same" style="margin:10px;" />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="phoneerror" style="display: none;margin-left:35%; " class="text-danger"></div>
+                                            <span id="msgspanPhone" style="color: #A94442;margin: 35%;"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-4 col-sm-5">
+                                                <input type="button" class="btn btn-primary" id="btnSubmit" value="Submit" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalAudio" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="padding:30px !important;">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="emailclose" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="fileType">Change Email</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>Email-Id</label>
+                        <div>
+                            <input type="text" placeholder="Enter Please Email" name="email" id="email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="emailerror">
+                        <span class="emailerror " style="color:red"></span><br />
+                        <span class="emailerror2 " style="color:red"></span><br />
+                    </div>
+                    <div class="modal-footer">
+                        <button name="submit_Email" id="submit_Email" class="btn btn-primary" type="button">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalPassword" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="padding: 30px !important;">
+                    <div class="modal-header">
+                        <button type="button" id="passwordclose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="fileType">Reset Your Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>New Password</label>
+                        <div>
+                            <input type="password" value="@Model.Password" name="Password" id="newpassword" class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <label>Confirm Password</label>
+                        <div>
+                            <input type="password" value="@Model.Password" name="ConfirmPassword" id="Confirmpassword" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="error">
+                        <span class="error alert alert-danger" style="color:red"></span><br />
+                    </div>
+                    <div class="modal-footer">
+                        <button name="submit_Audio" id="submit_Password" class="btn btn-primary" type="button">Reset my Password</button>
+                        @*<button data-dismiss="modal" class="btn btn-primary" type="button" id="Audioclose">Close</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+        $(document).ready(function () {
+
+        });
+        var allowsubmit = false;
+        var checked = true;
+        $('#error').hide();
+        $('#phoneerror').hide();
+
+        $("#same").change(function () {
+            if ($(this).prop('checked')) {
+                $('#msgspanPhone').hide();
+                $('#phonenumber').val(@Model.MobileNumber);
+                checked = true;
+            } else {
+                checked = false;
+            }
+        });
+
+        $('#phonenumber').on('blur', function () {
+            return validatePhoneNo();
+        });
+
+        $('#phonenumber').on("blur", function () {
+            if ($(this).val() != "") {
+                CheckMobileNo($(this).val());
+            }
+        });
+
+        $('#phonenumber').keyup(function () {
+            $('#msgspanPhone').html('');
+            if ($('#phonenumber').val().length > 0) {
+                //$('#same').prop('checked', true); 
+                    $('#msgspanPhone').hide();
+               
+      
+            
+            }
+            else {
+
+             // Checks it
+                $('#same').prop('checked', false); 
+            
+                checked = false;
+            }
+
+        });
+
+        $("#email").on("blur", function () {
+            return validateEmail();
+        });
+
+        $("#email").on("blur", function () {
+
+            if ($(this).val() != "") {
+                CheckMail($('#email').val());
+            }
+    });
+
+    $('#otp').keyup(function () {
+        $('#msgspan1').html('');
+    });
+
+        $('#submit_Password').click(function () {
+            var pass = $('#newpassword').val();
+            var conpass = $('#Confirmpassword').val();
+            if (pass == conpass)
+            {
+                $('#hiddenpassword').val(pass);
+                $('#passwordclose').click();
+            }
+            else
+            {
+                alert("Pass doesn't match ");
+                $('#hiddenpassword').val("@Model.Password");
+            }
+        });
+
+    $('#CSendOTP').on('click', function () {
+        var messageBody = "Verification";
+        var phonenumber = $('#phonenumber').val();
+        var Code = $(".selected-flag").attr("title");
+        Code = Code.split(":");
+        $.ajax({
+            url: "/Account/SendOTP",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            data: { mobileNumber: Code[1] + phonenumber, messageBody: messageBody },
+            success: function (data) {
+
+                if (data != null) {
+                    $('#CSendOTP').html('Resend OTP');
+                }
+                else {
+
+                }
+
+            },
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+
+            },
+            complete: function (data) {
+
+            }
+        });
+
+    });
+
+    $('#CVerifyOTP').on('click', function () {
+        var OTP = $('#otp').val();
+        if (OTP.length > 0) {
+            $('#msgspan1').html('');
+
+        }
+        else {
+            $('#msgspan1').html("Please Enter OTP");
+            return false;
+        }
+        $.ajax({
+            url: "/Account/VerifyPhone",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            data: { OTP: OTP, requestId: $('#hdnRequest').val() },
+            success: function (data) {
+                if (data == "0") {
+                    $('#msgspan1').html("Please Enter Valid OTP");
+                }
+                else if (data == null) {
+                    $('#msgspan1').html("Please Enter Valid OTP");
+                }
+                else {
+                    $('#msgspan1').html('');
+                    var verifyotp = $('#CVerifyOTP').text();
+                    if (verifyotp.length > 0) {
+                        $('#CVerifyOTP').text('Verified');
+                        document.getElementById('checkVerified').style.display = "block";
+                    }
+                    else {
+                        document.getElementById('checkVerified').style.display = "none";
+                    }
+                }
+
+
+            },
+            error: function () { }
+        });
+    });
+
+        $('#submit_Email').click(function () {
+            var e = $('#email').val();
+            var res = validateEmail();
+            if (res == true)
+            {
+                var email = CheckMail(e);
+                if (email == undefined) {
+                    $('#emailId').val(e);
+                    $('#emailclose').click();
+                }
+                else
+                {
+                    $('.emailerror2').html("");
+                    $('.emailerror').html("Email already exists please choose another");
+                }
+            }
+        });
+
+        function validatePhoneNo() {
+            var patternPhone = /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/;
+            var phoneNo = $('#phonenumber').val();
+            var valid = phoneNo.match(patternPhone)
+            if (valid == null) {
+                $('#phoneerror').html('Enter valid mobile number').show().fadeOut(10000);
+                return false;
+            }
+            else { return true; }
+        }
+
+        function validateEmail() {
+            var patternPhone = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            var phoneNo = $('#email').val();
+            var valid = phoneNo.match(patternPhone)
+            if (valid == null) {
+                $('.emailerror').html("");
+                $('.emailerror2').html("Enter valid Email-Id");
+                return false;
+            }
+            else { return true; }
+        }
+
+        function CheckMail(email)
+        {
+            $.get("/Account/CheckEmailExist", { "Email": email }, function (data) {
+                var getResponse = JSON.parse(data);
+                if (getResponse.Status == 1) {
+                    $('.emailerror2').html("");
+                    $('.emailerror').html("Email already exists please choose another");
+                    return false;
+                }
+
+            });
+        }
+
+        $(function ()
+        {
+            $('#Confirmpassword').keyup(function(e){
+                var pass = $('#newpassword').val();
+				var confpass = $(this).val();
+                if (pass == confpass) {
+                    $('#error').hide();
+					allowsubmit = true;
+				}
+				else {
+                    $('.error').text('The password and confirmation password do not match.');
+                    $('#error').show();
+					allowsubmit = false;
+				}
+			});
+
+			$('#form').submit(function(){
+                var pass = $('#newpassword').val();
+                var confpass = $('#Confirmpassword').val();
+				if(pass == confpass){
+					allowsubmit = true;
+				}
+				if(allowsubmit){
+					return true;
+				}else{
+					return false;
+				}
+            });
+
+            $cf = $('#phonenumber');
+
+            $cf.blur(function (e) {
+                phone = $(this).val();
+                phone = phone.replace(/[^0-9]/g, '');
+                if (phone.length != 10) {
+                    $('.phoneerror').text('Phone number must be 10 digits.');
+                    $('.phoneerror').show();
+                    $('#phonenumber').val('');
+                    $('#phonenumber').focus();
+                }
+            });
+        });
+
+
+
+
+
+        $('#btnSubmit').click(function ()
+        {
+       
+
+            var Email = $('#emailId').val();
+            var Password = $('#hiddenpassword').val();
+            var mobileno = $('#phonenumber').val();
+            var d = true;
+
+            if (mobileno != null || mobileno != "") {
+                var res = CheckMobileNo(mobileno);
+                if (res == undefined)
+                {
+                    d = false;
+                }
+            }
+
+            if (checked == true) {
+                $('#msgspanPhone').html("");
+                if (Email == null || Email == "") {
+                    alert("Please Enter EmailId");
+                }
+                else if (Password == null || Password == "") {
+                    alert("Please Enter Password");
+                }
+                else if (mobileno == null || mobileno == "") {
+                    alert("Please Enter Mobile Number");
+                }
+                else {
+                    $('#settingForm').submit();
+                }
+            }
+            else {
+                var r = validatePhoneNo();
+                if (r == true) {
+                    var res = CheckMobileNo(mobileno);
+                    if (res == undefined) {
+                        d = false;
+                    }
+                }
+                if (d == false)
+                {
+                    if ($('#CVerifyOTP').text() == 'Verified') {
+                        $('#msgspanPhone').html("");
+                        if (Email == null || Email == "") {
+                            alert("Please Enter EmailId");
+                        }
+                        else if (Password == null || Password == "") {
+                            alert("Please Enter Password");
+                        }
+                        else if (mobileno == null || mobileno == "") {
+                            alert("Please Enter Mobile Number");
+                        }
+                        else {
+                            setISD();
+                            $('#settingForm').submit();
+                        }
+                    }
+                }
+            }
+
+
+        });
+
+
+            function CheckMobileNo(mobile) {
+                $.get("/Account/CheckMobileExist", { "Mobile": mobile }, function (data) {
+                    var getResponse = JSON.parse(data);
+                    if (getResponse.Status == 1) {
+                        if (checked == false) {
+                            $('#msgspanPhone').html("Mobile number already exists please choose another");
+                            $('#msgspanPhone').show();
+                        }
+
+                        return false;
+                    } else {
+
+                        $('#msgspanPhone').html("");
+
+                    }
+                });
+        }
+
+        $('#delete').click(function () {
+            var confirm1 = confirm("Sure to delete the account ?");
+            if (confirm1 == true) {
+                $('#deletedvalue').val('1');
+                $('#DeleteForm').submit();
+            }
+            else {
+                $('#deletedvalue').val('0');
+            }
+        });
+
+
+</script>
+
+<script>
+    function setISD() {
+        var code = $(".selected-flag").attr("title");
+        if (code) {
+            var codeArr = code.split(":");
+            if (codeArr) {
+                $('#isdCode').val(codeArr[1]);
+            }
+        }
+    }
+</script>
+
+<script>
+    var input = document.querySelector("#phonenumber");
+    window.intlTelInput(input, {
+        utilsScript: "PhoneCountrySync/js/utils.js",
+    });
+</script>

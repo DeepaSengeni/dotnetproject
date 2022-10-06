@@ -1,0 +1,73 @@
+
+
+#colorbox,
+#cboxOverlay,
+#cboxWrapper {color:#514b46;position:absolute;top:0;left:0;z-index:9999;overflow:hidden;}
+#cboxOverlay {position:fixed;width:100%;height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft {clear:left;}
+#cboxContent {position:relative;overflow:hidden;}
+#cboxLoadedContent {/*	overflow:auto;	*/ ;overflow:hidden!important;}
+#cboxLoadedContent iframe {display:block;width:100%;height:100%;border:0;}
+#cboxTitle {margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic {position:absolute;top:0;left:0;width:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow {cursor:pointer;}
+
+
+#cboxOverlay {
+    background: url(../../images/overlay.png) 0 0 repeat;
+}
+
+	#cboxTopLeft,
+	#cboxTopRight,
+	#cboxBottomLeft,
+	#cboxBottomRight {width:12px;height:12px;}
+	
+
+	#cboxTopLeft {background:url(../../images/corners.png) 0 0;}
+	#cboxTopRight {background:url(../../images/corners.png) -12px 0;}
+	#cboxBottomLeft {background:url(../../images/corners.png) 0 -12px;}
+	#cboxBottomRight {background:url(../../images/corners.png) -12px -12px;}
+	#cboxMiddleLeft {width:12px;background:url(../../images/border.gif)  repeat-y;}
+	#cboxMiddleRight {width:12px;background:url(../../images/right-border.gif) repeat-y;}
+	#cboxTopCenter {height:12px;background:url(../../images/border.gif) repeat-x;}
+	#cboxBottomCenter {height:12px;background:url(../../images/bottom-border.gif) repeat-x;}
+	#cboxContent {background:#fff;}
+		#cboxLoadedContent {margin-bottom:28px}
+		#cboxLoadingOverlay {background:url(../../images/loading_background.png) center center no-repeat;}
+		#cboxLoadingGraphic {background:url(../../images/loading.gif) center center no-repeat;}
+		#cboxClose {
+    color: #7f7f7f;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    width: 65px;
+    border: transparent;
+}
+#cboxClose::before {
+    font-family: FontAwesome;
+    content: "\f057";
+    font-size: 25px;
+    color: #2C2B2B;
+}
+	#cboxWrapper,
+	#cboxTopLeft,
+	#cboxTopRight,
+	#cboxBottomLeft,
+	#cboxBottomRight,
+	#cboxMiddleLeft, 
+	#cboxMiddleRight, 
+	#cboxTopCenter,
+	#cboxBottomCenter {background-color:[$CLROVERLAYBORDER$];}
+
+#contentHolder {float:left;}
+#cboxNext {
+    position: absolute;
+    bottom: 0;
+    left: 27px;
+    background: url(../../images/controls.png) no-repeat -50px 0;
+    width: 25px;
+    height: 25px;
+    text-indent: -9999px;
+}
+/* END COLORBOX.CSS */

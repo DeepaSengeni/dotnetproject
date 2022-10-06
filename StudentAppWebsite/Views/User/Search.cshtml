@@ -1,0 +1,62 @@
+﻿@model StudentAppWebsite.Models.ManageProfile
+@{
+    ViewBag.Title = "Search";
+}
+<style>
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Showing result for "@Request.QueryString["data"] "</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @* <h3 class="panel-title">Friend List</h3>*@
+                </div>
+                <div class="panel-body">
+                    @{Html.RenderPartial("SearchResult", Model);}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div class="table-responsive">
+        <table id="example-4" class="table table-small-font table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>view</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.FirstName  @item.LastName</td>
+                        <td>@item.EmailId</td>
+                        <td><a href="/User/UserProfile?Id=15&FriendRequestId=@item.Id">View</a></td>
+                    </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            <div class="alert alert-danger">No Records Found</div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>*@
+
+<script src="~/Scripts/Profile.js"></script>

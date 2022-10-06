@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Untitled Document</title>
+</head>
+<body>
+    <style>
+        .style1 {
+            color: rgb(22, 22, 23);
+            background: #f5f5f5;
+            margin: 0 auto;
+            padding: 10px 10px;
+            font-family: open sans;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .style2 {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            width: 70%;
+            background: #004293 !important;
+        }
+
+        .style3 {
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .style4 {
+            color: rgb(69, 69, 69);
+            padding-top: 8px;
+            font-weight: 400 !important;
+        }
+
+        .style5 {
+            color: #323333;
+            padding-top: 13px;
+            font-size: 13px;
+            line-height: 22px;
+            text-align:center;
+        }
+
+        .clickbtn {
+            color: #235EEC;
+            text-decoration: underline;
+        }
+
+        .head {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+            color: #004293;
+        }
+
+        .clickbtn:hover {
+            color: #868484;
+        }
+
+        .taglines {
+            display: block;
+            color: White;
+            font-size: 16px;
+            line-height: 36px;
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+    </style>
+
+    <body>
+        <table class="style1">
+            <tbody>
+                <tr>
+                    <td class="style2"><span class="taglines">
+                        <img src="student-logo.png"></span></td>
+                </tr>
+                <tr>
+                    <td style="height: 10px;"></td>
+                </tr>
+                <tr>
+                    <td class="head">Advertisement payment request status update</td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="font-size: 20px; font-weight: 600;">Thank You. </td>
+                </tr>
+                <tr>
+                    <td class="style3">Your payment was successful.</td>
+                </tr>
+                <tr class="text-center">
+				
+
+	
+<table border=1 style="width:100%;text-align:center;border-collapse: collapse;padding: 35px;" >
+    
+    <tr>
+		<th> Name</th>
+        <th>Amount in USD</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td>@fullname</td>
+        <td>@name $</td>
+        <td>@token</td>
+    </tr>
+</table>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0px; line-height: 22px;"></td>
+                </tr>
+                <tr>
+                    <td class="style5">Thank you. </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

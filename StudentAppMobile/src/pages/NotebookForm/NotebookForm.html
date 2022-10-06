@@ -1,0 +1,101 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="home notertor-site">
+  <page-layout></page-layout>
+  <div class="main-page-wrapper">
+    <div class="BigMainWrapper">
+      <div class="home-note-slice" padding no-margin>
+        <form [formGroup]="notebookForm" (ngSubmit)="notebookSave(notebookForm.value,bookid)">
+          <div class="control-wrap">
+
+            <ion-item *ngIf="Change==false">
+              <ion-label>Subject Name</ion-label>
+              <ion-select formControlName="SubjectID" name="SubjectID" (ionChange)="GetSubjectList()">
+                <ion-option selected>Select Subject</ion-option>
+                <ion-option *ngFor="let item of SubjectList" value="{{ item['Id'] }}">{{ item['SubjectName'] }}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item  *ngIf="Change==true">
+              <ion-label floating>Subject Name</ion-label>
+              <ion-input formControlName="headline" type="text"></ion-input>
+            </ion-item>
+            <!--<ion-item *ngIf="notebookForm.controls.headline.hasError('required') && notebookForm.controls.headline.touched && Change==true">
+              <p class="error-text">Sorry, Subject is required!</p>
+            </ion-item>-->
+            <button ion-button round outline small (click)="Cancel()" *ngIf="Change==true" class="buttons">Cancel</button>
+            <button ion-button round outline small (click)="AddSubject()" *ngIf="Change==false" class="buttons">Add New</button>
+
+            <!--<ion-item *ngIf="notebookForm.controls.subName.hasError('required') && notebookForm.controls.subName.touched">
+              <p class="error-text">Subject Name is required!</p>
+            </ion-item>-->
+          </div>
+          <div class="control-wrap">
+            <ion-item [ngClass]="{'error-border':!notebookForm.controls.date.valid && notebookForm.controls.date.touched}">
+              <ion-label floating>Date</ion-label>
+              <ion-datetime displayFormat="MMM DD YYYY" formControlName="date" name="date"></ion-datetime>
+            </ion-item>
+
+            <ion-item *ngIf="notebookForm.controls.date.hasError('required') && notebookForm.controls.date.touched">
+              <p class="error-text">Date is required!</p>
+            </ion-item>
+          </div>
+          <div class="control-wrap">
+            <ion-list radio-group [(ngModel)]="monetaryType" formControlName="monetary">
+              <ion-list-header>
+                Do you want monetary advantages?
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Yes</ion-label>
+                <ion-radio value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>No</ion-label>
+                <ion-radio value="2"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </div>
+          <div class="control-wrap">
+            <ion-list radio-group [(ngModel)]="inType" formControlName="inType">
+              <ion-list-header>
+                Optional
+              </ion-list-header>
+              <ion-item>
+                <ion-label>None</ion-label>
+                <ion-radio value="0"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Innovation</ion-label>
+                <ion-radio value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Investment</ion-label>
+                <ion-radio value="2"></ion-radio>
+              </ion-item>
+            </ion-list>
+          </div>
+          <div class="control-wrap">
+            <ion-list radio-group [(ngModel)]="visibleToAll" formControlName="visibleToAll">
+              <ion-item>
+                <ion-label>Visible(Visible to All)</ion-label>
+                <ion-radio value="1"></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Hidden(Visible to you only)</ion-label>
+                <ion-radio value="2"></ion-radio>
+              </ion-item>
+
+            </ion-list>
+          </div>
+
+          <div class="control-wrap">
+            <button ion-button full [disabled]="!notebookForm.valid" type="submit" class="btn btn-block btn-success">{{content}}</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

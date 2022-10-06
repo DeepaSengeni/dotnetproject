@@ -1,0 +1,1077 @@
+﻿@model StudentAppWebsite.Models.NotebookForm
+@{
+    Layout = null;
+    var url = Request.Url.AbsoluteUri;
+    var F= url.Split('&')[0];
+    var S = url.Split('&')[0];
+    var twitterurl = F + "%26" + S;
+    var fburl = Url.Encode(Request.Url.AbsoluteUri);
+  var t=Server.UrlEncode(Request.Url.AbsoluteUri);
+}
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b7ab02f6fd7d20011419e12&product=inline-share-buttons' async='async'></script>
+<link href="~/Content/css/jssocials-theme-flat.css" rel="stylesheet" />
+<style>
+    label {
+        text-align: left;
+    }
+    .textcenter.custom-textcenter .btn {
+        padding: 6px 10px;
+    }
+    .textcenter.custom-textcenter #ask, .textcenter.custom-textcenter #invite, .textcenter.custom-textcenter #sendmsg {
+        min-width: inherit;
+    }
+    .textcenter.custom-textcenter .sharespan{
+        position:relative;
+    }
+        .textcenter.custom-textcenter .sharespan .jssocials{
+            position:absolute;
+        }
+        .textcenter.custom-textcenter .sharespan .jssocials-share {
+            display: inline-block;
+            height: 35px;
+            width: 35px;
+            background: linear-gradient(to bottom, #3ba301, #67cb31, #3ba301) !important;
+            color: #fff;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 50%;
+            margin-bottom:5px;
+        }
+        .textcenter.custom-textcenter .btn-success {
+            background: linear-gradient(to bottom, #3ba301, #67cb31, #3ba301) !important;
+        }
+        .textcenter.custom-textcenter .sharespan .jssocials-share a {
+            color: #fff;
+        }
+            .ad-div {
+                float: left;
+                display: inline-block;
+                background: #D7D7D7;
+                height: auto !important;
+                margin: 6px 1px;
+                padding: 4px 10px;
+                font-size: 14px;
+            }
+
+    .close-pos {
+        position: absolute;
+        right: -6px;
+        top: -7px;
+        z-index: 99;
+    }
+
+    .ad-div a {
+        color: #5C5C5C;
+    }
+
+        .ad-div a:hover {
+            color: #000;
+        }
+
+    .close-icn {
+        color: rgb(62, 62, 62);
+        border: 1px solid rgb(126, 125, 125);
+        background: rgb(227, 227, 227) none repeat scroll 0% 0%;
+        padding: 1px 5px !important;
+    }
+
+    .add-div {
+        border: 1px solid rgb(108, 105, 105);
+        height: auto;
+        background: rgb(252, 254, 234) none repeat scroll 0% 0%;
+        
+    }
+    @@media screen and (min-width: 320px) and (max-width: 400px) {
+        .add-div {
+            border: 1px solid rgb(108, 105, 105);
+            height: auto;
+            margin-top: 290px;
+            background: rgb(252, 254, 234) none repeat scroll 0% 0%;
+        }
+    }
+
+    .sponser label {
+        float: left;
+        margin-bottom: 0px;
+        font-size: 22px;
+        color: rgb(17, 116, 245);
+        font-family: arial;
+    }
+
+    #studentNameSpan {
+        color: rgb(13, 13, 14);
+        font-size: 15px;
+
+    }
+
+    .fadein img {
+        position: static;
+        left: 15px;
+        top: 0;
+        height: 128px;
+    }
+
+    .content_aria {
+        font-size: 18px;     
+        overflow-y: hidden;
+    
+    }
+
+    .closeTempMsg {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 2px 5px;
+        color: rgb(243, 17, 17);
+    }
+</style>
+<div id="main">
+    <section class="category">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 text-center">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group btn-breadcrumb" id="breadcrumbs">
+                                <a href="/Home/Home" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
+                                <a href="/Home/Notebook_Pages?BookId=@Model.BookId" class="btn btn-warning">@Model.SubjectName</a>
+                                <a href="/Home/Index?PageId=@Model.Id&BookId=@Model.BookId" class="btn btn-warning">Page No.: @Model.PageNumber</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="all-btn btns-style-2">
+                        <input type="hidden" id="copiedContent" />
+
+
+                        @Html.HiddenFor(m => m.PageNumber)
+                        @Html.HiddenFor(m => m.Id)
+
+                        @Html.HiddenFor(m => m.PageImage)
+                        @Html.HiddenFor(m => m.BookId)
+                        @Html.HiddenFor(m => m.ChapterName)
+                        @* <input type="hidden" id="nextpage" name="nextpage" value="@(Model.prevPage == null ? "" : Model.prevPage)"/>
+                            <input type="hidden" id="prevpage" name="prevpage" value="@(Model.nextPage == null ? "" : Model.nextPage)"/>*@
+                        @*   // @Html.HiddenFor(m => m.PageNumber)*@
+                        <button type="button" class="btn btn-primary sm-btn hvr-pop" disabled="disabled">Page No.: @Model.PageNumber</button>
+                        @*  //Page No.: @ViewBag.PageId*@
+                        @* <a href="javascript:;" class="btn btn-primary sm-btn hvr-pop prev" @(Model.prevPage == null ? "disabled=disabled" : "") style="display:none"><</a>
+                            <a href="javascript:;" class="btn btn-primary sm-btn hvr-pop next" @(Model.nextPage == null ? "disabled=disabled" : "") style="display:none">></a>*@
+                        <button type="button" class="btn btn-primary sm-btn hvr-pop" disabled="disabled">@Convert.ToDateTime(Model.StartDate).ToShortDateString()</button>
+                        @*<button type="button" class="btn btn-primary sm-btn marker" disabled="disabled">Marker</button>*@
+                        <button type="button" class="btn btn-primary sm-btn hvr-pop" id="generatepdf">Download</button>
+                        @if (Model.IsHtml)
+                        {
+                            <button type="button" class="btn btn-primary sm-btn copy hvr-pop" onclick="addText();">Copy Text</button>
+                            <button type="button" class="btn btn-primary sm-btn paste hvr-pop" onclick="insertContentAtCaret()" disabled="disabled" id="Pastbtn">Paste Text</button>
+                        }
+                        <button type="button" class="btn btn-primary sm-btn edit hvr-pop">Edit</button>@*
+                            <button type="submit" class="btn btn-primary sm-btn submit" disabled="disabled">Submit</button>*@
+
+                    </div>
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger" style="position: relative;">@TempData["ErrorMessage"]<a href="javascript:;"><i class="fa fa-times closeTempMsg" aria-hidden="true"></i></a></div>
+                            }
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success" style="position: relative;">@TempData["SuccessMessage"] <a href="javascript:;"><i class="fa fa-times closeTempMsg" aria-hidden="true"></i></a></div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="border-main" style="border: none;">
+
+
+
+                        <div class="text-edit">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="updateEditor content_aria" id="contentArea">
+                                        @if (Model.PageType == "Text")
+                                        {
+                                            <div id="pagetext">@Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))</div>
+                                        }
+                                        else if (Model.PageType == "Audio")
+                                        {
+                                            <div class='audioContainer' style='display: table; width: 100%; height: 100%;'>
+                                                <div style='display: table-cell; width: 100%; height: 100%; vertical-align: middle; text-align: center;'>
+                                                    <audio controls>
+                                                        <source src="@Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))" type="audio/mpeg">
+                                                        Your browser does not support the audio element.
+                                                       
+                                                    </audio>
+                                                </div>
+                                            </div>
+                                        }
+                                        else if (Model.PageType == "Video")
+                                        {
+                                            <div class='videoContainer'>
+                                                <div style='text-align: center;'>
+                                                    @*<video id="myVideo" class="dev_videos" controls autoplay style="width:100%" src="@Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))">
+            Your browser does not support HTML5 video.
+        </video>*@
+                                                    <link href="//vjs.zencdn.net/7.0/video-js.min.css" rel="stylesheet">
+                                                    <script src="//vjs.zencdn.net/7.0/video.min.js"></script>
+                                                    <video style="width: 100%; height:400px" id="myVideo"
+                                                           class="video-js dev_videos" 
+                                                           controls
+                                                           preload="auto"
+                                                           poster="//vjs.zencdn.net/v/oceans.png"
+                                                           data-setup='{}'>
+                                                        <source src="@Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))" type="video/mp4"></source>
+                                                        <p class="vjs-no-js">
+                                                            To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                            <a href="http://videojs.com/html5-video-support/" target="_blank">
+                                                                supports HTML5 video
+                                                            </a>
+                                                        </p>
+                                                    </video>
+
+
+                                                    <!-- <video id="myVideo" class="dev_videos" style="width: 100%;" controls src="@Html.Raw(HttpUtility.HtmlDecode(Model.PageImage))">
+        <source id="videoSource" />
+    </video> -->
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <a class="pageimg" href="@HttpUtility.HtmlDecode(Model.PageImage)" onclick="removeclose('img')">
+                                                <img src="@HttpUtility.HtmlDecode(Model.PageImage)" />
+                                            </a>
+
+                                        }
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div id="adDiv1">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12 add-div ad-main-large">
+                                        <div id="sponDetailDiv1" class="clearfix">
+                                            <div class="col-md-3 clearfix">
+                                                <div class="sponser">
+                                                    <label>Advertisement</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 clearfix">
+                                                <div class="">
+                                                    <div class="ad-div">
+                                                        <a href="/User/adcreation">Create Ad</a>
+                                                    </div>
+                                                    <div class="ad-div">
+                                                        <a id="editAnchor1" href="/User/adcreation?adId=">Edit Ad</a>
+                                                    </div>
+                                                    <div class="ad-div">
+                                                        <a href="javascript:;" id="removeAnchor1">Remove Ad</a>
+                                                    </div>
+                                                    <div class="ad-div">
+                                                        <a href="javascript:;" id="submitterAccount1">Submitters Account</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <a href="javascript:;" onclick="hideAd();" class="close-pos">
+                                                    <i class="fa fa-times close-icn" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row res">
+                                            <div class="col-md-5 col-sm-7 col-xs-12">
+
+                                                <div id="SlideshowImages1" class="fadein">
+                                                </div>
+                                                <div id="videoDiv1" align="center" class="embed-responsive embed-responsive-16by9">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 col-sm-5 col-xs-12 res2" style="font-size: 16px;word-wrap:break-word;">
+                                                <label class="res-lbl" id="headlineLbl1" style="display: block;font-size:20px;font-weight:600;"></label>
+                                                <label class="res-lbl" id="descriptionLbl1" style="display: block;"></label>
+                                                <label class="res-lbl" id="featuresLbl1" style="display: block;"></label>
+                                                <hr style="border-top: 1px dotted gray;" />
+                                                <label class="res-lbl" style="display: block;"><span id="urlLbl1" style="cursor:pointer;"></span></label>
+                                                <label class="res-lbl" style="display: block; color:red;"><span id="priceSpan1"></span> Rs.</label>
+                                                <label class="res-lbl" style="display: block;height: 73px;">Call <span id="MobileNumberSpan1" style="font-size:18px;color:green"></span> <span style="color:green;display:none;">Fastest delivery +Lowest price+Return within 7 days.</span></label>
+                                                <label class="res-lbl" style="display: block; color:red;"><a href="http://notetor.com/Account/SubmitterRegistration?returnUrl=%2f">www.Notetor.com</a> </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6" style="background: #F3FEFE;">
+                    <div class="textcenter custom-textcenter">
+                        <a class="btn btn-success btn-fnt16 btnborderlike" id="like" onclick="insertView('like')"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                        <button type="button" class="btn btn-success btn-fnt16 " id="ask" onclick="ask()">Ask Question</button>
+                        <button type="button" class="btn btn-success btn-fnt16" id="invite" onclick="invite()">&#10084; Invite</button>
+                        <a href="/User/SendMessages?pageno=@ViewBag.PageId&bookid=@Model.BookId" id="sendmsg" class="btn btn-success btn-fnt16">Send Message</a>
+                        <label class="btn btn-success btn-fnt16 btnborderlike" id="lableCall">Call</label>
+                        <label class="btn btn-success btn-fnt16 btnborderlike" id="lablelikes">Like()</label>
+                        <label class="btn btn-success btn-fnt16 btnborderlike" id="lableviews">View()</label>
+                        <label class="sharespan" style="    z-index: 9;">
+                            <a id="shareicon" class="btn btn-success btn-fnt16 btnborderlike">
+                                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                            </a>
+                            <div id="shareRoundIcons" class="jssocials text-right" style="display:none;">
+                                <div class="jssocials-shares">
+                                    <ul style="list-style-type:none;">
+                                        <li>
+                                            <div class="jssocials-share jssocials-share-twitter">
+                                                <a target="_blank" href="https://twitter.com/share?url=@twitterurl&text=Student&nbsp;NoteBooks" class="jssocials-share-link">
+                                                    <i class="fa fa-twitter jssocials-share-logo"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="jssocials-share jssocials-share-facebook">
+                                                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php%20?u=@t" class="jssocials-share-link">
+                                                    <i class="fa fa-facebook jssocials-share-logo"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="jssocials-share jssocials-share-googleplus">
+                                                <a target="_blank" href="https://plus.google.com/share?url=@twitterurl" class="jssocials-share-link">
+                                                    <i class="fa fa-google jssocials-share-logo"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        @*<li>
+                                            <div class="jssocials-share jssocials-share-linkedin">
+                                                <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=@url" class="jssocials-share-link">
+                                                    <i class="fa fa-linkedin jssocials-share-logo"></i>
+                                                </a>
+                                            </div>
+                                        </li>*@
+                                    </ul>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div style="overflow-y: auto; overflow-x: hidden; background: #F3FEFE; border: 1px solid rgb(211, 242, 242);" class="short" id="questionsDiv">
+
+                        @{ Html.RenderAction("_QuestionList", new { pageId = ViewBag.PageId, userId = Model.UserId, BookId = Model.BookId }); }
+
+                    </div>
+                    <div class="main-inner">
+                        <div class="content">
+                            @using (Html.BeginForm("SaveQuestion", "Home", FormMethod.Post, new { @id = "questionForm", @class = "questionForm" }))
+                            {
+                                { Html.RenderPartial("_Editor", Model); }
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="adDiv2" class="main-ad-block-mobile">
+                    <div class="col-md-12 add-div">
+                        <div id="sponDetailDiv2" class="clearfix">
+                            <div class="col-md-3 clearfix">
+                                <div class="sponser">
+                                    <label>Advertisement</label>
+                                </div>
+                            </div>
+                            <div class="col-md-9 clearfix">
+                                <div class="">
+                                    <div class="ad-div">
+                                        <a href="/User/adcreation">Create Ad</a>
+                                    </div>
+                                    <div class="ad-div">
+                                        <a id="editAnchor2" href="/User/adcreation?adId=">Edit Ad</a>
+                                    </div>
+                                    <div class="ad-div">
+                                        <a href="javascript:;" id="removeAnchor2">Remove Ad</a>
+                                    </div>
+                                    <div class="ad-div">
+                                        <a href="javascript:;" id="submitterAccount2">Submitters Account</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="javascript:;" onclick="hideAd();" class="close-pos">
+                                    <i class="fa fa-times close-icn" aria-hidden="true"></i>
+
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row res">
+                            <div class="col-md-5 col-sm-7 col-xs-12">
+
+                                <div id="SlideshowImages2" class="fadein" style="margin-left: 42px;">
+                                </div>
+                                <div id="videoDiv2" align="center" class="embed-responsive embed-responsive-16by9">
+                                </div>
+                            </div>
+
+                            <div class="col-md-7 col-sm-5 col-xs-12 res2  ad-responsive" style="font-size: 16px;word-wrap:break-word;">
+                                <label class="res-lbl" id="headlineLbl2" style="display: block;font-size:20px;font-weight:600;"></label>
+
+                                <label class="res-lbl" id="descriptionLbl2" style="display: block;"></label>
+                                <label class="res-lbl" id="featuresLbl2" style="display: block;"></label>
+
+
+                                <hr style="border-top: 1px dotted gray;" />
+                                <label class="res-lbl" style="display: block;"><span id="urlLbl2"></span></label>
+                                <label class="res-lbl" style="display: block; color:red;"><span id="priceSpan2"></span> Rs.</label>
+
+                                <label class="res-lbl" style="display: block;">Call <span id="MobileNumberSpan2" style="font-size:18px;color:green"></span> <span style="color:green;display:none;">Fastest delivery +Lowest price+Return within 7 days.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: none">
+                    <textarea id="dy" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;dy&lt;/div&gt;'</textarea>
+                    <textarea id="dx" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;dx&lt;/div&gt;'</textarea>
+                    <textarea id="dy1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;△y&lt;/div&gt;'</textarea>
+                    <textarea id="dx1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;△x&lt;/div&gt;'</textarea>
+                    <textarea id="dy2" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;∂y&lt;/div&gt;'</textarea>
+                    <textarea id="dx2" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;∂x&lt;/div&gt;'</textarea>
+                    <textarea id="dy3" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;δy&lt;/div&gt;'</textarea>
+                    <textarea id="dx3" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;δx&lt;/div&gt;'</textarea>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<meta charset="utf-8" />
+<script src="~/Content/js/jquery.colorbox-min.js"></script>
+<link href="~/Content/css/colorbox.css" rel="stylesheet" />
+<script>
+
+    var datahtml = "";
+    var del = false;
+    $(document).ready(function () {
+        var url ="@url.ToString()";
+        var output = encodeURIComponent(url);
+
+
+        $('.closeTempMsg').on('click', function () {
+            $(this).parents('div:first').hide();
+        });
+        $(".imageContainer").find('img').attr('style', 'height:100%;width:100%');
+
+        jQuery.colorbox.settings.maxWidth = '100%';
+        jQuery.colorbox.settings.maxHeight = '95%';
+        $('.edit').click(function () {
+            if (parseInt('@ViewBag.BookUserId') == parseInt('@Model.UserId')) {
+                window.location = "/User/AddNotebook?bookId=" + $('#BookId').val() + "&pageId=@ViewBag.PageId";
+            }
+            else {
+                alert('You dont have permission to edit.');
+            }
+        });
+
+
+        setTimeout(function () { $(".ques").css("word-break", "break-all !important"); }, 2000);
+
+
+        var DivHeight = $('#questionsDiv').css('height');
+
+
+    });
+
+
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        $('.EditQuestion').click(function () {
+            var html = $('.' + $('#EditableId').val() + '').html();
+            console.log($('.' + $('#EditableId').val() + ''));
+            $('#editor').html(html);
+            $('#hdnEditQuestion').val(true);
+            $('#hdnQuestionID').val($('#EditableId').val());
+            $('#btnClose').click();
+
+        });
+
+
+        $('#questionsDiv').find('.textbox').removeClass('textbox');
+        $('.reply').click(function () {
+            if (parseInt('@Model.UserId') == 0) {
+                alert('Please login to continue');
+                return false;
+            }
+           $('#editor').html('').focus();
+            $('#hdnQuestionID').val($(this).attr('data-id'));
+
+        });
+
+
+
+        $('.replyanswer').click(function () {
+            if (parseInt('@Model.UserId') == 0) {
+                alert('Please login to continue');
+                return false;
+            }
+            //$('#questionsDiv').addClass('short');
+            //$('.content').show();
+            $('#editor').html('').focus();
+            $('#hdnQuestionID').val($(this).attr('data-name'));
+
+            $('#hdnReplyAnswerID').val($(this).attr('data-id'));
+
+        });
+
+    });
+    function removeclose(type) {
+        $('#loaderDiv2').show();
+        setTimeout(function () {
+            $('#cboxClose').html('');
+            if (type == "img") {
+                $('#cboxContent').css('background', 'transparent');
+            }
+            // alert($('#cboxClose').html());
+            $('#loaderDiv2').hide();
+        }, 1000);
+
+    }
+
+    function DeleteQuestion() {
+
+        if (parseInt('@Model.UserId') == 0) {
+            alert('Please login to continue');
+            return false;
+        }
+        else {
+
+            if (confirm('Are you sure to delete?')) {
+
+
+                del = true;
+                var Questionid = $('#EditableId').val();
+                $.ajax
+                    ({
+                        type: 'POST',
+                        url: '/Home/DeleteQuestions_ById',
+                        data: '{ "Id" : "' + Questionid + '"}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+
+                            if (data) {
+
+                                //window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                                $('#messagespan').html('Record deleted successfuly!!');
+                                $('#questionsDiv').load("/Home/_QuestionList?userId=@Model.UserId&pageId=@ViewBag.PageId&bookId=" + $('#BookId').val() + "");
+
+                                $(".ques").css("word-break", "break-all !important");
+
+                            }
+                            else {
+                                $('#messagespan').html('error in request please try again later');
+
+                            }
+                        }
+                    });
+            } else {
+                return false;
+            }
+
+            //var answer = confirm("Are you sure to delete?");
+            //if (answer) {
+        }
+
+
+    }
+
+
+    $('.sharespan').hover(
+      function () {
+          $("#shareRoundIcons").css("display", "block");
+      },
+      function () {
+          $("#shareRoundIcons").css("display", "none");
+      }
+    );
+
+</script>
+<script>
+    $(document).ready(function () {
+       
+        $("#editable").click(function () {
+            $(".pop").show();
+        
+
+        });
+        $("body").click(function (e) {
+
+            if (e.target.className == "pop" || e.target.className == "control" || $(e.target).parents().hasClass("pop") || $(e.target).parents().hasClass("control") || e.target.id == "editable" || e.target.className == "KeyboardKey" || $(e.target).parents().hasClass("KeyboardKey")) {
+                $(".pop").show();
+            
+
+            }
+            else {
+              
+            }
+
+        });
+      
+
+
+
+
+
+
+
+        $('#cancel').click(function () {
+
+            //$('#questionsDiv').removeClass('short');
+            //$('.content').hide();
+            $('#editor').html('');
+            $('#hdnQuestionID').val(0);
+        });
+
+        setTimeout(function () { $(".ques").css("word-break", "break-all !important"); }, 2000);
+    });
+
+    function Addtofriendlst(obj) {
+        if (parseInt('@Model.UserId') == 0) {
+            alert('Please login to continue');
+            return false;
+        }
+        var QuestionerId = $(obj).attr("data-questionerid");
+        if (QuestionerId == '@Model.UserId.ToString()')
+            alert('You can not add yourself to your friend list!');
+        else {
+            $.ajax({
+                url: '/Home/FriendList_InsertUpdate?InvitedId=' + QuestionerId + '&PageId=' +@ViewBag.PageId +'',
+                data: {},
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    console.log(jsonData);
+                    if (jsonData.Status == 1) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.Status == '1') {
+                            if (jsonData.result == '-10')
+                                alert('Already added to your friendList.');
+                            else {
+                                if (jsonData.result == '-100')
+                                    alert('This user have blocked you.You can not add this user to your friend List.');
+                                else
+                                    if (jsonData.result == '-15')
+                                        alert('Invitation Already sent.');
+                                    else {
+                                        alert('Friend request sent successfully.');
+                                        $(obj).removeAttr('onclick');
+                                        $(obj).find('span').text('Friend request sent.')
+                                    }
+                            }
+
+                        }
+                        else {
+                            alert('Some error occured during sending invitation!');
+                        }
+                    }
+                },
+                error: function () { },
+                complete: function () { }
+
+            })
+        }
+
+
+    }
+</script>
+<script>
+    function invite() {
+
+        if (parseInt('@Model.UserId') == 0) {
+            alert('Please login to continue');
+            return false;
+        }
+        else {
+
+            // $('#btnInvite').click();
+            window.location.href = "/User/UserProfile?pageId=" +@ViewBag.PageId +"&tab=frndlist";
+        }
+    }
+
+    function ask() {
+        //$("#editable").trigger("click");
+        if (parseInt('@Model.UserId') == 0) {
+            alert('Please login to continue');
+            return false;
+        }
+        $('#questionsDiv').addClass('short');
+        $('.content').show();
+        $('#editor').html('');
+        $('#hdnQuestionID').val(0);
+        $('#editor').focus();
+        //$("#editableId").click();
+        //$('.pop').css("display","block");
+
+    }
+
+
+
+
+    function insertView(action) {
+
+        $.ajax({
+            type: 'POST',
+            url: '/Home/insertView',
+            data: '{ "Id" : "' + @ViewBag.PageId + '","action":"' + action + '"}',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) {
+
+                var obj = JSON.parse(data);
+                if (obj.status == "True" || obj.status == "1") {
+                    $('#like').css("color", "#004293");
+                }
+                else {
+                    $('#like').css("color", "White");
+
+                }
+                $('#lablelikes').html('Like(' + obj.likes + ')');
+                $('#lableviews').html('View(' + obj.views + ')');
+
+
+            }
+        });
+
+    }
+
+
+
+    uuid = function () {
+        var u = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+        function (c) {
+            var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+        return u;
+    }
+
+
+    getDeviceId = function () {
+        var current = window.localStorage.getItem("_DEVICEID_")
+        if (current) return current;
+        var id = uuid();
+        window.localStorage.setItem("_DEVICEID_", id);
+        return id;
+    }
+
+    function insertpageclick() {
+        var ip;
+        $.get("http://ipinfo.io", function (response) {
+            ip = response.ip;s
+            $.ajax({
+                type: 'POST',
+                url: '/Home/insertpageclick',
+                data: '{ "Id" : "' + @ViewBag.PageId + '","device":"' + ip + '"}',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                }
+            });
+        }, "jsonp");
+
+      
+
+    }
+</script>
+
+
+
+
+
+<script src="~/Scripts/bililiteRange.js"></script>
+<script src="~/Scripts/jquery.sendkeys.js"></script>
+<script>
+    function backspaceFunction() {
+        if ($("#editor").text().length == 0) {
+            $('#editor').empty();
+        }
+        $("#editor").sendkeys("{backspace}");
+    }
+    function deleteFunction() {
+        if ($("#editor").text().length == 0) {
+            $('#editor').empty();
+        }
+        $("#editor").sendkeys("{del}");
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        //var adcss = $('#adDiv').css('dispaly');
+        //alert(adDiv);
+
+        insertView('view');
+        insertpageclick();
+
+        $(".close-icn").click(function () {
+            $('.updateEditor').removeClass("content_aria");
+            //$(".updateEditor").css("height", "485px ");
+            //$(".updateEditor").css("max-height", "485px ");
+
+
+
+        });
+
+
+        $(".pageimg").colorbox({ rel: 'pageimg' });
+        $('#pagetext').wrap('<a class="pagetext" href="/Home/_TextPage?pageid=@ViewBag.PageId" onclick="removeclose(text)"></a>');
+        $(".pagetext").colorbox({ height: $('#contentArea').height() + 'px' });
+        // $('#cboxLoadedContent').css('overflow','scroll !important');
+
+    });
+
+</script>
+
+<script>
+    function getCookie(keyName){
+        const allcookies = document.cookie;
+        const cookieArray = allcookies.split(';');
+        let returnVal = null;
+        for (var i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            let name = cookie.split('=')[0].trim();
+            if (name == keyName) {
+                let value = cookie.split('=')[1].trim();
+                try {
+                    try {
+                        returnVal = JSON.parse(unescape(value));
+                    } catch (error) {
+                        returnVal = value;
+                    }
+                } catch {
+                    returnVal = [];
+                }
+                break;
+            }
+        }
+        return returnVal;
+    }
+
+    $(function () {
+        /* $.each(".dev_videos", function () {
+            var videoincookie = getCookie($(this).data("src"));
+            if (videoincookie != undefined && videoincookie != null && videoincookie != "") {
+                console.log(videoincookie);
+                var $source = $(this).find($('#videoSource'));
+                $source[0].src = URL.createObjectURL(videoincookie.file);
+                $source.parent()[0].load();
+            } else {
+                $(this).attr("src", $(this).data("src"));
+            }
+        }); */
+
+        if ('@Model.IsHtml' != 'True') {
+            //$('#contentArea').css('height', $(window).height() + 'px');
+        }
+
+        //  alert($('#hdnEditQuestion').val());
+        $('.questionForm').ajaxForm({
+            beforeSend: function () {
+                var htmldata = $('#data').html();
+
+                if (htmldata.length == 0) {
+                    return false;
+                }
+
+
+            },
+            success: function (data) {
+
+                if (data.success) {
+                    @* if ($('#hdnQuestionID').val() == 0) {
+                        $("#questionsDiv").scrollTop($("#questionsDiv")[0].scrollHeight);
+                        var $target = $('html,body');
+                        $target.animate({ scrollTop: $target.height() }, 1000);
+                    }
+
+                    $('#hdnQuestionID').val();
+                    $('#hdnEditQuestion').val(false);
+                    $('#messagespan').html('Record Saved successfuly!!');
+
+                    $('#questionsDiv').load("/Home/_QuestionList?userId=@Model.UserId&pageId=@ViewBag.PageId&bookId=" + $('#BookId').val() + "");
+                    //window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };
+                    $(".ques").css("word-break", "break-all !important");
+
+                    $('#questionsDiv').removeClass('short');
+                    $('.content').hide();*@
+
+                    //location.reload(true);
+                    window.location.href = "/Home/Index?PageId=@ViewBag.PageId&BookId=" + $('#BookId').val() + "";
+                }
+                else {
+                    $('#messagespan').html('error in request please try again later');
+
+                };
+            },
+            error: function () {
+
+            },
+            complete: function (xhr) {
+
+
+
+            }
+        });
+
+    });
+
+    function addText() {
+        var txt = '';
+        if (window.getSelection) {
+            txt = window.getSelection();
+        }
+        else if (document.getSelection) // FireFox
+        {
+            txt = document.getSelection();
+        }
+        else if (document.selection)  // IE 6/7
+        {
+            txt = document.selection.createRange().text;
+        }
+        document.getElementById('copiedContent').value = txt;
+        $('#Pastbtn').removeAttr('disabled');
+    }
+    function insertContentAtCaret() {
+        var sel, range;
+        var text = document.getElementById('copiedContent').value; // Textarea containing the text to add to the myInstance1 DIV
+        if (window.getSelection) {
+            sel = window.getSelection();
+            if (sel.getRangeAt && sel.rangeCount) {
+                range = sel.getRangeAt(0);
+                range.deleteContents();
+
+                var lines = text.replace("\r\n", "\n").split("\n");
+                var frag = document.createDocumentFragment();
+                for (var i = 0, len = lines.length; i < len; ++i) {
+                    if (i > 0) {
+                        frag.appendChild(document.createElement("br"));
+                    }
+                    frag.appendChild(document.createTextNode(lines[i]));
+                }
+
+                range.insertNode(frag);
+            }
+        } else if (document.selection && document.selection.createRange) {
+            document.selection.createRange().text = text;
+        }
+    }
+
+
+    function selectText(hexColor) {
+        var selection = window.getSelection().getRangeAt(0);
+        var selectedText = selection.extractContents();
+        var span = document.createElement('span');
+        span.style.backgroundColor = hexColor;
+        span.className = 'selected-text';
+        span.appendChild(selectedText);
+
+        selection.insertNode(span);
+
+
+        if ($(span)[0].nextSibling.nodeValue.charAt(0) == '') {
+            $(span).after("&nbsp;");
+        }
+
+    }
+    $('#generatepdf').click(function () {
+        $('#loaderDiv2').show();
+        if ($.browser.mozilla == true) {
+
+            $.getScript('//cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML').done(function () {
+                $('#contentArea').removeClass('updateEditor');
+                $('#contentArea').removeClass('notebookEditor');
+                $('#contentArea').css('background-color', 'white');
+                setTimeout(function () {
+
+                    html2canvas($('#contentArea'), {
+
+                        onrendered: function (canvas) {
+                            var img = canvas.toDataURL('image/jpeg');
+
+                            var doc = new jsPDF();
+
+                            doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                            $('#loaderDiv2').hide();
+
+                            doc.save("@(Model.SubjectId + '-' + Model.PageNumber)" + ".pdf");
+                            window.location.href = "/Home/Index?PageId=@ViewBag.PageId&BookId=" + $('#BookId').val() + "";
+                            //location.reload(true);
+                            $('#contentArea').addClass('updateEditor');
+                        }
+                    });
+                }, 500);
+            });
+
+
+        }
+        else {
+            $('#contentArea').removeClass('updateEditor');
+            $('#contentArea').removeClass('notebookEditor');
+            $('#contentArea').css('background-color', 'white');
+            html2canvas($("#contentArea"), {
+                onrendered: function (canvas) {
+                    var img = canvas.toDataURL('image/jpeg');
+
+                    var doc = new jsPDF();
+
+                    doc.addImage(img, 'JPEG', 10, 10, 180, 280);
+                    $('#loaderDiv2').hide();
+
+                    doc.save("ChapterContent.pdf");
+                    $('#contentArea').addClass('updateEditor');
+                }
+            });
+        }
+
+    });
+
+
+    function bindQuestion(id) {
+        $('#EditableId').val(id);
+
+
+    }
+</script>
+<style>
+    #cboxLoadedContent {
+        overflow: scroll !important;
+    }
+
+    .btnborderlike {
+        border-radius: 15px;
+    }
+
+    .jssocials-share-link {
+        border-radius: 50%;
+    }
+</style>

@@ -1,0 +1,144 @@
+﻿<style>
+
+</style>
+<div id="question" style="display: none"></div>
+<div class="popx" style="display: none">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-area1">
+                <a href="javascript:;" class="top-button" onclick="return defaultScientific_KeyBoard();">Scientific Keyboard</a>
+                <a href="javascript:;" class="top-button" onclick="gotoSpecialSymbols();">Special symbols</a>
+                <a href="javascript:;" class="top-button" onclick="return gotoQWETY();">Qwerty Keyboard</a>
+
+            </div>
+            @*<span data-attr="82" class="KeyboardKey"><a href="javascript:;"  class="button" onclick="return defaultScientific_KeyBoard();">X</a></span> *@
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn-area2 clearfix">
+            <div class="col-md-12" id="keyboadArea">
+
+                <span data-attr="1" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img1.PNG" />
+                    </a>
+                </span>
+                <span data-attr="2" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img2.PNG" />
+                    </a>
+                </span>
+                <span data-attr="3" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img3.PNG" />
+                    </a>
+                </span>
+                <span data-attr="4" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img4.PNG" />
+                    </a>
+                </span>
+                <span data-attr="5" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img5.PNG" />
+                    </a>
+                </span>
+                <span data-attr="6" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img6.PNG" />
+                    </a>
+                </span>
+                <span data-attr="7" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img7.PNG" />
+                    </a>
+                </span>
+                <span data-attr="8" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img8.PNG" />
+                    </a>
+                </span>
+                <span data-attr="9" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img9.PNG" />
+                    </a>
+                </span>
+                <span data-attr="10" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img10.PNG" />
+                    </a>
+                </span>
+                <span data-attr="11" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img11.PNG" />
+                    </a>
+                </span>
+                <span data-attr="12" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img12.PNG" />
+                    </a>
+                </span>
+                <span data-attr="80" data-text="∪" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img13.PNG" />
+                    </a>
+                </span>
+                <span data-attr="80" data-text="∩" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img14.PNG" />
+                    </a>
+                </span>
+                <span data-attr="15" class="KeyboardKey">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/img15.PNG" />
+                    </a>
+                </span>
+                @* <a href="#" class="buttonqk"><img src="/KeyboardIcons/images/img16.PNG" /></a>
+                    <a href="#" class="buttonsk"><img src="/KeyboardIcons/images/img17.PNG" /></a>*@
+            </div>
+            <table class="ruled prec-form-char" style="display: none;">
+                <tr>
+                    <td>
+                        <textarea id="powerTextbox">\html'&lt;div contenteditable="true" class="textbox text"&gt;x&lt;/div&gt;'</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <textarea id="mathSrc1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox"&gt;&lt;/div&gt;'</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="mathTgt1"></div>
+                    </td>
+                </tr>
+            </table>
+            <div style="float: right; position: absolute; bottom: -12px; right: 8px;display:none" id="commonKeys">
+                <span class="KeyboardKey" data-attr="80" data-text="&nbsp;">
+                    <a href="javascript:;" class="button">
+                        <img src="/KeyboardIcons/images/space.PNG" />
+                    </a>
+                </span>
+                <span class="KeyboardKey">
+                    <a href="javascript:;" class="button" onclick="backspaceFunction()">
+                        <img src="/KeyboardIcons/images/special character/bkspc.PNG" />
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div style="display: none">
+    <textarea id="dy" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;dy&lt;/div&gt;'</textarea>
+    <textarea id="dx" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;dx&lt;/div&gt;'</textarea>
+    <textarea id="dy1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;△y&lt;/div&gt;'</textarea>
+    <textarea id="dx1" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;△x&lt;/div&gt;'</textarea>
+    <textarea id="dy2" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;∂y&lt;/div&gt;'</textarea>
+    <textarea id="dx2" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;∂x&lt;/div&gt;'</textarea>
+    <textarea id="dy3" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;δy&lt;/div&gt;'</textarea>
+    <textarea id="dx3" style="height: 10px;">\html'&lt;div contenteditable="true" class="textbox text"&gt;δx&lt;/div&gt;'</textarea>
+</div>

@@ -1,0 +1,189 @@
+﻿
+@media only screen and (max-width:768px) {
+
+    .my-login {
+        display: block;
+    }
+
+    .KeyboardKey {
+        height: 82px !important;
+        min-height: 82px !important;
+        padding: 5px 7px !important;
+        width: 22% !important;
+    }
+
+    .KeyboardRow span {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        margin-left: 6px !important;
+        float: left;
+    }
+
+    #leftSideMenu {
+        display: list-item;
+        float: left;
+    }
+
+    #keyboadArea {
+        margin-left: 0px !important;
+    }
+
+    .KeyboardRow {
+        width: 100%;
+    }
+
+
+
+    #leftSideMenu > span {
+        height: 82px !important;
+        min-height: 82px !important;
+        padding: 5px 7px !important;
+        margin-left: 6px;
+        float: left;
+        width: 164px !important;
+    }
+
+    .editor {
+        width: 100% !important;
+        height: auto;
+        max-height: 400px !important;
+        margin: 0 auto !important;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width:480px) {
+
+
+    .KeyboardKey {
+        height: 82px !important;
+        min-height: 82px !important;
+        padding: 5px 7px !important;
+        width: 20% !important;
+    }
+
+    .KeyboardRow span {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        margin-left: 6px !important;
+        float: left;
+    }
+
+    #leftSideMenu {
+        display: list-item;
+        float: left;
+    }
+
+    #keyboadArea {
+        margin-left: 0px !important;
+    }
+
+    .KeyboardRow {
+        width: 100%;
+    }
+
+
+
+    #leftSideMenu > span {
+        height: 82px !important;
+        min-height: 82px !important;
+        padding: 5px 7px !important;
+        margin-left: 6px;
+        float: left;
+        width: 91px !important;
+    }
+
+    .editor {
+        width: 100% !important;
+        height: auto;
+        max-height: 200px !important;
+        margin: 0 auto !important;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width:360px) {
+
+
+    .KeyboardKey {
+        height: 82px !important;
+        min-height: 82px !important;
+        padding: 5px 7px !important;
+        width: 25% !important;
+    }
+
+    .KeyboardRow span {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+        margin-left: 6px !important;
+        float: left;
+    }
+
+    #leftSideMenu {
+        display: list-item;
+        float: left;
+    }
+
+    #keyboadArea {
+        margin-left: 0px !important;
+    }
+
+    .KeyboardRow {
+        width: 100%;
+    }
+
+
+
+    #leftSideMenu > span {
+        height: 82px !important;
+        min-height: 82px !important;
+        padding: 5px 7px !important;
+        margin-left: 6px;
+        float: left;
+        width: 85px !important;
+    }
+
+    .editor {
+        width: 100% !important;
+        height: auto;
+        max-height: 200px !important;
+        margin: 0 auto !important;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width:320px) {
+
+
+
+    #leftSideMenu > span {
+        height: 80px !important;
+        min-height: 80px !important;
+        padding: 8px 0px !important;
+        margin-left: 1px;
+        float: left;
+        width: 95px !important;
+    }
+
+    .KeyboardKey {
+        font-size: 11px !important;
+        padding: 5px 0px !important;
+        width: 32% !important;
+    }
+
+    .KeyboardRow span {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+        margin-left: 1px !important;
+        float: left;
+    }
+
+
+    #rightSideMenu > span {
+        height: 71px !important;
+    }
+}
