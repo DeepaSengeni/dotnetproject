@@ -73,7 +73,7 @@
                                             <div id="error_username" class="text-danger">@TempData["EmailError"]</div>
                                         </div>
                                         <div class="form-group" style="display: block;">
-                                            <label style="font-size: 12px;">Keep me logged in &nbsp;&nbsp;</label>
+                                            <label style="font-size: 12px;">Remember me &nbsp;&nbsp;</label>
                                             @Html.CheckBoxFor(m => m.Rememberme);
                                         </div>
                                     </div>
@@ -85,11 +85,14 @@
                                         </div>
                                         <div class="form-group" style="display: block;">
 
-                                            <div class="forget-pass"><a href="/Account/ForgotPassword">Forgotten Password?</a></div>
+                                            <div class="forget-pass"><a href="/Account/ForgotPassword">Forgot Password?</a></div>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2 col-xs-2 ">
                                         <button type="submit" class="btn btn-default login-btn-fb btn-block" style="margin-bottom: 0px !important;">log in</button>
+                                        <a href="mailto:notetorhelp@gmail.com" class="btn btn-lnk" target="_blank" style="color:#ffff">
+                                            May I help you?  &#128578
+                                        </a>
                                     </div>
                                     <div class="col-md-2 col-sm-2 col-xs-2 ">
                                         <a href="/Home/FAQ" class="btn btn-warning" style="margin-top: 26px; padding: 1px 15px;">FAQ</a>
@@ -119,13 +122,13 @@
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-6">
                                         <div class="form-group">
-                                            <label style="font-size: 11px;">Keep me logged in &nbsp;&nbsp;</label>
+                                            <label style="font-size: 11px;">Remember me &nbsp;&nbsp;</label>
                                             @Html.CheckBoxFor(m => m.Rememberme);
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-6">
                                         <div class="form-group" style="margin-top: 5px;">
-                                            <div class="forget-pass"><a href="/Account/ForgotPassword">Forgotten Password?</a></div>
+                                            <div class="forget-pass"><a href="/Account/ForgotPassword">Forgot Password?</a></div>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2 col-xs-12">
@@ -175,9 +178,9 @@
                                 <div class="form-1st">
                                     <div class="form-group">
                                         <label class="sr-only">Email address</label>
-                                        @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control emailId", @autocomplete = "off", @readonly = "readonly", onfocus= "this.removeAttribute('readonly');", placeholder = "Email" })
+                                        @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control emailId", @autocomplete = "off", @readonly = "readonly", onfocus = "this.removeAttribute('readonly');", placeholder = "Email" })
                                         <div class="text-danger">@Html.ValidationMessageFor(model => model.EmailID)</div>
-                                        <span id="msgspan" style="color: #A94442"></span><span class="otp-style"><a href="javascript:;" id="SendOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Send OTP </a></span>
+                                        <span id="msgspan" style="color: #A94442"></span><span class="otp-style"><a href="javascript:;" class="btn btn-primary" id="SendOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Send OTP </a></span>
                                     </div>
                                 </div>
                                 <div class="form-2nd">
@@ -189,7 +192,7 @@
                                         </div>
                                         <input type="hidden" id="hdnRequest" value="" />
                                         <p id="msgspan1" style="color: red;"></p>
-                                        <span class="otp-style"><a href="javascript:;" id="VerifyOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Verify OTP</a></span>
+                                        <span class="otp-style"><a href="javascript:;" class="btn btn-primary" id="VerifyOTP" style="text-decoration: none" data-dismiss="modal" aria-hidden="true">Verify OTP</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -245,12 +248,12 @@
                                 </div>
                             </div>
                             @*<div class="adj clearfix">
-            <div class="form-group">
-                <label class="sr-only">Name Of (Coaching/College/School)</label>
-                @Html.DropDownListFor(model => model.CollegeID, new SelectList(Model.InstituteModelList, "ID", "InstituteName"), "Name Of (Coaching/College/School)", new { @class = "form-control" })
-                <div class="text-danger">@Html.ValidationMessageFor(model => model.CollegeID)</div>
-            </div>
-        </div>*@
+                                    <div class="form-group">
+                                        <label class="sr-only">Name Of (Coaching/College/School)</label>
+                                        @Html.DropDownListFor(model => model.CollegeID, new SelectList(Model.InstituteModelList, "ID", "InstituteName"), "Name Of (Coaching/College/School)", new { @class = "form-control" })
+                                        <div class="text-danger">@Html.ValidationMessageFor(model => model.CollegeID)</div>
+                                    </div>
+                                </div>*@
                             <div class="adj clearfix">
                                 <div class="form-group">
                                     <label class="birthday">Profile Picture</label>
@@ -329,6 +332,34 @@
             </div>
         </div>
     </div>
+
+    <section class="navigation">
+        <!-- Footer -->
+        <footer class="text-center text-white" style="border:none !important;">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: CTA -->
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center footerlinks">
+                     <a class="link" target="_blank" href="/Home/Contact">Contact Details</a>
+                     <a class="link" target="_blank" href="/Home/TermsandConditions">Terms and Conditions</a>
+                     <a class="link" target="_blank" href="/Home/AboutUs">About Us</a>
+                     <a class="link" target="_blank" href="/Home/PrivacyPolicies">Privacy Policies</a>
+                     <a target="_blank" href="/Home/RefundCancellation">Refund and Cancellation Policies</a>
+                    </p>
+                </section>
+                <!-- Section: CTA -->
+            </div>
+            <!-- Grid container -->
+            <!-- Copyright -->
+            <div class="text-center p-3">
+                © 2022 Notetor, LLC. All Rights Reserved.
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </section>
+
     @Html.Hidden("ip", (object)ViewBag.ip)
 </body>
 </html>

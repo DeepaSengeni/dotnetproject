@@ -27,6 +27,28 @@
 
 @foreach (var replyanswer in Model.ReplyAnswersList.ToList())
 {
+    if (replyanswer.isRemoveForYouOnly.Contains(Session["UserId"].ToString()))
+    {
+        continue;
+    }
+
+    if (replyanswer.isRemoveForAll == 1)
+    {
+        continue;
+    }
+
+    if (replyanswer.isRemoveForAll.ToString().Trim() == "")
+    {
+        replyanswer.isRemoveForAll = 0;
+    }
+
+    if (replyanswer.isRemoveForYouOnly.Trim() == "")
+    {
+        replyanswer.isRemoveForYouOnly = "0";
+    }
+
+    var isRemoveForYouOnlyValForReplyAns = replyanswer.isRemoveForYouOnly + "," + Convert.ToInt32(Session["UserId"]);
+
     <div style="padding-left: 60px; padding-top: 10px;">
         <div class="row edrcls sp-cm" style="margin-top: 0px;">
             <div class="col-md-12 all-que-wrap clearfix">
@@ -50,7 +72,7 @@
                     <h3 class="ques @(replyanswer.Id)ans">@Html.Raw(replyanswer.Answer)</h3>
 
                     @* <div class="like_textarea txtarea" name="page_content" contenteditable></div>
-                        <input type="hidden">*@
+            <input type="hidden">*@
 
                 </div>
 
@@ -67,6 +89,18 @@
                         <li><a href="javascript:;" data-id="@replyanswer.Id" class="delete" onclick="DeleteAnswer()">Delete</a></li>
                     </ul>
                 </div>
+
+                <div class="dropdown editbtn edit-div2" style="visibility:@(replyanswer.bookCreator == Convert.ToInt32(Session["UserId"]) && replyanswer.UserId != Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")">
+                    <button class="dropdown-toggle edit-btn" type="button" data-toggle="dropdown" onclick="bindAnswer('@replyanswer.Id','@Model.QuestionId')">
+                        <i class="fa fa-pencil"></i>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;" data-id="@replyanswer.Id" class="delete remove" onclick="RemoveAnswer('@isRemoveForYouOnlyValForReplyAns','@replyanswer.isRemoveForAll')">Remove for you only</a></li>
+                        <li><a href="javascript:;" data-id="@replyanswer.Id" class="delete remove" onclick="RemoveAnswer('@replyanswer.isRemoveForYouOnly',1)">Remove for all</a></li>
+                    </ul>
+                </div>
+
                 <div class="inner-main col-md-12">
                     <div class="btn-all">
 
@@ -77,7 +111,7 @@
 
 
                         @*<a href="javascript:;" class="reply" data-id="@answer.Id" style="cursor: not-allowed; pointer-events: none;" ><i class="fa fa-reply" aria-hidden="true"></i>
-                            Answered</a>*@
+                Answered</a>*@
 
                         @{
                             var index3 = Array.IndexOf(CurrentUserfriendIds, replyanswer.UserId);
@@ -123,9 +157,9 @@
                         }
 
                         @*<a href="javascript:;" class="friend" data-id="@answer.Id" data-questionerId="@answer.UserId" onclick="Addtofriendlst(this)" style="visibility:@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "Visible" : "hidden")"><i class="fa fa-user" aria-hidden="true"></i>
-                            Add friend</a>*@
+                Add friend</a>*@
                         @*<a href="javascript:;" class="delete" data-id="@item.Id" style="@(item.UserId == Convert.ToInt32(Session["UserId"]) ? "padding: 5px;" : "padding:5px; pointer-events:none")" ><i class="fa fa-trash-o" aria-hidden="true"></i>
-                            Delete</a>*@
+                Delete</a>*@
                     </div>
                 </div>
 

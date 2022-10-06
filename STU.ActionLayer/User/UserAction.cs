@@ -56,6 +56,25 @@ namespace STU.ActionLayer.User
         }
         #endregion
 
+        public ActionResult USP_U_UsersCustomerid(UsersInfoBase usersInfoBase)
+        {
+            userDl = new UserDL();
+            actionResult = new ActionResult();
+            try
+            {
+                actionResult.dtResult = userDl.USP_U_UsersCustomerid(usersInfoBase);
+                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
+                    actionResult.IsSuccess = true;
+                else
+                    actionResult.IsError = true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return actionResult;
+        }
+
         #region USP_U_UsersProfilePic
         public ActionResult USP_U_UsersProfilePic(UsersInfoBase usersInfoBase)
         {

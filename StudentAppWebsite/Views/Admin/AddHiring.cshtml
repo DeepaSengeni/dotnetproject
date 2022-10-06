@@ -1,0 +1,74 @@
+﻿@model StudentAppWebsite.Models.Hiring
+@{
+    ViewBag.Title = "AddHiring";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="col-md-12">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+</div>
+@using (Html.BeginForm("AddHiring", "Admin", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Add New Hiring
+                    </h3>
+
+                    <div class="panel-options">
+                        <a href="#" data-toggle="panel">
+                            <span class="collapse-icon">&ndash;</span>
+                            <span class="expand-icon">+</span>
+                        </a>
+                        <a href="#" data-toggle="remove">
+                            &times;
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-6">
+                        <div class="form-group clearfix">
+                            <label class="control-label">Hiring  Tittle</label>
+                            @Html.TextBoxFor(model => model.Tittle, new { @class = "form-control", placeholder = "Hiring Tittle", maxlength = "50" })
+                            <div class="text-danger">@Html.ValidationMessageFor(model => model.Tittle)</div>
+                        </div>
+
+                        <div class="form-group clearfix">
+                            <label class="control-label">Hiring Description</label>
+                            @Html.TextBoxFor(model => model.Description, new { @class = "form-control", placeholder = "Hiring Description", maxlength = "500" })
+                            <div class="text-danger">@Html.ValidationMessageFor(model => model.Description)</div>
+                        </div>
+                        @*<div class="form-group clearfix">
+                            <label class="col-sm-4 control-label">Status</label>
+                            <div class="col-sm-8">
+                                @Html.CheckBoxFor(model => model.Status)
+                            </div>
+                        </div>*@
+                        <div class="form-group clearfix">
+
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                            <a href="/Admin/ManageHiring" class="btn btn-success">Back</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>

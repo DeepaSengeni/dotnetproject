@@ -15,7 +15,10 @@ namespace STU.BaseLayer.Questions
         private string _createdDate = string.Empty;
         private string _modifiedDate = string.Empty;
         private string _questionImage = string.Empty;
-        private string _questionTitle = string.Empty; 
+        private string _questionTitle = string.Empty;
+        private String _isRemoveForYouOnly = string.Empty;
+        private Int64 _isRemoveForAll = 0;
+        private Int64 _bookCreator = 0;
 
 
         public Int64 Id { get { return _id; } set { _id = value; } }
@@ -26,6 +29,9 @@ namespace STU.BaseLayer.Questions
         public string ModifiedDate { get { return _modifiedDate; } set { _modifiedDate = value; } }
         public string QuestionImage { get { return _questionImage; } set { _questionImage = value; } }
         public string QuestionTitle { get { return _questionTitle; } set { _questionTitle = value; } }
-        
+
+        public String isRemoveForYouOnly { get { return _isRemoveForYouOnly; } set { _isRemoveForYouOnly = value; } }
+        public Int64 isRemoveForAll { get { return _isRemoveForAll; } set { _isRemoveForAll = value; } }
+        public Int64 bookCreator { get { return _bookCreator; } set { _bookCreator = value; } }
     }
 }

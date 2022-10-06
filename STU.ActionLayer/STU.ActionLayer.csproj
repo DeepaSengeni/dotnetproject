@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionLayerErrorHandler.cs" />
-    <Compile Include="Admin\PaymentListAction.cs" />
     <Compile Include="Advertisement\AdvertisementAction.cs" />
     <Compile Include="Answers\AnswerAction.cs" />
     <Compile Include="Book\BookAction.cs" />

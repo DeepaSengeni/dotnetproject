@@ -38,12 +38,6 @@
     <Reference Include="Quartz, Version=3.0.7.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
       <HintPath>..\packages\Quartz.3.0.7\lib\net452\Quartz.dll</HintPath>
     </Reference>
-    <Reference Include="STU.DBServices">
-      <HintPath>..\STU.DBServices\bin\Debug\STU.DBServices.dll</HintPath>
-    </Reference>
-    <Reference Include="STU.Utility">
-      <HintPath>..\STU.Utility\bin\Debug\STU.Utility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -55,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\PaymentListDL.cs" />
     <Compile Include="Advertisement\AdvertisementDL.cs" />
     <Compile Include="Answers\AnswersDL.cs" />
     <Compile Include="Book\BookDL.cs" />
@@ -70,6 +63,14 @@
     <ProjectReference Include="..\STU.BaseLayer\STU.BaseLayer.csproj">
       <Project>{3edc595b-be69-41eb-84b9-8ecab3d7dda5}</Project>
       <Name>STU.BaseLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\STU.DBServices\STU.DBServices.csproj">
+      <Project>{d9c7d490-d087-4470-970b-649ac3e44d60}</Project>
+      <Name>STU.DBServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\STU.Utility\STU.Utility.csproj">
+      <Project>{0215f579-4010-4a0f-bc87-4f37697438e1}</Project>
+      <Name>STU.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

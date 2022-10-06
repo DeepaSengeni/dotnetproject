@@ -1,0 +1,154 @@
+﻿@model  List<StudentAppWebsite.Models.Hiring>
+    @{
+        ViewBag.Title = "Hiring";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <style>
+        .panel-title {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 16px;
+            color: inherit;
+        }
+
+        .panel-default > .panel-heading {
+            color: #333;
+            background-color: #eee;
+        }
+
+        .panel-heading {
+            padding: 10px 15px;
+        }
+
+        .panel-default {
+            border-color: #ddd;
+        }
+
+        .panel {
+            margin: 0px;
+            background-color: #fff;
+            border: none;
+            border-radius: 0px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            padding: 0px 10px;
+        }
+
+        .panel-default > .panel-heading + .panel-collapse > .panel-body {
+            border-top-color: #ddd;
+        }
+
+        .panel-body {
+            border-top: 0px;
+            padding: 15px;
+        }
+
+        .panel .panel-body {
+            padding: 0;
+            color: #626262;
+            padding: 0px 5px;
+        }
+
+        .panel .panel-heading > .panel-title > a {
+            color: #000;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .panel-group .panel .panel-heading + .panel-collapse .panel-body {
+            border-top: none;
+            margin-top: 0px;
+        }
+
+        .panel .panel-heading {
+            padding-bottom: 0px;
+            border-bottom: none;
+            margin-bottom: 7px !important;
+            color: #000 !important;
+        }
+
+        .panel-group .panel {
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #616565;
+        }
+
+        .answ {
+            line-height: 32px;
+            color: #616565;
+        }
+    </style>
+    <div class="col-md-12">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 faq-page">
+                <h2 style="text-align: center;">Open Positions</h2>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    @if (Model != null)
+                    {
+                        if (Model.Count > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@item.ID" aria-expanded="false" aria-controls="@item.ID">
+                                                @item.Tittle
+
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="@item.ID" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <p>@item.Description</p>
+                                            <div class="float-right">
+                                                <a href="mailto:notetorhiring@gmail.com?subject=Application For @item.Tittle" class="btn btn-warning">Apply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <h4 style="color: red; text-align: center"> We Are Not Hiring For the While.</h4>
+                        }
+                    }
+
+                    @*<div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Q. 2 How can i 'Create an account' ?
+
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    <p class="answ">
+                        If you open Notetor.com/NotetorApp in Web browser/Phone/Tablet/device then 'Create an account' form will appear. Fill your first name, last name, email id and mobile number in given text box then click 'Send OTP'. OTP will come to your mobile in message box. Type this OTP in next textbox then click Verify OTP. OTP will verify then a green check sign will appear next.
+                        Fill password for this website/App then fill confirm password.
+                        Choose 'Birthday' from calender. Select 'Gender' (Male/Female). Choose 'Profile pic' through 'Browse'.
+                        Choose country, state, city from given dropdown list then click 'Create account' button in green color. Now your account will create and you will enter into homepage.
+                    </p>
+                </div>
+            </div>
+        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>

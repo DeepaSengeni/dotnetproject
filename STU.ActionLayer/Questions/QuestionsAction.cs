@@ -269,6 +269,25 @@ namespace STU.ActionLayer.Questions
             }
             return actionResult;
         }
+
+        public ActionResult Questions_Remove_By_Id(QuestionsBase questionBase)
+        {
+            questionDL = new QuestionDL();
+            actionResult = new ActionResult();
+            try
+            {
+                actionResult.dtResult = questionDL.Questions_Remove_By_Id(questionBase);
+                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
+                    actionResult.IsSuccess = true;
+                else
+                    actionResult.IsError = true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return actionResult;
+        }
         #endregion
 
         #region DeleteAnswer_ById
@@ -279,6 +298,25 @@ namespace STU.ActionLayer.Questions
             try
             {
                 actionResult.dtResult = questionDL.DeleteAnswer_ById(questionBase);
+                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
+                    actionResult.IsSuccess = true;
+                else
+                    actionResult.IsError = true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return actionResult;
+        }
+
+        public ActionResult RemoveAnswer_ById(QuestionsBase questionBase)
+        {
+            questionDL = new QuestionDL();
+            actionResult = new ActionResult();
+            try
+            {
+                actionResult.dtResult = questionDL.RemoveAnswer_ById(questionBase);
                 if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
                     actionResult.IsSuccess = true;
                 else
