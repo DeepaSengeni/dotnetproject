@@ -147,7 +147,7 @@ namespace STA.DataLayer.Advertisement
         }
         #endregion
 
-        
+
         #region adcreation_LoadByAdId
         public DataTable adcreation_LoadByAdId(AdvertisementBase advertisementbase)
         {
@@ -223,8 +223,8 @@ namespace STA.DataLayer.Advertisement
         }
         #endregion
 
-        #region PaymentRequest_IU
-        public DataTable PaymentRequest_IU(AdvertisementBase advertisementbase)
+        #region PaymentRequest_UPI
+        public DataTable PaymentRequest_UPI(AdvertisementBase advertisementbase)
         {
             dsContainer = new DataSet();
             dtContainer = new DataTable();
@@ -233,15 +233,13 @@ namespace STA.DataLayer.Advertisement
                 MyParameter[] myParams = {
 
                                           new MyParameter("@UserId",advertisementbase.userId),
-                                          new MyParameter("@AccountNo",advertisementbase.AccountNumber),
-                                            new MyParameter("@IFSCCode",advertisementbase.IFSCCode),
-                                          new MyParameter("@AmountRequested",advertisementbase.AmountRequested),
-                                           new MyParameter("@AccountHolderName",advertisementbase.AccountHolderName),
-                                           new MyParameter("@EmailId",advertisementbase.EmailId),
+                                          new MyParameter("@BankAccountHolderName",advertisementbase.BankAccountHolderName),
+                                            new MyParameter("@UPIId",advertisementbase.UPIId),
+                                          new MyParameter("@MobileNumberUPI",advertisementbase.MobileNumberUPI),
+                                           new MyParameter("@AmountRequested",advertisementbase.AmountRequested),
                                            new MyParameter("@AmountCurrency",advertisementbase.Currency),
-                                           new MyParameter("@ExchangeRate",advertisementbase.ExchangeRate)
                                          };
-                Common.Set_Procedures("PaymentRequest_IU");
+                Common.Set_Procedures("PaymentRequest_UPI");
                 Common.Set_ParameterLength(myParams.Length);
                 Common.Set_Parameters(myParams);
                 dsContainer = Common.Execute_Procedures_Select();
@@ -255,7 +253,36 @@ namespace STA.DataLayer.Advertisement
         }
         #endregion
 
+        #region PaymentRequest_Bank
+        public DataTable PaymentRequest_Bank(AdvertisementBase advertisementbase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
 
+                                          new MyParameter("@UserId",advertisementbase.userId),
+                                          new MyParameter("@BankAccountHolderName",advertisementbase.BankAccountHolderName),
+                                          new MyParameter("@BankAccountNumber",advertisementbase.BankAccountNumber),
+                                          new MyParameter("@IFSCCode",advertisementbase.BankIFSCCode),
+                                          new MyParameter("@MobileNumberUPI",advertisementbase.MobileNumberUPI),
+                                           new MyParameter("@AmountRequested",advertisementbase.AmountRequested),
+                                           new MyParameter("@AmountCurrency",advertisementbase.Currency),
+                                         };
+                Common.Set_Procedures("PaymentRequest_Bank");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
         #region saveAd_Clicks
         public DataTable saveAd_Clicks(AdvertisementBase advertisementbase)
         {
@@ -571,7 +598,7 @@ namespace STA.DataLayer.Advertisement
             try
             {
                 MyParameter[] myParams = {
-                                          new MyParameter("@UserId",advertisementbase.userId),                                         
+                                          new MyParameter("@UserId",advertisementbase.userId),
                                           new MyParameter("@CurrencyCode",advertisementbase.Currency),
                                           new MyParameter("@ExchangeRate",advertisementbase.ExchangeRate),
                                           new MyParameter("@paymentId",advertisementbase.paymentId),
@@ -763,7 +790,7 @@ namespace STA.DataLayer.Advertisement
                                           new MyParameter("@Headline",advertisementbase.headline),
                                           new MyParameter("@UserId",advertisementbase.userId),
                                           new MyParameter("@CityId",advertisementbase.CityId),
-                                   
+
                                          };
                 Common.Set_Procedures("FindusersDetailofCreatedForCity");
                 Common.Set_ParameterLength(myParams.Length);
@@ -791,7 +818,7 @@ namespace STA.DataLayer.Advertisement
                                           new MyParameter("@cityid",advertisementbase.CityId),
                                           new MyParameter("@StartDate",advertisementbase.startdate),
                                           new MyParameter("@EndDate",advertisementbase.enddate)
-                                         
+
                                          };
                 Common.Set_Procedures("cityId_Insert");
                 Common.Set_ParameterLength(myParams.Length);
@@ -852,8 +879,62 @@ namespace STA.DataLayer.Advertisement
             return dsContainer;
         }
         #endregion
+        #region UPI_Insert_Update
+        public DataTable UPIDetails_Insert_Update(AdvertisementBase advertisementbase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
 
-   
+                                          new MyParameter("@UserId",advertisementbase.userId),
+                                           new MyParameter("@BankAccountHolderName",advertisementbase.BankAccountHolderName),
+                                           new MyParameter("@UPIId",advertisementbase.UPIId),
+                                           new MyParameter("@MobileNumberUPI",advertisementbase.MobileNumberUPI)
+                                         };
+                Common.Set_Procedures("UPIdetails_Insert_Update");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
+
+        #region Bank_Insert_Update
+        public DataTable BankDetails_Insert_Update(AdvertisementBase advertisementbase)
+        {
+            dsContainer = new DataSet();
+            dtContainer = new DataTable();
+            try
+            {
+                MyParameter[] myParams = {
+
+                                          new MyParameter("@UserId",advertisementbase.userId),
+                                           new MyParameter("@BankAccountHolderName",advertisementbase.BankAccountHolderName),
+                                           new MyParameter("@BankAccountNumber",advertisementbase.BankAccountNumber),
+                                           new MyParameter("@IFSCCode",advertisementbase.BankIFSCCode),
+                                           new MyParameter("@MobileNumberUPI",advertisementbase.MobileNumberUPI)
+                                         };
+                Common.Set_Procedures("Bankdetails_Insert_Update");
+                Common.Set_ParameterLength(myParams.Length);
+                Common.Set_Parameters(myParams);
+                dsContainer = Common.Execute_Procedures_Select();
+                dtContainer = dsContainer.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.DataLayerError(ex);
+            }
+            return dtContainer;
+        }
+        #endregion
 
 
     }

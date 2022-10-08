@@ -56,11 +56,32 @@
         font-size: 20px;
     }
 
+    #bankAccountName, #upiID, #mobileNumber, #walletAmount, #bankIFSCCode, #bankAccountNumber {
+        color: #004293;
+        font-size: 20px;
+        white-space: initial;
+    }
+
     .totl-btn {
         margin-top: 0;
         margin-bottom: 15px;
         float: right;
         margin-left: 5px;
+    }
+
+    .bankaccholder-btn {
+        margin-top: 0;
+        margin-bottom: 15px;
+        float: right;
+        margin-left: 5px;
+        white-space: initial;
+    }
+
+    .content1::after {
+        color: #004293;
+        font-size: 20px;
+        content: "\a";
+        white-space: pre;
     }
 
     #CurrCode {
@@ -84,8 +105,13 @@
     <input type="hidden" id="CurrenCode" />
     <input type="hidden" id="dbtotalAmount" />
     <input type="hidden" id="tot" />
+    <div style="position: fixed; height: 100%; width: 100%; top: 0; z-index: 5; background-color: #fff; text-align: center; display: none;" id="loaderDiv3">
 
+        <div style="width: 200pt; text-align: center; position: fixed; left: 40%; top: 43%; z-index: 9999999;">
+            <img src="/Content/spinner.gif" style="position: fixed; left: 48%; top: 40%; height: 80px; width: 80px; z-index: 6;" />
 
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -93,16 +119,36 @@
                     <h3 class="panel-title">Creator's Account</h3>
                     @*<span>@ViewBag.CountryCode</span>*@
                     <div style="float: right">
-                        My Wallet : <i class="CurrCode"></i> <span class="totalAmount">0</span>
-                        <a href="javascript:;" class="btn btn-primary totl-btn" onclick="return CheckAmount()">Transfer to my PayPal account</a>
+                        My Wallet : <i class="CurrCode"></i> <span class="totalAmount">@Model.WalletAmount</span>
+                        <a href="javascript:;" class="btn btn-primary totl-btn" onclick="TransferAmount()">Transfer to my Bank account</a>
                     </div>
                 </div>
                 <div class="alert alert-default  manualal text-center" role="alert">
                     @*<h4 class="alert-heading">PayPal Email :</h4> <span id="paypalEmail"></span>
 
-                        <a href="javascript:;" class="btn btn-primary btn-sm totl-btnn" onclick="checkEmailPaypal()">Change Paypal Email</a>*@
-                    <span class="label"> PayPal Email :</span><span id="paypalEmail"></span>
-                    <a href="javascript:;" class="btn btn-primary totl-btn" onclick="checkEmailPaypal()">Change Paypal Email</a>
+        <a href="javascript:;" class="btn btn-primary btn-sm totl-btnn" onclick="checkEmailPaypal()">Change Paypal Email</a>*@
+
+                    @*<span class="label"> PayPal Email :</span><span id="paypalEmail"></span>
+        <a href="javascript:;" class="btn btn-primary totl-btn" onclick="checkEmailPaypal()">Change Paypal Email</a>*@
+                    <div class="row">
+                        <a href="javascript:;" class="btn btn-primary bankaccholder-btn" onclick="checkBankAccHolderName()">Change Bank Details</a>
+                    </div>
+                    <div class="row">
+                        <span class="label"> Bank Account Holder Name :</span>
+                        <span id="bankAccountName">@Model.BankAccountHolderName</span>
+                    </div>
+                    <div>
+                        <span class="label"> Bank Account Number :</span><span id="bankAccountNumber">@Model.BankAccountNumber</span>
+                    </div>
+                    <div>
+                        <span class="label"> IFSC Code :</span><span id="bankIFSCCode">@Model.BankIFSCCode</span>
+                    </div>
+                    <div>
+                        <span class="label"> Mobile Number :</span><span id="mobileNumber">@Model.MobileNumberUPI</span>
+                    </div>
+                    <div>
+                        <span class="label"> Amount :</span><span id="walletAmount">@Model.WalletAmount</span><i class="CurrCode label-newaccount"></i>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <div class="mid-pannel">
@@ -110,13 +156,13 @@
                             <div class="col-md-6">
                                 <div class="account-box">
                                     <label class="head-label">Number of clicks</label>
-                                    <label class="label-newaccount">[<span id="totalClick">0</span>]</label>
+                                    <label class="label-newaccount">[<span id="totalClick">@Model.ClicksCount</span>]</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="account-box">
                                     <label class="head-label">Amount</label>
-                                    <label class="label-newaccount">[<span class="totalAmount">0</span>]<i class="CurrCode"></i></label>
+                                    <label class="label-newaccount">[<span class="totalAmount">@Model.WalletAmount</span>]<i class="CurrCode"></i></label>
                                 </div>
                             </div>
                             <div class="divider-account"></div>
@@ -129,8 +175,8 @@
                 </div>
                 <div>
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab">Notebook Pages</a></li>
-                        <li role="presentation"><a href="#requests" aria-controls="requests" role="tab" data-toggle="tab">My Requests</a></li>
+                        <li role="presentation" class="active"><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab">Clicked Details</a></li>
+                        <li role="presentation"><a href="#requests" aria-controls="requests" role="tab" data-toggle="tab">Transaction Details</a></li>
                         @*<li role="presentation"><a href="#advertisements" aria-controls="advertisements" role="tab" data-toggle="tab">My Advertisements</a></li>*@
                     </ul>
                 </div>
@@ -259,7 +305,7 @@
                                     <table id="example-4" class="table table-small-font table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>PayPal Email</th>
+                                                <th>Bank Account Number</th>
                                                 <th>Amount Requested (USD)</th>
 
                                                 <th>Requested Date</th>
@@ -273,7 +319,7 @@
                                                 for (int i = 0; i < Model.PaymentList.Count; i++)
                                                 {
                                                     <tr>
-                                                        <td>@Model.PaymentList[i].EmailId</td>
+                                                        <td>@Model.BankAccountNumber</td>
                                                         <td>@Model.PaymentList[i].AmountRequested</td>
 
                                                         <td>@Model.PaymentList[i].RequestDate</td>
@@ -291,90 +337,116 @@
                             </div>
                         </div>
                         @*<div role="tabpanel" class="tab-pane" id="advertisements">
-                            <div class="panel-body">
-                                <div class="table-responsive" 
-                                    <table id="example-4" class="table table-small-font table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Headline</th>
-                                                <th>Action</th>
-                                              
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model.AdsModels != null && Model.AdsModels.Count > 0)
-                                            {
-                                                for (int i = 0; i < Model.AdsModels.Count; i++)
-                                                {
-                                                    <tr>
-                                                        <td>@Model.AdsModels[i].Headline</td>
-                                                        <td>
-                                                            @Html.ActionLink(" ", "adcreation","User", new { adId = Model.AdsModels[i].AdcreationId , check ="edit", settingCheck ="setting"}, new { @class = "fa fa-pencil", title = "Edit" })                                                           
-                                                        @Html.ActionLink(" ", "DeleteAds", new { id = Model.AdsModels[i].AdcreationId }, new { @class = "fa fa-trash-o", @onclick = "return ConfirmDelete()" , @style = "color:red;margin-left:16px;", title = "Delete" })
-                                                    </td>
-                                                    </tr>
-                                                }
-                                            }
+                                <div class="panel-body">
+                                    <div class="table-responsive"
+                                        <table id="example-4" class="table table-small-font table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Headline</th>
+                                                    <th>Action</th>
 
-                                        </tbody>
-                                    </table>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model.AdsModels != null && Model.AdsModels.Count > 0)
+                                                {
+                                                    for (int i = 0; i < Model.AdsModels.Count; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>@Model.AdsModels[i].Headline</td>
+                                                            <td>
+                                                                @Html.ActionLink(" ", "adcreation","User", new { adId = Model.AdsModels[i].AdcreationId , check ="edit", settingCheck ="setting"}, new { @class = "fa fa-pencil", title = "Edit" })
+                                                            @Html.ActionLink(" ", "DeleteAds", new { id = Model.AdsModels[i].AdcreationId }, new { @class = "fa fa-trash-o", @onclick = "return ConfirmDelete()" , @style = "color:red;margin-left:16px;", title = "Delete" })
+                                                        </td>
+                                                        </tr>
+                                                    }
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
-@using (Html.BeginForm("Paypaldetails_Insert_Update", "Home", FormMethod.Post, new { @id = "profileForm" }))
+@using (Html.BeginForm("Bankdetails_Insert_Update", "Home", FormMethod.Post, new { @id = "profileForm" }))
 {
     <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
-
         <div class="modal-dialog">
             <div class="modal-content">
                 <form class="avatar-form" action="Update_Picture" enctype="multipart/form-data" method="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="avatar-modal-label">Paypal Account Details</h4>
+                        <h4 class="modal-title" id="avatar-modal-label">Bank Account Details</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-12">
-                                    @*<div class="form-group">
-                                            <label>Account Holder Name</label>
-                                            @Html.TextBoxFor(m => m.AccountHolderName, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.AccountHolderName)
-                                        </div>*@
-                                    @*<div class="form-group">
-
-                                            @Html.HiddenFor(m => m.WalletAmount)
-                                            <label>Account Number</label>
-                                            @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.AccountNumber)
-                                        </div>
-                                        <div class="form-group">
-                                            <label>IFSC Code</label>
-                                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.IFSCCode)
-                                        </div>*@
                                     <div class="form-group">
-                                        <label>PayPal Email Id</label>
-                                        @Html.TextBoxFor(m => m.AdvertiserEmialId, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.AdvertiserEmialId)
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" value="Submit" class="btn btn-primary" id="paysub" />
+                                        <label>Bank Account Holder Name</label>
+                                        @Html.TextBoxFor(m => m.BankAccountHolderName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BankAccountHolderName)
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div> -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Bank Account Number</label>
+                                        @Html.TextBoxFor(m => m.BankAccountNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BankAccountNumber)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>IFSC Code</label>
+                                        @Html.TextBoxFor(m => m.BankIFSCCode, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BankIFSCCode)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label>Mobile number</label>
+                                            @Html.TextBoxFor(m => m.MobileNumberUPI, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.MobileNumberUPI)
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="Submit" class="btn btn-primary" id="paysub" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+                        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
                 </form>
             </div>
         </div>
@@ -450,13 +522,111 @@
     });
 
 
-    function CheckAmount() {
-        if ($("#paypalEmail").text() == "") {
-            $('#openPopup').click();
-            $('#AdvertiserEmialId').val("");
-            $('#paysub').val("Submit");
-        }
+    //function CheckAmount() {
+    //    if ($("#paypalEmail").text() == "") {
+    //        $('#openPopup').click();
+    //        $('#AdvertiserEmialId').val("");
+    //        $('#paysub').val("Submit");
+    //    }
 
+    //    else if (parseFloat($('.totalAmount').html()) > 0) {
+    //        //if ($("#CurrenCode").val() == $("#ConvertCurr_Code").val()) {
+    //        //    var t = $('#dbtotalAmount').val();
+    //        //    var d = parseFloat(t);
+    //        //    $('#tot').val(d.toFixed(2));
+    //        //    var Amount = $('#tot').val();
+    //        //}
+    //        //else {
+
+    //        //    var t = $('#dbtotalAmount').val() / $("#ConvertCurr_Rate").val();
+    //        //    var d = parseFloat(t);
+    //        //    $('#tot').val(d.toFixed(2));
+    //        //    var Amount = $('#tot').val();
+    //        //}
+
+    //        var Email = $("#paypalEmail").text();
+    //        var Exchagerate = $('#itnw').val();
+    //        var CurrentCurrency = $("#countrycurrencyisocode").val();
+    //        var Amount = $('#dbtotalAmount').val();
+    //        var sendamount = Amount + ".00";
+    //        $('#loaderDiv2').show();
+    //        if (Amount != "0") {
+    //            $.ajax({
+    //                type: 'POST',
+    //                url: '/Home/SavePaymentRequest',
+    //                data: '{Currency: "' + CurrentCurrency + '",ExchangeRate: "' + Exchagerate + '",WalletAmount: "' + sendamount + '",EmailId: "' + Email + '" }',
+    //                //data: '{Currency: "' + CurrentCurrency + '",ExchangeRate: "' + Exchagerate + '",WalletAmount: "' + sendamount + '",EmailId: "' + Email + '" }',
+    //                contentType: 'application/json; charset=utf-8',
+    //                dataType: 'json',
+    //                success: function (msg) {
+    //                    $.ajax({
+    //                        type: 'POST',
+    //                        url: '/User/Payouts',
+    //                        data: '{PaypalEmail: "' + Email + '",value: "' + sendamount + '",currency:"' + CurrentCurrency + '" }',
+    //                        contentType: 'application/json; charset=utf-8',
+    //                        dataType: 'json',
+    //                        success: function (data) {
+    //                            $('.totalAmount').html("0");
+    //                            $('#totalClick').html("0");
+
+    //                            $('#loaderDiv2').hide();
+    //                        },
+    //                        error: function (data) {
+    //                            $('#loaderDiv2').hide();
+    //                            console.log(data);
+    //                        },
+    //                        complete: function (data) {
+    //                            console.log(data);
+    //                        }
+
+    //                    });
+    //                },
+    //                error: function (msg) {
+    //                    $('#loaderDiv2').hide();
+    //                    console.log(msg);
+    //                },
+    //                complete: function (msg) {
+
+    //                    console.log(msg);
+    //                }
+
+    //            });
+
+    //        }
+    //        else {
+    //            $('#amountPaidLbl').text("0");
+    //        }
+    //    }
+    //    else {
+    //        alert('You can not request payment for 0 amount');
+    //        return false;
+    //    }
+
+    //}
+
+    function TransferAmount() {
+        if ($("#bankAccountName").text() == "")
+        {
+            alert("Enter Bank Account number")
+        }
+        //else if ($("#upiID").text() == "")
+        //{
+        //    alert("Enter UPIID")
+        //}
+        else if ($("#bankAccountNumber").text() == "") {
+            alert("Enter Bank Account Number")
+        }
+        else if ($("#bankIFSCCode").text() == "") {
+            alert("Enter IFSC Code")
+        }
+        else if ($("#mobileNumber").text() == "")
+        {
+            alert("Enter Mobile Number")
+        }
+        else if ($("#walletAmount").text() == 0)
+        {
+            alert("Wallet Amount Should not be 0")
+        }
         else if (parseFloat($('.totalAmount').html()) > 0) {
             //if ($("#CurrenCode").val() == $("#ConvertCurr_Code").val()) {
             //    var t = $('#dbtotalAmount').val();
@@ -471,52 +641,35 @@
             //    $('#tot').val(d.toFixed(2));
             //    var Amount = $('#tot').val();
             //}
-
+            /*debugger*/
+            var bankaccountname = $("#bankAccountName").text();
             var Email = $("#paypalEmail").text();
-            var Exchagerate = $('#itnw').val();
+            var bankAccountNumber = $("#bankAccountNumber").text();
+            var IFSCCode = $("#bankIFSCCode").text();
+            //var UPIID = $("#upiID").text();
+            var mobilenumberUPI = $("#mobileNumber").text();
             var CurrentCurrency = $("#countrycurrencyisocode").val();
-            var Amount = $('#dbtotalAmount').val();
+            var Amount = $('#walletAmount').text();
             var sendamount = Amount + ".00";
-            $('#loaderDiv2').show();
+            $('#loaderDiv3').show();
             if (Amount != "0") {
                 $.ajax({
                     type: 'POST',
-                    url: '/Home/SavePaymentRequest',
-                    data: '{Currency: "' + CurrentCurrency + '",ExchangeRate: "' + Exchagerate + '",WalletAmount: "' + sendamount + '",EmailId: "' + Email + '" }',
+                    url: '/Home/SavePaymentRequestBank',
+                    data: '{Currency: "' + CurrentCurrency + '",BankAccountHolderName: "' + bankaccountname + '",BankAccountNumber: "' + bankAccountNumber + '",BankIFSCCode: "' + IFSCCode + '",MobileNumberUPI: "' + mobilenumberUPI + '",WalletAmount: "' + sendamount + '",EmailId: "' + Email + '"}',
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (msg) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/User/Payouts',
-                            data: '{PaypalEmail: "' + Email + '",value: "' + sendamount + '",currency:"' + CurrentCurrency + '" }',
-                            contentType: 'application/json; charset=utf-8',
-                            dataType: 'json',
-                            success: function (data) {
-                                $('.totalAmount').html("0");
-                                $('#totalClick').html("0");
-
-                                $('#loaderDiv2').hide();
-                            },
-                            error: function (data) {
-                                $('#loaderDiv2').hide();
-                                console.log(data);
-                            },
-                            complete: function (data) {
-                                console.log(data);
-                            }
-
-                        });
+                        window.location = "/User/AccountSettings";
                     },
                     error: function (msg) {
                         $('#loaderDiv2').hide();
                         console.log(msg);
+                        window.location = "/User/AccountSettings";
                     },
                     complete: function (msg) {
-
                         console.log(msg);
                     }
-
                 });
 
             }
@@ -530,11 +683,6 @@
         }
 
     }
-
-
-
-
-
 
     function AdLoadByBookId(adId) {
         $('#SlideshowImages').html('');
@@ -626,28 +774,52 @@
         }
     }
 
-    $.ajax({
-        type: 'GET',
-        url: '/Home/ShowpaypalEmail_IU',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (data) {
-            //   console.log(data);
-            $(data).each(function (i, item) {
-                $('#paypalEmail').append(item.PaypalEmail);
-            });
-        },
-    })
+    //$.ajax({
+    //    type: 'GET',
+    //    url: '/Home/ShowpaypalEmail_IU',
+    //    contentType: 'application/json; charset=utf-8',
+    //    dataType: 'json',
+    //    success: function (data) {
+    //        //   console.log(data);
+    //        $(data).each(function (i, item) {
+    //            $('#paypalEmail').append(item.PaypalEmail);
+    //        });
+    //    },
+    //})
 
-    function checkEmailPaypal() {
-        var pay = $('#paypalEmail').text();
+    //function checkEmailPaypal() {
+    //    var pay = $('#paypalEmail').text();
+    //    $('#avatar-modal').modal("show");
+    //    if (pay != "") {
+    //        // console.log(pay);
+
+    //        $('#AdvertiserEmialId').val(pay);
+    //        $('#paysub').val("Update");
+
+    //    }
+    //}
+
+    function checkBankAccHolderName() {
+        var pay = $('#bankAccountName').text();
         $('#avatar-modal').modal("show");
         if (pay != "") {
-            // console.log(pay);
-
-            $('#AdvertiserEmialId').val(pay);
             $('#paysub').val("Update");
+        }
+    }
 
+    function checkUPIId() {
+        var pay = $('#upiID').text();
+        $('#upiid-modal').modal("show");
+        if (pay != "") {
+            $('#paysub').val("Update");
+        }
+    }
+
+    function checkmobilenumber() {
+        var pay = $('#checkmobilenumber').text();
+        $('#mobilenumber-modal').modal("show");
+        if (pay != "") {
+            $('#paysub').val("Update");
         }
     }
     //$.ajax({
@@ -665,35 +837,35 @@
     //    },
     //})
 
-    $.ajax({
-        type: 'GET',
-        url: '/Home/Update_Wallet_ByuserId',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (data) {
-            // console.log(data);
-            $(data).each(function (i, item) {
-                $(".totalAmount").html(item.TotalAmount);
-                $("#totalClick").html(item.ClickCount);
-                // $("#dbtotalAmount").val(item.TotalAmount + ".00");
-                $("#dbtotalAmount").val(item.TotalAmount);
+    //$.ajax({
+    //    type: 'GET',
+    //    url: '/Home/Update_Wallet_ByuserId',
+    //    contentType: 'application/json; charset=utf-8',
+    //    dataType: 'json',
+    //    success: function (data) {
+    //        // console.log(data);
+    //        $(data).each(function (i, item) {
+    //            $(".totalAmount").html(item.TotalAmount);
+    //            $("#totalClick").html(item.ClickCount);
+    //            // $("#dbtotalAmount").val(item.TotalAmount + ".00");
+    //            $("#dbtotalAmount").val(item.TotalAmount);
 
-            });
-        },
-    })
+    //        });
+    //    },
+    //})
 
 
-    $.ajax({
-        type: 'GET',
-        url: '/User/getpayout',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (data) {
-            //  console.log(data);
-            $(data).each(function (i, item) {
-            });
-        },
-    })
+    //$.ajax({
+    //    type: 'GET',
+    //    url: '/User/getpayout',
+    //    contentType: 'application/json; charset=utf-8',
+    //    dataType: 'json',
+    //    success: function (data) {
+    //        //  console.log(data);
+    //        $(data).each(function (i, item) {
+    //        });
+    //    },
+    //})
 
     //$.ajax({
     //    type: 'GET',
@@ -742,11 +914,11 @@
 
 
 
-    function ConfirmDelete(){
+    function ConfirmDelete() {
         var r = confirm("Are you confirm to delete ad ?");
         if (r == true) {
             return true;
-        } 
+        }
         return false;
     }
 

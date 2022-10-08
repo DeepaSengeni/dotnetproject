@@ -86,7 +86,24 @@
         display: none;
     }
 
-    
+    .containerdiv {
+        border: 0;
+        float: left;
+        position: relative;
+        width: 120px;
+    }
+
+    .cornerimage {
+        border: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .ratingimg {
+        width: 120px !important;
+    }
 </style>
 
 <link href="~/Content/css/star-rating.css" rel="stylesheet" />
@@ -147,17 +164,17 @@
                     <input type="hidden" id="hdnUserID" value="@Model.UserId" />
 
                     @{ string[] chapterdata = null;
-                       var chapterName = Model.ChapterName;
-                       if (chapterName != null)
-                       {
-                           chapterdata = chapterName.Split(',');
-                       }     
-                               
+                        var chapterName = Model.ChapterName;
+                        if (chapterName != null)
+                        {
+                            chapterdata = chapterName.Split(',');
+                        }
+
                         @*<div class="form-group clearfix">
-                            <label class="col-lg-5 ">Chapter Name:</label>
-                            <div class="col-lg-7">@(chapterdata != null ? chapterdata[0] : string.Empty)</div>
-                        </div>*@
-                                
+                <label class="col-lg-5 ">Chapter Name:</label>
+                <div class="col-lg-7">@(chapterdata != null ? chapterdata[0] : string.Empty)</div>
+            </div>*@
+
                         <div class="form-group clearfix">
                             <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 ">Subject Name:</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.SubjectName</div>
@@ -166,23 +183,23 @@
                             <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 ">Creator:</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.StudentName</div>
                         </div>
-                        
-                                
-                       @* <div class="form-group clearfix">
-                            <label class="col-lg-5 ">Teacher Name:</label>
-                            <div class="col-lg-7">@Model.TeachereName</div>
-                        </div>*@
+
+
+                        @* <div class="form-group clearfix">
+                <label class="col-lg-5 ">Teacher Name:</label>
+                <div class="col-lg-7">@Model.TeachereName</div>
+            </div>*@
                         <div class="form-group clearfix" style="display:none;">
-                              <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 pc-show">Name of Coaching/ College/ School:</label>
+                            <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 pc-show">Name of Coaching/ College/ School:</label>
                             <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6 mobile-show">Name of Coaching/College<br>/School:</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.CollegeId</div>
                         </div>
-                       
+
                         <div class="form-group clearfix" style="display:none;">
                             <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Stream:</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.StreamName</div>
                         </div>
-                         <div class="form-group clearfix" style="display:none;">
+                        <div class="form-group clearfix" style="display:none;">
                             <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Category:</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.CategoryName</div>
                         </div>
@@ -194,50 +211,61 @@
                             <label class="col-lg-5 col-md-5 col-sm-5 col-xs-6">Pages:</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6">@Model.Total_Number_of_Pages</div>
                         </div>
-                        
-                       @* <div class="form-group clearfix">
-                            <label class="col-lg-5 ">Type:</label>
-                            <div class="col-lg-7">@Model.Type</div>
-                        </div>*@
-                              
-                                @*<li>Chapter Name: <span></span></li> 
-                                <li>Subject Name: <span></span></li>
-                                <li>Student Name: <span>@Model.StudentName</span></li>
-                                <li>Teacher Name: <span>@Model.TeachereName</span></li>
-                                <li>Name of Coaching/College/School: <span>@Model.CollegeId</span></li>
-                                <li>Stream: <span>@Model.StreamName</span></li>
-                                <li>Date: <span>@Model.StartDate</span></li>
-                                <li>Pages: <span>@Model.TotalPages</span></li>
-                                <li>Type: <span>@Model.Type</span></li>*@
-                        
-@*<div class="form-group clearfix">
-                            <label class="col-lg-5 "></label>
-                            <div class="col-lg-7">
-                                <div id="RatingDiv" onclick="SaveRating()">
-                                   
-                                    <label style="opacity: 0">@Model.Rate  </label>
-                                    <input type="text"  value="@Model.Rate" class="rating rating10" id="Rating" />
+                        <div class="form-group clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="containerdiv">
+                                    <div>
+                                        <img class="ratingimg" src="https://image.ibb.co/jpMUXa/stars_blank.png" alt="img">
+                                    </div>
+                                    <div class="cornerimage" style="width:@Model.StarRating%;">
+                                        <img class="ratingimg" src="https://image.ibb.co/caxgdF/stars_full.png" alt="">
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>*@
-                        
-                    }
+                                @* <div class="form-group clearfix">
+            <label class="col-lg-5 ">Type:</label>
+            <div class="col-lg-7">@Model.Type</div>
+        </div>*@
 
-                   
-                         <div class="col-md-12 all-prop-btn">
-                    <a href="/User/UserProfile?Id=@Model.UserId" class="btn btn-primary all-propety" >Creator's Profile</a>
-                    <a href="javascript:;"  class="btn btn-success" onclick="Downloadbook('@ViewBag.BookId','@Model.SubjectName')">Download</a>
-                    
-                    @if (Convert.ToString(Model.UserId) == Convert.ToString(Session["UserId"]))
-                    {
-                        <a href="/User/NotebookForm?bookId=@Model.BookId"   class="btn btn-primary all-propety" >Edit</a>
-                        <a href="/User/Delete_NotebookForm?bookId=@Model.BookId" class="btn btn-primary all-propety" onclick="return confirm('Are you sure?')" >Delete</a>
-                    }
+                                @*<li>Chapter Name: <span></span></li>
+        <li>Subject Name: <span></span></li>
+        <li>Student Name: <span>@Model.StudentName</span></li>
+        <li>Teacher Name: <span>@Model.TeachereName</span></li>
+        <li>Name of Coaching/College/School: <span>@Model.CollegeId</span></li>
+        <li>Stream: <span>@Model.StreamName</span></li>
+        <li>Date: <span>@Model.StartDate</span></li>
+        <li>Pages: <span>@Model.TotalPages</span></li>
+        <li>Type: <span>@Model.Type</span></li>*@
 
-  </div> 
+                                @*<div class="form-group clearfix">
+            <label class="col-lg-5 "></label>
+            <div class="col-lg-7">
+                <div id="RatingDiv" onclick="SaveRating()">
 
-
+                    <label style="opacity: 0">@Model.Rate  </label>
+                    <input type="text"  value="@Model.Rate" class="rating rating10" id="Rating" />
                 </div>
+            </div>
+        </div>*@
+
+                                }
+
+
+                                <div class="col-md-12 all-prop-btn">
+                                    <a href="/User/UserProfile?Id=@Model.UserId" class="btn btn-primary all-propety">Creator's Profile</a>
+                                    <a href="javascript:;" class="btn btn-success" onclick="Downloadbook('@ViewBag.BookId','@Model.SubjectName')">Download</a>
+
+                                    @if (Convert.ToString(Model.UserId) == Convert.ToString(Session["UserId"]))
+                                    {
+                                        <a href="/User/NotebookForm?bookId=@Model.BookId" class="btn btn-primary all-propety">Edit</a>
+                                        <a href="/User/Delete_NotebookForm?bookId=@Model.BookId" class="btn btn-primary all-propety" onclick="return confirm('Are you sure?')">Delete</a>
+                                    }
+
+                                </div>
+
+
+                            </div>
 
 
             </div>

@@ -11,7 +11,7 @@ namespace StudentAppWebsite.Models
 {
     public class AdminModels
     {
-        public List<Hiring> hiringList { get; set; }
+
 
 
     } 
@@ -182,20 +182,7 @@ namespace StudentAppWebsite.Models
         public string Payer_id { get; set; }
         public string intent { get; set; }
         public string state { get; set; }
-        public string order_id { get; set; }
-        public string invoice_id { get; set; }
 
         public List<PaypalResponse> PaypalResponseList { get; set; }
-    }
-    public class Hiring
-    {
-        public int ID { get; set; }
-        public string Tittle { get; set; }
-        public string Description { get; set; }
-        public bool IsActive { get; set; }
-        public int CreatedBy  { get; set; }
-        public DateTime CreatedOn  { get; set; }
-
-
     }
 }

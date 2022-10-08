@@ -24,7 +24,7 @@ namespace StudentAppWebsite.Models
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "EmailID is not in correct format")]
         [Required(ErrorMessage = "Email is required.")]
         public string Email { get; set; }
-        public int? PageId { get; set; }
+        public int PageId { get; set; }
         public string EditQuestion { get; set; }
         public string StudentName { get; set; }
         public string CreatedDate { get; set; }

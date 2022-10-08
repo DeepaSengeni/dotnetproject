@@ -450,7 +450,8 @@ namespace STA.DataLayer.Book
                                             new MyParameter("@userId",bookBase.UserId),
                                              new MyParameter("@device",bookBase.Device)
                                };
-                Common.Set_Procedures("Insert_PageClick_Details");
+                //Common.Set_Procedures("Insert_PageClick_Details");
+                Common.Set_Procedures("PageClick_Details_Insert");
                 Common.Set_ParameterLength(myParams.Length);
                 Common.Set_Parameters(myParams);
                 dtContainer = Common.Execute_Procedures_LoadData();

@@ -93,7 +93,7 @@ namespace StudentAppWebsite.Models
         public string AccountHolderName { get; set; }
 
         public List<AdvertisementModels> AdvertismentList { get; set; }
-        
+
         public decimal WalletAmount { get; set; }
         public string ClickDate { get; set; }
         public string ClickedBy { get; set; }
@@ -102,7 +102,21 @@ namespace StudentAppWebsite.Models
         public decimal UnitPrice { get; set; }
         public List<AdvertisementModels> AdvertiseList = new List<AdvertisementModels>();
         public List<AdvertisementModels> PageListClick = new List<AdvertisementModels>();
-        
+        [Required]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Use letters only please")]
+        public string BankAccountHolderName { get; set; }
+        [Required]
+        public string UPIId { get; set; }
+        [Required]
+        public string BankAccountNumber { get; set; }
+        [Required]
+        public string BankIFSCCode { get; set; }
+
+        [Required]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Mobile Number must be numeric")]
+        [RegularExpression(@"^[0-9]{10,20}$", ErrorMessage = "Mobile Number should have minimum of 10 digits and Enter digits only")]
+        public string MobileNumberUPI { get; set; }
+
     }
 
     public class PicuploadedModel
@@ -110,4 +124,5 @@ namespace StudentAppWebsite.Models
         public HttpPostedFileBase[] fileuploader { get; set; }
         public string[] FileUploadedPath { get; set; }
     }
+
 }

@@ -164,14 +164,34 @@ namespace STU.ActionLayer.Advertisement
         }
         #endregion
 
-        #region PaymentRequest_IU
-        public ActionResult PaymentRequest_IU(AdvertisementBase advertisementbase)
+        #region PaymentRequest_UPI
+        public ActionResult PaymentRequest_UPI(AdvertisementBase advertisementbase)
         {
             advertisementdl = new AdvertisementDL();
             actionResult = new ActionResult();
             try
             {
-                actionResult.dtResult = advertisementdl.PaymentRequest_IU(advertisementbase);
+                actionResult.dtResult = advertisementdl.PaymentRequest_Bank(advertisementbase);
+                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
+                    actionResult.IsSuccess = true;
+                else
+                    actionResult.IsError = true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return actionResult;
+        }
+        #endregion
+        #region PaymentRequest_Bank
+        public ActionResult PaymentRequest_Bank(AdvertisementBase advertisementbase)
+        {
+            advertisementdl = new AdvertisementDL();
+            actionResult = new ActionResult();
+            try
+            {
+                actionResult.dtResult = advertisementdl.PaymentRequest_Bank(advertisementbase);
                 if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
                     actionResult.IsSuccess = true;
                 else
@@ -653,7 +673,47 @@ namespace STU.ActionLayer.Advertisement
         }
         #endregion
 
+        #region UPIdetails_Insert_Update
+        public ActionResult UPIdetails_Insert_Update(AdvertisementBase advertisementbase)
+        {
+            advertisementdl = new AdvertisementDL();
+            actionResult = new ActionResult();
+            try
+            {
+                actionResult.dtResult = advertisementdl.UPIDetails_Insert_Update(advertisementbase);
+                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
+                    actionResult.IsSuccess = true;
+                else
+                    actionResult.IsError = true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return actionResult;
+        }
+        #endregion
 
+        #region Bankdetails_Insert_Update
+        public ActionResult Bankdetails_Insert_Update(AdvertisementBase advertisementbase)
+        {
+            advertisementdl = new AdvertisementDL();
+            actionResult = new ActionResult();
+            try
+            {
+                actionResult.dtResult = advertisementdl.BankDetails_Insert_Update(advertisementbase);
+                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
+                    actionResult.IsSuccess = true;
+                else
+                    actionResult.IsError = true;
+            }
+            catch (Exception ex)
+            {
+                ErrorReporting.WebApplicationError(ex);
+            }
+            return actionResult;
+        }
+        #endregion
 
     }
 }

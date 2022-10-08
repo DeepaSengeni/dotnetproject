@@ -92,7 +92,7 @@
                                         }
                                         else if (Model[item].PageType == "Audio")
                                         {
-                                            <a title="@Model[item].PageImage.Split('/')[@Model[item].PageImage.Split('/').Length - 1]" href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">
+                                            <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">
                                                 <img width="150" height="195" src="~/Content/images/Audio.png" />
                                             </a>
                                         }
@@ -108,19 +108,14 @@
                                                 <img width="150" height="195" src="@(Model[item].PageImage)">
                                             </a>
                                         }
-    
-
-                                        @if (Model[item].PageType == "Audio")
-                                        {
-                                            
-                                                <div style="color: black; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: absolute; top: 40%;" title="@Model[item].PageImage.Split('/')[@Model[item].PageImage.Split('/').Length - 1]">@Model[item].PageImage.Split('/')[@Model[item].PageImage.Split('/').Length - 1]</div>
-                                            
-                                        }
-
+                                        @*<a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">@* onclick="Selectpage(this)"*@
+                                        @*<img width="150" height="195" src="@((Model[item].IsHtml == true) ? ((Model[item].ScreenShot != null && Model[item].ScreenShot != "") ? Model[item].ScreenShot : "http://securecamp.co/notebooks/images/page_icon2.png") : (Model[item].PageImage))">*@
+                                        @*</a>*@
                                         <p class="f9 text-center">
                                             <input type="checkbox" class="chkbx" data-id="@Model[item].Id" />
                                             <a href="/Home/Index?PageId=@Model[item].Id&BookId=@Model[item].BookId" data-pageid="@Model[item].Id">Page-@Model[item].PageNumber [@(Model[item].ModifiedDate != null ? Model[item].ModifiedDate : Model[item].CreatedDate)]</a>
                                         </p>
+                                        @*@(item + 1)*@
 
 
                                     </div>

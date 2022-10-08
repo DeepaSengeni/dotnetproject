@@ -220,7 +220,6 @@ namespace STA.DataLayer.Questions
             try
             {
                 MyParameter[] myParams ={
-                                            new MyParameter("@PageId",answersBase.PageID),
                                             new MyParameter("@AnswerId",answersBase.Id)
                                };
                 Common.Set_Procedures("[GetReply_AnswersList_ByPageId]");
@@ -257,29 +256,6 @@ namespace STA.DataLayer.Questions
             }
             return dtContainer;
         }
-
-        public DataTable Questions_Remove_By_Id(QuestionsBase answersBase)
-        {
-            dtContainer = new DataTable();
-            dsContainer = new DataSet();
-            try
-            {
-                MyParameter[] myParams ={
-                                            new MyParameter("@Id",answersBase.Id),
-                                            new MyParameter("@isRemoveForYouOnly",answersBase.isRemoveForYouOnly),
-                                            new MyParameter("@isRemoveForAll",answersBase.isRemoveForAll)
-                               };
-                Common.Set_Procedures("USP_D_QuestionsAnswers_Remove");
-                Common.Set_ParameterLength(myParams.Length);
-                Common.Set_Parameters(myParams);
-                dtContainer = Common.Execute_Procedures_LoadData();
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.DataLayerError(ex);
-            }
-            return dtContainer;
-        }
         #endregion
 
         #region DeleteAnswer_ById
@@ -293,29 +269,6 @@ namespace STA.DataLayer.Questions
                                             new MyParameter("@Id",answersBase.Id)
                                };
                 Common.Set_Procedures("USP_D_Answers");
-                Common.Set_ParameterLength(myParams.Length);
-                Common.Set_Parameters(myParams);
-                dtContainer = Common.Execute_Procedures_LoadData();
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.DataLayerError(ex);
-            }
-            return dtContainer;
-        }
-
-        public DataTable RemoveAnswer_ById(QuestionsBase answersBase)
-        {
-            dtContainer = new DataTable();
-            dsContainer = new DataSet();
-            try
-            {
-                MyParameter[] myParams ={
-                                            new MyParameter("@Id",answersBase.Id),
-                                            new MyParameter("@isRemoveForYouOnly",answersBase.isRemoveForYouOnly),
-                                            new MyParameter("@isRemoveForAll",answersBase.isRemoveForAll)
-                               };
-                Common.Set_Procedures("USP_D_Answers_Remove");
                 Common.Set_ParameterLength(myParams.Length);
                 Common.Set_Parameters(myParams);
                 dtContainer = Common.Execute_Procedures_LoadData();

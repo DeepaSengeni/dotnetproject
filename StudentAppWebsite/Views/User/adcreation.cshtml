@@ -3,7 +3,7 @@
     ViewBag.Title = "adcreation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Plugin/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" /> 
+<link href="~/Plugin/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
@@ -26,6 +26,30 @@
        
     }
     
+</script>
+<script>
+    function updatefileList() {
+        alert("Hello! I am an alert box!!");
+
+        $("#ulList").empty();
+        var fp = $("#fileuploader");
+        var lg = fp[0].files.length; // get length
+        var items = fp[0].files;
+        var fragment = "";
+
+        if (lg > 0) {
+            for (var i = 0; i < lg; i++) {
+                var fileName = items[i].name; // get file name
+                var fileSize = items[i].size; // get file size 
+                var fileType = items[i].type; // get file type
+
+                // append li to UL tag to display File info
+                fragment += "<li>" + fileName + " (<b>" + fileSize + "</b> bytes) - Type :" + fileType + "</li>";
+            }
+
+            $("#ulList").append(fragment);
+        }
+    });
 </script>
 <style>
     label {
@@ -173,7 +197,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 </style>
 <div class="paddng">
-    @Html.HiddenFor(model => model.UserId);
     @using (Html.BeginForm("adcreation", "User", FormMethod.Post, new { enctype = "multipart/form-data", id = "MyForm" }))
     {
         <div class="container-fluid signupform">
@@ -196,13 +219,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
                             }
                             <div id="progressbar"></div>
                             <br />
-
-                            <div class="col-md-12" id="loader" style="display:none;">
-                                <progress id="videoprogressBar" value="0" max="100" style="width:100%;"></progress>
-                                <h3 id="status"></h3>
-                                <p id="loaded_n_total"></p>
-                            </div>
-
                             <div class="form-horizontal ">
                                 <input type="hidden" name="hdnCategoryIds" id="hdnCategoryIds" value="" />
                                 @Html.HiddenFor(model => model.adcreationId)
@@ -231,8 +247,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                                         <label class="video-clip">
                                                             <input type="radio" class="ra " style="display:none" name="uploadtype" value="3" onclick="HtmlViewer.selectMultiple(3);" />@*Video Clip*@
                                                         </label>
-                                                        <a id="upfile1" class="btn btn-primary" style="cursor: pointer;">Upload Images/Videos<!-- <i class="fa fa-paperclip text-blue text-left" style="font-size:20px"></i> --> </a>
-                                                        <input type="file" accept=".jpg,.jpeg,.png,.mp3,.mp4,.wmv,.3gp" id="fileuploader" multiple="multiple" name="fileuploader" onchange="CehckFileType(this); " style="width: 100%; display:none" /><span class="fileupld"></span>
+                                                        <a id="upfile1" style="cursor:pointer"><i class="fa fa-paperclip text-blue text-left" style="font-size:20px"></i></a>
+                                                        <input type="file" accept=".jpg,.jpeg,.png,.mp3,.mp4,.wmv,.3gp" id="fileuploader" multiple="multiple" name="fileuploader" onchange="updateList(); CehckFileType(this); " style="width: 100%; display:none" /><span class="fileupld"></span> 
                                                         <br />
                                                         <ul id="ulList">
                                                         </ul>
@@ -243,8 +259,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                                             });
                                                         </script>
                                                         @* <span style="color: red;">@Html.ValidationMessage("fileuploader")</span>*@
-                                                        <!-- <span id="viewfilename" style=""></span> -->
-                                                        <span id="viewfilenameall" style=""><ul></ul></span>
+                                                        <span id="viewfilename" style=""></span>
+                                                        <span id="viewfilenameall" style=""></span>
                                                         <input type="hidden" id="hdnFilePath" name="hdnFilePath" />
                                                     </span>
 
@@ -324,42 +340,33 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">State</label>
-                                                <div class="col-sm-6">
-                                                    @Html.DropDownListFor(model => model.state, new SelectList(Model.statelist, "ID", "StateName"), "--Select State--", new { @class = "form-control State", placeholder = "State" })
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(model => model.state, new SelectList(Model.statelist, "ID", "StateName"), "--Select State--", new { @class = "form-control", placeholder = "State" })
                                                     <div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.state)</div>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <input type="checkbox" id="checkboxState">All
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">City</label>
-                                                <div class="col-sm-6">
-                                                    @*<select class="js-example-basic-multiple form-control" multiple="multiple" data-tags="true">
-                                                        </select>*@
-                                                    @Html.DropDownListFor(model => model.City, new SelectList(Model.citylist, "ID", "CityName"), "--Select City--", new { @class = "js-example-basic-multiple form-control", placeholder = "City", multiple = "multiple"})
-                                                    @*<div id="error_pass" class="text-danger">@Html.ValidationMessageFor(model => model.city)</div>*@
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <input type="checkbox" id="checkboxCity">All
+                                                <div class="col-sm-8">
+                                                    <select class="js-example-basic-multiple form-control" multiple="multiple" data-tags="true">
+                                                    </select>
                                                 </div>
                                                 @*<div class="option-boxes zoomTarget">
-            <ul id="subDiv" style="padding-left: 10px;list-style-type: none;">
-                <li id="City" style="margin-top: -17px;">
-                    <div class="Checkbox">
-                        <label>
-                        </label>
-                    </div>
-                </li>
-            </ul>
-        </div>*@
+                            <ul id="subDiv" style="padding-left: 10px;list-style-type: none;">
+                                <li id="City" style="margin-top: -17px;">
+                                    <div class="Checkbox">
+                                        <label>
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>*@
                                             </div>
 
 
                                             <input type="hidden" id="selid" />
                                             <input type="hidden" id="demo" name="citydata" />
-                                            <input type="hidden" id="citynamedata" name="citynamedata" />
-                                            <input type="hidden" id="dev_noofdays" name="dev_noofdays" />
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -399,28 +406,28 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                             </div>
                                             <div class="col-md-4 col-sm-8 cls">
                                                 @*<div class="form-group">
-                                                        <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Before Conversion</label>
-                                                        <div class="col-sm-6">
-                                                            <label class="control-label total" id="totalAmLbl" style="display: none;">0</label>
-                                                            <label class="control-label total">
-                                                                <span class="selectedCountryCode" aria-hidden="true"></span>
-                                                                <span id="beforeconvert">0</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Conversion Rate</label>
-                                                        <div class="col-sm-6">
-                                                            <label class="control-label total" id="totalAmLbl" style="display: none;">0</label>
-                                                            <label class="control-label total">
-                                                                <span aria-hidden="true">1</span>
-                                                                <span class="selectedCountryCode" aria-hidden="true"></span>
-                                                                <span> = </span>
-                                                                <span class="conversion">0</span>
-                                                                <span class="usercountry"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>*@
+                            <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Before Conversion</label>
+                            <div class="col-sm-6">
+                                <label class="control-label total" id="totalAmLbl" style="display: none;">0</label>
+                                <label class="control-label total">
+                                    <span class="selectedCountryCode" aria-hidden="true"></span>
+                                    <span id="beforeconvert">0</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Conversion Rate</label>
+                            <div class="col-sm-6">
+                                <label class="control-label total" id="totalAmLbl" style="display: none;">0</label>
+                                <label class="control-label total">
+                                    <span aria-hidden="true">1</span>
+                                    <span class="selectedCountryCode" aria-hidden="true"></span>
+                                    <span> = </span>
+                                    <span class="conversion">0</span>
+                                    <span class="usercountry"></span>
+                                </label>
+                            </div>
+                        </div>*@
                                                 <div class="form-group">
                                                     <label class="col-sm-5 col-xs-6 control-label total" style="text-align: left">Amount per Day</label>
                                                     <div class="col-sm-6">
@@ -465,17 +472,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <div class="col-sm-offset-8 col-sm-4">
+                                            <div class="col-sm-offset-6 col-sm-4 pull-right">
                                                 <span id="spanmsg" class="col-md-8 text-danger" style="font-size: 16px;margin-top: 18px;">
                                                 </span>
-
-
-                                                <span id="myBtn" class="btn btn-primary col-md-4 text-center" style="font-size: 13px;">Continue to Pay</span>
+                                              
+                                               
+                                                <span id="myBtn"  class="btn btn-primary pull-right col-md-4 text-center">Continue to Pay</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Trigger/Open The Modal -->
+                               
+
                                 <!-- The Modal -->
                                 <div id="myModal" class="modal">
 
@@ -596,35 +605,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <script>
 
-    var isMobile = {
-        Android: function () {
-            return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function () {
-            return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function () {
-            return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function () {
-            return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function () {
-            return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
-        },
-        any: function () {
-            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-        }
-    };
-
     var orgfilePath = [];
     $(document).ready(function () {
-
-        if (isMobile.any()) {
-            $("#upfile1").css({ "height": "40px!important", "cursor" : "pointer" , "min-width": "50%" });
-        } else {
-            $("#upfile1").css({ "cursor": "pointer" });
-        }
 
         setTimeout(function () {
 
@@ -675,15 +657,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
         });
 
         $('#Country').on("change", function () {
-             $('#checkboxCity').prop('checked',false);
-            $('#checkboxState').prop('checked', false);
-            $("#state").prop("disabled", false);
-            $("#City").prop("disabled", false);
-
             dataget();
-            setTimeout(function () {
-                StateBind();
-            });
+            StateBind();
         });
 
         $('#state').on("change", function () {
@@ -703,7 +678,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
         $('#MyForm').submit(function () {
-            debugger;
+
             console.log($("#MyForm").valid());
             if ($("#MyForm").valid()) {
                 if ('@ViewBag.ButtonText' == "Update") {
@@ -720,7 +695,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         alert('Please select atleast one file image/video.');
                         return false;
                     }
-                     else if ($('#amountPaidLbl').text() == '0') {
+                     else if ($('#amountPaidLbl').text() == '0') { 
                         alert('Please fill Start Date and End Date.');
                         return false;
                     }
@@ -744,7 +719,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 $('#fileuploader').removeAttr('accept');
                 $('#fileuploader').attr('multiple', 'multiple');
                 $("#fileuploader").attr("accept", ".jpg,.jpeg,.png,.wmv,.ogg,.webM,.mp4,.mp3,.3gp");
-                // $('#viewfilename').html('');
+                $('#viewfilename').html('');
             }
             else if ($('.ra:checked').val() === '3') {
                 $('#fileuploader').removeAttr('accept');
@@ -752,7 +727,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 $("#fileuploader").attr("accept", ".wmv,.ogg,.webM,.mp4");
                 $('.fileupld').html('');
                 $('#more').hide();
-                // $('#viewfilename').html('');
+                $('#viewfilename').html('');
             }
             else if ($('.ra:checked').val() === '4') {
                 $('#fileuploader').removeAttr('accept');
@@ -760,7 +735,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 $("#fileuploader").attr("accept", ".mp3,.mp4");
                 $('.fileupld').html('');
                 $('#more').hide();
-                // $('#viewfilename').html('');
+                $('#viewfilename').html('');
             }
             else {
                 $('.fileupld').html('');
@@ -768,7 +743,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 $('#fileuploader').removeAttr('accept');
                 $('#fileuploader').removeAttr('multiple');
                 $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
-                // $('#viewfilename').html('');
+                $('#viewfilename').html('');
             }
         });
 
@@ -869,7 +844,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
             $('#more').hide();
             $('#fileuploader').removeAttr('accept');
             $("#fileuploader").attr("accept", ".jpg,.jpeg,.png");
-            // $('#viewfilename').html('');
+            $('#viewfilename').html('');
         }
 
         else if ('@ViewBag.AdType' == '2') {
@@ -878,7 +853,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
             $('#more').show();
             $('#fileuploader').removeAttr('accept');
             $("#fileuploader").attr("accept", ".jpg,.jpeg,.png,.wmv,.ogg,.webM,.mp4,.mp3,.mp4,.3gp");
-            // $('#viewfilename').html('');
+            $('#viewfilename').html('');
         }
 
         else if ('@ViewBag.AdType' == '3') {
@@ -887,7 +862,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
             $("#fileuploader").attr("accept", ".wmv,.ogg,.webM,.mp4");
             $('.fileupld').html('');
             $('#more').hide();
-            // $('#viewfilename').html('');
+            $('#viewfilename').html('');
         }
 
         else if ('@ViewBag.AdType' == '4') {
@@ -896,19 +871,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
             $("#fileuploader").attr("accept", ".mp3,.mp4");
             $('.fileupld').html('');
             $('#more').hide();
-            // $('#viewfilename').html('');
+            $('#viewfilename').html('');
         }
     });
 
     function CehckFileType(input) {
-        debugger;
-        // $('#hdnFilePath').val('');
-        /* var fileUpload = $(input).val();
+       
+        $('#hdnFilePath').val('');
+        var fileUpload = $(input).val();
 
         var extension = fileUpload.substr((fileUpload.lastIndexOf('.') + 1)).toLocaleLowerCase();
         if ($('.ra:checked').val() == '1') {
             if (extension == 'jpg' || extension == 'jpeg' || extension == 'png' || extension == 'mp3' || extension == 'mp4' || extension == 'wmv' || extension == '3gp') {
-
+               
             }
 
             else {
@@ -950,13 +925,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 $(input).val('');
                 return false;
             }
-        } */
-
-        // var newfiles = $('#fileuploader').val();
+        }
+        var newfiles = $('#fileuploader').val();
 
        UploadFile($('#fileuploader')[0].files);
        // sendFile($('#fileuploader')[0].files);
-        // $('#hdnFilePath').val('FileUploading');
+        $('#hdnFilePath').val('FileUploading');
         $('#spanmsg').html('Please wait file is uploading.');
     }
 
@@ -998,11 +972,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     }
     function UploadFile(TargetFile) {
-        /* if (TargetFile.length == 1) {
+        if (TargetFile.length == 1) {
             $('#viewfilename').html(TargetFile[0].name);
         } else {
             $('#viewfilename').html(TargetFile.length + " files");
-        } */
+        }
 
         for (var i = 0; i < TargetFile.length; i++) {
             // create array to store the buffer chunks
@@ -1010,97 +984,36 @@ body {font-family: Arial, Helvetica, sans-serif;}
             // the file object itself that we will work with
             var file = TargetFile[i];
             // set up other initial vars
-
-            saveVideoFileV2(file);
-
-            /* if (file.type.indexOf("video") != -1) {
-                saveVideoFileV2(file);
-            } else {
-                var MaxFileSizeMB = 1;
-                var BufferChunkSize = MaxFileSizeMB * 4145728;
-                var ReadBuffer_Size = 1024;
-                var FileStreamPos = 0;
-                // set the initial chunk length
-                var EndPos = BufferChunkSize;
-                var Size = file.size;
-                var newFileName = guid() + "_" + file.name.replace(/\ /g, '_');
-                // add to the FileChunk array until we get to the end of the file
-                while (FileStreamPos < Size) {
-                    // "slice" the file from the starting position/offset, to  the required length
-                    FileChunk.push(file.slice(FileStreamPos, EndPos));
-                    FileStreamPos = EndPos; // jump by the amount read
-                    EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
-                }
-                // get total number of "files" we will be sending
-                var TotalParts = FileChunk.length;
-                var PartCount = 0;
-                // loop through, pulling the first item from the array each time and sending it
-                while (chunk = FileChunk.shift()) {
-                    PartCount++;
-                    // file name convention
-                    var FilePartName = newFileName + ".part_" + PartCount + "." + TotalParts;
-                    // send the file
-                    var precentage = Math.floor((PartCount / TotalParts) * 100) + '%';
-                    //  UploadFileChunk(chunk, FilePartName, newFileName,precentage);
-                    sendFile(chunk, FilePartName, newFileName);
-                }
-            } */
+            var MaxFileSizeMB = 1;
+            var BufferChunkSize = MaxFileSizeMB * 4145728;
+            var ReadBuffer_Size = 1024;
+            var FileStreamPos = 0;
+            // set the initial chunk length
+            var EndPos = BufferChunkSize;
+            var Size = file.size;
+            var newFileName = guid() + "_" + file.name.replace(/\ /g, '_');
+            // add to the FileChunk array until we get to the end of the file
+            while (FileStreamPos < Size) {
+                // "slice" the file from the starting position/offset, to  the required length
+                FileChunk.push(file.slice(FileStreamPos, EndPos));
+                FileStreamPos = EndPos; // jump by the amount read
+                EndPos = FileStreamPos + BufferChunkSize; // set next chunk length
+            }
+            // get total number of "files" we will be sending
+            var TotalParts = FileChunk.length;
+            var PartCount = 0;
+            // loop through, pulling the first item from the array each time and sending it
+            while (chunk = FileChunk.shift()) {
+                PartCount++;
+                // file name convention
+                var FilePartName = newFileName + ".part_" + PartCount + "." + TotalParts;
+                // send the file
+                  var precentage = Math.floor((PartCount / TotalParts) * 100) + '%';
+                //  UploadFileChunk(chunk, FilePartName, newFileName,precentage);
+                sendFile(chunk, FilePartName, newFileName);
+            }
         }
         $('#fileuploader').val('');
-    }
-
-    var VideoFD = new FormData();
-    function _(el) {
-        return document.getElementById(el);
-    }
-
-    function progressHandler(event) {
-        $("#loader").show();
-        _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-        var percent = (event.loaded / event.total) * 100;
-        _("videoprogressBar").value = Math.round(percent);
-        _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-    }
-
-    function completeHandler(event) {
-        $("#loader").hide();
-        _("status").innerHTML = event.target.responseText;
-        _("videoprogressBar").value = 0; //wil clear progress bar after successful upload
-
-        $("#spanmsg").text("");
-    }
-
-    function errorHandler(event) {
-        _("status").innerHTML = "Upload Failed";
-    }
-
-    function abortHandler(event) {
-        _("status").innerHTML = "Upload Aborted";
-    }
-
-    function saveVideoFileV2(file) {
-        var orignalFileName = guid() + "_" + file.name.replace(/\ /g, '_');
-        $("#viewfilenameall ul").append("<li>" + orignalFileName + "</li>");
-
-        var hdnFilePath = "/Content/Uploads/Ads/" + $("#UserId").val() + "/" + orignalFileName;
-        if ($('#hdnFilePath').val().trim() == "") {
-            $('#hdnFilePath').val(hdnFilePath);
-        } else {
-            $('#hdnFilePath').val($('#hdnFilePath').val() + "," + hdnFilePath);
-        }
-
-        VideoFD = new FormData();
-        VideoFD.append('file', file);
-        VideoFD.append('OrignalfileName', orignalFileName);
-
-        var ajax = new XMLHttpRequest();
-        ajax.upload.addEventListener("progress", progressHandler, false);
-        ajax.addEventListener("load", completeHandler, false);
-        ajax.addEventListener("error", errorHandler, false);
-        ajax.addEventListener("abort", abortHandler, false);
-        ajax.open("POST", "/User/UploadVideoFileForAdCreation"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-        //use file_upload_parser.php from above url
-        ajax.send(VideoFD);
     }
 
     function UploadFileChunk(Chunk, FileName, orignalFileName,precentage) {
@@ -1145,73 +1058,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     function validateFileSize(file) {
     }
-    function CalculatePaisa(paisa) {
-        isCityChecked = $('#checkboxCity').prop('checked');
-        isStateChecked = $('#checkboxState').prop('checked');
-        if (isStateChecked == true) {
-            var CountryID = $('#Country').val();
-            if (CountryID != "") {
-                $.ajax({
-                    type: "POST",
-                    url: "/Account/GetCitiesByCountry",
-                    dataType: "json",
-                    async: false,
-                    success: function (msg) {
-                        debugger;
-                        if (msg && msg.Price > 0) {
-                            paisa = msg.Price;  
-                        }
-                        else {
-                            $('#state').html("<option value>--Select State--</option>");
-                            $('#City').html("<option style='margin-top: 17px;'>--Select City--</option>");
-                            Sumofcitypricing();
-                        }
-                    },
-                    failure: function (msg) {
-                        console.log(msg);
-                    },
-                    data: { 'CountryID': CountryID },
-                });
-            }
-        }
-        else if (isCityChecked == true) {
-            var StateID = $('#state').val();
-            if (StateID != "") {
-                $.ajax({
-                    type: "POST",
-                    url: "/Account/GetCitiesByState",
-                    dataType: "json",
-                    async: false,
-                    success: function (msg) {
-                        if (msg && msg.Price > 0) {
-                            paisa = msg.Price;
-                        }
-                        else {
-                            $('#state').html("<option value>--Select State--</option>");
-                            $('#City').html("<option style='margin-top: 17px;'>--Select City--</option>");
-                            Sumofcitypricing();
-                        }
-                    },
-                    failure: function (msg) {
-                        console.log(msg);
-                    },
-                    data: { 'StateID': StateID },
-                });
-            }
-
-        }
-        else {
-            var arr = new Array();
-            var selectedOption = $('.js-example-basic-multiple option:selected');
-            $(selectedOption).each(function (index, value) {
-                arr.push($(value).attr("data-name"));
-                paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
-            });
-            
-        }
-        return paisa;
-    }
     function changeAmount() {
+       
         $('#showTotalAmountLbl').text('0');
         $('#showTotalAmountLblpaynow').text('0');
         var days = $('#numberOfDaysLbl').text();
@@ -1222,8 +1070,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
         var total = '';
         var paisa = 0.00;
          // var data = $(".js-example-basic-multiple option:selected").text();
-        
-        paisa=CalculatePaisa(paisa);
+       var arr= new Array();
+        var selectedOption = $('.js-example-basic-multiple option:selected');
+        $(selectedOption).each(function(index,value) {
+            arr.push($(value).attr("data-name"));
+           paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
+         });
 
         $('#showTotalAmountLbl').text(paisa + '/day');
         $('#showTotalAmountLblpaynow').text(paisa + '/day');
@@ -1309,7 +1161,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     }
 
     function calculateTotalDays() {
-
+        
         /*var rate = $('#itnw').val();*/
         var rate = 1;
         var noofdays = 0;
@@ -1329,13 +1181,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
         if (TotalDays != undefined) {
             $('#numberOfDaysLbl').text(TotalDays);
             $('#numberOfDaysLblpaynow').text(TotalDays);
-         //    var arr= new Array();
-         //var selectedOption = $('.js-example-basic-multiple option:selected');
-         // $(selectedOption).each(function(index,value) {
-         //   arr.push($(value).attr("data-name"));
-         //  paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
-         // });
-            paisa = CalculatePaisa(paisa);
+             var arr= new Array();
+         var selectedOption = $('.js-example-basic-multiple option:selected');
+          $(selectedOption).each(function(index,value) {
+            arr.push($(value).attr("data-name"));
+           paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
+          });
             $('#showTotalAmountLbl').text(paisa + ' /day');
             $('#amountPaidLbl').text((paisa * TotalDays).toFixed(2));
             $('#amountPaidLblpaynow').text((paisa * TotalDays).toFixed(2));
@@ -1371,12 +1222,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 url: "/Account/StateLoad",
                 dataType: "json",
                 success: function (msg) {
-                    debugger;
+
                     if (msg && msg.statelist.length > 0) {
                         //var options = "<option value='0'>All</option>";
                         var options = "";
-                       // options += "<option value=''>--Select State--</option>";
-                           // options += "<option value=0>Select All</option>";
                         $.each(msg.statelist, function (key, value) {
                             options += "<option value=" + value.ID + ">" + value.StateName + "</option>";
                         });
@@ -1418,9 +1267,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
         var rate = 1;
         var usercountry = $('.selectedCountryCode').html();
         var t = $('#Country').val();
-        /* if (t == 101) { // case of india
+        if (t == 101) { // case of india
             rate = 0.013; // 1 INR = 0.013 USD
-        } */
+        }
         if (StateID != "") {
             $.ajax({
                 type: "POST",
@@ -1430,14 +1279,12 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     console.log(msg);
                     if (msg && msg.citylist.length > 0) {
                         var optionsdata = "";
-                        //optionsdata += "<option value=-1>Select All</option>";
                         $.each(msg.citylist, function (key, value) {
-                            /* if (t == 101) { // case of india
+                            if (t == 101) { // case of india
                                 optionsdata += "<option value=" + value.ID + " for=" + rate * (parseFloat(value.Price).toFixed(2)) + " data-city=" + value.CityName + "  data-name=" + rate * (parseFloat(value.Price).toFixed(2)) + ">" + value.CityName + " " + rate * (parseFloat(value.Price).toFixed(2)) + " " + usercountry + " (" + (parseFloat(value.Price).toFixed(2)) + " ₹)" + "  </option>";
                             } else {
                                 optionsdata += "<option value=" + value.ID + " for=" + rate * (parseFloat(value.Price).toFixed(2)) + " data-city=" + value.CityName + "  data-name=" + rate * (parseFloat(value.Price).toFixed(2)) + ">" + value.CityName + " " + rate * (parseFloat(value.Price).toFixed(2)) + " " + usercountry + "  </option>";
-                            } */
-                            optionsdata += "<option value=" + value.ID + " for=" + rate * (parseFloat(value.Price).toFixed(2)) + " data-city=" + value.CityName + "  data-name=" + rate * (parseFloat(value.Price).toFixed(2)) + ">" + value.CityName + " " + rate * (parseFloat(value.Price).toFixed(2)) + " " + usercountry + "  </option>";
+                            }
                         });
                         $(".js-example-basic-multiple").html($(optionsdata));
                     }
@@ -1480,135 +1327,36 @@ body {font-family: Arial, Helvetica, sans-serif;}
         var paisa = 0.00;
         var cityid = "";
         var allcityid = "";
-        var citynamedata1 = "";
         var startDate = $('#startdate').val();
         var endDate = $('#enddate').val();
+        //  var numberOfChecked = $('#City').find('.Checkbox').find("input[type='checkbox']:checked").length;
+        var numberOfChecked = $('.js-example-basic-multiple option:selected').length;
+        var selectedOption = $('.js-example-basic-multiple option:selected');
+        $(selectedOption).each(function (index, value) {
+            paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
+        });
 
-        debugger;
-        //if all 
-        isCityChecked = $('#checkboxCity').prop('checked');
-        isStateChecked = $('#checkboxState').prop('checked');
-        if (isStateChecked == true) {
-            var CountryName = $('#Country').find(":selected").text();
-            var CountryID = $('#Country').val();
-            if (CountryID != "") {
-                var cityData = "";
-                $.ajax({
-                    type: "POST",
-                    url: "/User/GetCitiesIDByCountry",
-                    dataType: "json",
-                    async: false,
-                    success: function (msg) {
-                        debugger;
-                        if (msg && msg.citylist.length > 0) {
-                            $.each(msg.citylist, function (key, value) {
-                                cityData += value.ID + ",";
-                            });
-                        }
-                        else {
-                            $('#state').html("<option value>--Select State--</option>");
-                            $('#City').html("<option style='margin-top: 17px;'>--Select City--</option>");
-                            //Sumofcitypricing();
-                        }
-                    },
-                    failure: function (msg) {
-                        console.log(msg);
-                    },
-                    data: { 'CountryID': CountryID },
-                });
-            }
-            //setting values for frontend use
-            var lastChar = cityData.slice(-1);
-            if (lastChar == ',') {
-                cityData = cityData.slice(0, -1);
-            }
-            var reamount = $("#showTotalAmountLbl").html().split("/");
-            var amount = reamount[0];
-            $("#demo").val(cityData);
-            $("#citynamedata").val("All States of " + CountryName + ":" + amount);
+        $('#showTotalAmountLbl').text(paisa + '/day');
+        $(selectedOption).each(function (index, value) {
+            allcityid = allcityid + $(value).val() + ',';
+        });
+
+        $(selectedOption).each(function (index, value) {
+            SubjectID = SubjectID + $(value).val() + ',';
+            $('#selid').val(SubjectID);
+        });
+
+        var strVal = $.trim($('#selid').val());
+        var lastChar = strVal.slice(-1);
+
+        if (lastChar == ',') {
+            strVal = strVal.slice(0, -1);
         }
-        else if (isCityChecked == true) {
-            var StateID = $('#state').val();
-            var StateName = $('#state').find(":selected").text();
-            if (StateID != "") {
-                var cityData = "";
-                $.ajax({
-                    type: "POST",
-                    url: "/User/GetCitiesIDByState",
-                    dataType: "json",
-                    async: false,
-                    success: function (msg) {
-                        debugger;
-                        if (msg && msg.citylist.length > 0) {
-                            $.each(msg.citylist, function (key, value) {
-                                cityData += value.ID +",";
-                            });
-                        }
-                        else {
-                            $('#state').html("<option value>--Select State--</option>");
-                            $('#City').html("<option style='margin-top: 17px;'>--Select City--</option>");
-                            Sumofcitypricing();
-                        }
-                    },
-                    failure: function (msg) {
-                        console.log(msg);
-                    },
-                    data: { 'StateID': StateID },
-                });
-            }
-            var lastChar = cityData.slice(-1);
-            if (lastChar == ',') {
-                cityData = cityData.slice(0, -1);
-            }
-            var reamount = $("#showTotalAmountLbl").html().split("/");
-            var amount = reamount[0];
-            $("#demo").val(cityData);
-            $("#citynamedata").val("All Cities of " + StateName+ ":"+amount);
-        }
-        else {
-            var numberOfChecked = $('#City').find('.Checkbox').find("input[type='checkbox']:checked").length;
-
-            var numberOfChecked = $('.js-example-basic-multiple option:selected').length;
-            var selectedOption = $('.js-example-basic-multiple option:selected');
-            $(selectedOption).each(function (index, value) {
-                paisa = parseFloat(parseFloat(paisa) + parseFloat(($(value).attr("data-name")))).toFixed(2);
-            });
-
-            $('#showTotalAmountLbl').text(paisa + '/day');
-            $(selectedOption).each(function (index, value) {
-                allcityid = allcityid + $(value).val() + ',';
-                citynamedata1 = citynamedata1 + $(this).attr("data-city") + ":" + $(value).attr("data-name") + ",";
-                $("#citynamedata").val(citynamedata1);
-            });
-
-            $(selectedOption).each(function (index, value) {
-                SubjectID = SubjectID + $(value).val() + ',';
-                $('#selid').val(SubjectID);
-            });
-
-            var strVal = $.trim($('#selid').val());
-            var lastChar = strVal.slice(-1);
-
-            if (lastChar == ',') {
-                strVal = strVal.slice(0, -1);
-            }
-
-            var citynamedataVal = $.trim($('#citynamedata').val());
-            var lastChar1 = citynamedataVal.slice(-1);
-
-            if (lastChar1 == ',') {
-                citynamedataVal = citynamedataVal.slice(0, -1);
-            }
-            $("#demo").val(strVal);
-            $("#citynamedata").val(citynamedataVal);
-        }
-        
-        
+        $("#demo").val(strVal);
         $('#numberOfDaysLbl').text();
         $('#numberOfDaysLblpaynow').text();
-        $("#dev_noofdays").val($('#numberOfDaysLbl').text());
 
-        if ((numberOfChecked != 0 || $("#City").val() >=0 )&& startDate != "" && endDate != "") {
+        if (numberOfChecked != 0 && startDate != "" && endDate != "") {
             var adId = $('#adcreationId').val();
             if (startDate != "" && endDate != "") {
                 $('#loaderDiv2').show();
@@ -1759,22 +1507,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     dataget();
 
-        function dataget() {
-            debugger;
+    function dataget() {
        
         var t = $('#Country').val();
         if (t == 101) { // case of india
-            // $("#countrycurrencyisocode").val('USD');
-            // $(".selectedCountryCode").html('$');
-
-            $("#countrycurrencyisocode").val('INR');
-            $(".selectedCountryCode").html('₹');
-
-            $("#ConvertCurr_Code").val('INR');
-            $("#ConvertCurr_Codepaynow").val('INR');
-
+            $("#countrycurrencyisocode").val('USD');
+            $(".selectedCountryCode").html('$');
             currentrate();
-        } else { 
+        } else {
             $.ajax({
                 type: "Get",
                 url: "/User/Get_Country_CurrencyCode_Rate_by_CountryId",
@@ -1786,8 +1526,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         $("#countrycurrencyisocode").val(item.code);
                         $(".selectedCountryCode").html(item.currency_symbole);
 
-                        $("#ConvertCurr_Code").val(item.code);
-                        $("#ConvertCurr_Codepaynow").val(item.code);
+                        // $("#ConvertCurr_Code").val(item.code);
+                        // $("#ConvertCurr_Codepaynow").val(item.code);
                     }
                     currentrate();
                 },
@@ -1796,7 +1536,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
                 }
 
             })/*.done(function () { CityBind(); })*/;
-        } 
+        }
     }
 
     // currentrate();
@@ -1864,46 +1604,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <script>
     $(function () {
         $('.js-example-basic-multiple').select2();
-        $("#checkboxCity").click(function () {
-            debugger;
-            if ($("#checkboxCity").is(':checked')) {
-                var options = "";
-                options += "<option value='-1'>All Cities</option>";
-                $('#City').html(options);
-                $("#City").prop("disabled", "true");
-                changeAmount();
-
-            } else {
-                $("#City").prop("disabled", "");
-                changeAmount();
-                CityBind();
-            }
-        });
-        $("#checkboxState").click(function () {
-            if ($("#checkboxState").is(':checked')) {
-                debugger;
-                var options = "";
-                options += "<option value='-1'>All States</option>";
-                $('#state').html(options);
-                $("#state").prop("disabled", "true");
-                var optionsCity = "";
-                optionsCity += "<option value='-1'>All Cities</option>";
-                $("#City").html(optionsCity);
-                $("#City").prop("disabled", "true");
-                $("#checkboxCity").prop("disabled", "true");
-                changeAmount();
-                //$('.State > option').prop("selected", "selected");
-                //$('.State').trigger("change");
-            } else {
-                $(".State").prop("disabled", "");
-                $("#City").prop("disabled", "");
-                $("#checkboxCity").prop("disabled", "");
-                StateBind();
-                changeAmount();
-                //$(".State > option").removeAttr("selected");
-                //$(".State").trigger("change");
-            }
-        });
     });
 </script>
 <script>
@@ -1918,9 +1618,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
     // When the user clicks the button, open the modal
     btn.onclick = function () {
-        // modal.style.display = "block";
-
-        $("#btnsubclick").click();
+        modal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal

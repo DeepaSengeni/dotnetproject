@@ -75,7 +75,7 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 divideclas">
             <div class="row resp">
                 <div class="col-md-5 col-sm-5 col-xs-5 img-res-style u-frnd" onclick="window.open('/User/UserProfile?Id=@item.id&FriendRequestId=@CurrentUserFriendRequestIds2','_self')">
-                    <img style="width:150px !important;height:122px !important;" src="@(!string.IsNullOrEmpty(item.ProfileImage) ? item.ProfileImage : "/Content/no-image-available.png")" class="img-responsive frnd-list-profile"/>
+                    <img src="@(!string.IsNullOrEmpty(item.ProfileImage) ? item.ProfileImage : "/Content/no-image-available.png")" class="img-responsive frnd-list-profile"/>
                 </div>
                 <div class="">
                     <div class="name-div">

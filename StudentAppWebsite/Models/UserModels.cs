@@ -137,6 +137,12 @@ namespace StudentAppWebsite.Models
         public int MonetoryAdvantages { get; set; }
         public string PageType { get; set; }
         public string subnametxt { get; set; }
+
+        public int Views { get; set; }
+
+        public int Likes { get; set; }
+
+        public double StarRating { get; set; }
     }
 
 
