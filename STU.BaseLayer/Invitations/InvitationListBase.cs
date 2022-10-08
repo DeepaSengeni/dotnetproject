@@ -16,7 +16,6 @@ namespace STU.BaseLayer.Invitations
         private string _modifiedDate = string.Empty;
         private Int64 _questionID = 0;
         private int _pageId = 0;
-        private int _bookId = 0;
 
 
 
@@ -28,7 +27,7 @@ namespace STU.BaseLayer.Invitations
         public string ModifiedDate { get { return _modifiedDate; } set { _modifiedDate = value; } }
         public Int64 QuestionID { get { return _questionID; } set { _questionID = value; } }
         public int PageId { get { return _pageId; } set { _pageId = value; } }
-
-        public int BookId { get { return _bookId; } set { _bookId = value; } }
+        
+        
     }
 }

@@ -25,7 +25,7 @@ namespace STU.BaseLayer.Advertisement
         public string Checkstartdate { get; set; }
         public string Checkenddate { get; set; }
         public DataTable fileuploadTable { get; set; }
-         
+
         public string EmailId { get; set; }
         public string MobileNumber { get; set; }
         public int CountryId { get; set; }
@@ -38,7 +38,7 @@ namespace STU.BaseLayer.Advertisement
         public decimal AmountToBePaid { get; set; }
         public decimal AmountRequested { get; set; }
         public int Status { get; set; }
-      
+
         public int ClicksCount { get; set; }
 
         public string AccountHolderName { get; set; }
@@ -60,11 +60,18 @@ namespace STU.BaseLayer.Advertisement
         public string sender_batch_id { get; set; }
         public string response_Status { get; set; }
         public string payout_batch_id { get; set; }
+        public string BankAccountHolderName { get; set; }
+        public string UPIId { get; set; }
+        public string MobileNumberUPI { get; set; }
+        public string BankAccountNumber { get; set; }
+
+        public string BankIFSCCode { get; set; }
+
     }
 
     public class AdvertisementUploadingBase
     {
-       public int adcreationId { get; set; }
+        public int adcreationId { get; set; }
         public string FileUploadedPath { get; set; }
     }
 }

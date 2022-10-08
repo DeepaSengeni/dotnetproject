@@ -80,26 +80,5 @@ namespace STU.ActionLayer.Invitation
             return actionResult;
         }
         #endregion
-
-        #region CallList_InsertUpdate
-        public ActionResult CallList_InsertUpdate(InvitationListBase invitationListBase)
-        {
-            actionResult = new ActionResult();
-            invitationListDL = new InvitationListDL();
-            try
-            {
-                actionResult.dtResult = invitationListDL.CallList_InsertUpdate(invitationListBase);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        #endregion
     }
 }

@@ -345,6 +345,5 @@ namespace StudentAppWebsite.Models
 
     }
 
-    
 
 }

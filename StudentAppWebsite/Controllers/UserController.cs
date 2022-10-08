@@ -35,7 +35,6 @@ using Hangfire;
 using System.Web.Hosting;
 using System.Threading;
 using Newtonsoft.Json;
-using System.Net;
 
 namespace StudentAppWebsite.Controllers
 {
@@ -311,7 +310,8 @@ namespace StudentAppWebsite.Controllers
                         int Innovation_Investment = 0;
                         int.TryParse(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["Innovation_Investment"]), out Innovation_Investment);
 
-                        model.BookId = !String.IsNullOrEmpty(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["Id"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["Id"]) : "";
+                        model.BookId = !String.IsNullOrEmpty(Convert.ToString
+                            (ActionResult.dsResult.Tables[1].Rows[0]["Id"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["Id"]) : "";
 
                         model.CollegeId = !String.IsNullOrEmpty(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["CollegeId"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["CollegeId"]) : "";
                         model.SubjectId = !String.IsNullOrEmpty(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectId"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectId"]) : "";
@@ -324,7 +324,7 @@ namespace StudentAppWebsite.Controllers
                         model.Visible_Hidden = Visible_Hidden;
                         model.Innovation_Investment = Innovation_Investment;
                         //model.subnametxt = !String.IsNullOrEmpty(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectId"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectId"]) : "";
-                        model.subnametxt = !String.IsNullOrEmpty(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectName"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectName"]) : "";
+                        //model.subnametxt = !String.IsNullOrEmpty(Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectName"])) ? Convert.ToString(ActionResult.dsResult.Tables[1].Rows[0]["SubjectName"]) : "";
 
                     }
                     else
@@ -917,41 +917,7 @@ namespace StudentAppWebsite.Controllers
             return Citylist;
         }
 
-        public JsonResult GetCitiesIDByCountry(int CountryID)
-        {
-            List<City> CityList = new List<City>();
-            string json = string.Empty;
-            StudentRegistration model = new StudentRegistration();
-            commonBase.CountryId = CountryID;
-            ActionResult = commonAction.FindCitiesIDByCountry(commonBase);
-            if (ActionResult.IsSuccess)
-            {
-                CityList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<City>(ActionResult.dtResult);
-            }
-            if (CityList != null)
-            {
-                model.citylist = CityList.OrderBy(m => m.ID).ToList();
-            }
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult GetCitiesIDByState(int StateID)
-        {
-            List<City> CityList = new List<City>();
-            string json = string.Empty;
-            StudentRegistration model = new StudentRegistration();
-            commonBase.StateId = StateID;
-            ActionResult = commonAction.FindCitiesIDByState(commonBase);
-            if (ActionResult.IsSuccess)
-            {
-                CityList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<City>(ActionResult.dtResult);
-            }
 
-            if (CityList != null)
-            {
-                model.citylist = CityList.OrderBy(m => m.ID).ToList();
-            }
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
         public ActionResult AddNotebook(int bookId = 0, int pageId = 0)
         {
             NotebookForm model = new NotebookForm();
@@ -1871,7 +1837,6 @@ namespace StudentAppWebsite.Controllers
         {
 
             AdvertisementModels model = new AdvertisementModels();
-            model.UserId = Int32.Parse(Session["UserId"].ToString());
             List<State> StateList = new List<State>();
             List<City> CityList = new List<City>();
             List<Categories> CategoryList = new List<Categories>();
@@ -2015,11 +1980,9 @@ namespace StudentAppWebsite.Controllers
             advertisementbase.StateId = Convert.ToInt32(advertisementmodels.state);
             decimal amount = Convert.ToDecimal(fc["finalamount"] != "" ? Convert.ToDecimal(fc["finalamount"]) : 0);
             string Isocode = fc["countryIsocode"];
-
             // string Isocode = fc["countrycurrencyisocode"];
-            // decimal Totalamount = Convert.ToDecimal(fc["amountPaidLbl"] != "" ? Convert.ToDecimal(fc["amountPaidLbl"]) : 0);
+            decimal Totalamount = Convert.ToDecimal(fc["amountPaidLbl"] != "" ? Convert.ToDecimal(fc["amountPaidLbl"]) : 0);
             var d = amount;
-            decimal Totalamount = amount;
             advertisementbase.CategoryIds = fc["hdnCategoryIds"] != "" ? fc["hdnCategoryIds"] : "";
             advertisementbase.adId = advertisementmodels.adcreationId;
             DataTable fileuploadTable = new DataTable();
@@ -2072,7 +2035,6 @@ namespace StudentAppWebsite.Controllers
                 {
                     ErrorReporting.WebApplicationError(ex);
                 }
-                // advertisementbase.AmountToBePaid = Totalamount;
                 ActionResult = advertisementaction.Advertisement_Insert(advertisementbase);
                 if (ActionResult.IsSuccess)
                 {
@@ -2081,10 +2043,8 @@ namespace StudentAppWebsite.Controllers
                     if (ActionResult.dtResult.Rows[0][0].ToString() != "" && ActionResult.dtResult.Rows[0][0].ToString() != null)
                     {
                         adid = ActionResult.dtResult.Rows[0][0].ToString();
-                        //get city
                         string citydata = fc["citydata"];
                         Session["CityId"] = citydata;
-
                         var datacity = citydata.Split(',');
                         foreach (var item in datacity)
                         {
@@ -2109,125 +2069,30 @@ namespace StudentAppWebsite.Controllers
                     Random randomObj = new Random();
                     string transactionId = randomObj.Next(10000000, 100000000).ToString();
 
-                    try
+                    Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_zYyzqJWIM3ODfO", "PlHYMaHgcJPZ6frOOiqRNgF8");
+                    Dictionary<string, object> options = new Dictionary<string, object>();
+                    options.Add("amount", paym * 100);  // Amount will in paise
+                    options.Add("receipt", transactionId);
+                    options.Add("currency", countrycode);
+                    options.Add("payment_capture", "0");
+                    Razorpay.Api.Order orderResponse = client.Order.Create(options);
+
+                    // Create order model for return on view
+                    OrderModel orderModel = new OrderModel
                     {
-                        //PaymentWithPaypal(null);
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        orderId = orderResponse.Attributes["id"],
+                        razorpayKey = "rzp_test_zYyzqJWIM3ODfO",
+                        amount = paym * 100,
+                        currency = countrycode,
+                        name = "",
+                        email = email,
+                        contactNumber = contactNumber,
+                        address = "",
+                        description = ""
+                    };
 
-                        // Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_zYyzqJWIM3ODfO", "PlHYMaHgcJPZ6frOOiqRNgF8");
-                        Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_live_fV9NoBuTOqQ7XR", "17ZmF8jSkyBO810sFcIVACl3");
-                        Dictionary<string, object> options = new Dictionary<string, object>();
-                        options.Add("amount", paym * 100);  // Amount will in paise
-                        options.Add("receipt", transactionId);
-                        options.Add("currency", countrycode);
-                        options.Add("payment_capture", "0");
-                        Razorpay.Api.Order orderResponse = client.Order.Create(options);
-
-                        // Create order model for return on view
-
-                        string citynamedata = fc["citynamedata"];
-                        string dev_noofdays = fc["dev_noofdays"];
-
-                        String customer_id = "";
-                        // get customer_id from database
-                        userAction = new UserAction();
-                        usersInfoBase = new UsersInfoBase();
-                        usersInfoBase.Id = Convert.ToInt32(Session["UserId"]);
-                        ActionResult = userAction.UsersInfo_LoadBy_Id(usersInfoBase);
-                        if (ActionResult.IsSuccess)
-                        {
-                            if (ActionResult.dtResult.Rows.Count > 0)
-                            {
-                                customer_id = ActionResult.dtResult.Rows[0]["customer_id"].ToString();
-                            }
-                        }
-
-                        // customer_id = "cust_JgzZQnqPb6akk3"; // this is for testing
-
-                        if (customer_id == "")
-                        {
-                            // create customer
-                            options = new Dictionary<string, object>();
-                            options.Add("name", Session["StudentName"]);
-                            options.Add("contact", contactNumber);
-                            options.Add("email", email);
-                            options.Add("fail_existing", 0);
-
-                            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                            Razorpay.Api.Customer customer = client.Customer.Create(options);
-
-                            customer_id = customer.Attributes["id"];
-
-                            // update customer_id in database
-                            userAction = new UserAction();
-                            usersInfoBase = new UsersInfoBase();
-                            usersInfoBase.Id = Convert.ToInt32(Session["UserId"]);
-                            usersInfoBase.Customerid = customer.Attributes["id"];
-                            ActionResult = userAction.USP_U_UsersCustomerid(usersInfoBase);
-                        }
-
-                        // create items
-                        var line_items = new ArrayList();
-                        string[] fcitynamedataarr = citynamedata.Split(',');
-
-                        for (int i = 0; i < fcitynamedataarr.Length; i++)
-                        {
-                            string[] citynamedataarr = fcitynamedataarr[i].Split(':');
-                            if (citynamedataarr.Length >= 2)
-                            {
-                                decimal rateamount = Int32.Parse(citynamedataarr[1]) * Int32.Parse(dev_noofdays);
-                                options = new Dictionary<string, object>();
-                                options.Add("name", citynamedataarr[0]);
-                                options.Add("amount", rateamount * 100);
-                                options.Add("currency", countrycode);
-                                line_items.Add(options);
-                            }
-                        }
-
-
-                        // create invoice
-                        options = new Dictionary<string, object>();
-                        options.Add("type", "invoice");
-                        options.Add("description", "Transaction description");
-                        options.Add("customer_id", customer_id);
-                        options.Add("line_items", line_items);
-                        options.Add("sms_notify", 1);
-                        options.Add("email_notify", 1);
-                        options.Add("partial_payment", false);
-                        options.Add("currency", countrycode);
-
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                        Razorpay.Api.Invoice invoice = client.Invoice.Create(options);
-
-                        OrderModel orderModel = new OrderModel
-                        {
-                            orderId = orderResponse.Attributes["id"],
-                            razorpayKey = "rzp_live_fV9NoBuTOqQ7XR",
-                            // razorpayKey = "rzp_test_zYyzqJWIM3ODfO",
-                            amount = paym * 100,
-                            amountc = paym,
-                            currency = countrycode,
-                            name = Session["StudentName"].ToString(),
-                            email = email,
-                            contactNumber = contactNumber,
-                            address = "",
-                            description = "",
-                            citynamedata = citynamedata,
-                            dev_noofdays = dev_noofdays,
-                            dev_invoiceid = invoice.Attributes["id"],
-                            customer_id = customer_id
-                        };
-
-                        //Return on PaymentPage with Order data
-                        return View("PaymentPage", orderModel);
-                    }
-                    catch (Exception ex)
-                    {
-                        return RedirectToAction("PaymentOnFailure");
-                        // return View("PaymentOnFailure");
-                    }
-
+                    // Return on PaymentPage with Order data
+                    return View("PaymentPage", orderModel);
                 }
                 else
                 {
@@ -2647,28 +2512,32 @@ namespace StudentAppWebsite.Controllers
 
                     model.PageListClick = PageList;
 
-                    if (ActionResult.dsResult.Tables[1].Rows.Count > 0)
-                    {
-                        DataRow dr = ActionResult.dsResult.Tables[1].Rows[0];
-                        if (PageList != null && PageList.Count > 0)
-                        {
-                            model.WalletAmount = dr["TotalAmount"] != DBNull.Value ? Convert.ToDecimal(dr["TotalAmount"]) : 0;
-                            model.UnitPrice = dr["UnitPrice"] != DBNull.Value ? Convert.ToDecimal(dr["UnitPrice"]) : 0;
-                            model.ClicksCount = dr["ClickCount"] != DBNull.Value ? Convert.ToInt32(dr["ClickCount"]) : 0;
-                        }
-                        else
-                        {
-                            model.WalletAmount = 0;
-                        }
-                    }
-
-                    //if (ActionResult.dsResult.Tables[2].Rows.Count > 0)
+                    //if (ActionResult.dsResult.Tables[1].Rows.Count > 0)
                     //{
-                    //    DataRow drUnitPrice = ActionResult.dsResult.Tables[2].Rows[0];
-                    //    model.UnitPrice = drUnitPrice["UnitPrice"] != DBNull.Value ? Convert.ToDecimal(drUnitPrice["UnitPrice"]) : 0;
+                    //    DataRow dr = ActionResult.dsResult.Tables[1].Rows[0];
+                    //    if (PageList != null && PageList.Count > 0)
+                    //    {
+                    //        //model.WalletAmount = dr["TotalAmount"] != DBNull.Value ? Convert.ToDecimal(dr["TotalAmount"]) : 0;
+                    //        model.UnitPrice = dr["UnitPrice"] != DBNull.Value ? Convert.ToDecimal(dr["UnitPrice"]) : 0;
+                    //        //model.ClicksCount = dr["ClickCount"] != DBNull.Value ? Convert.ToInt32(dr["ClickCount"]) : 0;
+                    //    }
+                    //    else
+                    //    {
+                    //        model.UnitPrice = 0;
+                    //    }
                     //}
-                }
 
+                    if (ActionResult.dsResult.Tables[2].Rows.Count > 0)
+                    {
+                        DataRow drUnitPrice = ActionResult.dsResult.Tables[2].Rows[0];
+                        model.UnitPrice = drUnitPrice["UnitPrice"] != DBNull.Value ? Convert.ToDecimal(drUnitPrice["UnitPrice"]) : 0;
+                    }
+                }
+                //Get Total Amount, Click count from db and set it in Advertisement model
+                Update_Wallet_ByuserId(model);
+                //Get UPI Information from db and set it in Advertisement model
+                //GetUPIInfo_ByuserId(model);
+                GetBankInfo_ByuserId(model);
 
                 //-----Comented by Zuber (Client Requirement)
                 //  ActionResult = advertisementaction.GetAdsList_ByUserId(advertisementbase);
@@ -2716,8 +2585,6 @@ namespace StudentAppWebsite.Controllers
                     paymentList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<AdvertisementModels>(ActionResult.dtResult);
                 }
                 model.PaymentList = paymentList;
-
-
                 try
                 {
                     Profile profileModel = new Profile();
@@ -2733,7 +2600,7 @@ namespace StudentAppWebsite.Controllers
                         //DateTime dt;
                         //var date = DateTime.TryParseExact(ActionResult.dtResult.Rows[0]["DOB"].ToString(), "dd-MM-yyyy hh:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt);
                         ViewBag.CountryCode = profileModel.CountryName;
-
+                        Session["FirstName"]= profileModel.FirstName;
                         string YourCountryName = profileModel.CountryName;
                         foreach (CultureInfo cul in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
                         {
@@ -2750,11 +2617,6 @@ namespace StudentAppWebsite.Controllers
                     }
                 }
                 catch (Exception ex) { throw (ex); }
-
-
-
-
-
                 //Get Ad detail by Ad Id
                 //if (adId == 0)
                 //{
@@ -3191,50 +3053,7 @@ namespace StudentAppWebsite.Controllers
             {
                 // return ex.Message;
             }
-        }
-
-
-        [HttpPost]
-        public async Task UploadVideoFileForAdCreation()
-        {
-            try
-            {
-                var orgnfileName = Request.Params["OrignalfileName"];
-                string path = Path.Combine(Server.MapPath("~/Content/Uploads/Ads/" + Session["UserId"] + "/"), orgnfileName);
-                HttpPostedFileBase postedFile = Request.Files[0];
-
-                if (!Directory.Exists(Server.MapPath("~/Content/Uploads/Ads/" + Session["UserId"] + "/")))
-                {
-                    Directory.CreateDirectory(Server.MapPath("~/Content/Uploads/Ads/" + Session["UserId"] + "/"));
-                }
-
-                using (var fileStream =
-                new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    await postedFile.InputStream.CopyToAsync(fileStream);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        [HttpPost]
-        public string getUploadVideoFilePathForAd()
-        {
-            try
-            {
-                string json = string.Empty;
-                var orgnfileName = Request.Params["OrignalfileName"];
-                json = Path.Combine(("/Content/Uploads/Ads/" + Session["UserId"] + "/"), orgnfileName.ToString());
-                return json;
-            }
-            catch (Exception ex)
-            {
-                return "";
-            }
-        }
+        } 
 
         /* [HttpPost]
         public string UploadVideoFilev2()
@@ -3441,94 +3260,53 @@ namespace StudentAppWebsite.Controllers
         [HttpPost]
         public ActionResult Complete()
         {
-            try
+            // Payment data comes in url so we have to get it from url
+
+            // This id is razorpay unique payment id which can be use to get the payment details from razorpay server
+            string paymentId = Request.Params["rzp_paymentid"];
+
+            // This is orderId
+            string orderId = Request.Params["rzp_orderid"];
+
+            Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_zYyzqJWIM3ODfO", "PlHYMaHgcJPZ6frOOiqRNgF8");
+
+            Razorpay.Api.Payment payment = client.Payment.Fetch(paymentId);
+
+            // This code is for capture the payment 
+            Dictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("amount", payment.Attributes["amount"]);
+            Razorpay.Api.Payment paymentCaptured = payment.Capture(options);
+            string amt = paymentCaptured.Attributes["amount"];
+
+            //// Check payment made successfully
+
+            if (paymentCaptured.Attributes["status"] == "captured")
             {
-                // Payment data comes in url so we have to get it from url
-
-                // This id is razorpay unique payment id which can be use to get the payment details from razorpay server
-                string paymentId = Request.Params["rzp_paymentid"];
-
-                // This is orderId
-                string orderId = Request.Params["rzp_orderid"];
-
-                string amountc = Request.Params["amountc"];
-                string citynamedata = Request.Params["citynamedata"];
-                string dev_noofdays = Request.Params["dev_noofdays"];
-                string dev_invoiceid = Request.Params["dev_invoiceid"];
-                string customer_id = Request.Params["customer_id"];
-
-                // Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_zYyzqJWIM3ODfO", "PlHYMaHgcJPZ6frOOiqRNgF8");
-
-                Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_live_fV9NoBuTOqQ7XR", "17ZmF8jSkyBO810sFcIVACl3");
-
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                Razorpay.Api.Payment payment = client.Payment.Fetch(paymentId);
-
-                // This code is for capture the payment 
-                Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", payment.Attributes["amount"]);
-                Razorpay.Api.Payment paymentCaptured = payment.Capture(options);
-                string amt = paymentCaptured.Attributes["amount"];
-
-                //// Check payment made successfully
-
-                if (paymentCaptured.Attributes["status"] == "captured")
-                {
-                    
-                    PaypalResponse respon = new PaypalResponse();
-                    respon.userId = Convert.ToInt32(Session["UserId"]);
-                    respon.Add_Id = Convert.ToString(TempData["Add_Id"]);
-                    respon.paymentId = paymentId;
-                    respon.totalammount = amountc;
-                    respon.Currency = Request.Params["currency"];
-                    respon.Payer_id = customer_id;
-                    respon.intent = "Sale";
-                    respon.state = paymentCaptured.Attributes["status"];
-                    respon.order_id = orderId;
-                    respon.invoice_id = dev_invoiceid;
-
-                    return RedirectToAction("PaymentOnSuccess", "User", respon);
-
-                    // return View("PaymentOnSuccess", respon);
-                }
-                else
-                {
-                    return RedirectToAction("PaymentOnFailure");
-
-                    // return View("PaymentOnFailure");
-                }
+                // Create these action method
+                return View("PaymentOnSuccess");
             }
-            catch (Exception ex)
+            else
             {
-                return RedirectToAction("PaymentOnFailure");
+                return View("PaymentOnFailure");
             }
         }
 
-        //Paypal
-        public ActionResult PaymentWithPaypal(string Cancel = null)
+        public ActionResult PaymentWithPaypal(string Cancel = null, string paym = "", string countrycode = "")
         {
-            //getting the apiContext  
+            AdvertisementAction advertisementaction = new AdvertisementAction();
+            AdvertisementBase advertisementbase = new AdvertisementBase();
+            PaypalResponse respon = new PaypalResponse();
             APIContext apiContext = PaypalConfiguration.GetAPIContext();
+            var ad = Convert.ToString(TempData["Add_Id"]);
+            string da = paym;
             try
             {
-                //A resource representing a Payer that funds a payment Payment Method as paypal  
-                //Payer Id will be returned when payment proceeds or click to pay  
                 string payerId = Request.Params["PayerID"];
                 if (string.IsNullOrEmpty(payerId))
                 {
-                    //this section will be executed first because PayerID doesn't exist  
-                    //it is returned by the create function call of the payment class  
-                    // Creating a payment  
-                    // baseURL is the url on which paypal sendsback the data.  
                     string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/User/PaymentWithPayPal?";
-                    //here we are generating guid for storing the paymentID received in session  
-                    //which will be used in the payment execution  
                     var guid = Convert.ToString((new Random()).Next(100000));
-                    //CreatePayment function gives us the payment approval url  
-                    //on which payer is redirected for paypal account payment  
-                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
-                    //get links returned from paypal in response to Create function call  
+                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, da, countrycode);
                     var links = createdPayment.links.GetEnumerator();
                     string paypalRedirectUrl = null;
                     while (links.MoveNext())
@@ -3536,32 +3314,51 @@ namespace StudentAppWebsite.Controllers
                         Links lnk = links.Current;
                         if (lnk.rel.ToLower().Trim().Equals("approval_url"))
                         {
-                            //saving the payapalredirect URL to which user will be redirected for payment  
                             paypalRedirectUrl = lnk.href;
                         }
                     }
-                    // saving the paymentID in the key guid  
                     Session.Add(guid, createdPayment.id);
                     return Redirect(paypalRedirectUrl);
                 }
                 else
                 {
-                    // This function exectues after receving all parameters for the payment  
                     var guid = Request.Params["guid"];
                     var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
-                    //If executed payment failed then we will show payment failure message to user  
+
+                    respon.userId = Convert.ToInt32(Session["UserId"]);
+                    respon.Add_Id = Convert.ToString(TempData["Add_Id"]);
+                    respon.paymentId = executedPayment.id;
+                    respon.totalammount = executedPayment.transactions[0].amount.total;
+                    respon.Currency = executedPayment.transactions[0].amount.currency;
+                    respon.Payer_id = executedPayment.payer.payer_info.payer_id;
+                    respon.intent = executedPayment.intent;
+                    respon.state = executedPayment.transactions[0].related_resources[0].sale.state;
                     if (executedPayment.state.ToLower() != "approved")
                     {
-                        return View("FailureView");
+                        return RedirectToAction("PaymentOnFailure", new { Adid = respon.Add_Id });
                     }
                 }
             }
             catch (Exception ex)
             {
-                return View("FailureView");
+                var jobject = (((PayPal.ConnectionException)ex).Response).ToString();
+                //    DeleteAddWhichIsnotPaid(Convert.ToInt32(ad), jobject);
+                advertisementbase.Add_Creation_ID = ad != "" ? ad : "";
+                advertisementbase.Currency = countrycode != "" ? countrycode : "";
+                advertisementbase.totalammount = da != "" ? da : "";
+                advertisementbase.Response = jobject != "" ? jobject : "";
+                advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
+                //   Convert.ToDecimal(fc["amountPaidLbl"] != "" ? Convert.ToDecimal(fc["amountPaidLbl"]) : 0);
+                advertisementbase.headline = "";
+                advertisementbase.ExchangeRate = Convert.ToDecimal(0);
+                advertisementbase.paymentId = "";
+                advertisementbase.Payer_id = "";
+                advertisementbase.intent = "";
+                advertisementbase.state = "";
+                var d = advertisementaction.PaymentDetails_Insert(advertisementbase);
+                return RedirectToAction("PaymentOnFailure", new { Adid = ad });
             }
-            //on successful payment, show success page to user.  
-            return View("SuccessView");
+            return RedirectToAction("PaymentOnSuccess", "User", respon);
         }
         private PayPal.Api.Payment payment;
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
@@ -3576,19 +3373,17 @@ namespace StudentAppWebsite.Controllers
             };
             return this.payment.Execute(apiContext, paymentExecution);
         }
-        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+        private Payment CreatePayment(APIContext apiContext, string redirectUrl, string pay, string countrycode)
         {
-            //create itemlist and add item objects to it  
             var itemList = new ItemList()
             {
                 items = new List<Item>()
             };
-            //Adding Item Details like name, currency, price etc  
             itemList.items.Add(new Item()
             {
                 name = "Item Name comes here",
-                currency = "USD",
-                price = "1",
+                currency = countrycode,
+                price = pay,
                 quantity = "1",
                 sku = "sku"
             });
@@ -3596,32 +3391,29 @@ namespace StudentAppWebsite.Controllers
             {
                 payment_method = "paypal"
             };
-            // Configure Redirect Urls here with RedirectUrls object  
             var redirUrls = new RedirectUrls()
             {
                 cancel_url = redirectUrl + "&Cancel=true",
                 return_url = redirectUrl
             };
-            // Adding Tax, shipping and Subtotal details  
             var details = new Details()
             {
-                tax = "1",
-                shipping = "1",
-                subtotal = "1"
+                tax = "0",
+                shipping = "0",
+                subtotal = pay
             };
-            //Final amount with details  
             var amount = new Amount()
             {
-                currency = "USD",
-                total = "3", // Total must be equal to sum of tax, shipping and subtotal.  
+                currency = countrycode,
+                total = pay, // Total must be equal to sum of tax, shipping and subtotal.  
                 details = details
             };
-            var transactionList = new List<Transaction>();
+            var transactionList = new List<PayPal.Api.Transaction>();
             // Adding description about the transaction  
-            transactionList.Add(new Transaction()
+            transactionList.Add(new PayPal.Api.Transaction()
             {
                 description = "Transaction description",
-                invoice_number = "your generated invoice number", //Generate an Invoice No  
+                invoice_number = Convert.ToString((new Random()).Next(100000)), //Generate an Invoice No  
                 amount = amount,
                 item_list = itemList
             });
@@ -3633,257 +3425,120 @@ namespace StudentAppWebsite.Controllers
                 redirect_urls = redirUrls
             };
             // Create a payment using a APIContext  
+            Console.WriteLine(apiContext);
             return this.payment.Create(apiContext);
         }
+        public ActionResult PaymentOnSuccess()
+        {
+            AdvertisementModels model = new AdvertisementModels();
+            AdvertisementAction advertisementaction = new AdvertisementAction();
+            AdvertisementBase advertisementbase = new AdvertisementBase();
+            string Email = Convert.ToString(Session["UserName"]);
+            string FirstName = Convert.ToString(Session["FirstName"]);
+            string LastName = Convert.ToString(Session["LastName"]);
+            advertisementbase.headline = Convert.ToString(Session["adTitle"]);
+            advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
+            advertisementbase.Add_Creation_ID = Request.QueryString["Add_Id"];
+            advertisementbase.ExchangeRate = Convert.ToInt32(Session["Rate"]);
+            advertisementbase.paymentId = Request.QueryString["paymentId"];
+            advertisementbase.Currency = Request.QueryString["Currency"];
+            advertisementbase.totalammount = Request.QueryString["totalammount"];
+            advertisementbase.Payer_id = Request.QueryString["Payer_id"];
+            advertisementbase.intent = Request.QueryString["intent"];
+            advertisementbase.state = Request.QueryString["state"];
+            string Fullname = FirstName + " " + LastName;
+            AccountingSoftware.Helper.Email.SendPaymentRequestStatusUpdateEmail(Email, advertisementbase.totalammount, Fullname, advertisementbase.state);
 
-        //public ActionResult PaymentWithPaypal(string Cancel = null, string paym = "", string countrycode = "")
-        //{
-        //    AdvertisementAction advertisementaction = new AdvertisementAction();
-        //    AdvertisementBase advertisementbase = new AdvertisementBase();
-        //    PaypalResponse respon = new PaypalResponse();
-        //    APIContext apiContext = PaypalConfiguration.GetAPIContext();
-        //    var ad = Convert.ToString(TempData["Add_Id"]);
-        //    string da = paym;
-        //    try
-        //    {
-        //        string payerId = Request.Params["PayerID"];
-        //        if (string.IsNullOrEmpty(payerId))
-        //        {
-        //            string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/User/PaymentWithPayPal?";
-        //            var guid = Convert.ToString((new Random()).Next(100000));
-        //            var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid, da, countrycode);
-        //            var links = createdPayment.links.GetEnumerator();
-        //            string paypalRedirectUrl = null;
-        //            while (links.MoveNext())
-        //            {
-        //                Links lnk = links.Current;
-        //                if (lnk.rel.ToLower().Trim().Equals("approval_url"))
-        //                {
-        //                    paypalRedirectUrl = lnk.href;
-        //                }
-        //            }
-        //            Session.Add(guid, createdPayment.id);
-        //            return Redirect(paypalRedirectUrl);
-        //        }
-        //        else
-        //        {
-        //            var guid = Request.Params["guid"];
-        //            var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+            ActionResult = advertisementaction.PaymentDetails_Insert(advertisementbase);
+            string citydata = Convert.ToString(Session["CityId"]);
+            var datacity = citydata.Split(',');
+            foreach (var item in datacity)
+            {
+                advertisementbase.CityId = Convert.ToInt32(item);
+                var data = advertisementaction.FindusersDetailofCreatedForCity(advertisementbase);
+                if (data.dtResult.Rows[0][1].ToString() != "" && data.dtResult.Rows[0][1].ToString() != null)
+                {
+                    Task.Run(() => AdBulkSmsSend_ForAd(data.dtResult));
+                }
+            }
+            return View();
+        }
+        public ActionResult PaymentOnFailure(int Adid)
+        {
+            commonAction.RemoveUnpiadAdd();
+            return View();
+        }
+        public JsonResult Payouts(string PaypalEmail, string value, string currency)
+        {
+            AdvertisementAction advertisementaction = new AdvertisementAction();
+            AdvertisementBase advertisementbase = new AdvertisementBase();
+            string batch_Id;
+            var apiContext = PaypalConfiguration.GetAPIContext();
+            try
+            {
+                var payout = new Payout
+                {
+                    sender_batch_header = new PayoutSenderBatchHeader
+                    {
+                        sender_batch_id = "batch_" + System.Guid.NewGuid().ToString().Substring(0, 8),
+                        email_subject = "You have a payment"
+                    },
+                    items = new List<PayoutItem>    {
+                    new PayoutItem
+                    {
+                        recipient_type = PayoutRecipientType.EMAIL,
+                        amount = new Currency
+                        {
+                            value= value,
+                            currency = "USD"
+                        },
+                        receiver=PaypalEmail,
+                        note = "Thank you.",
+                        sender_item_id = Convert.ToString(Session["Payment_ID"]),
+                    } }
+                };
+                var dt = payout.Create(apiContext, false);
+                string res = dt.batch_header.batch_status;
+                batch_Id = dt.batch_header.payout_batch_id;
+                string Sender_batch_Id = dt.batch_header.sender_batch_header.sender_batch_id;
+                var d = dt.batch_header;
+                advertisementbase.Id = Convert.ToInt32(Session["Payment_ID"]);
+                advertisementbase.payout_batch_id = batch_Id;
+                advertisementbase.sender_batch_id = Sender_batch_Id;
+                var data = advertisementaction.UpdatePaymentBatch_ID(advertisementbase);
+                Session["BatchId"] = data.dtResult.Rows[0].ItemArray[0];
+                var t = Convert.ToString(Session["BatchId"]);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            return Json("Done");
+        }
 
-        //            respon.userId = Convert.ToInt32(Session["UserId"]);
-        //            respon.Add_Id = Convert.ToString(TempData["Add_Id"]);
-        //            respon.paymentId = executedPayment.id;
-        //            respon.totalammount = executedPayment.transactions[0].amount.total;
-        //            respon.Currency = executedPayment.transactions[0].amount.currency;
-        //            respon.Payer_id = executedPayment.payer.payer_info.payer_id;
-        //            respon.intent = executedPayment.intent;
-        //            respon.state = executedPayment.transactions[0].related_resources[0].sale.state;
-        //            if (executedPayment.state.ToLower() != "approved")
-        //            {
-        //                return RedirectToAction("PaymentOnFailure", new { Adid = respon.Add_Id });
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var jobject = (((PayPal.ConnectionException)ex).Response).ToString();
-        //        //    DeleteAddWhichIsnotPaid(Convert.ToInt32(ad), jobject);
-        //        advertisementbase.Add_Creation_ID = ad != "" ? ad : "";
-        //        advertisementbase.Currency = countrycode != "" ? countrycode : "";
-        //        advertisementbase.totalammount = da != "" ? da : "";
-        //        advertisementbase.Response = jobject != "" ? jobject : "";
-        //        advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-        //        //   Convert.ToDecimal(fc["amountPaidLbl"] != "" ? Convert.ToDecimal(fc["amountPaidLbl"]) : 0);
-        //        advertisementbase.headline = "";
-        //        advertisementbase.ExchangeRate = Convert.ToDecimal(0);
-        //        advertisementbase.paymentId = "";
-        //        advertisementbase.Payer_id = "";
-        //        advertisementbase.intent = "";
-        //        advertisementbase.state = "";
-        //        var d = advertisementaction.PaymentDetails_Insert(advertisementbase);
-        //        return RedirectToAction("PaymentOnFailure", new { Adid = ad });
-        //    }
-        //    return RedirectToAction("PaymentOnSuccess", "User", respon);
-        //}
-        //private PayPal.Api.Payment payment;
-        //private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
-        //{
-        //    var paymentExecution = new PaymentExecution()
-        //    {
-        //        payer_id = payerId
-        //    };
-        //    this.payment = new Payment()
-        //    {
-        //        id = paymentId
-        //    };
-        //    return this.payment.Execute(apiContext, paymentExecution);
-        //}
-        //private Payment CreatePayment(APIContext apiContext, string redirectUrl, string pay, string countrycode)
-        //{
-        //    var itemList = new ItemList()
-        //    {
-        //        items = new List<Item>()
-        //    };
-        //    itemList.items.Add(new Item()
-        //    {
-        //        name = "Item Name comes here",
-        //        currency = countrycode,
-        //        price = pay,
-        //        quantity = "1",
-        //        sku = "sku"
-        //    });
-        //    var payer = new Payer()
-        //    {
-        //        payment_method = "paypal"
-        //    };
-        //    var redirUrls = new RedirectUrls()
-        //    {
-        //        cancel_url = redirectUrl + "&Cancel=true",
-        //        return_url = redirectUrl
-        //    };
-        //    var details = new Details()
-        //    {
-        //        tax = "0",
-        //        shipping = "0",
-        //        subtotal = pay
-        //    };
-        //    var amount = new Amount()
-        //    {
-        //        currency = countrycode,
-        //        total = pay, // Total must be equal to sum of tax, shipping and subtotal.  
-        //        details = details
-        //    };
-        //    var transactionList = new List<PayPal.Api.Transaction>();
-        //    // Adding description about the transaction  
-        //    transactionList.Add(new PayPal.Api.Transaction()
-        //    {
-        //        description = "Transaction description",
-        //        invoice_number = Convert.ToString((new Random()).Next(100000)), //Generate an Invoice No  
-        //        amount = amount,
-        //        item_list = itemList
-        //    });
-        //    this.payment = new Payment()
-        //    {
-        //        intent = "sale",
-        //        payer = payer,
-        //        transactions = transactionList,
-        //        redirect_urls = redirUrls
-        //    };
-        //    // Create a payment using a APIContext  
-        //    Console.WriteLine(apiContext);
-        //    return this.payment.Create(apiContext);
-        //}
-        //public ActionResult PaymentOnSuccess()
-        //{
-        //    AdvertisementModels model = new AdvertisementModels();
-        //    AdvertisementAction advertisementaction = new AdvertisementAction();
-        //    AdvertisementBase advertisementbase = new AdvertisementBase();
-        //    string Email = Convert.ToString(Session["UserName"]);
-        //    string FirstName = Convert.ToString(Session["FirstName"]);
-        //    string LastName = Convert.ToString(Session["LastName"]);
-        //    advertisementbase.headline = Convert.ToString(Session["adTitle"]);
-        //    advertisementbase.userId = Convert.ToInt32(Session["UserId"]);
-        //    advertisementbase.Add_Creation_ID = Request.QueryString["Add_Id"];
-        //    advertisementbase.ExchangeRate = Convert.ToInt32(Session["Rate"]);
-        //    advertisementbase.paymentId = Request.QueryString["paymentId"];
-        //    advertisementbase.Currency = Request.QueryString["Currency"];
-        //    advertisementbase.totalammount = Request.QueryString["totalammount"];
-        //    advertisementbase.Payer_id = Request.QueryString["Payer_id"];
-        //    advertisementbase.intent = Request.QueryString["intent"];
-        //    advertisementbase.state = Request.QueryString["state"];
-        //    string Fullname = FirstName + " " + LastName;
-        //    // AccountingSoftware.Helper.Email.SendPaymentRequestStatusUpdateEmail(Email, advertisementbase.totalammount, Fullname, advertisementbase.state);
+        public ActionResult getpayout()
+        {
+            var apiContext = PaypalConfiguration.GetAPIContext();
+            AdvertisementAction advertisementaction = new AdvertisementAction();
+            AdvertisementBase advertisementbase = new AdvertisementBase();
 
-        //    ActionResult = advertisementaction.PaymentDetails_Insert(advertisementbase);
-        //    /* string citydata = Convert.ToString(Session["CityId"]);
-        //    var datacity = citydata.Split(',');
-        //    foreach (var item in datacity)
-        //    {
-        //        advertisementbase.CityId = Convert.ToInt32(item);
-        //        var data = advertisementaction.FindusersDetailofCreatedForCity(advertisementbase);
-        //        if (data.dtResult.Rows[0][1].ToString() != "" && data.dtResult.Rows[0][1].ToString() != null)
-        //        {
-        //            Task.Run(() => AdBulkSmsSend_ForAd(data.dtResult));
-        //        }
-        //    } */
-        //    return View();
-        //}
-        //public ActionResult PaymentOnFailure()
-        //{
-        //    commonAction.RemoveUnpiadAdd();
-        //    return View();
-        //}
-        //public JsonResult Payouts(string PaypalEmail, string value, string currency)
-        //{
-        //    AdvertisementAction advertisementaction = new AdvertisementAction();
-        //    AdvertisementBase advertisementbase = new AdvertisementBase();
-        //    string batch_Id;
-        //    var apiContext = PaypalConfiguration.GetAPIContext();
-        //    try
-        //    {
-        //        var payout = new Payout
-        //        {
-        //            sender_batch_header = new PayoutSenderBatchHeader
-        //            {
-        //                sender_batch_id = "batch_" + System.Guid.NewGuid().ToString().Substring(0, 8),
-        //                email_subject = "You have a payment"
-        //            },
-        //            items = new List<PayoutItem>    {
-        //            new PayoutItem
-        //            {
-        //                recipient_type = PayoutRecipientType.EMAIL,
-        //                amount = new Currency
-        //                {
-        //                    value= value,
-        //                    currency = "USD"
-        //                },
-        //                receiver=PaypalEmail,
-        //                note = "Thank you.",
-        //                sender_item_id = Convert.ToString(Session["Payment_ID"]),
-        //            } }
-        //        };
-        //        var dt = payout.Create(apiContext, false);
-        //        string res = dt.batch_header.batch_status;
-        //        batch_Id = dt.batch_header.payout_batch_id;
-        //        string Sender_batch_Id = dt.batch_header.sender_batch_header.sender_batch_id;
-        //        var d = dt.batch_header;
-        //        advertisementbase.Id = Convert.ToInt32(Session["Payment_ID"]);
-        //        advertisementbase.payout_batch_id = batch_Id;
-        //        advertisementbase.sender_batch_id = Sender_batch_Id;
-        //        var data = advertisementaction.UpdatePaymentBatch_ID(advertisementbase);
-        //        Session["BatchId"] = data.dtResult.Rows[0].ItemArray[0];
-        //        var t = Convert.ToString(Session["BatchId"]);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
-        //    return Json("Done");
-        //}
-
-        //public ActionResult getpayout()
-        //{
-        //    var apiContext = PaypalConfiguration.GetAPIContext();
-        //    AdvertisementAction advertisementaction = new AdvertisementAction();
-        //    AdvertisementBase advertisementbase = new AdvertisementBase();
-
-        //    var payoutBatchId = Convert.ToString(Session["BatchId"]);
-        //    if (!string.IsNullOrEmpty(payoutBatchId))
-        //    {
-        //        var payout = Payout.Get(apiContext, payoutBatchId);
-        //        var final_Status = payout.items[0].transaction_status;
-        //        advertisementbase.Id = Convert.ToInt32(Session["Payment_ID"]);
-        //        advertisementbase.response_Status = Convert.ToString(final_Status);
-        //        var data = advertisementaction.UpdatePaymentStatus_ByUserId(advertisementbase);
-        //        var amount = payout.items[0].payout_item.amount.value;
-        //        string Email = Convert.ToString(Session["UserName"]);
-        //        string FirstName = Convert.ToString(Session["FirstName"]);
-        //        string LastName = Convert.ToString(Session["LastName"]);
-        //        string Fullname = Convert.ToString(Session["StudentName"]);
-        //        AccountingSoftware.Helper.Email.SendPaymentRequestStatusUpdateEmail(Email, Convert.ToString(amount), Fullname, advertisementbase.response_Status);
-        //    }
-        //    return RedirectToAction("AccountSettings");
-        //}
+            var payoutBatchId = Convert.ToString(Session["BatchId"]);
+            if (!string.IsNullOrEmpty(payoutBatchId))
+            {
+                var payout = Payout.Get(apiContext, payoutBatchId);
+                var final_Status = payout.items[0].transaction_status;
+                advertisementbase.Id = Convert.ToInt32(Session["Payment_ID"]);
+                advertisementbase.response_Status = Convert.ToString(final_Status);
+                var data = advertisementaction.UpdatePaymentStatus_ByUserId(advertisementbase);
+                var amount = payout.items[0].payout_item.amount.value;
+                string Email = Convert.ToString(Session["UserName"]);
+                string FirstName = Convert.ToString(Session["FirstName"]);
+                string LastName = Convert.ToString(Session["LastName"]);
+                string Fullname = Convert.ToString(Session["StudentName"]);
+                AccountingSoftware.Helper.Email.SendPaymentRequestStatusUpdateEmail(Email, Convert.ToString(amount), Fullname, advertisementbase.response_Status);
+            }
+            return RedirectToAction("AccountSettings");
+        }
 
         [HttpGet]
         public JsonResult Get_Country_CurrencyCode_Rate_by_CountryId(int CountryID)
@@ -4031,8 +3686,61 @@ namespace StudentAppWebsite.Controllers
                 return Json(cityname, JsonRequestBehavior.AllowGet);
             }
         }
+        #region Get Wallet info by User ID 
+        public void Update_Wallet_ByuserId(AdvertisementModels model)
+        {
+            commonBase.Id = Convert.ToInt32(Session["UserId"]);
+            var data = commonAction.Update_Wallet_ByuserId(commonBase);
 
+            if (data.IsSuccess)
+            {
+                DataRow drWalletInfo = data.dtResult.Rows[0];
+                model.WalletAmount = drWalletInfo["TotalAmount"] != DBNull.Value ? Convert.ToDecimal(data.dtResult.Rows[0].ItemArray[2]) : 0;
+                model.ClicksCount = drWalletInfo["ClickCount"] != DBNull.Value ? Convert.ToInt32(data.dtResult.Rows[0].ItemArray[5]) : 0;
+            }
+        }
+        #endregion
 
+        #region Get UPI info by User ID 
+        public void GetUPIInfo_ByuserId(AdvertisementModels model)
+        {
+            try
+            {
+                commonBase.Id = Convert.ToInt32(Session["UserId"]);
+                var dataUPI = commonAction.GetUPIDetails_ByuserId(commonBase);
+                if (dataUPI.IsSuccess)
+                {
+                    model.BankAccountHolderName = dataUPI.dtResult.Rows[0].ItemArray[1].ToString();
+                    model.UPIId = dataUPI.dtResult.Rows[0].ItemArray[2].ToString();
+                    model.MobileNumberUPI = dataUPI.dtResult.Rows[0].ItemArray[3].ToString();
+                    //UPIDetailsList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<UPIDetails>(data.dtResult);
+                }
+
+            }
+            catch (Exception ex) { throw (ex); }
+        }
+        #endregion
+
+        #region Get Bank info by User ID 
+        public void GetBankInfo_ByuserId(AdvertisementModels model)
+        {
+            try
+            {
+                commonBase.Id = Convert.ToInt32(Session["UserId"]);
+                var dataBank = commonAction.GetBankDetails_ByuserId(commonBase);
+                if (dataBank.IsSuccess)
+                {
+                    model.BankAccountHolderName = dataBank.dtResult.Rows[0].ItemArray[1].ToString();
+                    model.BankAccountNumber = dataBank.dtResult.Rows[0].ItemArray[2].ToString();
+                    model.BankIFSCCode = dataBank.dtResult.Rows[0].ItemArray[3].ToString();
+                    model.MobileNumberUPI = dataBank.dtResult.Rows[0].ItemArray[4].ToString();
+                    //UPIDetailsList = AccountingSoftware.Helpers.CommonMethods.ConvertTo<UPIDetails>(data.dtResult);
+                }
+
+            }
+            catch (Exception ex) { throw (ex); }
+        }
+        #endregion
     }
 
     public class HttpPostedFileConverter : JsonConverter

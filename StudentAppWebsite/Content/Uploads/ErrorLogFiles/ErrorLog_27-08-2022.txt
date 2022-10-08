@@ -1,0 +1,638 @@
+
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:56
+  Error Message: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:57
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:57
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:57
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:57
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:58
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:00:59
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:00
+  Error Message: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:02
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:02
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:02
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:04
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:04
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:04
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:20
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:21
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:21
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:21
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:21
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:22
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:22
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:23
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:23
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:23
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:23
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:25
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:25
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:26
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:26
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:27
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:27
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:27
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:28
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:28
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:28
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:28
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:29
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:31
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:33
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:34
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:46
+  Error Message: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+  Stack Trace:    at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:46
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:49
+  Error Message: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:01:50
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:06:02
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 276
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:06:05
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 281
+   at STU.ActionLayer.User.UserAction.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\User\UserAction.cs:line 213
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:06:26
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:06:30
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:06:49
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:06:52
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:07:48
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 276
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:07:52
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 281
+   at STU.ActionLayer.User.UserAction.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\User\UserAction.cs:line 213
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:08:12
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:08:15
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:08:34
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:08:38
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:11:39
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 276
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:11:43
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 281
+   at STU.ActionLayer.User.UserAction.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\User\UserAction.cs:line 213
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:12:02
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 34
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:12:06
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 39
+   at STU.ActionLayer.Common.CommonAction.Countries_LoadAll() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 28
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:12:25
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 520
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:12:28
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.CommonMethods.CommonDL.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\Common\CommonDL.cs:line 525
+   at STU.ActionLayer.Common.CommonAction.Institutes_LoadByCityId(CommonBase common) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\Common\CommonAction.cs:line 430
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:32:17
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Common.Execute_Procedures_Select() in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.DBServices\Common.cs:line 343
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 276
+ ----------------------------------------------------------------------------- 
+ An error ocurred at 27-08-2022 19:32:20
+  Error Message: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+  Stack Trace:    at STU.Utility.ErrorReporting.DataLayerError(Exception dlException) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.Utility\ErrorReporting.cs:line 164
+   at STA.DataLayer.User.UserDL.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STA.DataLayer\User\UserDL.cs:line 281
+   at STU.ActionLayer.User.UserAction.UsersInfo_Login(UsersInfoBase usersInfoBase) in C:\Users\Venkata Ramana Raju\Downloads\StudentAppWebsite-17082022\StudentAppWebsite\STU.ActionLayer\User\UserAction.cs:line 213

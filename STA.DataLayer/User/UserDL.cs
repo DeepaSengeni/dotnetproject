@@ -103,29 +103,6 @@ namespace STA.DataLayer.User
         }
         #endregion
 
-        public DataTable USP_U_UsersCustomerid(UsersInfoBase usersInfoBase)
-        {
-            dsContainer = new DataSet();
-            dtContainer = new DataTable();
-            try
-            {
-                MyParameter[] myParams = {
-                                          new MyParameter("@Id",usersInfoBase.Id),
-
-                                          new MyParameter("@Customerid",usersInfoBase.Customerid)
-                                         };
-                Common.Set_Procedures("USP_U_Users_Customerid");
-                Common.Set_ParameterLength(myParams.Length);
-                Common.Set_Parameters(myParams);
-                dsContainer = Common.Execute_Procedures_Select();
-                dtContainer = dsContainer.Tables[0];
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.DataLayerError(ex);
-            }
-            return dtContainer;
-        }
 
         #region USP_U_UsersProfilePic
         public DataTable USP_U_UsersProfilePic(UsersInfoBase usersInfoBase)
@@ -281,7 +258,6 @@ namespace STA.DataLayer.User
             return dtContainer;
         }
         #endregion
-
 
         #region UsersInfo_Login
         public DataTable UsersInfo_Login(UsersInfoBase usersInfoBase)

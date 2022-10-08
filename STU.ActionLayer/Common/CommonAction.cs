@@ -18,88 +18,6 @@ namespace STU.ActionLayer.Common
         ActionResult actionResult;
         #endregion
 
-        #region FindCitiesByCountry
-        public ActionResult FindCitiesByCountry(CommonBase commonBase)
-        {
-            commonDL = new CommonDL();
-            actionResult = new ActionResult();
-            try
-            {
-                actionResult.dtResult = commonDL.FindCititesByCountry(commonBase);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        #endregion
-        #region FindCitiesByState
-        public ActionResult FindCitiesByState(CommonBase commonBase)
-        {
-            commonDL = new CommonDL();
-            actionResult = new ActionResult();
-            try
-            {
-                actionResult.dtResult = commonDL.FindCititesByState(commonBase);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        #endregion
-
-        #region FindCitiesIDByCountry
-        public ActionResult FindCitiesIDByCountry(CommonBase commonBase)
-        {
-            commonDL = new CommonDL();
-            actionResult = new ActionResult();
-            try
-            {
-                actionResult.dtResult = commonDL.FindCititesIDByCountry(commonBase);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        #endregion
-        #region FindCitiesIDByState
-        public ActionResult FindCitiesIDByState(CommonBase commonBase)
-        {
-            commonDL = new CommonDL();
-            actionResult = new ActionResult();
-            try
-            {
-                actionResult.dtResult = commonDL.FindCititesIDByState(commonBase);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        #endregion
-
         #region Countries_LoadAll
         public ActionResult Countries_LoadAll()
         {
@@ -1615,14 +1533,14 @@ namespace STU.ActionLayer.Common
         }
         #endregion
 
-        #region Hiring
-        public ActionResult Get_Admin_Hiring(CommonBase commonBase)
+        #region GetUPIDetails_ByuserId
+        public ActionResult GetUPIDetails_ByuserId(CommonBase commonBase)
         {
-            commonDL = new CommonDL();
+            CommonDL CommonDL = new CommonDL();
             actionResult = new ActionResult();
             try
             {
-                actionResult.dtResult = commonDL.Get_Admin_Hiring(commonBase);
+                actionResult.dtResult = CommonDL.GetUPIDetails(commonBase);
                 if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
                     actionResult.IsSuccess = true;
                 else
@@ -1634,50 +1552,16 @@ namespace STU.ActionLayer.Common
             }
             return actionResult;
         }
+        #endregion
 
-        public ActionResult Hiring_LoadById(CommonBase common)
+        #region GetBankDetails_ByuserId
+        public ActionResult GetBankDetails_ByuserId(CommonBase commonBase)
         {
-            commonDL = new CommonDL();
+            CommonDL CommonDL = new CommonDL();
             actionResult = new ActionResult();
             try
             {
-                actionResult.dtResult = commonDL.Hiring_LoadById(common);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        public ActionResult Hiring_InsertUpdate(CommonBase commonBase)
-        {
-            commonDL = new CommonDL();
-            actionResult = new ActionResult();
-            try
-            {
-                actionResult.dtResult = commonDL.Hiring_InsertUpdate(commonBase);
-                if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
-                    actionResult.IsSuccess = true;
-                else
-                    actionResult.IsError = true;
-            }
-            catch (Exception ex)
-            {
-                ErrorReporting.WebApplicationError(ex);
-            }
-            return actionResult;
-        }
-        public ActionResult Hiring_LoadActive()
-        {
-            commonDL = new CommonDL();
-            actionResult = new ActionResult();
-            try
-            {
-                actionResult.dtResult = commonDL.Hiring_LoadActive();
+                actionResult.dtResult = CommonDL.GetBankDetails(commonBase);
                 if (actionResult.dtResult != null && actionResult.dtResult.Rows.Count > 0)
                     actionResult.IsSuccess = true;
                 else
